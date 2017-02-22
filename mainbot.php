@@ -33,11 +33,8 @@ if (!is_null($events['events']))
       //
 
       // condition to class food check
-      // $check = "no";
       $checkfood = new FoodCheck;
-      // if ($checkfood->checkDB($text) == "food") {
-      //   $check = "yes";
-      // }
+
 
 
 
@@ -56,13 +53,10 @@ if (!is_null($events['events']))
         'type' => 'template',
         'altText' => 'เลือกเมนูการใช้งาน',
         'template' => array(
-
           'type' => 'buttons',
-            //     'thumbnailImageUrl' => '',
           'title' => '',
           'text' => 'เลือกเมนูการใช้งาน',
           'actions' => array(
-
             array(
               'type' => 'postback',
               'label' => '1',
@@ -83,7 +77,6 @@ if (!is_null($events['events']))
               'label' => '4',
               'data' => 'get_profile',
               'text' => 'ดูข้อมูลผู้ใช้')
-
             )
           )
         ];
@@ -141,28 +134,28 @@ if (!is_null($events['events']))
 
       //มื้อเช้า   ------------------------------------
       else if ($text == "มื้อเช้า") {
-        $ms1 = [
+        $ms_repast = [
         'type' => 'text',
         'text' => 'คุณทานอะไรมา'];
 
         $client->replyMessage(
           array(
             'replyToken' => $event['replyToken'],
-            'messages' => [$ms1]
+            'messages' => [$ms_repast]
             )
           );
       }
 
 
       else if ($checkfood->checkDB($text) == "food") {
-        $ms1 = [
+        $ms_num = [
         'type' => 'text',
         'text' => 'จำนวนเท่าไหร่'];
 
         $client->replyMessage(
           array(
             'replyToken' => $event['replyToken'],
-            'messages' => [$ms1]
+            'messages' => [$ms_num]
             )
           );
       }
