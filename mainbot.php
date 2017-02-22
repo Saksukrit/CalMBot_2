@@ -32,18 +32,31 @@ if (!is_null($events['events']))
       $replyToken = $event['replyToken'];
       //
       //
+      if ($text == "go") {
+        $messages = [
+        'type' => 'text',
+        'text' => 'go'];
+
+        $client->replyMessage(
+          array(
+            'replyToken' => $event['replyToken'],
+            'messages' => [$messages,$messages]
+            )
+          );
+      }else {
+        $messages = [
+        'type' => 'text',
+        'text' => 'ด้วยความยินดี'];
+
+        $client->replyMessage(
+          array(
+            'replyToken' => $event['replyToken'],
+            'messages' => [$messages,$messages]
+            )
+          );
+      }
 
 
-      $messages = [
-      'type' => 'text',
-      'text' => 'ด้วยความยินดี'];
-
-      $client->replyMessage(
-        array(
-          'replyToken' => $event['replyToken'],
-          'messages' => [$messages,$messages]
-          )
-        );
 
       //
       //
