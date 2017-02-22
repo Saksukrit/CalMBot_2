@@ -42,15 +42,72 @@ if (!is_null($events['events']))
             'messages' => [$messagess,$messagess]
             )
           );
-      }else {
+
+      }
+
+      //  menu
+      elseif ($text == "เมนู") {
+        $ms1 = [
+        'type' => 'text',
+        'text' => 'เมนูการใช้งาน
+        1.บันทึกมื้ออาหาร
+        2.ค้นหาข้อมูลอาหาร
+        3.ค้นหาข้อมูลการออกกำลังกาย
+        4.ดูข้อมูลผู้ใช้'];
+
+        $ms2 = [
+        'type' => 'template',
+        'altText' => 'เลือกเมนูการใช้งาน',
+        'template' => array(
+
+          'type' => 'buttons',
+            //     'thumbnailImageUrl' => '',
+          'title' => 'เลือกเมนูการใช้งาน',
+          'text' => 'กรุณาเลือก',
+          'actions' => array(
+
+            array(
+              'type' => 'postback',
+              'label' => 'บันทึกมื้ออาหาร',
+              'data' => 'บันทึกมื้ออาหาร',
+              'text' => 'บันทึกมื้ออาหาร')
+            ,array(
+              'type' => 'postback',
+              'label' => 'ค้นหาข้อมูลอาหาร',
+              'data' => 'ค้นหาข้อมูลอาหาร',
+              'text' => 'ค้นหาข้อมูลอาหาร')
+            ,array(
+              'type' => 'postback',
+              'label' => 'ค้นหาข้อมูลการออกกำลังกาย',
+              'data' => 'ค้นหาข้อมูลการออกกำลังกาย',
+              'text' => 'ค้นหาข้อมูลการออกกำลังกาย')
+            ,array(
+              'type' => 'postback',
+              'label' => 'ดูข้อมูลผู้ใช้',
+              'data' => 'ดูข้อมูลผู้ใช้',
+              'text' => 'ดูข้อมูลผู้ใช้')
+
+            )
+          )
+        ];
+
+
+        // send
+        $client->replyMessage(
+          array(
+            'replyToken' => $event['replyToken'],
+            'messages' => [$ms1,$ms2]
+            )
+          );
+
+      }
+
+      else {
         $messages = [
         'type' => 'text',
         'text' => 'ด้วยความยินดี'];
 
       }
-
-
-
       //
       //
       /*-------------------------------------------  Make a POST  -----------------------------------------*/
