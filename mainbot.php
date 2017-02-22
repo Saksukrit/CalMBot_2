@@ -40,23 +40,9 @@ if (!is_null($events['events']))
       }
 
 
-      //
-      if ($text == "go") {
-        $messagess = [
-        'type' => 'text',
-        'text' => 'go'];
-
-        $client->replyMessage(
-          array(
-            'replyToken' => $event['replyToken'],
-            'messages' => [$messagess,$messagess]
-            )
-          );
-
-      }
 
       //  select menu    ****************************************
-      else if ($text == "เมนู") {
+      if ($text == "เมนู") {
         $ms1 = [
         'type' => 'text',
         'text' => 'เมนูการใช้งาน
