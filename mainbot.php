@@ -45,7 +45,7 @@ if (!is_null($events['events']))
 
       }
 
-      //  menu
+      //  select menu
       else if ($text == "เมนู") {
         $ms1 = [
         'type' => 'text',
@@ -62,8 +62,8 @@ if (!is_null($events['events']))
 
           'type' => 'buttons',
             //     'thumbnailImageUrl' => '',
-          'title' => 'เลือกเมนูการใช้งาน',
-          'text' => 'กรุณาเลือก',
+          'title' => '',
+          'text' => 'เลือกเมนูการใช้งาน',
           'actions' => array(
 
             array(
@@ -91,7 +91,6 @@ if (!is_null($events['events']))
           )
         ];
 
-
         // send
         $client->replyMessage(
           array(
@@ -99,16 +98,32 @@ if (!is_null($events['events']))
             'messages' => [$ms1,$ms2]
             )
           );
-
       }
 
+      else if ($text == "บันทึกมื้ออาหาร") {
+        $save_dialy = [
+        'type' => 'text',
+        'text' => 'ok บันทึกมื้ออาหาร'];
+
+
+        $client->replyMessage(
+          array(
+            'replyToken' => $event['replyToken'],
+            'messages' => [$save_dialy]
+            )
+          );
+      }
+
+
+
+      //
+      //
+      // other
       else {
         $messages = [
         'type' => 'text',
         'text' => 'ขอโทษ ฉันไม่เข้าใจ'];
       }
-      //
-      //
       /*-------------------------------------------  Make a POST  -----------------------------------------*/
 
             // Make a POST Request to Messaging API to reply to sender
