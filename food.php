@@ -7,12 +7,14 @@ class FoodCheck
 {
 
     private $foodname = null;
+
+    private $value = 0;
     // function __construct($foodname)
     // {
     //   # code...
     // }
 
-    public function checkDB($foodname)
+    public function check_food($foodname)
     {
 
         if ($foodname == "ข้าวขาหมู")
@@ -22,6 +24,19 @@ class FoodCheck
         else
         {
             return "not_food";
+        }
+    }
+
+    public function check_num($value)
+    {
+
+        if ($value == '1')
+        {
+            return "ok";
+        }
+        else
+        {
+            return "not ok";
         }
     }
 }

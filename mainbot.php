@@ -147,17 +147,56 @@ if (!is_null($events['events']))
       }
 
 
-      else if ($checkfood->checkDB($text) == "food") {
-        $ms_num = [
+      else if ($checkfood->check_food($text) == "food") {
+        $ms_food = [
         'type' => 'text',
-        'text' => 'จำนวนเท่าไหร่'];
+        'text' => 'จำนวนเท่าไหร่ (จาน)'];
 
         $client->replyMessage(
           array(
             'replyToken' => $event['replyToken'],
-            'messages' => [$ms_num]
+            'messages' => [$ms_food]
             )
           );
+      }
+
+      else if ($checkfood->check_num($text) == '1') {
+        $ms_food = [
+        'type' => 'text',
+        'text' => 'ข้าวขาหมู 1 จาน เท่ากับ 690 กิโลแคลอรี่'];
+
+        $ms_num = [
+        'type' => 'template',
+        'altText' => 'บันทึกรายการอาหารแล้ว',
+        'template' => array(
+          'type' => 'buttons',
+          'title' => 'บันทึกรายการอาหารแล้ว',
+          'text' => 'ต้องการบันทึกเพิ่มเติมหรือไม่',
+          'actions' => array(
+            array(
+              'type' => 'postback',
+              'label' => 'เพิ่มอีก',
+              'data' => 'เพิ่มอีก',
+              'text' => 'เพิ่มอีก')
+            ,array(
+              'type' => 'postback',
+              'label' => 'พอแล้ว',
+              'data' => 'พอแล้ว',
+              'text' => 'พอแล้ว')
+            )
+          )
+        ];
+
+        $client->replyMessage(
+          array(
+            'replyToken' => $event['replyToken'],
+            'messages' => [$ms_food,$ms_num]
+            )
+          );
+      }
+
+      else if ($text == "พอแล้ว") {
+        # code...
       }
 
 
