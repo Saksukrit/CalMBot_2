@@ -23,7 +23,7 @@ if (!is_null($events['events']))
   foreach ($events['events'] as $event)
   {
 
-    if (($event['type'] == 'message')&& ($event['message']['type'] == 'text'))
+    if ($event['type'] == 'message'&& $event['message']['type'] == 'text')
     {
                   // Get text sent
       $text = $event['message']['text'];
@@ -36,12 +36,12 @@ if (!is_null($events['events']))
         'type' => 'text',
         'text' => 'go'];
 
-        $client->replyMessage(
-          array(
-            'replyToken' => $event['replyToken'],
-            'messages' => [$messages,$messages]
-            )
-          );
+        // $client->replyMessage(
+        //   array(
+        //     'replyToken' => $event['replyToken'],
+        //     'messages' => [$messages,$messages]
+        //     )
+        //   );
       }else {
         $messages = [
         'type' => 'text',
