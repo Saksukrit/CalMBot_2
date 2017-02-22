@@ -46,63 +46,64 @@ if (!is_null($events['events']))
 
 
 
-      //  select menu    ****************************************
-      if ($text == "เมนู" && $check == "no") {
-        $ms1 = [
-        'type' => 'text',
-        'text' => 'เมนูการใช้งาน
-        1.บันทึกมื้ออาหาร
-        2.ค้นหาข้อมูลอาหาร
-        3.ค้นหาข้อมูลการออกกำลังกาย
-        4.ดูข้อมูลผู้ใช้'];
-
-        $ms2 = [
-        'type' => 'template',
-        'altText' => 'เลือกเมนูการใช้งาน',
-        'template' => array(
-
-          'type' => 'buttons',
-            //     'thumbnailImageUrl' => '',
-          'title' => '',
-          'text' => 'เลือกเมนูการใช้งาน',
-          'actions' => array(
-
-            array(
-              'type' => 'postback',
-              'label' => '1',
-              'data' => 'save_dialy',
-              'text' => 'บันทึกมื้ออาหาร')
-            ,array(
-              'type' => 'postback',
-              'label' => '2',
-              'data' => 'search_food',
-              'text' => 'ค้นหาข้อมูลอาหาร')
-            ,array(
-              'type' => 'postback',
-              'label' => '3',
-              'data' => 'search_exercise',
-              'text' => 'ค้นหาข้อมูลการออกกำลังกาย')
-            ,array(
-              'type' => 'postback',
-              'label' => '4',
-              'data' => 'get_profile',
-              'text' => 'ดูข้อมูลผู้ใช้')
-
-            )
-          )
-        ];
-
-        // send
-        $client->replyMessage(
-          array(
-            'replyToken' => $event['replyToken'],
-            'messages' => [$ms1,$ms2]
-            )
-          );
-      }
+      // //  select menu    ****************************************
+      // if ($text == "เมนู" && $check == "no") {
+      //   $ms1 = [
+      //   'type' => 'text',
+      //   'text' => 'เมนูการใช้งาน
+      //   1.บันทึกมื้ออาหาร
+      //   2.ค้นหาข้อมูลอาหาร
+      //   3.ค้นหาข้อมูลการออกกำลังกาย
+      //   4.ดูข้อมูลผู้ใช้'];
+      //
+      //   $ms2 = [
+      //   'type' => 'template',
+      //   'altText' => 'เลือกเมนูการใช้งาน',
+      //   'template' => array(
+      //
+      //     'type' => 'buttons',
+      //       //     'thumbnailImageUrl' => '',
+      //     'title' => '',
+      //     'text' => 'เลือกเมนูการใช้งาน',
+      //     'actions' => array(
+      //
+      //       array(
+      //         'type' => 'postback',
+      //         'label' => '1',
+      //         'data' => 'save_dialy',
+      //         'text' => 'บันทึกมื้ออาหาร')
+      //       ,array(
+      //         'type' => 'postback',
+      //         'label' => '2',
+      //         'data' => 'search_food',
+      //         'text' => 'ค้นหาข้อมูลอาหาร')
+      //       ,array(
+      //         'type' => 'postback',
+      //         'label' => '3',
+      //         'data' => 'search_exercise',
+      //         'text' => 'ค้นหาข้อมูลการออกกำลังกาย')
+      //       ,array(
+      //         'type' => 'postback',
+      //         'label' => '4',
+      //         'data' => 'get_profile',
+      //         'text' => 'ดูข้อมูลผู้ใช้')
+      //
+      //       )
+      //     )
+      //   ];
+      //
+      //   // send
+      //   $client->replyMessage(
+      //     array(
+      //       'replyToken' => $event['replyToken'],
+      //       'messages' => [$ms1,$ms2]
+      //       )
+      //     );
+      // }
 
       // select repast
-      else if ($text == "บันทึกมื้ออาหาร") {
+      // else 
+      if ($text == "บันทึกมื้ออาหาร") {
         $save_dialy = [
         'type' => 'template',
         'altText' => 'OK บันทึกมื้ออาหาร',
