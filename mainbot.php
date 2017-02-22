@@ -32,9 +32,20 @@ if (!is_null($events['events']))
       //
       //
       if ($text == "go") {
-        $messages = [
+        $messagess = [
         'type' => 'text',
         'text' => 'go'];
+
+        $client->replyMessage(
+          array(
+            'replyToken' => $event['replyToken'],
+            'messages' => [$messagess,$messagess]
+            )
+          );
+      }else {
+        $messages = [
+        'type' => 'text',
+        'text' => 'ด้วยความยินดี'];
 
         // $client->replyMessage(
         //   array(
@@ -42,17 +53,6 @@ if (!is_null($events['events']))
         //     'messages' => [$messages,$messages]
         //     )
         //   );
-      }else {
-        $messages = [
-        'type' => 'text',
-        'text' => 'ด้วยความยินดี'];
-
-        $client->replyMessage(
-          array(
-            'replyToken' => $event['replyToken'],
-            'messages' => [$messages,$messages]
-            )
-          );
       }
 
 
