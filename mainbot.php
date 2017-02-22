@@ -160,7 +160,7 @@ if (!is_null($events['events']))
           );
       }
 
-      else if ($checkfood->check_num($text) == "1") {
+      else if ($checkfood->check_num($text) == "ok") {
         $ms_food = [
         'type' => 'text',
         'text' => 'ข้าวขาหมู 1 จาน เท่ากับ 690 กิโลแคลอรี่'];
