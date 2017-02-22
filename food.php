@@ -30,7 +30,7 @@ class FoodCheck
     public function check_num($value)
     {
 
-        if ($value == '1')
+        if ($value == "1")
         {
             return "ok";
         }

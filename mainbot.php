@@ -40,7 +40,7 @@ if (!is_null($events['events']))
 
 
       //  select menu    ****************************************
-      if ($text == "เมนู") {
+      if ($text == "เมนู" || $text == "พอแล้ว") {
         $ms1 = [
         'type' => 'text',
         'text' => 'เมนูการใช้งาน
@@ -160,7 +160,7 @@ if (!is_null($events['events']))
           );
       }
 
-      else if ($checkfood->check_num($text) == '1') {
+      else if ($checkfood->check_num($text) == "1") {
         $ms_food = [
         'type' => 'text',
         'text' => 'ข้าวขาหมู 1 จาน เท่ากับ 690 กิโลแคลอรี่'];
@@ -195,9 +195,18 @@ if (!is_null($events['events']))
           );
       }
 
-      else if ($text == "พอแล้ว") {
-        # code...
-      }
+      // else if ($text == "พอแล้ว") {
+      //   $ms_con = [
+      //   'type' => 'text',
+      //   'text' => ''];
+      //
+      //   $client->replyMessage(
+      //     array(
+      //       'replyToken' => $event['replyToken'],
+      //       'messages' => [$ms_con]
+      //       )
+      //     );
+      // }
 
 
       // ********************************************************************************
