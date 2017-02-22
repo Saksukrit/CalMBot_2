@@ -38,11 +38,14 @@ if (!is_null($events['events']))
       if ($checkfood->checkDB($text) == "food") {
         $check = "yes";
       }
+      // else if (condition) {
+      //   # code...
+      // }
 
 
 
       //  select menu    ****************************************
-      if ($text == "เมนู") {
+      else if ($text == "เมนู") {
         $ms1 = [
         'type' => 'text',
         'text' => 'เมนูการใช้งาน
@@ -154,6 +157,19 @@ if (!is_null($events['events']))
 
 
       else if ($check == "yes") {
+        $ms1 = [
+        'type' => 'text',
+        'text' => 'จำนวนเท่าไหร่'];
+
+        $client->replyMessage(
+          array(
+            'replyToken' => $event['replyToken'],
+            'messages' => [$ms1]
+            )
+          );
+      }
+
+      else if ($check == "no") {
         $ms1 = [
         'type' => 'text',
         'text' => 'จำนวนเท่าไหร่'];
