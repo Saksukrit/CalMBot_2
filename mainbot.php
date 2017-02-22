@@ -46,7 +46,7 @@ if (!is_null($events['events']))
       }
 
       //  menu
-      elseif ($text == "เมนู") {
+      else if ($text == "เมนู") {
         $ms1 = [
         'type' => 'text',
         'text' => 'เมนูการใช้งาน
