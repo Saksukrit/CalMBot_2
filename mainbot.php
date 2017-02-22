@@ -54,8 +54,8 @@ if (!is_null($events['events']))
         'altText' => 'เลือกเมนูการใช้งาน',
         'template' => array(
           'type' => 'buttons',
-          'title' => '',
-          'text' => 'เลือกเมนูการใช้งาน',
+          'title' => 'เมนูการใช้งาน',
+          'text' => 'เลือกเมนูที่ต้องการ',
           'actions' => array(
             array(
               'type' => 'postback',
