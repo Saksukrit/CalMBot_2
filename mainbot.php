@@ -47,12 +47,12 @@ if (!is_null($events['events']))
         'type' => 'text',
         'text' => 'ด้วยความยินดี'];
 
-        $client->replyMessage(
-          array(
-            'replyToken' => $event['replyToken'],
-            'messages' => [$messages,$messages]
-            )
-          );
+        // $client->replyMessage(
+        //   array(
+        //     'replyToken' => $event['replyToken'],
+        //     'messages' => [$messages,$messages]
+        //     )
+        //   );
       }
 
 
