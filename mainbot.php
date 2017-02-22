@@ -68,23 +68,23 @@ if (!is_null($events['events']))
 
             array(
               'type' => 'postback',
-              'label' => 'บันทึกมื้ออาหาร',
-              'data' => 'บันทึกมื้ออาหาร',
+              'label' => '1',
+              'data' => 'save_dialy',
               'text' => 'บันทึกมื้ออาหาร')
             ,array(
               'type' => 'postback',
-              'label' => 'ค้นหาข้อมูลอาหาร',
-              'data' => 'ค้นหาข้อมูลอาหาร',
+              'label' => '2',
+              'data' => 'search_food',
               'text' => 'ค้นหาข้อมูลอาหาร')
-            // ,array(
-            //   'type' => 'postback',
-            //   'label' => 'ค้นหาข้อมูลการออกกำลังกาย',
-            //   'data' => 'ค้นหาข้อมูลการออกกำลังกาย',
-            //   'text' => 'ค้นหาข้อมูลการออกกำลังกาย')
             ,array(
               'type' => 'postback',
-              'label' => 'ดูข้อมูลผู้ใช้',
-              'data' => 'ดูข้อมูลผู้ใช้',
+              'label' => '3',
+              'data' => 'search_exercise',
+              'text' => 'ค้นหาข้อมูลการออกกำลังกาย')
+            ,array(
+              'type' => 'postback',
+              'label' => '4',
+              'data' => 'get_profile',
               'text' => 'ดูข้อมูลผู้ใช้')
 
             )
@@ -115,7 +115,7 @@ if (!is_null($events['events']))
       $url = 'https://api.line.me/v2/bot/message/reply';
       $data = [
       'replyToken' => $replyToken,
-      'messages' => [$messages,$messages]       // send one more
+      'messages' => [$messages]
       ];
       $post = json_encode($data);
       $headers = array('Content-Type: application/json', 'Authorization: Bearer ' . $access_token);
