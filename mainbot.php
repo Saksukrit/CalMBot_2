@@ -37,6 +37,8 @@ if (!is_null($events['events']))
       $checkfood = new FoodCheck;
       if ($checkfood->checkDB($text) == "food") {
         $check = "yes";
+      }else {
+        $check = "no";
       }
       // else if (condition) {
       //   # code...
