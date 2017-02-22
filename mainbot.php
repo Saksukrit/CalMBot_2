@@ -43,16 +43,10 @@ if (!is_null($events['events']))
             )
           );
       }else {
-        $messagess = [
+        $messages = [
         'type' => 'text',
         'text' => 'ด้วยความยินดี'];
 
-        $client->replyMessage(
-          array(
-            'replyToken' => $event['replyToken'],
-            'messages' => [$messagess,$messagess]
-            )
-          );
       }
 
 
