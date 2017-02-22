@@ -45,7 +45,7 @@ if (!is_null($events['events']))
 
 
       //  select menu    ****************************************
-      if ($text == "เมนู") {
+      if ($text == "เมนู" && $check == "no") {
         $ms1 = [
         'type' => 'text',
         'text' => 'เมนูการใช้งาน
