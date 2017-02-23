@@ -2,31 +2,30 @@
 
 class Food_save
 {
-    // public $servername = "sql6.freemysqlhosting.net";
-    //
-    // public $username = "sql6159246";
-    //
-    // public $password = "DBUUiG4F5U";
-    //
-    // public $dbname = "sql6159246";
-    // function __construct(argument)
-    // {
-    //   # code...
-    // }
-    //
-    //
+  private $conn = null;
+
+    function __construct()
+    {
+      $servername = "sql6.freemysqlhosting.net";
+      $username = "sql6159246";
+      $password = "DBUUiG4F5U";
+      $dbname = "sql6159246";
+      // Create connection
+      $conn = new mysqli($servername, $username, $password, $dbname);
+    }
+
+
 
     public function save_food_dialy($userID, $save_date)
     {
         $userID = intval($userID);
-        $servername = "sql6.freemysqlhosting.net";
-        $username = "sql6159246";
-        $password = "DBUUiG4F5U";
-        $dbname = "sql6159246";
-        // Create connection
-        $conn = new mysqli($servername, $username, $password, $dbname);
+        // $servername = "sql6.freemysqlhosting.net";
+        // $username = "sql6159246";
+        // $password = "DBUUiG4F5U";
+        // $dbname = "sql6159246";
+        // // Create connection
+        // $conn = new mysqli($servername, $username, $password, $dbname);
         // Check connection
-
         if ($conn->connect_error)
         {
             die("Connection failed: " . $conn->connect_error);

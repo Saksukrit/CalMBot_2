@@ -12,15 +12,15 @@ echo "okok pass <br>";
 // echo 'Connected successfully';
 // mysql_close($link);
 // }
-
-$date = date('Y-m-d');
-echo $date." <br>";
-
-$food_dialy = new Food_save;
-echo $food_dialy->save_food_dialy("2",$date);
-
-
-echo " <br> okok";
+//
+// $date = date('Y-m-d');
+// echo $date." <br>";
+//
+// $food_dialy = new Food_save;
+// echo $food_dialy->save_food_dialy("2",$date);
+//
+//
+// echo "okok";
 
 //  https://warm-brushlands-72856.herokuapp.com/testconnectDB.php
 ?>
