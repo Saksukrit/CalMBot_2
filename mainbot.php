@@ -167,6 +167,11 @@ if (!is_null($events['events']))
       }
 
       else if ($checkfood->check_num($text) == "ok") {
+
+        // save food_dialy list
+        $food_dialy = new Food_save;
+        $food_dialy->save_food_dialy_list("15","ข้าวขาหมู","1","breakfast");
+
         $ms_food = [
         'type' => 'text',
         'text' => 'ข้าวขาหมู 1 จาน เท่ากับ 690 กิโลแคลอรี่'];
