@@ -3,6 +3,7 @@
 require_once ('./LINEBot.php');
 require_once ('./LINEBotTiny.php');
 include 'food.php';
+include 'foodsave.php';
 //
 //
 $channelAccessToken = 'uEaFS7lHeCcF0FEBVNQtuBTVpwVzjMCSebgBPdA/XUqgxzpYg8MHySfkmKpKys/TTEvQO99XihXnZaPKVO/4VsQXLqs8LQZdmskXuwncFHyI8/GZjv91J9Q/YN/pmATJTvlp6YOxOBypA2QFg1r6OwdB04t89/1O/w1cDnyilFU=';
@@ -92,6 +93,11 @@ if (!is_null($events['events']))
 
       // select repast
       else if ($text == "บันทึกมื้ออาหาร") {
+
+        // create food_dialy
+        $food_dialy = new Food_save;
+        $food_dialy->save_food_dialy("2",date('Y-m-d'));
+
         $save_dialy = [
         'type' => 'template',
         'altText' => 'OK บันทึกมื้ออาหาร',
@@ -248,5 +254,6 @@ if (!is_null($events['events']))
 
 //
 //
-echo "cal 2 OK";
+echo "cal 2 OK <br>";
+echo date('Y-m-d');
 ?>

@@ -39,5 +39,7 @@ class FoodCheck
             return "not ok";
         }
     }
+
+    
 }
 ?>
