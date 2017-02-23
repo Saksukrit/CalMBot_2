@@ -34,12 +34,24 @@ class FoodCheck
         {
             return "ok";
         }
+        else if ($value == "2")
+        {
+            return "ok";
+        }
+        else if ($value == "3")
+        {
+            return "ok";
+        }
+        else if ($value == "4")
+        {
+            return "ok";
+        }
         else
         {
             return "not ok";
         }
     }
 
-    
+
 }
 ?>

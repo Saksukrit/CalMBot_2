@@ -206,18 +206,18 @@ if (!is_null($events['events']))
           );
       }
 
-      // else if ($text == "พอแล้ว") {
-      //   $ms_con = [
-      //   'type' => 'text',
-      //   'text' => ''];
-      //
-      //   $client->replyMessage(
-      //     array(
-      //       'replyToken' => $event['replyToken'],
-      //       'messages' => [$ms_con]
-      //       )
-      //     );
-      // }
+      else if ($text == "เพิ่มอีก") {
+        $ms_con = [
+        'type' => 'text',
+        'text' => 'ยังไม่สามารถ'];
+
+        $client->replyMessage(
+          array(
+            'replyToken' => $event['replyToken'],
+            'messages' => [$ms_con]
+            )
+          );
+      }
 
 
       // ********************************************************************************
