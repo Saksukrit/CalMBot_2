@@ -31,6 +31,8 @@ if (!is_null($events['events']))
       $text = $event['message']['text'];
                   // Get replyToken
       $replyToken = $event['replyToken'];
+
+      $userId = $event['source']['userId'];
       //
 
       // condition to class food check
@@ -44,7 +46,8 @@ if (!is_null($events['events']))
       if ($text == "เมนู" || $text == "พอแล้ว") {
         $ms1 = [
         'type' => 'text',
-        'text' => 'เมนูการใช้งาน
+        'text' => 'สวัสดี '.$userId.'
+        เมนูการใช้งาน
         1.บันทึกมื้ออาหาร
         2.ค้นหาข้อมูลอาหาร
         3.ค้นหาข้อมูลการออกกำลังกาย
