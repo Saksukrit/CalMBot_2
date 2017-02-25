@@ -3,6 +3,8 @@
 
 require_once ('./LINEBot.php');
 require_once ('./LINEBotTiny.php');
+// require_once ('./LINEBot/HTTPClient/CurlHTTPClient.php');
+// require_once ('./LINEBot/MessageBuilder/TextMessageBuilder.php');
 include 'food.php';
 include 'foodsave.php';
 use LINE\LINEBot\HTTPClient;
@@ -21,20 +23,34 @@ $content = file_get_contents('php://input');
 $events = json_decode($content, true);
 //
 //
-
+//
+// $httpClient = new CurlHTTPClient($channelAccessToken);
+// $bot = new LINEBot($httpClient, ['channelSecret' => $channelSecret]);
+//
+// $textMessageBuilder = new TextMessageBuilder('hello');
+// $response = $bot->pushMessage($userId, $textMessageBuilder);
+//
+// echo $response->getHTTPStatus() . ' ' . $response->getRawBody();
 if (!is_null($events['events']))
 {
 
+  $client->pushMessage(
+    array(
+      'to' => $userId,
+      'messages' => ['$ms_food,$ms_num']
+      )
+    );
+
   //Push message
-        if (date('d/m/Y')=="25/02/2017") {
-          $httpClient = new \LINE\LINEBot\HTTPClient\CurlHTTPClient($channelAccessToken);
-          $bot = new \LINE\LINEBot($httpClient, ['channelSecret' => $channelSecret]);
-
-          $textMessageBuilder = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder('hello');
-          $response = $bot->pushMessage($userId, $textMessageBuilder);
-
-          echo $response->getHTTPStatus() . ' ' . $response->getRawBody();
-        }
+        // if (date('d/m/Y')=="25/02/2017") {
+        //   $httpClient = new \LINE\LINEBot\HTTPClient\CurlHTTPClient($channelAccessToken);
+        //   $bot = new \LINE\LINEBot($httpClient, ['channelSecret' => $channelSecret]);
+        //
+        //   $textMessageBuilder = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder('hello');
+        //   $response = $bot->pushMessage($userId, $textMessageBuilder);
+        //
+        //   echo $response->getHTTPStatus() . ' ' . $response->getRawBody();
+        // }
   foreach ($events['events'] as $event)
   {
 
