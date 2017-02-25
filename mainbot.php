@@ -25,6 +25,16 @@ $events = json_decode($content, true);
 if (!is_null($events['events']))
 {
 
+  //Push message
+        if (date('d/m/Y')=="25/02/2017") {
+          $httpClient = new \LINE\LINEBot\HTTPClient\CurlHTTPClient($channelAccessToken);
+          $bot = new \LINE\LINEBot($httpClient, ['channelSecret' => $channelSecret]);
+
+          $textMessageBuilder = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder('hello');
+          $response = $bot->pushMessage($userId, $textMessageBuilder);
+
+          echo $response->getHTTPStatus() . ' ' . $response->getRawBody();
+        }
   foreach ($events['events'] as $event)
   {
 
@@ -258,19 +268,6 @@ if (!is_null($events['events']))
       curl_close($ch);
 
       echo $result . "\r\n";
-// //
-
-//Push message
-      if (date('d/m/Y')=="25/02/2017") {
-        $httpClient = new \LINE\LINEBot\HTTPClient\CurlHTTPClient($channelAccessToken);
-        $bot = new LINEBot($httpClient, ['channelSecret' => $channelSecret]);
-
-        $textMessageBuilder = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder('hello');
-        $response = $bot->pushMessage($userId, $textMessageBuilder);
-
-        echo $response->getHTTPStatus() . ' ' . $response->getRawBody();
-      }
-
     }
   }
 }
