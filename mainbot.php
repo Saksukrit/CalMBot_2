@@ -1,9 +1,12 @@
 <?php
 //
+
 require_once ('./LINEBot.php');
 require_once ('./LINEBotTiny.php');
 include 'food.php';
 include 'foodsave.php';
+use LINE\LINEBot\HTTPClient;
+use LINE\LINEBot\MessageBuilder;
 //
 //
 $channelAccessToken = 'uEaFS7lHeCcF0FEBVNQtuBTVpwVzjMCSebgBPdA/XUqgxzpYg8MHySfkmKpKys/TTEvQO99XihXnZaPKVO/4VsQXLqs8LQZdmskXuwncFHyI8/GZjv91J9Q/YN/pmATJTvlp6YOxOBypA2QFg1r6OwdB04t89/1O/w1cDnyilFU=';
@@ -256,12 +259,36 @@ if (!is_null($events['events']))
 
       echo $result . "\r\n";
 // //
+
+//Push message
+      if (date('d/m/Y')=="25/02/2017") {
+        $httpClient = new \LINE\LINEBot\HTTPClient\CurlHTTPClient($channelAccessToken);
+        $bot = new LINEBot($httpClient, ['channelSecret' => $channelSecret]);
+
+        $textMessageBuilder = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder('hello');
+        $response = $bot->pushMessage($userId, $textMessageBuilder);
+
+        echo $response->getHTTPStatus() . ' ' . $response->getRawBody();
+      }
+
     }
   }
 }
 
+// //Push message
+// if (date('d/m/Y')=="25/02/2017") {
+//   $httpClient = new \LINEBot\HTTPClient\CurlHTTPClient('<channel access token>');
+//   $bot = new LINEBot($httpClient, ['channelSecret' => '<channel secret>']);
+//
+//   $textMessageBuilder = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder('hello');
+//   $response = $bot->pushMessage('<to>', $textMessageBuilder);
+//
+//   echo $response->getHTTPStatus() . ' ' . $response->getRawBody();
+// }
+
+
 //
 //
 echo "cal 2 OK <br>";
-echo date('Y-m-d');
+echo date('d/m/Y');
 ?>
