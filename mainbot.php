@@ -33,14 +33,6 @@ $events = json_decode($content, true);
 // echo $response->getHTTPStatus() . ' ' . $response->getRawBody();
 if (!is_null($events['events']))
 {
-
-  $client->pushMessage(
-    array(
-      'to' => $userId,
-      'messages' => ['$ms_food,$ms_num']
-      )
-    );
-
   //Push message
         // if (date('d/m/Y')=="25/02/2017") {
         //   $httpClient = new \LINE\LINEBot\HTTPClient\CurlHTTPClient($channelAccessToken);
@@ -63,6 +55,13 @@ if (!is_null($events['events']))
 
       $userId = $event['source']['userId'];
       //
+
+      $client->pushMessage(
+        array(
+          'to' => $userId,
+          'messages' => ['$ms_food,$ms_num']
+          )
+        );
 
       // condition to class food check
       $checkfood = new FoodCheck;
