@@ -27,26 +27,27 @@ class User
         $db->CloseCon($conn);
     }
 
-    // public function check_userId($userId)
-    // {
-    //     $conn = OpenCon();
-    //     $sql = "SELECT userID FROM Udetail WHERE userid_line = '$userId'";
-    //     $result = $conn->query($sql);
-    //
-    //     if ($result->num_rows > 0)
-    //     {
-    //
-    //         while ($row = $result->fetch_assoc())
-    //         {
-    //             $userID = $row["userID"];
-    //             return $userID;
-    //         }
-    //     }
-    //     else
-    //     {
-    //         return "null";
-    //     }
-    //     CloseCon($conn);
-    // }
+    public function check_userId($userId)
+    {
+      $db = new Dbcon;
+        $conn = $db->OpenCon();
+        $sql = "SELECT userID FROM Udetail WHERE userid_line = '$userId'";
+        $result = $conn->query($sql);
+
+        if ($result->num_rows > 0)
+        {
+
+            while ($row = $result->fetch_assoc())
+            {
+                $userID = $row["userID"];
+                return $userID;
+            }
+        }
+        else
+        {
+            return "null";
+        }
+        $db->CloseCon($conn);
+    }
 }
 ?>
