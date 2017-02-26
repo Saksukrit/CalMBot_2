@@ -30,7 +30,7 @@ class User
         $dbname = "sql6159246";
         // Create connection
         // $conn = new mysqli($servername, $username, $password, $dbname);
-        $conn = new DB;
+        $conn = new DB();
         // Check connection
 
         if ($conn->connect_error)
