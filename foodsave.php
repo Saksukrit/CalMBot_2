@@ -3,9 +3,9 @@
 class Food_save
 {
 
-    public $conn = null;
+    public $conn;
 
-    private $conn2 = null;
+    private $conn2;
     function __construct()
     {
         $servername = "sql6.freemysqlhosting.net";

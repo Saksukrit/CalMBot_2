@@ -24,25 +24,10 @@ $events = json_decode($content, true);
 //
 //
 //
-// $httpClient = new CurlHTTPClient($channelAccessToken);
-// $bot = new LINEBot($httpClient, ['channelSecret' => $channelSecret]);
-//
-// $textMessageBuilder = new TextMessageBuilder('hello');
-// $response = $bot->pushMessage($userId, $textMessageBuilder);
-//
-// echo $response->getHTTPStatus() . ' ' . $response->getRawBody();
+
 if (!is_null($events['events']))
 {
-  //Push message
-        // if (date('d/m/Y')=="25/02/2017") {
-        //   $httpClient = new \LINE\LINEBot\HTTPClient\CurlHTTPClient($channelAccessToken);
-        //   $bot = new \LINE\LINEBot($httpClient, ['channelSecret' => $channelSecret]);
-        //
-        //   $textMessageBuilder = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder('hello');
-        //   $response = $bot->pushMessage($userId, $textMessageBuilder);
-        //
-        //   echo $response->getHTTPStatus() . ' ' . $response->getRawBody();
-        // }
+
   foreach ($events['events'] as $event)
   {
 
@@ -66,6 +51,9 @@ if (!is_null($events['events']))
       // condition to class food check
       $checkfood = new FoodCheck;
 
+      $user = new User($userId);
+      $user->get_displayname();
+
 
 
 
@@ -74,7 +62,7 @@ if (!is_null($events['events']))
       if ($text == "เมนู" || $text == "พอแล้ว") {
         $ms1 = [
         'type' => 'text',
-        'text' => 'สวัสดี '.$userId.'
+        'text' => 'สวัสดี '.$user.'
         เมนูการใช้งาน
         1.บันทึกมื้ออาหาร
         2.ค้นหาข้อมูลอาหาร

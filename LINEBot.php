@@ -34,14 +34,14 @@ use LINE\LINEBot\SignatureValidator;
 class LINEBot
 {
     const DEFAULT_ENDPOINT_BASE = 'https://api.line.me';
-    
+
     /** @var string */
     private $channelSecret;
     /** @var string */
     private $endpointBase;
     /** @var HTTPClient */
     private $httpClient;
-    
+
     /**
     * LINEBot constructor.
     *
@@ -52,13 +52,13 @@ class LINEBot
     {
         $this->httpClient = $httpClient;
         $this->channelSecret = $args['channelSecret'];
-        
+
         $this->endpointBase = LINEBot::DEFAULT_ENDPOINT_BASE;
         if (array_key_exists('endpointBase', $args) && !empty($args['endpointBase'])) {
             $this->endpointBase = $args['endpointBase'];
         }
     }
-    
+
     /**
     * Gets specified user's profile through API calling.
     *
@@ -69,7 +69,7 @@ class LINEBot
     {
         return $this->httpClient->get($this->endpointBase . '/v2/bot/profile/' . urlencode($userId));
     }
-    
+
     /**
     * Gets message content which is associated with specified message ID.
     *
@@ -80,7 +80,7 @@ class LINEBot
     {
         return $this->httpClient->get($this->endpointBase . '/v2/bot/message/' . urlencode($messageId) . '/content');
     }
-    
+
     /**
     * Replies arbitrary message to destination which is associated with reply token.
     *
@@ -95,7 +95,7 @@ class LINEBot
         'messages' => $messageBuilder->buildMessage(),
         ]);
     }
-    
+
     /**
     * Replies text message(s) to destination which is associated with reply token.
     *
@@ -111,7 +111,7 @@ class LINEBot
         $textMessageBuilder = new TextMessageBuilder($text, ...$extraTexts);
         return $this->replyMessage($replyToken, $textMessageBuilder);
     }
-    
+
     /**
     * Sends arbitrary message to destination.
     *
@@ -126,7 +126,7 @@ class LINEBot
         'messages' => $messageBuilder->buildMessage(),
         ]);
     }
-    
+
     /**
     * Leaves from group.
     *
@@ -137,7 +137,7 @@ class LINEBot
     {
         return $this->httpClient->post($this->endpointBase . '/v2/bot/group/' . urlencode($groupId) . '/leave', []);
     }
-    
+
     /**
     * Leaves from room.
     *
@@ -148,7 +148,7 @@ class LINEBot
     {
         return $this->httpClient->post($this->endpointBase . '/v2/bot/room/' . urlencode($roomId) . '/leave', []);
     }
-    
+
     /**
     * Parse event request to Event objects.
     *
@@ -160,7 +160,7 @@ class LINEBot
     {
         return EventRequestParser::parseEventRequest($body, $this->channelSecret, $signature);
     }
-    
+
     /**
     * Validate request with signature.
     *
