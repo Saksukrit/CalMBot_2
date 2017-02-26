@@ -31,10 +31,11 @@ class User
         $dbname = "sql6159246";
         // Create connection
         // $conn = new mysqli($servername, $username, $password, $dbname);
-        $conn = $mysqli;
+        // $conn = $mysqli;
 
         $sql = "SELECT displayname FROM Udetail WHERE userid_line = '$userId'";
-        $result = $conn->query($sql);
+        // $result = $conn->query($sql);
+        $result = $mysqli->query($sql);
 
         if ($result->num_rows > 0)
         {
@@ -49,7 +50,7 @@ class User
         {
             return "no displayname";
         }
-        $conn->close();
+        // $conn->close();
     }
 
     public function check_userId()
