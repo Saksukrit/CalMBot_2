@@ -37,8 +37,8 @@ class User
 
             while ($row = $result->fetch_assoc())
             {
-                $displayname = $row["userID"];
-                return $displayname;
+                $userID = $row["userID"];
+                return $userID;
             }
         }
         else
