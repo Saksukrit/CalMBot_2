@@ -4,9 +4,7 @@ include 'dbcon.php';
 class Food_save
 {
 
-    public $conn;
-
-    public function check_food_dialy($userId,$currentdate)
+    public function check_food_dialy($userId, $currentdate)
     {
         # code...
 
@@ -15,7 +13,6 @@ class Food_save
     public function save_food_dialy($userID, $save_date)
     {
         $userID = intval($userID);
-
         // Create connection
         $conn = OpenCon();
         $sql = "INSERT INTO Food_diary (userID, food_diary_id, save_date, total_caloriel) VALUES ('$userID', null,'$save_date', 0)";

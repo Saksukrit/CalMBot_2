@@ -52,7 +52,7 @@ if (!is_null($events['events']))
       // condition to class food check
       $checkfood = new FoodCheck;
       $user = new User;
-      // $food_dialy = new Food_save;
+      $food_dialy = new Food_save;
 
       //  select menu    ****************************************
       if ($text == "เมนู" || $text == "พอแล้ว") {
@@ -120,7 +120,7 @@ if (!is_null($events['events']))
           # code...
         }else {
           // create food_dialy
-          $food_dialy = new Food_save;
+          // $food_dialy = new Food_save;
           $food_dialy->save_food_dialy($check_userId,date('Y-m-d'));
         }
 
