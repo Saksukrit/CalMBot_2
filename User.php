@@ -37,7 +37,7 @@ class User
         {
             die("Connection failed: " . $conn->connect_error);
         }
-        $sql = "SELECT Udetail.displayname FROM Udetail WHERE Udetail.userid_line = '$userId'";
+        $sql = "SELECT displayname FROM Udetail WHERE userid_line = '$userId'";
         $result = $conn->query($sql);
 
         if ($result->num_rows > 0)
