@@ -126,7 +126,7 @@ if (!is_null($events['events']))
 
         $save_dialy = [
         'type' => 'template',
-        'altText' => 'OK บันทึกมื้ออาหาร',
+        'altText' => 'OK บันทึกมื้ออาหาร  '.$check_userId.'',
         'template' => array(
 
           'type' => 'buttons',
