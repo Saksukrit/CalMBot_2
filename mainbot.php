@@ -121,7 +121,7 @@ if (!is_null($events['events']))
         }else {
           // create food_dialy
           // $food_dialy = new Food_save;
-          // $food_dialy->save_food_dialy($check_userId,date('Y-m-d'));
+          $food_dialy->save_food_dialy($check_userId,date('Y-m-d'));
         }
 
         $save_dialy = [

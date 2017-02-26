@@ -14,7 +14,8 @@ class Food_save
     {
         $userID = intval($userID);
         // Create connection
-        $conn = OpenCon();
+        $db = new Dbcon;
+        $conn = $db->OpenCon();
         $sql = "INSERT INTO Food_diary (userID, food_diary_id, save_date, total_caloriel) VALUES ('$userID', null,'$save_date', 0)";
 
         if ($conn->query($sql) === TRUE)
@@ -27,7 +28,7 @@ class Food_save
             echo "Error: " . $sql . "<br>" . $conn->error;
             return "fail add";
         }
-        CloseCon($conn);
+        $db->CloseCon($conn);
     }
 
     public function save_food_dialy_list($fd_id, $fname, $unit, $repast)
@@ -35,7 +36,8 @@ class Food_save
         $fd_id = intval($fd_id);
         $unit = intval($unit);
         // Create connection
-        $conn = OpenCon();
+        $db = new Dbcon;
+        $conn = $db->OpenCon();
         mysqli_set_charset($conn, "utf8");
 
         if ($conn->connect_error)
@@ -58,7 +60,7 @@ class Food_save
                 return "fail add";
             }
         }
-        CloseCon($conn);
+        $db->CloseCon($conn);
     }
 }
 ?>
