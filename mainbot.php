@@ -51,8 +51,8 @@ if (!is_null($events['events']))
       // condition to class food check
       $checkfood = new FoodCheck;
 
-      $user = new User($userId);
-      $displayname = $user->get_displayname();
+      $user = new User;
+      $displayname = $user->get_displayname($userId);
 
 
 
