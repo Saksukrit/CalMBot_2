@@ -64,6 +64,7 @@ if (!is_null($events['events']))
         $ms1 = [
         'type' => 'text',
         'text' => 'สวัสดี '.$displayname.'
+        '.$userId.'
         เมนูการใช้งาน
         1.บันทึกมื้ออาหาร
         2.ค้นหาข้อมูลอาหาร
