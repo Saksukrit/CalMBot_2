@@ -7,8 +7,9 @@ require_once ('./LINEBotTiny.php');
 // require_once ('./LINEBot/MessageBuilder/TextMessageBuilder.php');
 include 'food.php';
 include 'foodsave.php';
-use LINE\LINEBot\HTTPClient;
-use LINE\LINEBot\MessageBuilder;
+include 'User.php';
+// use LINE\LINEBot\HTTPClient;
+// use LINE\LINEBot\MessageBuilder;
 //
 //
 $channelAccessToken = 'uEaFS7lHeCcF0FEBVNQtuBTVpwVzjMCSebgBPdA/XUqgxzpYg8MHySfkmKpKys/TTEvQO99XihXnZaPKVO/4VsQXLqs8LQZdmskXuwncFHyI8/GZjv91J9Q/YN/pmATJTvlp6YOxOBypA2QFg1r6OwdB04t89/1O/w1cDnyilFU=';
