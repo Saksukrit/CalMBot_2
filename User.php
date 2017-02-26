@@ -3,22 +3,6 @@ include 'dbcon.php';
 
 class User
 {
-    // private $userId = null;
-    //
-    // private $servername = "sql6.freemysqlhosting.net";
-    //
-    // private $username = "sql6159246";
-    //
-    // private $password = "DBUUiG4F5U";
-    //
-    // private $dbname = "sql6159246";
-    // Create connection
-    // private $conn;
-    // function __construct($userId)
-    // {
-    //     $this->$userId = $userId;
-    //     $this->$conn = new mysqli($servername, $username, $password, $dbname);
-    // }
 
     public function get_displayname($userId)
     {
@@ -26,8 +10,6 @@ class User
         $username = "sql6159246";
         $password = "DBUUiG4F5U";
         $dbname = "sql6159246";
-        // Create connection
-        // $conn = new mysqli($servername, $username, $password, $dbname);
         $conn = OpenCon();
         $sql = "SELECT displayname FROM Udetail WHERE userid_line = '$userId'";
         $result = $conn->query($sql);
