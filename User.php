@@ -16,7 +16,7 @@ class User
     // private $dbname = "sql6159246";
     // Create connection
 
-    private $conn;
+    // private $conn;
     // function __construct($userId)
     // {
     //     $this->$userId = $userId;
@@ -42,10 +42,9 @@ class User
 
         if ($result->num_rows > 0)
         {
-
             while ($row = $result->fetch_assoc())
             {
-                $displayname = $row["Udetail.displayname"];
+                $displayname = $row["displayname"];
                 return $displayname;
             }
         }
