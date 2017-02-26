@@ -52,7 +52,7 @@ if (!is_null($events['events']))
       $checkfood = new FoodCheck;
 
       $user = new User($userId);
-      $user->get_displayname();
+      $displayname = $user->get_displayname();
 
 
 
@@ -62,7 +62,7 @@ if (!is_null($events['events']))
       if ($text == "เมนู" || $text == "พอแล้ว") {
         $ms1 = [
         'type' => 'text',
-        'text' => 'สวัสดี '.$user.'
+        'text' => 'สวัสดี '.$displayname.'
         เมนูการใช้งาน
         1.บันทึกมื้ออาหาร
         2.ค้นหาข้อมูลอาหาร
