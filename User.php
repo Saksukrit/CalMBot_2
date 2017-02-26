@@ -6,10 +6,6 @@ class User
 
     public function get_displayname($userId)
     {
-        $servername = "sql6.freemysqlhosting.net";
-        $username = "sql6159246";
-        $password = "DBUUiG4F5U";
-        $dbname = "sql6159246";
         $conn = OpenCon();
         $sql = "SELECT displayname FROM Udetail WHERE userid_line = '$userId'";
         $result = $conn->query($sql);
@@ -27,14 +23,29 @@ class User
         {
             return "no displayname";
         }
-        // $conn->close();
-
+        CloseCon($conn);
     }
 
-    public function check_userId()
+    public function check_userId($userId)
     {
-        # code...
+        $conn = OpenCon();
+        $sql = "SELECT userID FROM Udetail WHERE userid_line = '$userId'";
+        $result = $conn->query($sql);
 
+        if ($result->num_rows > 0)
+        {
+
+            while ($row = $result->fetch_assoc())
+            {
+                $displayname = $row["userID"];
+                return $displayname;
+            }
+        }
+        else
+        {
+            return "null";
+        }
+        CloseCon($conn);
     }
 }
 ?>

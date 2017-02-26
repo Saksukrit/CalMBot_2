@@ -51,16 +51,13 @@ if (!is_null($events['events']))
 
       // condition to class food check
       $checkfood = new FoodCheck;
-
       $user = new User;
-      $displayname = $user->get_displayname($userId);
-
-
-
-
+      $food_dialy = new Food_save;
 
       //  select menu    ****************************************
       if ($text == "เมนู" || $text == "พอแล้ว") {
+        $displayname = $user->get_displayname($userId);
+
         $ms1 = [
         'type' => 'text',
         'text' => 'สวัสดี '.$displayname.'
@@ -114,10 +111,18 @@ if (!is_null($events['events']))
       // ***********  Food_save  ************************************************************************************
       // select repast
       else if ($text == "บันทึกมื้ออาหาร") {
-
-        // create food_dialy
-        $food_dialy = new Food_save;
-        $food_dialy->save_food_dialy("2",date('Y-m-d'));
+        // check userId
+        $check_userId = $user->check_userId($userId);
+        // check date
+        // $food_dialy->check_food_dialy($userId,date('Y-m-d'));
+        //
+        if ($check_userId == "null") {
+          # code...
+        }else {
+          // create food_dialy
+          // $food_dialy = new Food_save;
+          $food_dialy->save_food_dialy($check_userId,date('Y-m-d'));
+        }
 
         $save_dialy = [
         'type' => 'template',
