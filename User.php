@@ -15,7 +15,6 @@ class User
     //
     // private $dbname = "sql6159246";
     // Create connection
-
     // private $conn;
     // function __construct($userId)
     // {
@@ -30,7 +29,8 @@ class User
         $password = "DBUUiG4F5U";
         $dbname = "sql6159246";
         // Create connection
-        $conn = new mysqli($servername, $username, $password, $dbname);
+        // $conn = new mysqli($servername, $username, $password, $dbname);
+        $conn = new DB;
         // Check connection
 
         if ($conn->connect_error)
@@ -42,6 +42,7 @@ class User
 
         if ($result->num_rows > 0)
         {
+
             while ($row = $result->fetch_assoc())
             {
                 $displayname = $row["displayname"];
