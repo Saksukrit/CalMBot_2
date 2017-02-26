@@ -1,19 +1,14 @@
 <?php
+$servername = "sql6.freemysqlhosting.net";
+$username = "sql6159246";
+$password = "DBUUiG4F5U";
+$dbname = "sql6159246";
+//
+$mysqli = new mysqli($servername, $username, $password, $dbname);
+//
 
-class DB
+if ($mysqli->connect_error)
 {
-
-    private $servername = "sql6.freemysqlhosting.net";
-
-    private $username = "sql6159246";
-
-    private $password = "DBUUiG4F5U";
-
-    private $dbname = "sql6159246";
-    function __construct()
-    {
-        $con = new mysqli($this->$servername, $this->$username, $this->$password, $this->$dbname);
-        return $con;
-    }
+    die('Connect Error');
 }
 ?>

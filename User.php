@@ -2,7 +2,7 @@
 /**
  *
  */
- include 'DBconfic.php';
+ require 'DBconfic.php';
 
 class User
 {
@@ -30,14 +30,9 @@ class User
         $password = "DBUUiG4F5U";
         $dbname = "sql6159246";
         // Create connection
-        $conn = new mysqli($servername, $username, $password, $dbname);
-        // $conn = new DB();
-        // Check connection
+        // $conn = new mysqli($servername, $username, $password, $dbname);
+        $conn = $mysqli;
 
-        if ($conn->connect_error)
-        {
-            die("Connection failed: " . $conn->connect_error);
-        }
         $sql = "SELECT displayname FROM Udetail WHERE userid_line = '$userId'";
         $result = $conn->query($sql);
 
