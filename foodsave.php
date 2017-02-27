@@ -6,8 +6,24 @@ class Food_save
 
     public function check_food_dialy($userId, $currentdate)
     {
-        # code...
+        $db = new Dbcon;
+        $conn = $db->OpenCon();
+        $sql = "SELECT food_diary_id FROM Food_diary WHERE userID = '$userId' AND save_date = '$currentdate'";
+        $result = $conn->query($sql);
 
+        if ($result->num_rows > 0)
+        {
+          while ($row = $result->fetch_assoc())
+          {
+              $food_diary_id = $row["food_diary_id"];
+              return $food_diary_id;
+          }
+        }
+        else
+        {
+            return "null";
+        }
+        $db->CloseCon($conn);
     }
 
     public function save_food_dialy($userID, $save_date)

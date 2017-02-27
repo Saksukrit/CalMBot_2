@@ -7,7 +7,7 @@ require_once ('./LINEBotTiny.php');
 // require_once ('./LINEBot/MessageBuilder/TextMessageBuilder.php');
 include 'food.php';
 include 'foodsave.php';
-include 'User.php';
+include 'user.php';
 // use LINE\LINEBot\HTTPClient;
 // use LINE\LINEBot\MessageBuilder;
 //
@@ -42,20 +42,37 @@ if (!is_null($events['events']))
       $userId = $event['source']['userId'];
       //
 
-      $client->pushMessage(
-        array(
-          'to' => $userId,
-          'messages' => ['$ms_food,$ms_num']
-          )
-        );
+      // $client->pushMessage(
+      //   array(
+      //     'to' => $userId,
+      //     'messages' => ['$ms_food,$ms_num']
+      //     )
+      //   );
 
       // condition to class food check
       $checkfood = new FoodCheck;
       $user = new User;
       $food_dialy = new Food_save;
 
-      //  select menu    ****************************************
-      if ($text == "เมนู" || $text == "พอแล้ว") {
+      // check user maping id
+      $checkuser = $user->get_userId($userId);
+      if ($checkuser == "null") {
+        $ms = [
+        'type' => 'text',
+        'text' => 'สวัสดี คุณคือใคร
+        กรุณายืนยันตัวตนด้วย Username ของคุณ'];
+
+        $client->replyMessage(
+          array(
+            'replyToken' => $event['replyToken'],
+            'messages' => [$ms]
+            )
+          );
+      }
+
+      else{
+        //  select menu    ****************************************
+       if ($text == "เมนู" || $text == "พอแล้ว") {
         $displayname = $user->get_displayname($userId);
 
         $ms1 = [
@@ -112,21 +129,18 @@ if (!is_null($events['events']))
       // select repast
       else if ($text == "บันทึกมื้ออาหาร") {
         // check userId
-        $check_userId = $user->check_userId($userId);
+        $get_userId = $user->get_userId($userId);
         // check date
-        // $food_dialy->check_food_dialy($userId,date('Y-m-d'));
+        $check_food_dialy = $food_dialy->check_food_dialy($get_userId,date('Y-m-d'));
         //
-        if ($check_userId == "null") {
-          # code...
-        }else {
-          // create food_dialy
-          // $food_dialy = new Food_save;
-          $food_dialy->save_food_dialy($check_userId,date('Y-m-d'));
+        if ($check_food_dialy == "null") {
+          // if null => create food_dialy
+          $food_dialy->save_food_dialy($get_userId,date('Y-m-d'));
         }
 
         $save_dialy = [
         'type' => 'template',
-        'altText' => 'OK บันทึกมื้ออาหาร  '.$check_userId.'',
+        'altText' => 'OK บันทึกมื้ออาหาร',
         'template' => array(
 
           'type' => 'buttons',
@@ -280,6 +294,7 @@ if (!is_null($events['events']))
       echo $result . "\r\n";
     }
   }
+}
 }
 
 // //Push message

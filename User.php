@@ -27,9 +27,9 @@ class User
         $db->CloseCon($conn);
     }
 
-    public function check_userId($userId)
+    public function get_userId($userId)
     {
-      $db = new Dbcon;
+        $db = new Dbcon;
         $conn = $db->OpenCon();
         $sql = "SELECT userID FROM Udetail WHERE userid_line = '$userId'";
         $result = $conn->query($sql);
