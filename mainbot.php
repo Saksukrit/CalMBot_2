@@ -193,11 +193,39 @@ if (!is_null($events['events']))
           );
       }
 
-
+      // number of foods
       else if ($checkfood->check_food($text) == "food") {
         $ms_food = [
-        'type' => 'text',
-        'text' => 'จำนวนเท่าไหร่ (จาน)'];
+        'type' => 'template',
+        'altText' => 'จำนวนเท่าไหร่',
+        'template' => array(
+          'type' => 'buttons',
+          'title' => ' ',
+          'text' => 'จำนวนเท่าไหร่',
+          'actions' => array(
+            array(
+              'type' => 'postback',
+              'label' => '1',
+              'data' => '1',
+              'text' => '1')
+            ,array(
+              'type' => 'postback',
+              'label' => '2',
+              'data' => '2',
+              'text' => '2')
+            ,array(
+              'type' => 'postback',
+              'label' => '3',
+              'data' => '3',
+              'text' => '3')
+            ,array(
+              'type' => 'postback',
+              'label' => '4',
+              'data' => '4',
+              'text' => '4')
+            )
+          )
+        ];
 
         $client->replyMessage(
           array(
@@ -208,6 +236,7 @@ if (!is_null($events['events']))
       }
 
       else if ($checkfood->check_num($text) == "ok") {
+        // get data from Req_manage
 
         // save food_dialy list
         $food_dialy = new Food_save;
