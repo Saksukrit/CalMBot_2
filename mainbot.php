@@ -330,8 +330,8 @@ if (!is_null($events['events']))
       }
 
       // show list food
-      else if ($searchfood->searchfood_byname($text) != "null") {
-
+      // else if ($searchfood->searchfood_byname($text) != "null") {
+      else if ($text == "ฟรุตสลัด") {
         $ms_foodlist = [
         'type' => 'template',
         'altText' => 'รายการอาหาร',
