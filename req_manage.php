@@ -18,7 +18,12 @@ class Req_manage
     # code...
   }
 
-  public function save_calorie($value='')
+  public function save_calorie($calorie)
+  {
+    # code...
+  }
+
+  public function get_dialy_list()
   {
     # code...
   }
