@@ -330,7 +330,7 @@ if (!is_null($events['events']))
       }
 
       // show list food
-      else if ($searchfood->searchfood_byname($text)) {
+      else if ($searchfood->searchfood_byname($text) != "null") {
 
         $ms_foodlist = [
         'type' => 'template',

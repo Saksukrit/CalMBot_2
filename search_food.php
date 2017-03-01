@@ -6,7 +6,7 @@ class Searchfood
 
 public function searchfood_byname($foodname)
 {
-  # code...
+  return "ok";
 }
 
 public function searchfood_bycalorie($foodcalorie)
