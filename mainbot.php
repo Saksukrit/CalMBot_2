@@ -54,6 +54,7 @@ if (!is_null($events['events']))
       $checkfood = new FoodCheck;
       $user = new User;
       $food_dialy = new Food_save;
+      $searchfood = new Searchfood;
 
       // check user maping id
       $checkuser = $user->get_userId($userId);
@@ -313,6 +314,80 @@ if (!is_null($events['events']))
             )
           );
       }
+
+      // search food by name ++++++++++++++++++++++++++++++++++
+      else if ($text == "ค้นหาโดยชื่ออาหาร") {
+        $ms_foodname = [
+        'type' => 'text',
+        'text' => 'บอกชื่ออาหารที่ต้องการ'];
+
+        $client->replyMessage(
+          array(
+            'replyToken' => $event['replyToken'],
+            'messages' => [$ms_foodname]
+            )
+          );
+      }
+
+      // show list food
+      else if ($searchfood->searchfood_byname($text)) {
+
+        $ms_foodlist = [
+        'type' => 'template',
+        'altText' => 'รายการอาหาร',
+        'template' => array(
+          'type' => 'carousel',
+          'columns' => array(
+            array(
+              'thumbnailImageUrl' => 'https://firebasestorage.googleapis.com/v0/b/my1st-firebase.appspot.com/o/photos%2Ffood%2F%E0%B8%AA%E0%B8%A5%E0%B8%B1%E0%B8%94%E0%B8%9C%E0%B8%A5%E0%B9%84%E0%B8%A1%E0%B9%89.jpg?alt=media&token=cc82fcfd-1c1a-4e62-8f53-b33231a6a370',
+              'title' => 'ฟรุตสลัด 1 ถ้วย',
+              'text' => ' 180 กิโลแคลอรี่',
+              // 'actions' => array(
+              //
+              //   array(
+              //     'type' => 'postback',
+              //     'label' => 'ข้อมูลเพิ่มเติม',
+              //     'data' => 'ข้อมูลเพิ่มเติม',
+              //     'text' => 'ข้อมูลเพิ่มเติม')
+              //
+              //   )
+              )
+
+            )
+          )
+        ];
+
+        $client->replyMessage(
+          array(
+            'replyToken' => $event['replyToken'],
+            'messages' => [$ms_foodlist]
+            )
+          );
+      }
+
+      // $messagess = [
+      // "type"=> "template",
+      // "altText"=> "แคลอรี่ของคุณเกินกำหนดแล้ว
+      // แคลอรี่ที่ได้รับตอนนี้เท่ากับ 2450 กิโลแคลอรี่",
+      // "template"=> array(
+      //   "type"=> "confirm",
+      //   "text"=> "แคลอรี่ของคุณเกินกำหนด(TDEE)แล้ว
+      //   แคลอรี่ที่ได้รับตอนนี้เท่ากับ 2450 กิโลแคลอรี่
+      //   คุณต้องการคำแนะนำเกี่ยวกับอาหารสุขภาพ หรือวิธีการออกกำลังกายมั้ย ?",
+      //   "actions"=> array(
+      //     array(
+      //       "type"=> "message",
+      //       "label"=> "ใช่",
+      //       "text"=> "ใช่"
+      //       ),
+      //     array(
+      //       "type"=> "message",
+      //       "label"=> "ไม่",
+      //       "text"=> "ไม่"
+      //       )
+      //     )
+      //   )
+      // ];
       // -----------------------------------------------------------------------------------------------------------------------------
 
       else if ($text == "เพิ่มอีก") {
