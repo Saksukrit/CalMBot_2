@@ -9,6 +9,7 @@ require_once ('./LINEBotTiny.php');
 include 'food.php';
 include 'foodsave.php';
 include 'user.php';
+include 'search_food.php';
 // use LINE\LINEBot\HTTPClient;
 // use LINE\LINEBot\MessageBuilder;
 //
