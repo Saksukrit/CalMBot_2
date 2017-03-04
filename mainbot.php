@@ -303,7 +303,7 @@ if (!is_null($events['events']))
                 // ----------------------
                 // show list food by name
 
-                else
+                else 
                 if ($searchfood->searchfood_byname($text) != "null")
                 {
                     $colum = $searchfood->searchfood_byname($text);
