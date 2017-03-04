@@ -348,28 +348,15 @@ if (!is_null($events['events']))
           'columns' => $colums
           )
         ];
-
         $ms_array = array();
         $ms_array[1]= $ms_foodlist;
         $ms_array[2]= $ms_foodlist;
-
-        // $max = count($colum);
-        // $num =0;
-        // $com;
-        // while ($num < $max) {
-        //   $com = $com.'  '.$colum[$num];
-        //   $num++;
-        // }
-        //
-        // $ms_con = [
-        // 'type' => 'text',
-        // 'text' => ''.$com.''];
 
         $client->replyMessage(
           array(
             'replyToken' => $event['replyToken'],
             // 'messages' => [$ms_array[1],$ms_array[2]]
-            'messages' => [$ms_foodlist]
+            'messages' => [$ms_array]
             )
           );
       }
