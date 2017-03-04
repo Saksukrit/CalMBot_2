@@ -320,12 +320,10 @@ if (!is_null($events['events']))
                     $ms_array = array();
                     $ms_array[1] = $ms_foodlist;
                     $ms_array[2] = $ms_foodlist;
-
-
                     $client->replyMessage(array(
                         'replyToken' => $event['replyToken'],
                         // 'messages' => [$ms_array[1],$ms_array[2]]
-                        'messages' => [$ms_array[2]]
+                        'messages' => [$ms_foodlist]
                     ));
                 }
                 // $messagess = [
