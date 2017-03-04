@@ -23,20 +23,19 @@ class Searchfood
 
                 if ($num != $nummax)
                 {
-                    $colum[$num] = $row["food_name"];
-                    // $colum = array(
-                    //     'thumbnailImageUrl' => '' . $row["f_pic"] . '',
-                    //     'title' => '' . $row["food_name"] . ' ' . $row["f_unit"] . '',
-                    //     'text' => 'มีพลังงาน ' . $row["f_calorie"] . ' แคลอรี่',
-                    //     'actions' => array(
-                    //         array(
-                    //             'type' => 'message',
-                    //             'label' => ' ',
-                    //             'text' => ' ',
-                    //         )
-                    //     ) ,
-                    // );
-                    // return $colum;
+                    // $colum[$num] = $row["food_name"];
+                    $colum[$num] = array(
+                        'thumbnailImageUrl' => '' . $row["f_pic"] . '',
+                        'title' => '' . $row["food_name"] . ' ' . $row["f_unit"] . '',
+                        'text' => 'มีพลังงาน ' . $row["f_calorie"] . ' แคลอรี่',
+                        'actions' => array(
+                            array(
+                                'type' => 'message',
+                                'label' => ' ',
+                                'text' => ' ',
+                            )
+                        ) ,
+                    );
                     $num++;
                 }
             }

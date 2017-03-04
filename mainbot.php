@@ -347,7 +347,8 @@ if (!is_null($events['events']))
       //     )
       //   );
         $colum = $searchfood->searchfood_byname($text);
-        $colums = array($colum,$colum,$colum);
+
+        $colums = array($colum[0],$colum[1],$colum[2]);
 
         $ms_array = array();
 
@@ -363,23 +364,23 @@ if (!is_null($events['events']))
         $ms_array[1]= $ms_foodlist;
         $ms_array[2]= $ms_foodlist;
 
-        $max = count($colum);
-        $num =0;
-        $com;
-        while ($num < $max) {
-          $com = $com.'  '.$colum[$num];
-          $num++;
-        }
-
-        $ms_con = [
-        'type' => 'text',
-        'text' => ''.$com.''];
+        // $max = count($colum);
+        // $num =0;
+        // $com;
+        // while ($num < $max) {
+        //   $com = $com.'  '.$colum[$num];
+        //   $num++;
+        // }
+        //
+        // $ms_con = [
+        // 'type' => 'text',
+        // 'text' => ''.$com.''];
 
         $client->replyMessage(
           array(
             'replyToken' => $event['replyToken'],
             // 'messages' => [$ms_array[1],$ms_array[2]]
-            'messages' => [$ms_con]
+            'messages' => [$ms_foodlist]
             )
           );
       }
