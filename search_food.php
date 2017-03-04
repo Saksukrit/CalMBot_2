@@ -6,15 +6,6 @@ class Searchfood
 
     public function searchfood_byname($foodname)
     {
-
-        if ($foodname == "เมนูต่อไป")
-        {
-            # code...
-
-        }
-        else
-        {
-            # code...
             $db = new Dbcon;
             $conn = $db->OpenCon();
             $sql = "SELECT * FROM Food WHERE food_name LIKE '%ข้าว%' LIMIT 5";
@@ -26,7 +17,18 @@ class Searchfood
                 while ($row = $result->fetch_assoc())
                 {
                     $food_name = $row["food_name"];
-                    return $food_name;
+                    $colum = array(
+                      'thumbnailImageUrl' => ''.$row["f_pic"].'',
+                      'title' => ''.$row["food_name"].' '.$row["f_unit"].'',
+                      'text' => ' '.$row["f_calorie"].'',
+                      'actions' => array(
+                        array(
+                          'type' => 'message',
+                          'label' => ' ',
+                          'text' => ' ',)
+                        ),
+                      );
+                    return $colum;
                 }
             }
             else
@@ -34,7 +36,7 @@ class Searchfood
                 return "null";
             }
             $db->CloseCon($conn);
-        }
+
     }
 
     public function searchfood_bycalorie($foodcalorie)
