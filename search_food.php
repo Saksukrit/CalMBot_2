@@ -8,7 +8,7 @@ class Searchfood
     {
         $db = new Dbcon;
         $conn = $db->OpenCon();
-        $sql = "SELECT displayname FROM Udetail WHERE userID = '2'";
+        $sql = "SELECT * FROM Food WHERE food_name = 'ข้าวขาหมู'";
         $result = $conn->query($sql);
 
         if ($result->num_rows > 0)
@@ -16,7 +16,7 @@ class Searchfood
 
             while ($row = $result->fetch_assoc())
             {
-                $colum = $row["displayname"];
+                $colum = $row["food_name"];
                 // $colum = array(
                 //     'thumbnailImageUrl' => '' . $row["f_pic"] . '',
                 //     'title' => '' . $row["food_name"] . ' ' . $row["f_unit"] . '',
