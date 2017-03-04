@@ -8,7 +8,7 @@ class Searchfood
     {
         $db = new Dbcon;
         $conn = $db->OpenCon();
-        $sql = "SELECT food_name FROM Food WHERE food_name LIKE '%ข้าว%' LIMIT 5";
+        $sql = "SELECT food_name FROM Food WHERE food_name LIKE '%ข้าว%' LIMIT '5'";
         $result = $conn->query($sql);
 
         if ($result->num_rows > 0)
