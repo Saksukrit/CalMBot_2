@@ -313,23 +313,19 @@ if (!is_null($events['events']))
                     {
                         $colums[$i] = $colum[$i];
                     }
-                    $ms_foodlist = array(
-                        array(
-                            'type' => 'template',
-                            'altText' => 'รายการอาหาร',
-                            'template' => array(
-                                'type' => 'carousel',
-                                'columns' => $colums
-                            )
-                        )
-                    );
+                    $ms_foodlist = ['type' => 'template', 'altText' => 'รายการอาหาร', 'template' => array(
+                        'type' => 'carousel',
+                        'columns' => $colums
+                    ) ];
                     $ms_array = array();
                     $ms_array[1] = $ms_foodlist;
                     $ms_array[2] = $ms_foodlist;
+
+
                     $client->replyMessage(array(
                         'replyToken' => $event['replyToken'],
                         // 'messages' => [$ms_array[1],$ms_array[2]]
-                        'messages' => [$ms_foodlist]
+                        'messages' => [$ms_array]
                     ));
                 }
                 // $messagess = [
