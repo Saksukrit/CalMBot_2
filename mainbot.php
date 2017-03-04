@@ -314,11 +314,13 @@ if (!is_null($events['events']))
                         $colums[$i] = $colum[$i];
                     }
                     $ms_foodlist = array(
-                        'type' => 'template',
-                        'altText' => 'รายการอาหาร',
-                        'template' => array(
-                            'type' => 'carousel',
-                            'columns' => $colums
+                        array(
+                            'type' => 'template',
+                            'altText' => 'รายการอาหาร',
+                            'template' => array(
+                                'type' => 'carousel',
+                                'columns' => $colums
+                            )
                         )
                     );
                     $ms_array = array();
