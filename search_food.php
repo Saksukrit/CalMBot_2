@@ -8,7 +8,7 @@ class Searchfood
     {
         $db = new Dbcon;
         $conn = $db->OpenCon();
-        $sql = "SELECT displayname FROM Udetail WHERE userid_line = '2'";
+        $sql = "SELECT displayname FROM Udetail WHERE userID = '2'";
         $result = $conn->query($sql);
 
         if ($result->num_rows > 0)
