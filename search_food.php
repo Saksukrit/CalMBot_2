@@ -17,19 +17,19 @@ class Searchfood
 
             while ($row = $result->fetch_assoc())
             {
-                $colum = $row["food_name"];
-                // $colum = array(
-                //     'thumbnailImageUrl' => '' . $row["f_pic"] . '',
-                //     'title' => '' . $row["food_name"] . ' ' . $row["f_unit"] . '',
-                //     'text' => ' ' . $row["f_calorie"] . '',
-                //     'actions' => array(
-                //         array(
-                //             'type' => 'message',
-                //             'label' => ' ',
-                //             'text' => ' ',
-                //         )
-                //     ) ,
-                // );
+                // $colum = $row["food_name"];
+                $colum = array(
+                    'thumbnailImageUrl' => '' . $row["f_pic"] . '',
+                    'title' => '' . $row["food_name"] . ' ' . $row["f_unit"] . '',
+                    'text' => ' ' . $row["f_calorie"] . '',
+                    'actions' => array(
+                        array(
+                            'type' => 'message',
+                            'label' => ' ',
+                            'text' => ' ',
+                        )
+                    ) ,
+                );
                 return $colum;
             }
         }
