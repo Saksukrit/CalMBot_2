@@ -364,16 +364,16 @@ if (!is_null($events['events']))
         $ms_array[2]= $ms_foodlist;
 
 
-        //
-        // $ms_con = [
-        // 'type' => 'text',
-        // 'text' => ''.$colum.''];
+
+        $ms_con = [
+        'type' => 'text',
+        'text' => ''.$colum[0] . $colum[1].$colum[2].''];
 
         $client->replyMessage(
           array(
             'replyToken' => $event['replyToken'],
             // 'messages' => [$ms_array[1],$ms_array[2]]
-            'messages' => [$ms_foodlist]
+            'messages' => [$ms_con]
             )
           );
       }

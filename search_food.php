@@ -14,24 +14,33 @@ class Searchfood
 
         if ($result->num_rows > 0)
         {
+            $nummax = $result->num_rows;
+            $num = 0;
+            $colum = array();
 
             while ($row = $result->fetch_assoc())
             {
-                // $colum = $row["food_name"];
-                $colum = array(
-                    'thumbnailImageUrl' => '' . $row["f_pic"] . '',
-                    'title' => '' . $row["food_name"] . ' ' . $row["f_unit"] . '',
-                    'text' => ' ' . $row["f_calorie"] . '',
-                    'actions' => array(
-                        array(
-                            'type' => 'message',
-                            'label' => ' ',
-                            'text' => ' ',
-                        )
-                    ) ,
-                );
-                return $colum;
+
+                if ($num != $nummax)
+                {
+                    $colum[$num] = $row["food_name"];
+                    // $colum = array(
+                    //     'thumbnailImageUrl' => '' . $row["f_pic"] . '',
+                    //     'title' => '' . $row["food_name"] . ' ' . $row["f_unit"] . '',
+                    //     'text' => 'มีพลังงาน ' . $row["f_calorie"] . ' แคลอรี่',
+                    //     'actions' => array(
+                    //         array(
+                    //             'type' => 'message',
+                    //             'label' => ' ',
+                    //             'text' => ' ',
+                    //         )
+                    //     ) ,
+                    // );
+                    // return $colum;
+
+                }
             }
+            return $colum;
         }
         else
         {
