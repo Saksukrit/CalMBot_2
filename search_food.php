@@ -16,8 +16,8 @@ class Searchfood
 
             while ($row = $result->fetch_assoc())
             {
-                $displayname = $row["displayname"];
-                return $displayname;
+                $food_name = $row["food_name"];
+                return $food_name;
             }
         }
         else

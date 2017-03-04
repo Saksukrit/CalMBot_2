@@ -335,20 +335,19 @@ if (!is_null($events['events']))
 
       // else if ($searchfood->searchfood_byname($text) != "null") {
 
-
-        $colum = array(
+      $colum = array(
+        'thumbnailImageUrl' => 'https://firebasestorage.googleapis.com/v0/b/my1st-firebase.appspot.com/o/photos%2Ffood%2F%E0%B8%AA%E0%B8%A5%E0%B8%B1%E0%B8%94%E0%B8%9C%E0%B8%A5%E0%B9%84%E0%B8%A1%E0%B9%89.jpg?alt=media&token=cc82fcfd-1c1a-4e62-8f53-b33231a6a370',
+        'title' => 'ฟรุตสลัด 1 ถ้วย',
+        'text' => ' 180 กิโลแคลอรี่',
+        'actions' => array(
           array(
-          'thumbnailImageUrl' => 'https://firebasestorage.googleapis.com/v0/b/my1st-firebase.appspot.com/o/photos%2Ffood%2F%E0%B8%AA%E0%B8%A5%E0%B8%B1%E0%B8%94%E0%B8%9C%E0%B8%A5%E0%B9%84%E0%B8%A1%E0%B9%89.jpg?alt=media&token=cc82fcfd-1c1a-4e62-8f53-b33231a6a370',
-          'title' => 'ฟรุตสลัด 1 ถ้วย',
-          'text' => ' 180 กิโลแคลอรี่',
-          'actions' => array(
-              array(
-                'type' => 'message',
-                'label' => ' ',
-                'text' => ' ')
-              )
-            )
-          );
+            'type' => 'message',
+            'label' => ' ',
+            'text' => ' ')
+          )
+        );
+
+        $colums = array($colum,$colum,$colum);
 
 
         $ms_foodlist = [
@@ -356,7 +355,7 @@ if (!is_null($events['events']))
         'altText' => 'รายการอาหาร',
         'template' => array(
           'type' => 'carousel',
-          'columns' => $colum
+          'columns' => $colums
           // array(
             // array(
             //   'thumbnailImageUrl' => 'https://firebasestorage.googleapis.com/v0/b/my1st-firebase.appspot.com/o/photos%2Ffood%2F%E0%B8%AA%E0%B8%A5%E0%B8%B1%E0%B8%94%E0%B8%9C%E0%B8%A5%E0%B9%84%E0%B8%A1%E0%B9%89.jpg?alt=media&token=cc82fcfd-1c1a-4e62-8f53-b33231a6a370',
