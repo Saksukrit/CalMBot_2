@@ -367,7 +367,7 @@ if (!is_null($events['events']))
         $num =0;
         $com;
         while ($num < $max) {
-          $com = $com.$colum[$num];
+          $com = $com.'  '.$colum[$num];
           $num++;
         }
 
