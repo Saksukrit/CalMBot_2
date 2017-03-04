@@ -8,7 +8,7 @@ class Searchfood
     {
         $db = new Dbcon;
         $conn = $db->OpenCon();
-        $sql = "SELECT food_name FROM Food WHERE food_name LIKE '%$foodname%' ;";
+        $sql = "SELECT * FROM Food WHERE food_name LIKE "%$foodname%"";
         $result = $conn->query($sql);
 
         if ($result->num_rows > 0)
