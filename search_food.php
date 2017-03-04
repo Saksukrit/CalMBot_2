@@ -9,7 +9,7 @@ class Searchfood
         $db = new Dbcon;
         $conn = $db->OpenCon();
         mysqli_set_charset($conn, "utf8");
-        $sql = "SELECT * FROM Food WHERE food_name = 'ข้าวขาหมู'";
+        $sql = "SELECT * FROM Food WHERE food_name LIKE '%$foodname%' LIMIT 5";
         $result = $conn->query($sql);
 
         if ($result->num_rows > 0)
