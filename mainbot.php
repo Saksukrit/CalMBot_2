@@ -363,11 +363,17 @@ if (!is_null($events['events']))
         $ms_array[1]= $ms_foodlist;
         $ms_array[2]= $ms_foodlist;
 
-
+        $max = count($colum);
+        $num =0;
+        $com;
+        while ($num < $max) {
+          $com = $com.$colum[$num];
+          $num++;
+        }
 
         $ms_con = [
         'type' => 'text',
-        'text' => ''.$colum[0] . $colum[1].$colum[2].''];
+        'text' => ''.$com.''];
 
         $client->replyMessage(
           array(
