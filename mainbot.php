@@ -316,9 +316,9 @@ if (!is_null($events['events']))
                         'type' => 'carousel',
                         'columns' => $colums
                     ) ];
-                    $ms_array = array();
-                    $ms_array[1] = $ms_foodlist;
-                    $ms_array[2] = $ms_foodlist;
+                    // $ms_array = array();
+                    // $ms_array[1] = $ms_foodlist;
+                    // $ms_array[2] = $ms_foodlist;
                     // $max = count($colum);
                     // $num =0;
                     // $com;
