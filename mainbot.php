@@ -357,7 +357,7 @@ if (!is_null($events['events']))
           array(
             'replyToken' => $event['replyToken'],
             // 'messages' => [$ms_array[1],$ms_array[2]]
-            'messages' => [ implode(",",$ms_array)]
+            'messages' => [$ms_foodlist]
             )
           );
       }
