@@ -325,7 +325,7 @@ if (!is_null($events['events']))
                     $client->replyMessage(array(
                         'replyToken' => $event['replyToken'],
                         // 'messages' => [$ms_array[1],$ms_array[2]]
-                        'messages' => [$ms_array]
+                        'messages' => [array_values($ms_array)]
                     ));
                 }
                 // $messagess = [
