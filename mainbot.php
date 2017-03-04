@@ -352,13 +352,12 @@ if (!is_null($events['events']))
         $ms_array[1]= $ms_foodlist;
         $ms_array[2]= $ms_foodlist;
 
-        $ms = array($ms_array);
 
         $client->replyMessage(
           array(
             'replyToken' => $event['replyToken'],
             // 'messages' => [$ms_array[1],$ms_array[2]]
-            'messages' => [$ms_array[1]]
+            'messages' => [ implode(",",$ms_array)]
             )
           );
       }
