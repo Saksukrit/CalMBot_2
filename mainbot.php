@@ -330,25 +330,16 @@ if (!is_null($events['events']))
           );
       }
 
-      // show list food
-      // else if ($text == "ข้าว") {
-
+      // show list food by name
       else if ($searchfood->searchfood_byname($text) != "null") {
 
-      // $colum = array(
-      //   'thumbnailImageUrl' => 'https://firebasestorage.googleapis.com/v0/b/my1st-firebase.appspot.com/o/photos%2Ffood%2F%E0%B8%AA%E0%B8%A5%E0%B8%B1%E0%B8%94%E0%B8%9C%E0%B8%A5%E0%B9%84%E0%B8%A1%E0%B9%89.jpg?alt=media&token=cc82fcfd-1c1a-4e62-8f53-b33231a6a370',
-      //   'title' => 'ฟรุตสลัด 1 ถ้วย',
-      //   'text' => ' 180 กิโลแคลอรี่',
-      //   'actions' => array(
-      //     array(
-      //       'type' => 'message',
-      //       'label' => ' ',
-      //       'text' => ' ')
-      //     )
-      //   );
         $colum = $searchfood->searchfood_byname($text);
+        $colums = array();
+        for ($i=0; $i <count($colum) ; $i++) {
+          $colums[$i] = $colum[$i];
+        }
 
-        $colums = array($colum[0],$colum[1],$colum[2]);
+        // $colums = array($colum[0],$colum[1],$colum[2]);
 
         $ms_array = array();
 
