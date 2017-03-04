@@ -37,7 +37,7 @@ class Searchfood
                     //     ) ,
                     // );
                     // return $colum;
-
+$num++;
                 }
             }
             return $colum;
