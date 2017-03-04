@@ -331,9 +331,9 @@ if (!is_null($events['events']))
       }
 
       // show list food
-      // else if ($text == "ฟรุตสลัด") {
+      else if ($text == "ฟรุตสลัด") {
 
-      else if ($searchfood->searchfood_byname($text) != "null") {
+      // else if ($searchfood->searchfood_byname($text) != "null") {
 
 
         $colum = array(
