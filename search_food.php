@@ -8,6 +8,7 @@ class Searchfood
     {
         $db = new Dbcon;
         $conn = $db->OpenCon();
+        mysqli_set_charset($conn, "utf8");
         $sql = "SELECT * FROM Food WHERE food_name = 'ข้าวขาหมู'";
         $result = $conn->query($sql);
 
