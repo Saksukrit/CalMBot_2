@@ -64,7 +64,7 @@ class Searchfood
                     'type' => 'carousel',
                     'columns' => $colums
                 ) ];
-                $colums = null;
+                $colums = array();
 
                 for ($i = 5;$i < count($colum);$op->iplus($i))
                 {
