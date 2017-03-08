@@ -11,17 +11,12 @@ class User
         $sql = "SELECT displayname FROM Udetail WHERE userid_line = '$userId'";
         $result = $conn->query($sql);
 
-        if ($result->num_rows > 0)
-        {
-
-            while ($row = $result->fetch_assoc())
-            {
+        if ($result->num_rows > 0) {
+            while ($row = $result->fetch_assoc()) {
                 $displayname = $row["displayname"];
                 return $displayname;
             }
-        }
-        else
-        {
+        } else {
             return "no displayname";
         }
         $db->CloseCon($conn);
@@ -34,20 +29,14 @@ class User
         $sql = "SELECT userID FROM Udetail WHERE userid_line = '$userId'";
         $result = $conn->query($sql);
 
-        if ($result->num_rows > 0)
-        {
-
-            while ($row = $result->fetch_assoc())
-            {
+        if ($result->num_rows > 0) {
+            while ($row = $result->fetch_assoc()) {
                 $userID = $row["userID"];
                 return $userID;
             }
-        }
-        else
-        {
+        } else {
             return "null";
         }
         $db->CloseCon($conn);
     }
 }
-?>

@@ -339,16 +339,7 @@ if (!is_null($events['events']))
         //   $colums[$i] = $colum[$i];
         // }
 
-
-        // $ms_foodlist = [
-        // 'type' => 'template',
-        // 'altText' => 'รายการอาหาร',
-        // 'template' => array(
-        //   'type' => 'carousel',
-        //   'columns' => $colums
-        //   )
-        // ];
-        $ms_foodlist= $searchfood->searchfood_byname($text);
+        $ms_foodlist = $searchfood->searchfood_byname($text);
 
         $ms_array = array();
         $ms_array[1]= $ms_foodlist;

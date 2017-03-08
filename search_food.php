@@ -1,5 +1,6 @@
 <?php
 include_once 'dbcon.php';
+include 'operate.php';
 
 class Searchfood
 {
@@ -32,28 +33,32 @@ class Searchfood
                                 'type' => 'message',
                                 'label' => ' ',
                                 'text' => ' ',
-                                )
-                            ) ,
-                        );
-                    $num++;
+                            )
+                        ) ,
+                    );
+                    iplus($num);
                 }
             }
-
             // number of $colum
-            if (count($colum) <= 5) {
-              $ms_foodlist = [
-              'type' => 'template',
-              'altText' => 'รายการอาหาร',
-              'template' => array(
-                'type' => 'carousel',
-                'columns' => $colum
-                )
-              ];
 
-              return $ms_foodlist;
+            if (count($colum) <= 5)
+            {
+                $ms_foodlist = ['type' => 'template', 'altText' => 'รายการอาหาร', 'template' => array(
+                    'type' => 'carousel',
+                    'columns' => $colum
+                ) ];
+                return $ms_foodlist;
             }
-
+            elseif (count($colum) <= 10)
+            {
+                $ms_foodlist = ['type' => 'template', 'altText' => 'รายการอาหาร', 'template' => array(
+                    'type' => 'carousel',
+                    'columns' => $colum
+                ) ];
+                return $ms_foodlist;
+            }
             // return $colum;
+
         }
         else
         {
@@ -74,4 +79,3 @@ class Searchfood
 
     }
 }
-?>
