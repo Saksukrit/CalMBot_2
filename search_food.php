@@ -9,7 +9,7 @@ class Searchfood
         $db = new Dbcon;
         $conn = $db->OpenCon();
         mysqli_set_charset($conn, "utf8");
-        $sql = "SELECT * FROM Food WHERE food_name LIKE '%$foodname%' LIMIT 5";
+        $sql = "SELECT * FROM Food WHERE food_name LIKE '%$foodname%'";
         $result = $conn->query($sql);
 
         if ($result->num_rows > 0)
@@ -23,7 +23,6 @@ class Searchfood
 
                 if ($num != $nummax)
                 {
-                    // $colum[$num] = $row["food_name"];
                     $colum[$num] = array(
                         'thumbnailImageUrl' => '' . $row["f_pic"] . '',
                         'title' => '' . $row["food_name"] . ' ' . $row["f_unit"] . '',
@@ -33,9 +32,9 @@ class Searchfood
                                 'type' => 'message',
                                 'label' => ' ',
                                 'text' => ' ',
-                            )
-                        ) ,
-                    );
+                                )
+                            ) ,
+                        );
                     $num++;
                 }
             }

@@ -299,11 +299,11 @@ if (!is_null($events['events']))
               'label' => 'ค้นหาโดยปริมาณพลังงาน',
               'data' => 'ค้นหาโดยปริมาณพลังงาน',
               'text' => 'ค้นหาโดยปริมาณพลังงาน')
-              ,array(
-                'type' => 'postback',
-                'label' => 'ค้นหาโดยชนิดอาหาร',
-                'data' => 'ค้นหาโดยชนิดอาหาร',
-                'text' => 'ค้นหาโดยชนิดอาหาร')
+            ,array(
+              'type' => 'postback',
+              'label' => 'ค้นหาโดยชนิดอาหาร',
+              'data' => 'ค้นหาโดยชนิดอาหาร',
+              'text' => 'ค้นหาโดยชนิดอาหาร')
             )
           )
         ];
@@ -356,7 +356,6 @@ if (!is_null($events['events']))
         $client->replyMessage(
           array(
             'replyToken' => $event['replyToken'],
-            // 'messages' => [$ms_array[1],$ms_array[2]]
             'messages' => [$ms_foodlist]
             )
           );
