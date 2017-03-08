@@ -354,7 +354,7 @@ if (!is_null($events['events']))
               'messages' => [$ms_array[0]]
               )
             );
-        }elseif (condcount($ms_array) == 2) {
+        }elseif (count($ms_array) == 2) {
           $client->replyMessage(
             array(
               'replyToken' => $event['replyToken'],
