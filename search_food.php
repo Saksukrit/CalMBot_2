@@ -41,7 +41,8 @@ class Searchfood
                 }
             }
 
-             getcolums($colum);
+            $getcolums = $this->getcolums($colum);
+            return $getcolums;
             // // number of $colum
             //
             // if (count($colum) <= 5) /*-------------- 5---------------- */
@@ -146,7 +147,7 @@ class Searchfood
 
     }
 
-    function getcolums($colum)
+    public function getcolums($colum)
     {
       // number of $colum
 
