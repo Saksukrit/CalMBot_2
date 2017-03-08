@@ -347,13 +347,27 @@ if (!is_null($events['events']))
         // $ms_array[1]= $ms_foodlist;
         // $ms_array[2]= $ms_foodlist;
 
-
-        $client->replyMessage(
-          array(
-            'replyToken' => $event['replyToken'],
-            'messages' => [$ms_array]
-            )
-          );
+        if (count($ms_array) == 1) {
+          $client->replyMessage(
+            array(
+              'replyToken' => $event['replyToken'],
+              'messages' => [$ms_array]
+              )
+            );
+        }elseif (condcount($ms_array) == 2) {
+          $client->replyMessage(
+            array(
+              'replyToken' => $event['replyToken'],
+              'messages' => [$ms_array[0],$ms_array[1]]
+              )
+            );
+        }
+        // $client->replyMessage(
+        //   array(
+        //     'replyToken' => $event['replyToken'],
+        //     'messages' => [$ms_array]
+        //     )
+        //   );
       }
 
       // $messagess = [
