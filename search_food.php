@@ -45,10 +45,10 @@ class Searchfood
             if (count($colum) <= 5)
             {
                 $ms_foodlist = array();
-                $ms_foodlist[0] = array('type' => 'template', 'altText' => 'รายการอาหาร', 'template' => array(
+                $ms_foodlist[0] = ['type' => 'template', 'altText' => 'รายการอาหาร', 'template' => array(
                     'type' => 'carousel',
                     'columns' => $colum
-                ) );
+                ) ];
                 // $ms_foodlist[1] = ['type' => 'template', 'altText' => 'รายการอาหาร', 'template' => array(
                 //     'type' => 'carousel',
                 //     'columns' => $colum
