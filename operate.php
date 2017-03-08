@@ -9,7 +9,8 @@ class Op
     }
     function inev($value, $num)
     {
-        return $value - $num;
+        $value = $value - $num;
+        return $value;
     }
 }
 ?>
