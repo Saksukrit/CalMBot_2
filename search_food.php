@@ -9,7 +9,7 @@ class Searchfood
         $db = new Dbcon;
         $conn = $db->OpenCon();
         mysqli_set_charset($conn, "utf8");
-        $sql = "SELECT * FROM Food WHERE food_name LIKE '%$foodname%'";
+        $sql = "SELECT * FROM Food WHERE food_name LIKE '%$foodname%' LIMIT 5";
         $result = $conn->query($sql);
 
         if ($result->num_rows > 0)
@@ -38,7 +38,22 @@ class Searchfood
                     $num++;
                 }
             }
-            return $colum;
+
+            // number of $colum
+            if (count($colum) <= 5) {
+              $ms_foodlist = [
+              'type' => 'template',
+              'altText' => 'รายการอาหาร',
+              'template' => array(
+                'type' => 'carousel',
+                'columns' => $colum
+                )
+              ];
+
+              return $ms_foodlist;
+            }
+
+            // return $colum;
         }
         else
         {
