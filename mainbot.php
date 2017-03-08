@@ -333,19 +333,8 @@ if (!is_null($events['events']))
       // show list food by name
       else if ($searchfood->searchfood_byname($text) != "null") {
 
-        // $colum = $searchfood->searchfood_byname($text);
-        // $colums = array();
-        // for ($i=0; $i <count($colum) ; $i++) {
-        //   $colums[$i] = $colum[$i];
-        // }
         $ms_array = array();
         $ms_array = $searchfood->searchfood_byname($text);
-
-        $ms_foodlist = $searchfood->searchfood_byname($text);
-        //
-        // $ms_array = array();
-        // $ms_array[1]= $ms_foodlist;
-        // $ms_array[2]= $ms_foodlist;
 
         if (count($ms_array) == 1) {
           $client->replyMessage(
@@ -361,13 +350,15 @@ if (!is_null($events['events']))
               'messages' => [$ms_array[0],$ms_array[1]]
               )
             );
+        }elseif (count($ms_array) == 3) {
+          $client->replyMessage(
+            array(
+              'replyToken' => $event['replyToken'],
+              'messages' => [$ms_array[0],$ms_array[1],$ms_array[2]]
+              )
+            );
         }
-        // $client->replyMessage(
-        //   array(
-        //     'replyToken' => $event['replyToken'],
-        //     'messages' => [$ms_array]
-        //     )
-        //   );
+
       }
 
       // $messagess = [
