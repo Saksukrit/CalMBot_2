@@ -11,7 +11,7 @@ class Searchfood
         $db = new Dbcon;
         $conn = $db->OpenCon();
         mysqli_set_charset($conn, "utf8");
-        $sql = "SELECT * FROM Food WHERE food_name LIKE '%$foodname%' LIMIT 5";
+        $sql = "SELECT * FROM Food WHERE food_name LIKE '%$foodname%'";
         $result = $conn->query($sql);
 
         if ($result->num_rows > 0)
@@ -49,18 +49,30 @@ class Searchfood
                     'type' => 'carousel',
                     'columns' => $colum
                 ) ];
-                $ms_foodlist[1] = ['type' => 'template', 'altText' => 'รายการอาหาร', 'template' => array(
-                    'type' => 'carousel',
-                    'columns' => $colum
-                ) ];
                 return $ms_foodlist;
             }
             elseif (count($colum) <= 10)
             {
                 $ms_foodlist = array();
-                $ms_foodlist = ['type' => 'template', 'altText' => 'รายการอาหาร', 'template' => array(
+                $colums = array();
+
+                for ($i = 0;$i < 5;$op->iplus($i))
+                {
+                    $colums[$i] = $colum[$i];
+                }
+                $ms_foodlist[0] = ['type' => 'template', 'altText' => 'รายการอาหาร', 'template' => array(
                     'type' => 'carousel',
-                    'columns' => $colum
+                    'columns' => $colums
+                ) ];
+                $colums = null;
+
+                for ($i = 5;$i < count($colum);$op->iplus($i))
+                {
+                    $colums[$op->inev($i,5)] = $colum[$i];
+                }
+                $ms_foodlist[1] = ['type' => 'template', 'altText' => 'รายการอาหาร', 'template' => array(
+                    'type' => 'carousel',
+                    'columns' => $colums
                 ) ];
                 return $ms_foodlist;
             }
