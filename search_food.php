@@ -36,7 +36,7 @@ class Searchfood
                             )
                         ) ,
                     );
-                    iplus($num);
+                    $num = iplus($num);
                 }
             }
             // number of $colum
