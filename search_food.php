@@ -149,6 +149,7 @@ class Searchfood
 
      function getcolums($colum)
     {
+      $op = new Op();
       // number of $colum
 
       if (count($colum) <= 5) /*-------------- 5---------------- */
