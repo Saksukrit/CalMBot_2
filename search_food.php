@@ -40,93 +40,7 @@ class Searchfood
                     $num = $op->iplus($num);
                 }
             }
-            // $getcolums = array();
-            // $getcolums = $this->getcolums($colum);
             return $this->getcolums($colum);
-            // // number of $colum
-            //
-            // if (count($colum) <= 5) /*-------------- 5---------------- */
-            //
-            // {
-            //     $ms_foodlist = array();
-            //     $ms_foodlist[0] = ['type' => 'template', 'altText' => 'รายการอาหาร', 'template' => array(
-            //         'type' => 'carousel',
-            //         'columns' => $colum
-            //     ) ];
-            //     return $ms_foodlist;
-            // }
-            // elseif (count($colum) <= 10) /*-------------- 10---------------- */
-            //
-            // {
-            //     $ms_foodlist = array();
-            //     $colums = array();
-            //     $i = 0;
-            //
-            //     while ($i < 5)
-            //     {
-            //         $colums[$i] = $colum[$i];
-            //         $i = $op->iplus($i);
-            //     }
-            //     $ms_foodlist[0] = ['type' => 'template', 'altText' => 'รายการอาหาร', 'template' => array(
-            //         'type' => 'carousel',
-            //         'columns' => $colums
-            //     ) ];
-            //     $colums = array();
-            //     $i = 5;
-            //
-            //     while ($i < count($colum))
-            //     {
-            //         $colums[$op->inev($i, 5) ] = $colum[$i];
-            //         $i = $op->iplus($i);
-            //     }
-            //     $ms_foodlist[1] = ['type' => 'template', 'altText' => 'รายการอาหาร', 'template' => array(
-            //         'type' => 'carousel',
-            //         'columns' => $colums
-            //     ) ];
-            //     return $ms_foodlist;
-            // }
-            // elseif (count($colum) <= 15) /*-------------- 15---------------- */
-            //
-            // {
-            //     $ms_foodlist = array();
-            //     $colums = array();
-            //     $i = 0;
-            //
-            //     while ($i < 5)
-            //     {
-            //         $colums[$i] = $colum[$i];
-            //         $i = $op->iplus($i);
-            //     }
-            //     $ms_foodlist[0] = ['type' => 'template', 'altText' => 'รายการอาหาร', 'template' => array(
-            //         'type' => 'carousel',
-            //         'columns' => $colums
-            //     ) ];
-            //     $colums = array();
-            //     $i = 5;
-            //
-            //     while ($i < 10)
-            //     {
-            //         $colums[$op->inev($i, 5) ] = $colum[$i];
-            //         $i = $op->iplus($i);
-            //     }
-            //     $ms_foodlist[1] = ['type' => 'template', 'altText' => 'รายการอาหาร', 'template' => array(
-            //         'type' => 'carousel',
-            //         'columns' => $colums
-            //     ) ];
-            //     $colums = array();
-            //     $i = 10;
-            //
-            //     while ($i < count($colum))
-            //     {
-            //         $colums[$op->inev($i, 10) ] = $colum[$i];
-            //         $i = $op->iplus($i);
-            //     }
-            //     $ms_foodlist[2] = ['type' => 'template', 'altText' => 'รายการอาหาร', 'template' => array(
-            //         'type' => 'carousel',
-            //         'columns' => $colums
-            //     ) ];
-            //     return $ms_foodlist;
-            // }
         }
         else
         {
@@ -146,93 +60,92 @@ class Searchfood
         # code...
 
     }
-
-     function getcolums($colum)
+    function getcolums($colum)
     {
-      $op = new Op();
-      // number of $colum
+        $op = new Op();
+        // number of $colum
 
-      if (count($colum) <= 5) /*-------------- 5---------------- */
+        if (count($colum) <= 5) /*-------------- 5---------------- */
 
-      {
-          $ms_foodlist = array();
-          $ms_foodlist[0] = ['type' => 'template', 'altText' => 'รายการอาหาร', 'template' => array(
-              'type' => 'carousel',
-              'columns' => $colum
-          ) ];
-          return $ms_foodlist;
-      }
-      elseif (count($colum) <= 10) /*-------------- 10---------------- */
+        {
+            $ms_foodlist = array();
+            $ms_foodlist[0] = ['type' => 'template', 'altText' => 'รายการอาหาร', 'template' => array(
+                'type' => 'carousel',
+                'columns' => $colum
+            ) ];
+            return $ms_foodlist;
+        }
+        elseif (count($colum) <= 10) /*-------------- 10---------------- */
 
-      {
-          $ms_foodlist = array();
-          $colums = array();
-          $i = 0;
+        {
+            $ms_foodlist = array();
+            $colums = array();
+            $i = 0;
 
-          while ($i < 5)
-          {
-              $colums[$i] = $colum[$i];
-              $i = $op->iplus($i);
-          }
-          $ms_foodlist[0] = ['type' => 'template', 'altText' => 'รายการอาหาร', 'template' => array(
-              'type' => 'carousel',
-              'columns' => $colums
-          ) ];
-          $colums = array();
-          $i = 5;
+            while ($i < 5)
+            {
+                $colums[$i] = $colum[$i];
+                $i = $op->iplus($i);
+            }
+            $ms_foodlist[0] = ['type' => 'template', 'altText' => 'รายการอาหาร', 'template' => array(
+                'type' => 'carousel',
+                'columns' => $colums
+            ) ];
+            $colums = array();
+            $i = 5;
 
-          while ($i < count($colum))
-          {
-              $colums[$op->inev($i, 5) ] = $colum[$i];
-              $i = $op->iplus($i);
-          }
-          $ms_foodlist[1] = ['type' => 'template', 'altText' => 'รายการอาหาร', 'template' => array(
-              'type' => 'carousel',
-              'columns' => $colums
-          ) ];
-          return $ms_foodlist;
-      }
-      // elseif (count($colum) <= 15) /*-------------- 15---------------- */
-      //
-      // {
-      //     $ms_foodlist = array();
-      //     $colums = array();
-      //     $i = 0;
-      //
-      //     while ($i < 5)
-      //     {
-      //         $colums[$i] = $colum[$i];
-      //         $i = $op->iplus($i);
-      //     }
-      //     $ms_foodlist[0] = ['type' => 'template', 'altText' => 'รายการอาหาร', 'template' => array(
-      //         'type' => 'carousel',
-      //         'columns' => $colums
-      //     ) ];
-      //     $colums = array();
-      //     $i = 5;
-      //
-      //     while ($i < 10)
-      //     {
-      //         $colums[$op->inev($i, 5) ] = $colum[$i];
-      //         $i = $op->iplus($i);
-      //     }
-      //     $ms_foodlist[1] = ['type' => 'template', 'altText' => 'รายการอาหาร', 'template' => array(
-      //         'type' => 'carousel',
-      //         'columns' => $colums
-      //     ) ];
-      //     $colums = array();
-      //     $i = 10;
-      //
-      //     while ($i < count($colum))
-      //     {
-      //         $colums[$op->inev($i, 10) ] = $colum[$i];
-      //         $i = $op->iplus($i);
-      //     }
-      //     $ms_foodlist[2] = ['type' => 'template', 'altText' => 'รายการอาหาร', 'template' => array(
-      //         'type' => 'carousel',
-      //         'columns' => $colums
-      //     ) ];
-      //     return $ms_foodlist;
-      // }
+            while ($i < count($colum))
+            {
+                $colums[$op->inev($i, 5) ] = $colum[$i];
+                $i = $op->iplus($i);
+            }
+            $ms_foodlist[1] = ['type' => 'template', 'altText' => 'รายการอาหาร', 'template' => array(
+                'type' => 'carousel',
+                'columns' => $colums
+            ) ];
+            return $ms_foodlist;
+        }
+        elseif (count($colum) <= 15) /*-------------- 15---------------- */
+
+        {
+            $ms_foodlist = array();
+            $colums = array();
+            $i = 0;
+
+            while ($i < 5)
+            {
+                $colums[$i] = $colum[$i];
+                $i = $op->iplus($i);
+            }
+            $ms_foodlist[0] = ['type' => 'template', 'altText' => 'รายการอาหาร', 'template' => array(
+                'type' => 'carousel',
+                'columns' => $colums
+            ) ];
+            $colums = array();
+            $i = 5;
+
+            while ($i < 10)
+            {
+                $colums[$op->inev($i, 5) ] = $colum[$i];
+                $i = $op->iplus($i);
+            }
+            $ms_foodlist[1] = ['type' => 'template', 'altText' => 'รายการอาหาร', 'template' => array(
+                'type' => 'carousel',
+                'columns' => $colums
+            ) ];
+            $colums = array();
+            $i = 10;
+
+            while ($i < count($colum))
+            {
+                $colums[$op->inev($i, 10) ] = $colum[$i];
+                $i = $op->iplus($i);
+            }
+            $ms_foodlist[2] = ['type' => 'template', 'altText' => 'รายการอาหาร', 'template' => array(
+                'type' => 'carousel',
+                'columns' => $colums
+            ) ];
+            return $ms_foodlist;
+        }
     }
 }
