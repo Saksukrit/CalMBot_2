@@ -41,7 +41,7 @@ class Searchfood
                 }
             }
 
-            return getcolums($colum);
+             getcolums($colum);
             // // number of $colum
             //
             // if (count($colum) <= 5) /*-------------- 5---------------- */
