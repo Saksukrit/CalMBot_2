@@ -49,6 +49,10 @@ class Searchfood
                     'type' => 'carousel',
                     'columns' => $colum
                 ) ];
+                $ms_foodlist[1] = ['type' => 'template', 'altText' => 'รายการอาหาร', 'template' => array(
+                    'type' => 'carousel',
+                    'columns' => $colum
+                ) ];
                 return $ms_foodlist;
             }
             elseif (count($colum) <= 10)
