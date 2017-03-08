@@ -51,94 +51,94 @@ class Searchfood
 
     public function searchfood_bycalorie($foodcalorie)
     {
-      $calorie = intval($foodcalorie);
-      $op = new Op();
-      $db = new Dbcon;
-      $conn = $db->OpenCon();
-      mysqli_set_charset($conn, "utf8");
-      $sql = "SELECT * FROM Food WHERE f_calorie <= '$calorie' LIMIT 15";
-      $result = $conn->query($sql);
+        $calorie = intval($foodcalorie);
+        $op = new Op();
+        $db = new Dbcon;
+        $conn = $db->OpenCon();
+        mysqli_set_charset($conn, "utf8");
+        $sql = "SELECT * FROM Food WHERE f_calorie <= '$calorie' LIMIT 15";
+        $result = $conn->query($sql);
 
-      if ($result->num_rows > 0)
-      {
-          $nummax = $result->num_rows;
-          $num = 0;
-          $colum = array();
+        if ($result->num_rows > 0)
+        {
+            $nummax = $result->num_rows;
+            $num = 0;
+            $colum = array();
 
-          while ($row = $result->fetch_assoc())
-          {
+            while ($row = $result->fetch_assoc())
+            {
 
-              if ($num != $nummax)
-              {
-                  $colum[$num] = array(
-                      'thumbnailImageUrl' => '' . $row["f_pic"] . '',
-                      'title' => '' . $row["food_name"] . ' ' . $row["f_unit"] . '',
-                      'text' => 'มีพลังงาน ' . $row["f_calorie"] . ' แคลอรี่',
-                      'actions' => array(
-                          array(
-                              'type' => 'message',
-                              'label' => ' ',
-                              'text' => ' ',
-                          )
-                      ) ,
-                  );
-                  $num = $op->iplus($num);
-              }
-          }
-          return $this->getcolums($colum);
-      }
-      else
-      {
-          return "null";
-      }
-      $db->CloseCon($conn);
-
+                if ($num != $nummax)
+                {
+                    $colum[$num] = array(
+                        'thumbnailImageUrl' => '' . $row["f_pic"] . '',
+                        'title' => '' . $row["food_name"] . ' ' . $row["f_unit"] . '',
+                        'text' => 'มีพลังงาน ' . $row["f_calorie"] . ' แคลอรี่',
+                        'actions' => array(
+                            array(
+                                'type' => 'message',
+                                'label' => ' ',
+                                'text' => ' ',
+                            )
+                        ) ,
+                    );
+                    $num = $op->iplus($num);
+                }
+            }
+            return $this->getcolums($colum);
+        }
+        else
+        {
+            return "null";
+        }
+        $db->CloseCon($conn);
     }
 
     public function searchfood_bytype($foodtype)
     {
-      $op = new Op();
-      $db = new Dbcon;
-      $conn = $db->OpenCon();
-      mysqli_set_charset($conn, "utf8");
-      $sql = "SELECT * FROM Food WHERE food_name LIKE '%$foodname%' LIMIT 15";
-      $result = $conn->query($sql);
+        $op = new Op();
+        $db = new Dbcon;
+        $conn = $db->OpenCon();
+        mysqli_set_charset($conn, "utf8");
+        $sql = "SELECT * FROM Food WHERE f_type = '$foodtype' LIMIT 15";
+        $result = $conn->query($sql);
 
-      if ($result->num_rows > 0)
-      {
-          $nummax = $result->num_rows;
-          $num = 0;
-          $colum = array();
+        if ($result->num_rows > 0)
+        {
+            $nummax = $result->num_rows;
+            $num = 0;
+            $colum = array();
 
-          while ($row = $result->fetch_assoc())
-          {
+            while ($row = $result->fetch_assoc())
+            {
 
-              if ($num != $nummax)
-              {
-                  $colum[$num] = array(
-                      'thumbnailImageUrl' => '' . $row["f_pic"] . '',
-                      'title' => '' . $row["food_name"] . ' ' . $row["f_unit"] . '',
-                      'text' => 'มีพลังงาน ' . $row["f_calorie"] . ' แคลอรี่',
-                      'actions' => array(
-                          array(
-                              'type' => 'message',
-                              'label' => ' ',
-                              'text' => ' ',
-                          )
-                      ) ,
-                  );
-                  $num = $op->iplus($num);
-              }
-          }
-          return $this->getcolums($colum);
-      }
-      else
-      {
-          return "null";
-      }
-      $db->CloseCon($conn);
-
+                if ($num != $nummax)
+                {
+                    $colum[$num] = array(
+                        'thumbnailImageUrl' => '' . $row["f_pic"] . '',
+                        'title' => '' . $row["food_name"] . ' ' . $row["f_unit"] . '',
+                        'text' => 'มีพลังงาน ' . $row["f_calorie"] . ' แคลอรี่',
+                        'actions' => array(
+                            array(
+                                'type' => 'message',
+                                'label' => ' ',
+                                'text' => ' ',
+                            )
+                        ) ,
+                    );
+                    $num = $op->iplus($num);
+                }
+            }
+            return $this->getcolums($colum);
+        }
+        else
+        {
+            return "null";
+        }
+        $db->CloseCon($conn);
     }
+    //------------------------------------------------------------
+    //
     function getcolums($colum)
     {
         $op = new Op();

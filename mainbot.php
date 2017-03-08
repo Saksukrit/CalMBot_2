@@ -405,6 +405,72 @@ if (!is_null($events['events']))
 
       }
 
+      // search food by type ++++++++++++++++++++++++++++++++++
+      else if ($text == "ค้นหาโดยชนิดอาหาร") {
+        $ms_search_type = [
+        'type' => 'template',
+        'altText' => 'ค้นหาข้อมูลอาหาร',
+        'template' => array(
+          'type' => 'buttons',
+          'title' => 'ค้นหาข้อมูลอาหาร',
+          'text' => 'ต้องการค้นหาแบบใด',
+          'actions' => array(
+            array(
+              'type' => 'postback',
+              'label' => 'food',
+              'data' => 'food',
+              'text' => 'food')
+            ,array(
+              'type' => 'postback',
+              'label' => 'dessert',
+              'data' => 'dessert',
+              'text' => 'dessert')
+            ,array(
+              'type' => 'postback',
+              'label' => 'beverage',
+              'data' => 'beverage',
+              'text' => 'beverage')
+            )
+          )
+        ];
+        $client->replyMessage(
+          array(
+            'replyToken' => $event['replyToken'],
+            'messages' => [$ms_search_type]
+            )
+          );
+      }
+      // show list food by type
+      else if ($searchfood->searchfood_bytype($text) != "null") {
+
+        $ms_array = array();
+        $ms_array = $searchfood->searchfood_bytype($text);
+
+        if (count($ms_array) == 1) {
+          $client->replyMessage(
+            array(
+              'replyToken' => $event['replyToken'],
+              'messages' => [$ms_array[0]]
+              )
+            );
+        }elseif (count($ms_array) == 2) {
+          $client->replyMessage(
+            array(
+              'replyToken' => $event['replyToken'],
+              'messages' => [$ms_array[0],$ms_array[1]]
+              )
+            );
+        }elseif (count($ms_array) == 3) {
+          $client->replyMessage(
+            array(
+              'replyToken' => $event['replyToken'],
+              'messages' => [$ms_array[0],$ms_array[1],$ms_array[2]]
+              )
+            );
+        }
+
+      }
+
 
       // $messagess = [
       // "type"=> "template",
