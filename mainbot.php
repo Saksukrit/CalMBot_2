@@ -361,6 +361,51 @@ if (!is_null($events['events']))
 
       }
 
+      // search food by calorie ++++++++++++++++++++++++++++++++++
+      else if ($text == "ค้นหาโดยปริมาณพลังงาน") {
+        $ms_foodcalorie = [
+        'type' => 'text',
+        'text' => 'บอกปริมาณพลังงานสูงสุดที่ต้องการ'];
+
+        $client->replyMessage(
+          array(
+            'replyToken' => $event['replyToken'],
+            'messages' => [$ms_foodcalorie]
+            )
+          );
+      }
+      // show list food by calorie
+      else if ($searchfood->searchfood_bycalorie($text) != "null") {
+
+        $ms_array = array();
+        $ms_array = $searchfood->searchfood_byname($text);
+
+        if (count($ms_array) == 1) {
+          $client->replyMessage(
+            array(
+              'replyToken' => $event['replyToken'],
+              'messages' => [$ms_array[0]]
+              )
+            );
+        }elseif (count($ms_array) == 2) {
+          $client->replyMessage(
+            array(
+              'replyToken' => $event['replyToken'],
+              'messages' => [$ms_array[0],$ms_array[1]]
+              )
+            );
+        }elseif (count($ms_array) == 3) {
+          $client->replyMessage(
+            array(
+              'replyToken' => $event['replyToken'],
+              'messages' => [$ms_array[0],$ms_array[1],$ms_array[2]]
+              )
+            );
+        }
+
+      }
+
+
       // $messagess = [
       // "type"=> "template",
       // "altText"=> "แคลอรี่ของคุณเกินกำหนดแล้ว
