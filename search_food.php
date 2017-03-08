@@ -40,9 +40,9 @@ class Searchfood
                     $num = $op->iplus($num);
                 }
             }
-            $getcolums = array();
-            $getcolums = $this->getcolums($colum);
-            return $getcolums;
+            // $getcolums = array();
+            // $getcolums = $this->getcolums($colum);
+            return $this->getcolums($colum);
             // // number of $colum
             //
             // if (count($colum) <= 5) /*-------------- 5---------------- */
