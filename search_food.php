@@ -55,7 +55,7 @@ class Searchfood
       $db = new Dbcon;
       $conn = $db->OpenCon();
       mysqli_set_charset($conn, "utf8");
-      $sql = "SELECT * FROM Food WHERE f_calorie <= $foodcalorie LIMIT 15";
+      $sql = "SELECT * FROM Food WHERE f_calorie <= intval($foodcalorie) LIMIT 15";
       $result = $conn->query($sql);
 
       if ($result->num_rows > 0)
