@@ -147,7 +147,7 @@ class Searchfood
 
     }
 
-    public function getcolums($colum)
+     function getcolums($colum)
     {
       // number of $colum
 
