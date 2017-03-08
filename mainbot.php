@@ -413,7 +413,7 @@ if (!is_null($events['events']))
         'template' => array(
           'type' => 'buttons',
           'title' => 'ค้นหาข้อมูลอาหาร',
-          'text' => 'ต้องการค้นหาแบบใด',
+          'text' => 'ต้องการค้นหาปรพเภทใด',
           'actions' => array(
             array(
               'type' => 'postback',
