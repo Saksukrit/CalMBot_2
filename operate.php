@@ -1,6 +1,6 @@
 <?php
 function iplus($value)
 {
-    return $value++;
+    return ++$value;
 }
 ?>
