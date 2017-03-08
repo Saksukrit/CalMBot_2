@@ -7,6 +7,7 @@ class Searchfood
 
     public function searchfood_byname($foodname)
     {
+      $op = new Op();
         $db = new Dbcon;
         $conn = $db->OpenCon();
         mysqli_set_charset($conn, "utf8");
@@ -36,7 +37,7 @@ class Searchfood
                             )
                         ) ,
                     );
-                    $num = iplus($num);
+                    $num = $op->iplus($num);
                 }
             }
             // number of $colum
@@ -51,6 +52,7 @@ class Searchfood
             }
             elseif (count($colum) <= 10)
             {
+                $ms_foodlist = array();
                 $ms_foodlist = ['type' => 'template', 'altText' => 'รายการอาหาร', 'template' => array(
                     'type' => 'carousel',
                     'columns' => $colum

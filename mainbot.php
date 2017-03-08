@@ -1,7 +1,7 @@
 <?php
 date_default_timezone_set('Asia/Bangkok');
 //
-
+// include 'operate.php';
 require_once ('./LINEBot.php');
 require_once ('./LINEBotTiny.php');
 // require_once ('./LINEBot/HTTPClient/CurlHTTPClient.php');
@@ -338,18 +338,20 @@ if (!is_null($events['events']))
         // for ($i=0; $i <count($colum) ; $i++) {
         //   $colums[$i] = $colum[$i];
         // }
+        $ms_array = array();
+        $ms_array = $searchfood->searchfood_byname($text);
 
         $ms_foodlist = $searchfood->searchfood_byname($text);
-
-        $ms_array = array();
-        $ms_array[1]= $ms_foodlist;
-        $ms_array[2]= $ms_foodlist;
+        //
+        // $ms_array = array();
+        // $ms_array[1]= $ms_foodlist;
+        // $ms_array[2]= $ms_foodlist;
 
 
         $client->replyMessage(
           array(
             'replyToken' => $event['replyToken'],
-            'messages' => [$ms_foodlist]
+            'messages' => [$ms_array]
             )
           );
       }

@@ -1,6 +1,14 @@
 <?php
-function iplus($value)
+
+/**
+ *
+ */
+class Op
 {
-    return ++$value;
+  function iplus($value)
+  {
+      return ++$value;
+  }
+
 }
 ?>
