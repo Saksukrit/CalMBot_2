@@ -40,7 +40,7 @@ class Searchfood
                     $num = $op->iplus($num);
                 }
             }
-
+            $getcolums = array();
             $getcolums = $this->getcolums($colum);
             return $getcolums;
             // // number of $colum
