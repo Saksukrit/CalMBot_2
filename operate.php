@@ -1,13 +1,11 @@
 <?php
-/**
- *
- */
+
 
 class Op
 {
     function iplus($value)
     {
-        return $value;
+        return ++$value;
     }
     function inev($value, $num)
     {

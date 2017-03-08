@@ -68,7 +68,7 @@ class Searchfood
 
                 for ($i = 5;$i < count($colum);$op->iplus($i))
                 {
-                    $colums[$op->inev($i,5)] = $colum[$i];
+                    $colums[$op->inev($i, 5) ] = $colum[$i];
                 }
                 $ms_foodlist[1] = ['type' => 'template', 'altText' => 'รายการอาหาร', 'template' => array(
                     'type' => 'carousel',
