@@ -378,7 +378,7 @@ if (!is_null($events['events']))
       else if ($searchfood->searchfood_bycalorie($text) != "null") {
 
         $ms_array = array();
-        $ms_array = $searchfood->searchfood_byname($text);
+        $ms_array = $searchfood->searchfood_bycalorie($text);
 
         if (count($ms_array) == 1) {
           $client->replyMessage(
