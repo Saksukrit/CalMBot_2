@@ -64,15 +64,15 @@ class Searchfood
                     'type' => 'carousel',
                     'columns' => $colums
                 ) ];
-                $colums = array();
+                $colums2 = array();
 
                 for ($i = 5;$i < count($colum);$op->iplus($i))
                 {
-                    $colums[$op->inev($i, 5) ] = $colum[$i];
+                    $colums2[$i] = $colum[$i];
                 }
                 $ms_foodlist[1] = ['type' => 'template', 'altText' => 'รายการอาหาร', 'template' => array(
                     'type' => 'carousel',
-                    'columns' => $colums
+                    'columns' => $colums2
                 ) ];
                 return $ms_foodlist;
             }
