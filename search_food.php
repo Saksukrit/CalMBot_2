@@ -55,24 +55,27 @@ class Searchfood
             {
                 $ms_foodlist = array();
                 $colums = array();
+                $i = 0;
 
-                for ($i = 0;$i < 5;$op->iplus($i))
+                while ($i < 5)
                 {
                     $colums[$i] = $colum[$i];
+                    $i = $op->iplus($i);
                 }
                 $ms_foodlist[0] = ['type' => 'template', 'altText' => 'รายการอาหาร', 'template' => array(
                     'type' => 'carousel',
                     'columns' => $colums
                 ) ];
-                $colums2 = array();
+                $colums = array();
 
-                for ($i = 5;$i < count($colum);$op->iplus($i))
+                while ($i < count($colum))
                 {
-                    $colums2[$i] = $colum[$i];
+                    $colums[$i] = $colum[$i];
+                    $i = $op->iplus($i);
                 }
                 $ms_foodlist[1] = ['type' => 'template', 'altText' => 'รายการอาหาร', 'template' => array(
                     'type' => 'carousel',
-                    'columns' => $colums2
+                    'columns' => $colums
                 ) ];
                 return $ms_foodlist;
             }
