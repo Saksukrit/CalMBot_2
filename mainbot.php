@@ -44,6 +44,8 @@ if (!is_null($events['events']))
       $userId = $event['source']['userId'];
       //
 
+      //
+      $text_type = explode(' ', $text);
       // $client->pushMessage(
       //   array(
       //     'to' => $userId,
@@ -56,6 +58,7 @@ if (!is_null($events['events']))
       $user = new User;
       $food_dialy = new Food_save;
       $searchfood = new Searchfood;
+      $searchexercise = new Searchexercise;
 
       // check user maping id
       $checkuser = $user->get_userId($userId);
@@ -471,6 +474,51 @@ if (!is_null($events['events']))
 
       }
 
+      // -------------------------------------------------------------------------
+
+            // search food by calorie ++++++++++++++++++++++++++++++++++
+            else if ($text == "ค้นหาโดยปริมาณพลังงาน") {
+              $ms_foodcalorie = [
+              'type' => 'text',
+              'text' => 'บอกปริมาณพลังงานสูงสุดที่ต้องการ'];
+
+              $client->replyMessage(
+                array(
+                  'replyToken' => $event['replyToken'],
+                  'messages' => [$ms_foodcalorie]
+                  )
+                );
+            }
+            // show list food by calorie
+            else if (($text_type[0] == "เผาพลาญได้") && ($searchexercise->searchexercise_bycalorie($text_type[1]) != "null")) {
+
+              $ms_array = array();
+              $ms_array = $searchfood->searchfood_bycalorie($text);
+
+              if (count($ms_array) == 1) {
+                $client->replyMessage(
+                  array(
+                    'replyToken' => $event['replyToken'],
+                    'messages' => [$ms_array[0]]
+                    )
+                  );
+              }elseif (count($ms_array) == 2) {
+                $client->replyMessage(
+                  array(
+                    'replyToken' => $event['replyToken'],
+                    'messages' => [$ms_array[0],$ms_array[1]]
+                    )
+                  );
+              }elseif (count($ms_array) == 3) {
+                $client->replyMessage(
+                  array(
+                    'replyToken' => $event['replyToken'],
+                    'messages' => [$ms_array[0],$ms_array[1],$ms_array[2]]
+                    )
+                  );
+              }
+
+            }
 
       // $messagess = [
       // "type"=> "template",
