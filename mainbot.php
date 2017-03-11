@@ -10,6 +10,7 @@ include 'food.php';
 include 'foodsave.php';
 include 'user.php';
 include 'search_food.php';
+include 'search_exercise.php';
 // use LINE\LINEBot\HTTPClient;
 // use LINE\LINEBot\MessageBuilder;
 //
