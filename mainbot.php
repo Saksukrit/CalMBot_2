@@ -494,7 +494,7 @@ if (!is_null($events['events']))
             else if (($text_type[0] == "เผาพลาญได้") && ($searchexercise->searchexercise_bycalorie($text_type[1]) != "null")) {
 
               $ms_array = array();
-              $ms_array = $searchfood->searchfood_bycalorie($text);
+              $ms_array = $searchexercise->searchexercise_bycalorie($text_type[1]);
 
               if (count($ms_array) == 1) {
                 $client->replyMessage(
