@@ -5,6 +5,7 @@ class Searchexercise
 {
   public function searchexercise_bycalorie($calorie)
   {
+      $calorie=intval($calorie);
       $db = new Dbcon;
       $conn = $db->OpenCon();
       mysqli_set_charset($conn, "utf8");
