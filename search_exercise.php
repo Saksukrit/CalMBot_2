@@ -5,24 +5,9 @@ include 'operate.php';
 class Searchexercise
 {
 
-	public function FunctionName($value='')
-	{
-		$i++;
-	}
-	for ($i=0; $i < ; $i++) { 
-	# code...
-	}
+    public function FunctionName($value = '')
+    {
 
-
+        $i++;
+    }
 }
-?>
-<!DOCTYPE html>
-<html>
-<head>
-	<meta charset="utf-8">
-	<title></title>
-</head>
-<body>
-
-</body>
-</html>
