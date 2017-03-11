@@ -1,6 +1,5 @@
 <?php
 include_once 'dbcon.php';
-include 'operate.php';
 
 
 class Searchfood
@@ -8,7 +7,6 @@ class Searchfood
 
     public function searchfood_byname($foodname)
     {
-        $op = new Op();
         $db = new Dbcon;
         $conn = $db->OpenCon();
         mysqli_set_charset($conn, "utf8");
@@ -34,7 +32,7 @@ class Searchfood
                             )
                         ) ,
                     );
-                    $num = $op->iplus($num);
+                    ++$num;
                 }
             }
             return $this->getcolums($colum);
@@ -47,7 +45,6 @@ class Searchfood
     public function searchfood_bycalorie($foodcalorie)
     {
         $calorie = intval($foodcalorie);
-        $op = new Op();
         $db = new Dbcon;
         $conn = $db->OpenCon();
         mysqli_set_charset($conn, "utf8");
@@ -73,7 +70,7 @@ class Searchfood
                             )
                         ) ,
                     );
-                    $num = $op->iplus($num);
+                    ++$num;
                 }
             }
             return $this->getcolums($colum);
@@ -85,7 +82,6 @@ class Searchfood
 
     public function searchfood_bytype($foodtype)
     {
-        $op = new Op();
         $db = new Dbcon;
         $conn = $db->OpenCon();
         mysqli_set_charset($conn, "utf8");
@@ -111,7 +107,7 @@ class Searchfood
                             )
                         ) ,
                     );
-                    $num = $op->iplus($num);
+                    ++$num;
                 }
             }
             return $this->getcolums($colum);
@@ -124,7 +120,6 @@ class Searchfood
     //
     function getcolums($colum)
     {
-        $op = new Op();
         // number of $colum
 
         if (count($colum) <= 5) { /*-------------- 5---------------- */
@@ -139,23 +134,19 @@ class Searchfood
 
             $ms_foodlist = array();
             $colums = array();
-            $i = 0;
-
-            while ($i < 5) {
+            for ($i=0; $i < 5; $i++) {
                 $colums[$i] = $colum[$i];
-                $i = $op->iplus($i);
             }
+
             $ms_foodlist[0] = ['type' => 'template', 'altText' => 'รายการอาหาร', 'template' => array(
                 'type' => 'carousel',
                 'columns' => $colums
-            ) ];
+                  ) ];
             $colums = array();
-            $i = 5;
-
-            while ($i < count($colum)) {
-                $colums[$op->inev($i, 5) ] = $colum[$i];
-                $i = $op->iplus($i);
+            for ($i=5; $i < count($colum); $i++) {
+                $colums[$i-5] = $colum[$i];
             }
+
             $ms_foodlist[1] = ['type' => 'template', 'altText' => 'รายการอาหาร', 'template' => array(
                 'type' => 'carousel',
                 'columns' => $colums
@@ -165,33 +156,27 @@ class Searchfood
 
             $ms_foodlist = array();
             $colums = array();
-            $i = 0;
 
-            while ($i < 5) {
+            for ($i=0; $i < 5; $i++) {
                 $colums[$i] = $colum[$i];
-                $i = $op->iplus($i);
             }
             $ms_foodlist[0] = ['type' => 'template', 'altText' => 'รายการอาหาร', 'template' => array(
                 'type' => 'carousel',
                 'columns' => $colums
             ) ];
-            $colums = array();
-            $i = 5;
 
-            while ($i < 10) {
-                $colums[$op->inev($i, 5) ] = $colum[$i];
-                $i = $op->iplus($i);
+            $colums = array();
+            for ($i=5; $i < 10; $i++) {
+                $colums[$i-5] = $colum[$i];
             }
             $ms_foodlist[1] = ['type' => 'template', 'altText' => 'รายการอาหาร', 'template' => array(
                 'type' => 'carousel',
                 'columns' => $colums
             ) ];
-            $colums = array();
-            $i = 10;
 
-            while ($i < count($colum)) {
-                $colums[$op->inev($i, 10) ] = $colum[$i];
-                $i = $op->iplus($i);
+            $colums = array();
+            for ($i = 10; $i < count($colum); $i++) {
+                $colums[$i - 10] = $colum[$i];
             }
             $ms_foodlist[2] = ['type' => 'template', 'altText' => 'รายการอาหาร', 'template' => array(
                 'type' => 'carousel',
