@@ -44,10 +44,11 @@ if (!is_null($events['events']))
 
       $userId = $event['source']['userId'];
       //
-      $data = null;
-      if (!is_null($event['postback']['data'])) {
+      // $data = null;
         $data = $event['postback']['data'];
-      }
+      // if (!is_null($event['postback']['data'])) {
+      //   $data = $event['postback']['data'];
+      // }
 
       //
       $text_type = explode(' ', $text);
