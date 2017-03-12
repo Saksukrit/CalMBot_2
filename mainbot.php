@@ -44,15 +44,14 @@ if (!is_null($events['events']))
 
       $userId = $event['source']['userId'];
       //
+      $data = null;
+      if (!is_null($event['postback']['data'])) {
+        $data = $event['postback']['data'];
+      }
 
       //
       $text_type = explode(' ', $text);
-      // $client->pushMessage(
-      //   array(
-      //     'to' => $userId,
-      //     'messages' => ['$ms_food,$ms_num']
-      //     )
-      //   );
+
 
       // condition to class food check
       $checkfood = new FoodCheck;
@@ -147,7 +146,7 @@ if (!is_null($events['events']))
 
         $save_dialy = [
         'type' => 'template',
-        'altText' => 'OK บันทึกมื้ออาหาร',
+        'altText' => 'OK บันทึกมื้ออาหาร  '.$data.'',
         'template' => array(
 
           'type' => 'buttons',
