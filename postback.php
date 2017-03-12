@@ -3,7 +3,7 @@
 
 class Postback
 {
-    private $data;
+    private $data = 'null';
     
     public function setpostback($data)
     {
