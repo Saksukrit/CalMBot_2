@@ -52,6 +52,8 @@ if ($event['type'] == 'postback') {
       )
     );
 }
+
+
     if (($event['type'] == 'message')&& $event['message']['type'] == 'text')
     {
                   // Get text sent
@@ -493,9 +495,41 @@ if ($event['type'] == 'postback') {
       }
 
       // -------------------------------------------------------------------------
+      // ค้นหาข้อมูลการออกกำลังกาย
+      // ************  search exercise *****************************************************************************************************
+      else if ($text == "ค้นหาข้อมูลการออกกำลังกาย") {
+        $ms_menu_search = [
+        'type' => 'template',
+        'altText' => 'ค้นหาข้อมูลการออกกำลังกาย',
+        'template' => array(
+          'type' => 'buttons',
+          'title' => 'ค้นหาข้อมูลการออกกำลังกาย',
+          'text' => 'ต้องการค้นหาแบบใด',
+          'actions' => array(
+            array(
+              'type' => 'postback',
+              'label' => 'ค้นหาโดยปริมาณพลังงานเผาพลาญ',
+              'data' => 'ค้นหาโดยปริมาณพลังงานเผาพลาญ',
+              'text' => 'ค้นหาโดยปริมาณพลังงานเผาพลาญ')
+            ,array(
+              'type' => 'postback',
+              'label' => 'ค้นหาโดยชนิดการออกกำลังกาย',
+              'data' => 'ค้นหาโดยชนิดการออกกำลังกาย',
+              'text' => 'ค้นหาโดยชนิดการออกกำลังกาย')
+            )
+          )
+        ];
 
-            // search food by calorie ++++++++++++++++++++++++++++++++++
-            else if ($text == "ค้นหาโดยปริมาณพลังงาน") {
+        $client->replyMessage(
+          array(
+            'replyToken' => $event['replyToken'],
+            'messages' => [$ms_menu_search]
+            )
+          );
+      }
+
+            // search exercise by calorie ++++++++++++++++++++++++++++++++++
+            else if ($text == "ค้นหาโดยปริมาณพลังงานเผาพลาญ") {
               $ms_foodcalorie = [
               'type' => 'text',
               'text' => 'บอกปริมาณพลังงานสูงสุดที่ต้องการ'];
@@ -507,7 +541,7 @@ if ($event['type'] == 'postback') {
                   )
                 );
             }
-            // show list food by calorie
+            // show list exercise by calorie
             else if (($text_type[0] == "เผาพลาญได้") && ($searchexercise->searchexercise_bycalorie($text_type[1]) != "null")) {
 
               $ms_array = array();
