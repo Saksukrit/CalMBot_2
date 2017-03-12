@@ -35,12 +35,13 @@ if (!is_null($events['events']))
   foreach ($events['events'] as $event)
   {
 
+// test postback
 if ($event['type'] == 'postback') {
 
   $data = $event['postback']['data'];
   $ms = [
   'type' => 'text',
-  'text' => 'test postback'.$data.''];
+  'text' => 'test postback : '.$data.''];
 
   $client->replyMessage(
     array(
@@ -48,8 +49,8 @@ if ($event['type'] == 'postback') {
       'messages' => [$ms]
       )
     );
-}
-    if (($event['type'] == 'message' || $event['type'] == 'postback')&& $event['message']['type'] == 'text')
+}else
+    if (($event['type'] == 'message')&& $event['message']['type'] == 'text')
     {
                   // Get text sent
       $text = $event['message']['text'];
