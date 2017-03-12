@@ -11,6 +11,7 @@ include 'foodsave.php';
 include 'user.php';
 include 'search_food.php';
 include 'search_exercise.php';
+include 'postback.php';
 // use LINE\LINEBot\HTTPClient;
 // use LINE\LINEBot\MessageBuilder;
 //
@@ -28,7 +29,7 @@ $events = json_decode($content, true);
 //
 //
 //
-
+$obdata = new Postback;
 if (!is_null($events['events']))
 {
 
@@ -39,6 +40,7 @@ if (!is_null($events['events']))
 if ($event['type'] == 'postback') {
 
   $data = $event['postback']['data'];
+  $obdata->setpostback($data);
   $ms = [
   'type' => 'text',
   'text' => 'test postback : '.$data.''];
@@ -60,7 +62,7 @@ if ($event['type'] == 'postback') {
       $userId = $event['source']['userId'];
       //
       // $data = null;
-      $data = $event['postback']['data'];
+      // $data = $event['postback']['data'];
       // if (!is_null($event['postback']['data'])) {
       //   $data = $event['postback']['data'];
       // }
@@ -159,7 +161,7 @@ if ($event['type'] == 'postback') {
           // if null => create food_dialy
           $food_dialy->save_food_dialy($get_userId,date('Y-m-d'));
         }
-        $data = $event['postback']['data'];
+        $obdata->getpostback();
         $save_dialy = [
         'type' => 'template',
         'altText' => 'OK บันทึกมื้ออาหาร',
@@ -167,7 +169,7 @@ if ($event['type'] == 'postback') {
 
           'type' => 'buttons',
           'title' => 'OK บันทึกมื้ออาหาร',
-          'text' => 'เลือกมื้ออาหารที่ต้องการ'.$data.'',
+          'text' => 'เลือกมื้ออาหารที่ต้องการ'.$obdata->getpostback().'',
           'actions' => array(
             array(
               'type' => 'postback',
