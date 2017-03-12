@@ -34,7 +34,7 @@ if (!is_null($events['events']))
 
   foreach ($events['events'] as $event)
   {
-
+$data = null;
 // test postback
 if ($event['type'] == 'postback') {
 
@@ -60,7 +60,7 @@ if ($event['type'] == 'postback') {
       $userId = $event['source']['userId'];
       //
       // $data = null;
-        $data = $event['postback']['data'];
+        // $data = $event['postback']['data'];
       // if (!is_null($event['postback']['data'])) {
       //   $data = $event['postback']['data'];
       // }
