@@ -34,7 +34,7 @@ if (!is_null($events['events']))
 
   foreach ($events['events'] as $event)
   {
-$data = null;
+// $data = null;
 // test postback
 if ($event['type'] == 'postback') {
 
@@ -60,7 +60,7 @@ if ($event['type'] == 'postback') {
       $userId = $event['source']['userId'];
       //
       // $data = null;
-        // $data = $event['postback']['data'];
+      $data = $event['postback']['data'];
       // if (!is_null($event['postback']['data'])) {
       //   $data = $event['postback']['data'];
       // }
@@ -159,7 +159,7 @@ if ($event['type'] == 'postback') {
           // if null => create food_dialy
           $food_dialy->save_food_dialy($get_userId,date('Y-m-d'));
         }
-
+        
         $save_dialy = [
         'type' => 'template',
         'altText' => 'OK บันทึกมื้ออาหาร',
