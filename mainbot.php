@@ -35,7 +35,7 @@ if (!is_null($events['events']))
   foreach ($events['events'] as $event)
   {
 
-    if ($event['type'] == 'message'&& $event['message']['type'] == 'text')
+    if (($event['type'] == 'message' || $event['type'] == 'postback')&& $event['message']['type'] == 'text')
     {
                   // Get text sent
       $text = $event['message']['text'];
