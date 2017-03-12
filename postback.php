@@ -45,7 +45,7 @@ class Postback
     }
     
     
-    public function deletepostback($userId,$data)
+    public function deletepostback($userId)
     {
         // Create connection
         $db = new Dbcon;

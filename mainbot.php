@@ -29,7 +29,7 @@ $events = json_decode($content, true);
 //
 //
 //
-
+$obdata = new Postback;
 if (!is_null($events['events']))
 {
     
@@ -40,7 +40,7 @@ if (!is_null($events['events']))
             
             $datapostback = $event['postback']['data'];
             $userIdpostback = $event['source']['userId'];
-            $obdata = new Postback;
+            // $obdata = new Postback;
             $obdata->setpostback($userIdpostback,$datapostback);
             
         }
