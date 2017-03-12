@@ -29,7 +29,7 @@ class Postback
         $db = new Dbcon;
         $conn = $db->OpenCon();
         mysqli_set_charset($conn, "utf8");
-        $sql = "SELECT content FROM Postback WHERE userId = '$userId'";
+        $sql = "SELECT content FROM Postback WHERE userId = '$userId' LIMIT 1";
         $result = $conn->query($sql);
         
         if ($result->num_rows > 0) {
