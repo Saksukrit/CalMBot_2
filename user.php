@@ -59,8 +59,8 @@ class User
                 อายุ : '.$row["old"].'
                 ค่า BMR : '.$row["bmr"].'
                 ค่า TDEE : '.$row["tdee"].'
-                **********---****---**********
-                '];
+
+                *******---****---*******'];
                 return $ms_profile;
             }
         } else {

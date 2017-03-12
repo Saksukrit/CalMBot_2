@@ -634,12 +634,7 @@ if (!is_null($events['events']))
                 // ดูข้อมูลผู้ใช้
                 // get profile
                 else if ($text == "ดูข้อมูลผู้ใช้") {
-
                     $ms_profile = $user->get_profile($userId);
-                    // $ms_profile = [
-                    // 'type' => 'text',
-                    // 'text' => 'ข้อมูลผู้ใช้ของ '.$userId.'
-                    // '];
                     
                     $client->replyMessage(
                     array(
