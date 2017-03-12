@@ -29,7 +29,9 @@ $events = json_decode($content, true);
 //
 //
 //
+//Postback
 $obdata = new Postback;
+//
 if (!is_null($events['events']))
 {
     
@@ -40,7 +42,6 @@ if (!is_null($events['events']))
             
             $datapostback = $event['postback']['data'];
             $userIdpostback = $event['source']['userId'];
-            // $obdata = new Postback;
             $obdata->setpostback($userIdpostback,$datapostback);
             
         }
@@ -150,7 +151,7 @@ if (!is_null($events['events']))
                     
                     $postbackcontent = 'null';
                     $postbackcontent = $obdata->getpostback($userId);
-                    // $postbackcontent = $obdata->deletepostback($userId);
+                    $postbackcontent = $obdata->deletepostback($userId);
                     
                     $save_dialy = [
                     'type' => 'template',
