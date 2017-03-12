@@ -508,7 +508,7 @@ if ($event['type'] == 'postback') {
           'actions' => array(
             array(
               'type' => 'postback',
-              'label' => 'ค้นหาโดยปริมาณพลังงานเผาพลาญ',
+              'label' => 'ค้นหาโดยปริมาณพลังงาน',
               'data' => 'ค้นหาโดยปริมาณพลังงานเผาพลาญ',
               'text' => 'ค้นหาโดยปริมาณพลังงานเผาพลาญ')
             ,array(
@@ -542,7 +542,7 @@ if ($event['type'] == 'postback') {
                 );
             }
             // show list exercise by calorie
-            else if (($text_type[0] == "เผาพลาญได้") && ($searchexercise->searchexercise_bycalorie($text_type[1]) != "null")) {
+            else if (($text_type[0] == "สูงสุด") && ($searchexercise->searchexercise_bycalorie($text_type[1]) != "null")) {
 
               $ms_array = array();
               $ms_array = $searchexercise->searchexercise_bycalorie($text_type[1]);
