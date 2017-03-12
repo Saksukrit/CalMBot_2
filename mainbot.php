@@ -30,7 +30,7 @@ $events = json_decode($content, true);
 //
 //
 $obdata = new Postback;
- $datapostback= 'null';
+$datapostback= 'null';
 if (!is_null($events['events']))
 {
     
@@ -38,21 +38,21 @@ if (!is_null($events['events']))
     {
         // $data = null;
         // test postback
-        if ($event['type'] == 'postback') {
-            
-            $datapostback = $event['postback']['data'];
-            // $obdata->setpostback($data);
-            $ms = [
-            'type' => 'text',
-            'text' => 'test postback : '.$datapostback.''];
-            
-            $client->replyMessage(
-            array(
-            'replyToken' => $event['replyToken'],
-            'messages' => [$ms]
-            )
-            );
-        }
+        // if ($event['type'] == 'postback') {
+        
+        //     $datapostback = $event['postback']['data'];
+        //     // $obdata->setpostback($data);
+        //     $ms = [
+        //     'type' => 'text',
+        //     'text' => 'test postback : '.$datapostback.''];
+        
+        //     $client->replyMessage(
+        //     array(
+        //     'replyToken' => $event['replyToken'],
+        //     'messages' => [$ms]
+        //     )
+        //     );
+        // }
         
         
         if (($event['type'] == 'message')&& $event['message']['type'] == 'text')
@@ -63,13 +63,23 @@ if (!is_null($events['events']))
             $replyToken = $event['replyToken'];
             
             $userId = $event['source']['userId'];
-            //
-            // $data = null;
-            // $data = $event['postback']['data'];
-            // if (!is_null($event['postback']['data'])) {
-            //   $data = $event['postback']['data'];
-            // }
             
+            // postback
+            if ($event['type'] == 'postback') {
+                
+                $datapostback = $event['postback']['data'];
+                // $obdata->setpostback($data);
+                // $ms = [
+                // 'type' => 'text',
+                // 'text' => 'test postback : '.$datapostback.''];
+                
+                // $client->replyMessage(
+                // array(
+                // 'replyToken' => $event['replyToken'],
+                // 'messages' => [$ms]
+                // )
+                // );
+            }
             //
             $text_type = explode(' ', $text);
             
@@ -640,7 +650,7 @@ if (!is_null($events['events']))
                     }
                     
                 }
-
+                
                 // $messagess = [
                 // "type"=> "template",
                 // "altText"=> "แคลอรี่ของคุณเกินกำหนดแล้ว
