@@ -34,22 +34,22 @@ if (!is_null($events['events']))
 
   foreach ($events['events'] as $event)
   {
-$data = null;
+// $data = null;
 // test postback
-if ($event['type'] == 'postback') {
-
-  $data = $event['postback']['data'];
-  $ms = [
-  'type' => 'text',
-  'text' => 'test postback : '.$data.''];
-
-  $client->replyMessage(
-    array(
-      'replyToken' => $event['replyToken'],
-      'messages' => [$ms]
-      )
-    );
-}else
+// if ($event['type'] == 'postback') {
+//
+//   $data = $event['postback']['data'];
+//   $ms = [
+//   'type' => 'text',
+//   'text' => 'test postback : '.$data.''];
+//
+//   $client->replyMessage(
+//     array(
+//       'replyToken' => $event['replyToken'],
+//       'messages' => [$ms]
+//       )
+//     );
+// }else
     if (($event['type'] == 'message')&& $event['message']['type'] == 'text')
     {
                   // Get text sent
@@ -60,7 +60,7 @@ if ($event['type'] == 'postback') {
       $userId = $event['source']['userId'];
       //
       // $data = null;
-        // $data = $event['postback']['data'];
+        $data = $event['postback']['data'];
       // if (!is_null($event['postback']['data'])) {
       //   $data = $event['postback']['data'];
       // }
@@ -162,11 +162,11 @@ if ($event['type'] == 'postback') {
 
         $save_dialy = [
         'type' => 'template',
-        'altText' => 'OK บันทึกมื้ออาหาร  '.$data.'',
+        'altText' => 'OK บันทึกมื้ออาหาร',
         'template' => array(
 
           'type' => 'buttons',
-          'title' => 'OK บันทึกมื้ออาหาร',
+          'title' => 'OK บันทึกมื้ออาหาร '.$data.'',
           'text' => 'เลือกมื้ออาหารที่ต้องการ',
           'actions' => array(
             array(
