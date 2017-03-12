@@ -46,7 +46,7 @@ class Searchexercise
         $db = new Dbcon;
         $conn = $db->OpenCon();
         mysqli_set_charset($conn, "utf8");
-        $sql = "SELECT * FROM Food WHERE f_type = '$foodtype' LIMIT 15";
+        $sql = "SELECT * FROM Exercise WHERE e_type = '$exercisetype' LIMIT 15";
         $result = $conn->query($sql);
 
         if ($result->num_rows > 0) {
@@ -57,17 +57,17 @@ class Searchexercise
             while ($row = $result->fetch_assoc()) {
                 if ($num != $nummax) {
                     $colum[$num] = array(
-                      'thumbnailImageUrl' => '' . $row["f_pic"] . '',
-                      'title' => '' . $row["food_name"] . ' ' . $row["f_unit"] . '',
-                      'text' => 'มีพลังงาน ' . $row["f_calorie"] . ' แคลอรี่',
-                      'actions' => array(
-                          array(
-                              'type' => 'message',
-                              'label' => ' ',
-                              'text' => ' ',
-                          )
-                      ) ,
-                    );
+                    'thumbnailImageUrl' => '' . $row["e_pic"] . '',
+                    'title' => '' . $row["exercise_name"] . ' ',
+                    'text' => 'เผาพลาญพลังงานได้ ' . $row["e_calorie"] . ' แคลอรี่ /ชั่วโมง',
+                    'actions' => array(
+                        array(
+                            'type' => 'message',
+                            'label' => ' ',
+                            'text' => ' ',
+                        )
+                    ) ,
+                  );
                     ++$num;
                 }
             }
