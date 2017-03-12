@@ -29,20 +29,29 @@ $events = json_decode($content, true);
 //
 //
 //
-$datapostback = 'null';
+// $datapostback = 'null';
+$datapostback = $event['postback']['data'];
+// postback
+// if ($event['type'] == 'postback') {
+
+//     $datapostback = $event['postback']['data'];
+//     // $obdata = new Postback;
+//     // $obdata->setpostback($datapostback);
+
+// }
 if (!is_null($events['events']))
 {
     
     foreach ($events['events'] as $event)
     {
-        // postback
-        if ($event['type'] == 'postback') {
-            
-            $datapostback = $event['postback']['data'];
-            // $obdata = new Postback;
-            // $obdata->setpostback($datapostback);
-            
-        }
+        // // postback
+        // if ($event['type'] == 'postback') {
+        
+        //     $datapostback = $event['postback']['data'];
+        //     // $obdata = new Postback;
+        //     // $obdata->setpostback($datapostback);
+        
+        // }
         if (($event['type'] == 'message')&& $event['message']['type'] == 'text')
         {
             // Get text sent
