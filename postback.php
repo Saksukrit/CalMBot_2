@@ -2,11 +2,11 @@
 
 
 class Postback
-{public $data;
+{private $data = null;
 
 public function setpostback($data)
 {
-  $data = $this->$data;
+  $this->$data = $data;
 }
 public function getpostback()
 {
