@@ -35,7 +35,14 @@ if (!is_null($events['events']))
     
     foreach ($events['events'] as $event)
     {
-        
+        // postback
+        if ($event['type'] == 'postback') {
+            
+            $datapostback = $event['postback']['data'];
+            // $obdata = new Postback;
+            // $obdata->setpostback($datapostback);
+            
+        }
         if (($event['type'] == 'message')&& $event['message']['type'] == 'text')
         {
             // Get text sent
@@ -45,14 +52,6 @@ if (!is_null($events['events']))
             
             $userId = $event['source']['userId'];
             
-            // postback
-            if ($event['type'] == 'postback') {
-                
-                $datapostback = $event['postback']['data'];
-                // $obdata = new Postback;
-                // $obdata->setpostback($datapostback);
-                
-            }
             //
             $text_type = explode(' ', $text);
             
@@ -154,7 +153,7 @@ if (!is_null($events['events']))
                     
                     'type' => 'buttons',
                     'title' => 'OK บันทึกมื้ออาหาร',
-                    'text' => 'เลือกมื้ออาหารที่ต้องการ '.$userId.' '.$datapostback,
+                    'text' => 'เลือกมื้ออาหารที่ต้องการ '.$datapostback,
                     'actions' => array(
                     array(
                     'type' => 'postback',
