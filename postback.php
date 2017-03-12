@@ -3,13 +3,12 @@ include_once 'dbcon.php';
 
 class Postback
 {
-    private $data = 'null';
-    
     public function setpostback($userId,$data)
     {
         // Create connection
         $db = new Dbcon;
         $conn = $db->OpenCon();
+        mysqli_set_charset($conn, "utf8");
         $sql = "INSERT INTO Postback (userId, content) VALUES ('$userId', '$data')";
         
         
