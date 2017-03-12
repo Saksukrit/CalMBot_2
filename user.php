@@ -8,6 +8,7 @@ class User
     {
         $db = new Dbcon;
         $conn = $db->OpenCon();
+        mysqli_set_charset($conn, "utf8");
         $sql = "SELECT displayname FROM Udetail WHERE userid_line = '$userId'";
         $result = $conn->query($sql);
 

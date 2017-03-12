@@ -29,16 +29,15 @@ $events = json_decode($content, true);
 //
 //
 //
-// $datapostback = 'null';
-$datapostback = $event['postback']['data'];
-// postback
-// if ($event['type'] == 'postback') {
+// get save postback
+if ($event['type'] == 'postback') {
 
-//     $datapostback = $event['postback']['data'];
-//     // $obdata = new Postback;
-//     // $obdata->setpostback($datapostback);
+    $datapostback = $event['postback']['data'];
+    $userIdpostback = $event['source']['userId'];
+    $obdata = new Postback;
+    $obdata->setpostback($userIdpostback,$datapostback);
 
-// }
+}
 if (!is_null($events['events']))
 {
     
@@ -155,6 +154,9 @@ if (!is_null($events['events']))
                         // if null => create food_dialy
                         $food_dialy->save_food_dialy($get_userId,date('Y-m-d'));
                     }
+
+                    $datapostback = $obdata->getpostback($userId);
+
                     $save_dialy = [
                     'type' => 'template',
                     'altText' => 'OK บันทึกมื้ออาหาร',
