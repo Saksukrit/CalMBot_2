@@ -11,7 +11,6 @@ class Postback
         mysqli_set_charset($conn, "utf8");
         $sql = "INSERT INTO Postback (userId, content) VALUES ('$userId', '$data')";
         
-        
         if ($conn->query($sql) === TRUE)
         {
             echo "New record created successfully";

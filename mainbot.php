@@ -155,7 +155,8 @@ if (!is_null($events['events']))
                         $food_dialy->save_food_dialy($get_userId,date('Y-m-d'));
                     }
 
-                    $datapostback = $obdata->getpostback($userId);
+                    $postbackcontent = 'null';
+                    // $postbackcontent = $obdata->getpostback($userId);
 
                     $save_dialy = [
                     'type' => 'template',
@@ -164,7 +165,7 @@ if (!is_null($events['events']))
                     
                     'type' => 'buttons',
                     'title' => 'OK บันทึกมื้ออาหาร',
-                    'text' => 'เลือกมื้ออาหารที่ต้องการ '.$datapostback,
+                    'text' => 'เลือกมื้ออาหารที่ต้องการ '.$postbackcontent,
                     'actions' => array(
                     array(
                     'type' => 'postback',
