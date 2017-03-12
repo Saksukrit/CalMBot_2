@@ -43,7 +43,7 @@ if ($event['type'] == 'postback') {
   $obdata->setpostback($data);
   $ms = [
   'type' => 'text',
-  'text' => 'test postback : '.$data.''];
+  'text' => 'test postback : '.$obdata->getpostback().''];
 
   $client->replyMessage(
     array(
