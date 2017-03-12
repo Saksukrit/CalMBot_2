@@ -150,8 +150,10 @@ if (!is_null($events['events']))
                     }
                     
                     $postbackcontent = 'null';
+                    //select
                     $postbackcontent = $obdata->getpostback($userId);
-                    $postbackcontent = $obdata->deletepostback($userId);
+                    //delete
+                    $obdata->deletepostback($userId);
                     
                     $save_dialy = [
                     'type' => 'template',
