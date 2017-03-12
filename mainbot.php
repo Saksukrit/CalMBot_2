@@ -30,6 +30,7 @@ $events = json_decode($content, true);
 //
 //
 $obdata = new Postback;
+ $data= 'null';
 if (!is_null($events['events']))
 {
     
@@ -40,7 +41,7 @@ if (!is_null($events['events']))
         if ($event['type'] == 'postback') {
             
             $data = $event['postback']['data'];
-            $obdata->setpostback($data);
+            // $obdata->setpostback($data);
             $ms = [
             'type' => 'text',
             'text' => 'test postback : '.$data.''];
@@ -64,7 +65,7 @@ if (!is_null($events['events']))
             $userId = $event['source']['userId'];
             //
             // $data = null;
-            $data = $event['postback']['data'];
+            // $data = $event['postback']['data'];
             // if (!is_null($event['postback']['data'])) {
             //   $data = $event['postback']['data'];
             // }
@@ -572,7 +573,7 @@ if (!is_null($events['events']))
                     
                 }
                 
-                // 
+                //
                 // search exercise by type ++++++++++++++++++++++++++++++++++
                 else if ($text == "ชนิดการออกกำลังกาย") {
                     $ms_menu_search = [
@@ -639,6 +640,7 @@ if (!is_null($events['events']))
                     }
                     
                 }
+
                 // $messagess = [
                 // "type"=> "template",
                 // "altText"=> "แคลอรี่ของคุณเกินกำหนดแล้ว
