@@ -166,8 +166,8 @@ if ($event['type'] == 'postback') {
         'template' => array(
 
           'type' => 'buttons',
-          'title' => 'OK บันทึกมื้ออาหาร '.$data.'',
-          'text' => 'เลือกมื้ออาหารที่ต้องการ',
+          'title' => 'OK บันทึกมื้ออาหาร',
+          'text' => 'เลือกมื้ออาหารที่ต้องการ'.$this->$data.'',
           'actions' => array(
             array(
               'type' => 'postback',
