@@ -154,7 +154,7 @@ if (!is_null($events['events']))
                     
                     'type' => 'buttons',
                     'title' => 'OK บันทึกมื้ออาหาร',
-                    'text' => 'เลือกมื้ออาหารที่ต้องการ',
+                    'text' => 'เลือกมื้ออาหารที่ต้องการ '.$userId.' '.$datapostback,
                     'actions' => array(
                     array(
                     'type' => 'postback',
