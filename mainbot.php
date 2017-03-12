@@ -159,7 +159,7 @@ if ($event['type'] == 'postback') {
           // if null => create food_dialy
           $food_dialy->save_food_dialy($get_userId,date('Y-m-d'));
         }
-        
+        $data = $event['postback']['data'];
         $save_dialy = [
         'type' => 'template',
         'altText' => 'OK บันทึกมื้ออาหาร',
