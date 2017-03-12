@@ -29,7 +29,6 @@ $events = json_decode($content, true);
 //
 //
 //
-$obdata = new Postback;
 $datapostback = 'null';
 if (!is_null($events['events']))
 {
@@ -50,8 +49,8 @@ if (!is_null($events['events']))
             if ($event['type'] == 'postback') {
                 
                 $datapostback = $event['postback']['data'];
-                $datapostback = (string)$datapostback;
-                // $obdata->setpostback($data);
+                $obdata = new Postback;
+                $obdata->setpostback($datapostback);
                 // $ms = [
                 // 'type' => 'text',
                 // 'text' => 'test postback : '.$datapostback.''];
@@ -165,7 +164,7 @@ if (!is_null($events['events']))
                     
                     'type' => 'buttons',
                     'title' => 'OK บันทึกมื้ออาหาร',
-                    'text' => 'เลือกมื้ออาหารที่ต้องการ'.$datapostback.'',
+                    'text' => 'เลือกมื้ออาหารที่ต้องการ'.$obdata->getpostback().'',
                     'actions' => array(
                     array(
                     'type' => 'postback',
