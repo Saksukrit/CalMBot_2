@@ -34,22 +34,22 @@ if (!is_null($events['events']))
 
   foreach ($events['events'] as $event)
   {
-// $data = null;
+$data = null;
 // test postback
-// if ($event['type'] == 'postback') {
-//
-//   $data = $event['postback']['data'];
-//   $ms = [
-//   'type' => 'text',
-//   'text' => 'test postback : '.$data.''];
-//
-//   $client->replyMessage(
-//     array(
-//       'replyToken' => $event['replyToken'],
-//       'messages' => [$ms]
-//       )
-//     );
-// }else
+if ($event['type'] == 'postback') {
+
+  $data = $event['postback']['data'];
+  $ms = [
+  'type' => 'text',
+  'text' => 'test postback : '.$data.''];
+
+  $client->replyMessage(
+    array(
+      'replyToken' => $event['replyToken'],
+      'messages' => [$ms]
+      )
+    );
+}
     if (($event['type'] == 'message')&& $event['message']['type'] == 'text')
     {
                   // Get text sent
@@ -60,7 +60,7 @@ if (!is_null($events['events']))
       $userId = $event['source']['userId'];
       //
       // $data = null;
-        $data = $event['postback']['data'];
+        // $data = $event['postback']['data'];
       // if (!is_null($event['postback']['data'])) {
       //   $data = $event['postback']['data'];
       // }
