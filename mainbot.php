@@ -572,9 +572,9 @@ if (!is_null($events['events']))
                     
                 }
                 
-                // ค้นหาโดยชนิดการออกกำลังกาย
+                // 
                 // search exercise by type ++++++++++++++++++++++++++++++++++
-                else if ($text == "ค้นหาโดยชนิดการออกกำลังกาย") {
+                else if ($text == "ชนิดการออกกำลังกาย") {
                     $ms_menu_search = [
                     'type' => 'template',
                     'altText' => 'เลือกชนิดการออกกำลังกาย',
