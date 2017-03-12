@@ -35,6 +35,20 @@ if (!is_null($events['events']))
   foreach ($events['events'] as $event)
   {
 
+if ($event['type'] == 'postback') {
+
+  $data = $event['postback']['data'];
+  $ms = [
+  'type' => 'text',
+  'text' => 'test postback'.$data.''];
+
+  $client->replyMessage(
+    array(
+      'replyToken' => $event['replyToken'],
+      'messages' => [$ms]
+      )
+    );
+}
     if (($event['type'] == 'message' || $event['type'] == 'postback')&& $event['message']['type'] == 'text')
     {
                   // Get text sent
