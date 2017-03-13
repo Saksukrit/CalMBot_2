@@ -95,5 +95,16 @@ class Req_manage
     {
         # code...
     }
+
+    // delete by userId
+    public function delete_req($userId)
+    {
+        $db = new Dbcon;
+        $conn = $db->OpenCon();
+        mysqli_set_charset($conn, "utf8");
+        $sql = "DELETE FROM RequestLine WHERE userId = '$userId'";
+        $conn->query($sql);
+        $db->CloseCon($conn);
+    }
 }
 ?>
