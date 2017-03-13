@@ -138,7 +138,8 @@ if (!is_null($events['events']))
                 
                 // ***********  Food_save  ************************************************************************************
                 // select repast
-                else if ($text == "บันทึกมื้ออาหาร") {
+                else if ($obdata->getpostback($userId) == "save_dialy") {
+                // else if ($text == "บันทึกมื้ออาหาร") {
                     // check userId
                     $get_userId = $user->get_userId($userId);
                     // check date
@@ -162,27 +163,27 @@ if (!is_null($events['events']))
                     
                     'type' => 'buttons',
                     'title' => 'OK บันทึกมื้ออาหาร',
-                    'text' => 'เลือกมื้ออาหารที่ต้องการ '.$postbackcontent,
+                    'text' => 'เลือกมื้ออาหารที่ต้องการ ',
                     'actions' => array(
                     array(
                     'type' => 'postback',
                     'label' => 'มื้อเช้า',
-                    'data' => 'มื้อเช้า',
+                    'data' => 'repast',
                     'text' => 'มื้อเช้า')
                     ,array(
                     'type' => 'postback',
                     'label' => 'มื้อเที่ยง',
-                    'data' => 'มื้อเที่ยง',
+                    'data' => 'repast',
                     'text' => 'มื้อเที่ยง')
                     ,array(
                     'type' => 'postback',
                     'label' => 'มื้อเย็น',
-                    'data' => 'มื้อเย็น',
+                    'data' => 'repast',
                     'text' => 'มื้อเย็น')
                     ,array(
                     'type' => 'postback',
                     'label' => 'ระหว่างมื้อ',
-                    'data' => 'ระหว่างมื้อ',
+                    'data' => 'repast',
                     'text' => 'ระหว่างมื้อ')
                     )
                     )
@@ -196,6 +197,7 @@ if (!is_null($events['events']))
                 }
                 
                 //มื้อเช้า   ------------------------------------
+                //postback repast
                 else if ($text == "มื้อเช้า") {
                     $ms_repast = [
                     'type' => 'text',
@@ -213,7 +215,7 @@ if (!is_null($events['events']))
                 else if ($checkfood->check_food($text) == "food") {
                     $ms_food = [
                     'type' => 'template',
-                    'altText' => 'จำนวนเท่าไหร่',
+                    'altText' => 'จำนวนกี่หน่วย',
                     'template' => array(
                     'type' => 'buttons',
                     'title' => ' ',
@@ -222,22 +224,22 @@ if (!is_null($events['events']))
                     array(
                     'type' => 'postback',
                     'label' => '1',
-                    'data' => '1',
+                    'data' => 'num_food',
                     'text' => '1')
                     ,array(
                     'type' => 'postback',
                     'label' => '2',
-                    'data' => '2',
+                    'data' => 'num_food',
                     'text' => '2')
                     ,array(
                     'type' => 'postback',
                     'label' => '3',
-                    'data' => '3',
+                    'data' => 'num_food',
                     'text' => '3')
                     ,array(
                     'type' => 'postback',
                     'label' => '4',
-                    'data' => '4',
+                    'data' => 'num_food',
                     'text' => '4')
                     )
                     )
