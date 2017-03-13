@@ -199,6 +199,8 @@ if (!is_null($events['events']))
                 //postback repast
                 else if ($obdata->getpostback($userId) == "repast") {
 
+                    $req = new Req_manage();
+                    $req->save_repast($userId,$text);
                        // $checkfood->check_food($text) == "food"
                     
                     $ms_repast = [
