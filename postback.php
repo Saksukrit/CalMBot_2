@@ -72,17 +72,17 @@ class Postback
         $db = new Dbcon;
         $conn = $db->OpenCon();
         mysqli_set_charset($conn, "utf8");
-        $sql = "DELETE FROM Postback WHERE userId = '$userId'";
+        $sql = "UPDATE Postback SET content ='$food' WHERE (userId = '$userId')";
         
         if ($conn->query($sql) === TRUE)
         {
             echo "New record created successfully";
-            return "delete success";
+            return "update success";
         }
         else
         {
             echo "Error: " . $sql . "<br>" . $conn->error;
-            return "delete fail";
+            return "update fail";
         }
         $db->CloseCon($conn);
     }
