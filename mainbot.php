@@ -6,8 +6,8 @@ require_once ('./LINEBot.php');
 require_once ('./LINEBotTiny.php');
 // require_once ('./LINEBot/HTTPClient/CurlHTTPClient.php');
 // require_once ('./LINEBot/MessageBuilder/TextMessageBuilder.php');
-include 'food.php';
-include 'foodsave.php';
+include 'food_check.php';
+include 'food_save.php';
 include 'user.php';
 include 'search_food.php';
 include 'search_exercise.php';
@@ -80,7 +80,7 @@ if (!is_null($events['events']))
                 )
                 );
             }
-            // user 
+            // user
             else
             {
                 //  select menu    ****************************************
@@ -140,7 +140,7 @@ if (!is_null($events['events']))
                 // ***********  Food_save  ************************************************************************************
                 // select repast
                 else if ($obdata->getpostback($userId) == "save_dialy") {
-                // else if ($text == "บันทึกมื้ออาหาร") {
+                    // else if ($text == "บันทึกมื้ออาหาร") {
                     // check userId
                     $get_userId = $user->get_userId($userId);
                     // check date
@@ -198,6 +198,7 @@ if (!is_null($events['events']))
                 //มื้อเช้า   ------------------------------------
                 //postback repast
                 else if ($obdata->getpostback($userId) == "repast") {
+                    
                     $ms_repast = [
                     'type' => 'text',
                     'text' => 'คุณทานอะไรมา'];
@@ -208,6 +209,9 @@ if (!is_null($events['events']))
                     'messages' => [$ms_repast]
                     )
                     );
+                    
+                    //delete
+                    $obdata->deletepostback($userId);
                 }
                 
                 // number of foods
@@ -631,7 +635,7 @@ if (!is_null($events['events']))
                     }
                     
                 }
-
+                
                 // ดูข้อมูลผู้ใช้
                 // get profile
                 else if ($text == "ดูข้อมูลผู้ใช้") {
