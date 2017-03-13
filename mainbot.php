@@ -80,6 +80,7 @@ if (!is_null($events['events']))
                 )
                 );
             }
+            
             // user
             else
             {
@@ -198,10 +199,10 @@ if (!is_null($events['events']))
                 //มื้อเช้า   ------------------------------------
                 //postback repast
                 else if ($obdata->getpostback($userId) == "repast") {
-
+                    
                     $req = new Req_manage();
                     $req->save_repast($userId,$text);
-                       // $checkfood->check_food($text) == "food"
+                    // $checkfood->check_food($text) == "food"
                     
                     $ms_repast = [
                     'type' => 'text',
@@ -214,12 +215,12 @@ if (!is_null($events['events']))
                     )
                     );
                     
-
+                    
                     // change postback
                     $obdata->changepostback($userId,'food');
                     // //delete
                     // $obdata->deletepostback($userId);
-                 
+                    
                 }
                 
                 // number of foods
@@ -262,10 +263,10 @@ if (!is_null($events['events']))
                     'messages' => [$ms_food]
                     )
                     );
-
+                    
                     // //delete
                     $obdata->deletepostback($userId);
-
+                    
                     // $checkfood->check_num($text) == "ok"
                 }
                 
@@ -308,7 +309,7 @@ if (!is_null($events['events']))
                     'messages' => [$ms_food,$ms_num]
                     )
                     );
-
+                    
                     // //delete
                     $obdata->deletepostback($userId);
                 }
