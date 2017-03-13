@@ -210,8 +210,11 @@ if (!is_null($events['events']))
                     )
                     );
                     
-                    //delete
-                    $obdata->deletepostback($userId);
+
+                    // change postback
+                    $obdata->changepostback($userId,'food');
+                    // //delete
+                    // $obdata->deletepostback($userId);
                 }
                 
                 // number of foods
