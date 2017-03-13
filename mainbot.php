@@ -311,19 +311,26 @@ if (!is_null($events['events']))
                     $req->save_unit($userId,$text);
                     
                     // get data from Req_manage
-
-
+                    $food = $req->get_food($userId);
+                    $unit = intval($text);
+                    $unittext = $searchfood->get_unit($food);
+                    $calorie = $searchfood->get_calorie($food);
+                    $caloriesum = $unit * $calorie;
+                    
+                    $repast = $req->get_repast($userId);
+                    // if to eng repast     Breakfast  Lunch  Dinner  Supper
+                    
                     // get userId
                     $get_userId = $user->get_userId($userId);
                     // get dialyId
                     $get_food_dialyId = $food_dialy->check_food_dialy($get_userId,date('Y-m-d'));
-
-                    // save food_dialy list
-                    $food_dialy->save_food_dialy_list($get_food_dialyId,"ข้าวขาหมู","1",300,"breakfast");
                     
-                    $ms_food = [
-                    'type' => 'text',
-                    'text' => 'ข้าวขาหมู 1 จาน เท่ากับ 690 กิโลแคลอรี่'];
+                    // save food_dialy list
+                    $food_dialy->save_food_dialy_list($get_food_dialyId,$food,$unit,$caloriesum,$repast);
+                    
+                    $ms_food = ['type' => 'text'
+                    ,'text' => 'สรุปรายการ
+                    '.$food.' '.$unit.' '.$unittext.' เท่ากับ '.$calorie.' กิโลแคลอรี่'];
                     
                     $ms_num = [
                     'type' => 'template',

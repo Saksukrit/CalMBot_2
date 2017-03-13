@@ -33,9 +33,62 @@ class Req_manage
         $db->CloseCon($conn);
     }
     
-    public function save_calorie($calorie)
-    {
-        # code...
+    // get data =========================================================
+    public function get_repast($userId){
+        $db = new Dbcon;
+        $conn = $db->OpenCon();
+        mysqli_set_charset($conn, "utf8");
+        $sql = "SELECT content FROM RequestLine WHERE userId = '$userId' AND req_type = 'savefood' AND header = 'repast' LIMIT 1";
+        $result = $conn->query($sql);
+        
+        if ($result->num_rows > 0) {
+            while ($row = $result->fetch_assoc()) {
+                $content = $row["content"];
+                return $content;
+            }
+        } else {
+            return "null";
+        }
+        
+        $db->CloseCon($conn);
+    }
+    
+    public function get_food(){
+        $db = new Dbcon;
+        $conn = $db->OpenCon();
+        mysqli_set_charset($conn, "utf8");
+        $sql = "SELECT content FROM RequestLine WHERE userId = '$userId' AND req_type = 'savefood' AND header = 'food' LIMIT 1";
+        $result = $conn->query($sql);
+        
+        if ($result->num_rows > 0) {
+            while ($row = $result->fetch_assoc()) {
+                $content = $row["content"];
+                return $content;
+            }
+        } else {
+            return "null";
+        }
+        
+        $db->CloseCon($conn);
+    }
+    
+    public function get_unit(){
+        $db = new Dbcon;
+        $conn = $db->OpenCon();
+        mysqli_set_charset($conn, "utf8");
+        $sql = "SELECT content FROM RequestLine WHERE userId = '$userId' AND req_type = 'savefood' AND header = 'unit' LIMIT 1";
+        $result = $conn->query($sql);
+        
+        if ($result->num_rows > 0) {
+            while ($row = $result->fetch_assoc()) {
+                $content = $row["content"];
+                return $content;
+            }
+        } else {
+            return "null";
+        }
+        
+        $db->CloseCon($conn);
     }
     
     public function get_dialy_list($userId)
