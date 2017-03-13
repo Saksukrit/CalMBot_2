@@ -117,6 +117,45 @@ class Searchfood
         $db->CloseCon($conn);
     }
     //------------------------------------------------------------
+    // for save
+    public function searchfood_forsave($foodname)
+    {
+        $db = new Dbcon;
+        $conn = $db->OpenCon();
+        mysqli_set_charset($conn, "utf8");
+        $sql = "SELECT * FROM Food WHERE food_name LIKE '%$foodname%' LIMIT 15";
+        $result = $conn->query($sql);
+
+        if ($result->num_rows > 0) {
+            $nummax = $result->num_rows;
+            $num = 0;
+            $colum = array();
+
+            while ($row = $result->fetch_assoc()) {
+                if ($num != $nummax) {
+                    $colum[$num] = array(
+                        // 'thumbnailImageUrl' => '' . $row["f_pic"] . '',
+                        'title' => '' . $row["food_name"] . ' ' . $row["f_unit"] . '',
+                        'text' => 'มีพลังงาน ' . $row["f_calorie"] . ' แคลอรี่',
+                        'actions' => array(
+                            array(
+                                'type' => 'message',
+                                'label' => 'เลือก',
+                                'data' => 'food_selected',
+                                'text' => ''.$row["food_name"].''
+                            )
+                        ) ,
+                    );
+                    ++$num;
+                }
+            }
+            return $this->getcolums($colum);
+        } else {
+            return "null";
+        }
+        $db->CloseCon($conn);
+    }
+    //------------------------------------------------------------
     //
     function getcolums($colum)
     {

@@ -65,6 +65,7 @@ if (!is_null($events['events']))
             $food_dialy = new Food_save;
             $searchfood = new Searchfood;
             $searchexercise = new Searchexercise;
+            $req = new Req_manage;
             
             // check user maping id
             $checkuser = $user->get_userId($userId);
@@ -201,9 +202,7 @@ if (!is_null($events['events']))
                 //postback repast
                 else if ($obdata->getpostback($userId) == "repast") {
                     
-                    $req = new Req_manage();
                     $req->save_repast($userId,$text);
-                    // $checkfood->check_food($text) == "food"
                     
                     $ms_repast = [
                     'type' => 'text',
@@ -224,8 +223,45 @@ if (!is_null($events['events']))
                     
                 }
                 
+                // search for save
+                // show list food by name
+                else if (($searchfood->searchfood_forsave($text) != "null") && ($obdata->getpostback($userId) == "food")) {
+                    
+                    $ms_array = array();
+                    $ms_array = $searchfood->searchfood_forsave($text);
+                    
+                    if (count($ms_array) == 1) {
+                        $client->replyMessage(
+                        array(
+                        'replyToken' => $event['replyToken'],
+                        'messages' => [$ms_array[0]]
+                        )
+                        );
+                    }elseif (count($ms_array) == 2) {
+                        $client->replyMessage(
+                        array(
+                        'replyToken' => $event['replyToken'],
+                        'messages' => [$ms_array[0],$ms_array[1]]
+                        )
+                        );
+                    }elseif (count($ms_array) == 3) {
+                        $client->replyMessage(
+                        array(
+                        'replyToken' => $event['replyToken'],
+                        'messages' => [$ms_array[0],$ms_array[1],$ms_array[2]]
+                        )
+                        );
+                    }
+                    // //delete
+                    $obdata->deletepostback($userId);
+                    
+                }
+                
                 // number of foods
-                else if ($obdata->getpostback($userId) == "food") {
+                else if ($obdata->getpostback($userId) == "food_selected") {
+                    //
+                    $req->save_food($userId,$text);
+                    
                     $ms_food = [
                     'type' => 'template',
                     'altText' => 'จำนวนกี่หน่วย',
