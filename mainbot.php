@@ -308,7 +308,7 @@ if (!is_null($events['events']))
                 
                 else if ($obdata->getpostback($userId) == "num_food") {
                     //
-                    $req->save_unit($userId,$text);
+                    // $req->save_unit($userId,$text);
                     
                     // get data from Req_manage
                     $food = $req->get_food($userId);

@@ -53,7 +53,7 @@ class Req_manage
         $db->CloseCon($conn);
     }
     
-    public function get_food(){
+    public function get_food($userId){
         $db = new Dbcon;
         $conn = $db->OpenCon();
         mysqli_set_charset($conn, "utf8");
@@ -72,7 +72,7 @@ class Req_manage
         $db->CloseCon($conn);
     }
     
-    public function get_unit(){
+    public function get_unit($userId){
         $db = new Dbcon;
         $conn = $db->OpenCon();
         mysqli_set_charset($conn, "utf8");
