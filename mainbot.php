@@ -328,8 +328,6 @@ if (!is_null($events['events']))
                     // save food_dialy list
                     $food_dialy->save_food_dialy_list($get_food_dialyId,$food,$unit,$caloriesum,$repast);
                     
-                    // delete req
-                    $req->delete_req($userId);
                     
                     $ms_food = ['type' => 'text'
                     ,'text' => 'สรุปรายการ
@@ -366,6 +364,8 @@ if (!is_null($events['events']))
                     
                     // //delete
                     $obdata->deletepostback($userId);
+                    // delete req
+                    // $req->delete_req($userId);
                 }
                 // -----------------------------------------------------------------------------------------------------------------------------
                 
