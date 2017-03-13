@@ -9,16 +9,7 @@ class Req_manage
         $conn = $db->OpenCon();
         mysqli_set_charset($conn, "utf8");
         $sql = "INSERT INTO RequestLine (userId, req_type, header, content) VALUES ('$userId', 'savefood', 'repast', '$repast')";
-        if ($conn->query($sql) === TRUE)
-        {
-            echo "New record created successfully";
-            return "success";
-        }
-        else
-        {
-            echo "Error: " . $sql . "<br>" . $conn->error;
-            return "fail add";
-        }
+        $conn->query($sql);
         $db->CloseCon($conn);
     }
     
