@@ -331,7 +331,7 @@ if (!is_null($events['events']))
                     
                     $ms_food = ['type' => 'text'
                     ,'text' => 'สรุปรายการ
-                    '.$food.' '.$unit.' '.$unittext.' เท่ากับ '.$calorie.' กิโลแคลอรี่'];
+                    '.$food.' '.$unit.' '.$unittext.' เท่ากับ '.$caloriesum.' กิโลแคลอรี่'];
                     
                     $ms_num = [
                     'type' => 'template',
