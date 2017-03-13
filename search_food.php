@@ -134,12 +134,11 @@ class Searchfood
             while ($row = $result->fetch_assoc()) {
                 if ($num != $nummax) {
                     $colum[$num] = array(
-                        // 'thumbnailImageUrl' => '' . $row["f_pic"] . '',
                         'title' => '' . $row["food_name"] . ' ' . $row["f_unit"] . '',
                         'text' => 'มีพลังงาน ' . $row["f_calorie"] . ' แคลอรี่',
                         'actions' => array(
                             array(
-                                'type' => 'message',
+                                'type' => 'postback',
                                 'label' => 'เลือก',
                                 'data' => 'food_selected',
                                 'text' => ''.$row["food_name"].''
