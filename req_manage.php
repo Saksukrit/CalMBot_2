@@ -47,7 +47,7 @@ class Req_manage
                 return $content;
             }
         } else {
-            return "null";
+            return "null--";
         }
         
         $db->CloseCon($conn);
@@ -66,7 +66,7 @@ class Req_manage
                 return $content;
             }
         } else {
-            return "null";
+            return "null--";
         }
         
         $db->CloseCon($conn);
