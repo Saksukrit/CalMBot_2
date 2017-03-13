@@ -198,6 +198,8 @@ if (!is_null($events['events']))
                 //มื้อเช้า   ------------------------------------
                 //postback repast
                 else if ($obdata->getpostback($userId) == "repast") {
+
+                       // $checkfood->check_food($text) == "food"
                     
                     $ms_repast = [
                     'type' => 'text',
@@ -215,10 +217,11 @@ if (!is_null($events['events']))
                     $obdata->changepostback($userId,'food');
                     // //delete
                     // $obdata->deletepostback($userId);
+                 
                 }
                 
                 // number of foods
-                else if ($checkfood->check_food($text) == "food") {
+                else if ($obdata->getpostback($userId) == "food") {
                     $ms_food = [
                     'type' => 'template',
                     'altText' => 'จำนวนกี่หน่วย',
@@ -257,9 +260,14 @@ if (!is_null($events['events']))
                     'messages' => [$ms_food]
                     )
                     );
+
+                    // //delete
+                    $obdata->deletepostback($userId);
+
+                    // $checkfood->check_num($text) == "ok"
                 }
                 
-                else if ($checkfood->check_num($text) == "ok") {
+                else if ($obdata->getpostback($userId) == "num_food") {
                     // get data from Req_manage
                     
                     // save food_dialy list
@@ -281,12 +289,12 @@ if (!is_null($events['events']))
                     array(
                     'type' => 'postback',
                     'label' => 'เพิ่มอีก',
-                    'data' => 'เพิ่มอีก',
+                    'data' => 'more',
                     'text' => 'เพิ่มอีก')
                     ,array(
                     'type' => 'postback',
                     'label' => 'พอแล้ว',
-                    'data' => 'พอแล้ว',
+                    'data' => 'enough',
                     'text' => 'พอแล้ว')
                     )
                     )
@@ -298,6 +306,9 @@ if (!is_null($events['events']))
                     'messages' => [$ms_food,$ms_num]
                     )
                     );
+
+                    // //delete
+                    $obdata->deletepostback($userId);
                 }
                 // -----------------------------------------------------------------------------------------------------------------------------
                 
