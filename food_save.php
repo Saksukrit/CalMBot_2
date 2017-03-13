@@ -47,7 +47,8 @@ class Food_save
         $db->CloseCon($conn);
     }
     
-    public function save_food_dialy_list($fd_id, $fname, $unit, $repast)
+    
+    public function save_food_dialy_list($fd_id, $fname, $unit, $calorie, $repast)
     {
         $fd_id = intval($fd_id);
         $unit = intval($unit);
@@ -56,26 +57,9 @@ class Food_save
         $conn = $db->OpenCon();
         mysqli_set_charset($conn, "utf8");
         
-        if ($conn->connect_error)
-        {
-            die("Connection failed: " . $conn->connect_error);
-            return "fail con";
-        }
-        else
-        {
-            $sql = "INSERT INTO Food_diary_list (food_diary_id, food_name, unit_eat, repast) VALUES ('$fd_id', '$fname', '$unit', '$repast')";
-            
-            if ($conn->query($sql) === TRUE)
-            {
-                echo "New record created successfully";
-                return "success";
-            }
-            else
-            {
-                echo "Error: " . $sql . "<br>" . $conn->error;
-                return "fail add";
-            }
-        }
+        $sql = "INSERT INTO Food_diary_list (food_diary_id_List, food_name, unit_eat, calorie, repast) VALUES ('$fd_id', '$fname', '$unit', '$calorie', '$repast')";
+        $conn->query($sql);
+        
         $db->CloseCon($conn);
     }
 }

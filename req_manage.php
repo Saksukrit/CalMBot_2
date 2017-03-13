@@ -23,9 +23,14 @@ class Req_manage
         $db->CloseCon($conn);
     }
     
-    public function save_unit($unit)
+    public function save_unit($userId,$unit)
     {
-        # code...
+        $db = new Dbcon;
+        $conn = $db->OpenCon();
+        mysqli_set_charset($conn, "utf8");
+        $sql = "INSERT INTO RequestLine (userId, req_type, header, content) VALUES ('$userId', 'savefood', 'unit', '$unit')";
+        $conn->query($sql);
+        $db->CloseCon($conn);
     }
     
     public function save_calorie($calorie)
@@ -33,7 +38,7 @@ class Req_manage
         # code...
     }
     
-    public function get_dialy_list()
+    public function get_dialy_list($userId)
     {
         # code...
     }

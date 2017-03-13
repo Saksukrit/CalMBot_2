@@ -60,8 +60,8 @@ if (!is_null($events['events']))
             
             
             // condition to class food check
-            $checkfood = new FoodCheck;
             $user = new User;
+            // $checkfood = new FoodCheck;
             $food_dialy = new Food_save;
             $searchfood = new Searchfood;
             $searchexercise = new Searchexercise;
@@ -304,15 +304,22 @@ if (!is_null($events['events']))
                     // //delete
                     $obdata->deletepostback($userId);
                     
-                    // $checkfood->check_num($text) == "ok"
                 }
                 
                 else if ($obdata->getpostback($userId) == "num_food") {
-                    // get data from Req_manage
+                    //
+                    $req->save_unit($userId,$text);
                     
+                    // get data from Req_manage
+
+
+                    // get userId
+                    $get_userId = $user->get_userId($userId);
+                    // get dialyId
+                    $get_food_dialyId = $food_dialy->check_food_dialy($get_userId,date('Y-m-d'));
+
                     // save food_dialy list
-                    // $food_dialy = new Food_save;
-                    $food_dialy->save_food_dialy_list("15","ข้าวขาหมู","1","breakfast");
+                    $food_dialy->save_food_dialy_list($get_food_dialyId,"ข้าวขาหมู","1",300,"breakfast");
                     
                     $ms_food = [
                     'type' => 'text',
@@ -405,10 +412,10 @@ if (!is_null($events['events']))
                 
                 // show list food by name
                 // else if ($searchfood->searchfood_byname($text) != "null") {
-                    
+                
                 //     $ms_array = array();
                 //     $ms_array = $searchfood->searchfood_byname($text);
-                    
+                
                 //     if (count($ms_array) == 1) {
                 //         $client->replyMessage(
                 //         array(
@@ -431,7 +438,7 @@ if (!is_null($events['events']))
                 //         )
                 //         );
                 //     }
-                    
+                
                 // }
                 
                 // search food by calorie ++++++++++++++++++++++++++++++++++
