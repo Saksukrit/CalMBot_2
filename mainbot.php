@@ -151,9 +151,7 @@ if (!is_null($events['events']))
                         $food_dialy->save_food_dialy($get_userId,date('Y-m-d'));
                     }
                     
-                    $postbackcontent = 'null';
-                    //select
-                    $postbackcontent = $obdata->getpostback($userId);
+                    
                     //delete
                     $obdata->deletepostback($userId);
                     
@@ -199,7 +197,7 @@ if (!is_null($events['events']))
                 
                 //มื้อเช้า   ------------------------------------
                 //postback repast
-                else if ($text == "มื้อเช้า") {
+                else if ($obdata->getpostback($userId) == "repast") {
                     $ms_repast = [
                     'type' => 'text',
                     'text' => 'คุณทานอะไรมา'];
@@ -258,7 +256,7 @@ if (!is_null($events['events']))
                     // get data from Req_manage
                     
                     // save food_dialy list
-                    $food_dialy = new Food_save;
+                    // $food_dialy = new Food_save;
                     $food_dialy->save_food_dialy_list("15","ข้าวขาหมู","1","breakfast");
                     
                     $ms_food = [

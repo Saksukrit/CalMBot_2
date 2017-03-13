@@ -3,21 +3,21 @@ include_once 'dbcon.php';
 
 class Food_save
 {
-
+    
     public function check_food_dialy($userId, $currentdate)
     {
         $db = new Dbcon;
         $conn = $db->OpenCon();
         $sql = "SELECT food_diary_id FROM Food_diary WHERE userID = '$userId' AND save_date = '$currentdate'";
         $result = $conn->query($sql);
-
+        
         if ($result->num_rows > 0)
         {
-          while ($row = $result->fetch_assoc())
-          {
-              $food_diary_id = $row["food_diary_id"];
-              return $food_diary_id;
-          }
+            while ($row = $result->fetch_assoc())
+            {
+                $food_diary_id = $row["food_diary_id"];
+                return $food_diary_id;
+            }
         }
         else
         {
@@ -25,7 +25,7 @@ class Food_save
         }
         $db->CloseCon($conn);
     }
-
+    
     public function save_food_dialy($userID, $save_date)
     {
         $userID = intval($userID);
@@ -33,7 +33,7 @@ class Food_save
         $db = new Dbcon;
         $conn = $db->OpenCon();
         $sql = "INSERT INTO Food_diary (userID, food_diary_id, save_date, total_caloriel) VALUES ('$userID', null,'$save_date', 0)";
-
+        
         if ($conn->query($sql) === TRUE)
         {
             echo "New record created successfully";
@@ -46,7 +46,7 @@ class Food_save
         }
         $db->CloseCon($conn);
     }
-
+    
     public function save_food_dialy_list($fd_id, $fname, $unit, $repast)
     {
         $fd_id = intval($fd_id);
@@ -55,7 +55,7 @@ class Food_save
         $db = new Dbcon;
         $conn = $db->OpenCon();
         mysqli_set_charset($conn, "utf8");
-
+        
         if ($conn->connect_error)
         {
             die("Connection failed: " . $conn->connect_error);
@@ -64,7 +64,7 @@ class Food_save
         else
         {
             $sql = "INSERT INTO Food_diary_list (food_diary_id, food_name, unit_eat, repast) VALUES ('$fd_id', '$fname', '$unit', '$repast')";
-
+            
             if ($conn->query($sql) === TRUE)
             {
                 echo "New record created successfully";
