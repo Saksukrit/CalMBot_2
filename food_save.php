@@ -52,12 +52,13 @@ class Food_save
     {
         $fd_id = intval($fd_id);
         $unit = intval($unit);
+        $calorie = intval($calorie);
         // Create connection
         $db = new Dbcon;
         $conn = $db->OpenCon();
         mysqli_set_charset($conn, "utf8");
         
-        $sql = "INSERT INTO Food_diary_list (food_diary_id_List, food_name, unit_eat, calorie, repast) VALUES ('$fd_id', '$fname', '$unit', '$calorie', '$repast')";
+        $sql = "INSERT INTO Food_diary_list (f_diary_id_List, food_name, unit_eat, calorie, repast) VALUES ('$fd_id', '$fname', '$unit', '$calorie', '$repast')";
         $conn->query($sql);
         
         $db->CloseCon($conn);
