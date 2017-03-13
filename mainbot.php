@@ -212,7 +212,7 @@ if (!is_null($events['events']))
                     
 
                     // change postback
-                    $obdata->changepostback($userId,'food');
+                    // $obdata->changepostback($userId,'food');
                     // //delete
                     // $obdata->deletepostback($userId);
                 }
