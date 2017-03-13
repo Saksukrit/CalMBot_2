@@ -80,8 +80,9 @@ if (!is_null($events['events']))
                 )
                 );
             }
-            
-            else{
+            // user 
+            else
+            {
                 //  select menu    ****************************************
                 if ($text == "เมนู" || $text == "พอแล้ว") {
                     $displayname = $user->get_displayname($userId);
@@ -637,6 +638,8 @@ if (!is_null($events['events']))
                 // get profile
                 else if ($text == "ดูข้อมูลผู้ใช้") {
                     $ms_profile = $user->get_profile($userId);
+                    //delete
+                    $obdata->deletepostback($userId);
                     
                     $client->replyMessage(
                     array(
