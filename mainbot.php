@@ -404,35 +404,35 @@ if (!is_null($events['events']))
                 }
                 
                 // show list food by name
-                else if ($searchfood->searchfood_byname($text) != "null") {
+                // else if ($searchfood->searchfood_byname($text) != "null") {
                     
-                    $ms_array = array();
-                    $ms_array = $searchfood->searchfood_byname($text);
+                //     $ms_array = array();
+                //     $ms_array = $searchfood->searchfood_byname($text);
                     
-                    if (count($ms_array) == 1) {
-                        $client->replyMessage(
-                        array(
-                        'replyToken' => $event['replyToken'],
-                        'messages' => [$ms_array[0]]
-                        )
-                        );
-                    }elseif (count($ms_array) == 2) {
-                        $client->replyMessage(
-                        array(
-                        'replyToken' => $event['replyToken'],
-                        'messages' => [$ms_array[0],$ms_array[1]]
-                        )
-                        );
-                    }elseif (count($ms_array) == 3) {
-                        $client->replyMessage(
-                        array(
-                        'replyToken' => $event['replyToken'],
-                        'messages' => [$ms_array[0],$ms_array[1],$ms_array[2]]
-                        )
-                        );
-                    }
+                //     if (count($ms_array) == 1) {
+                //         $client->replyMessage(
+                //         array(
+                //         'replyToken' => $event['replyToken'],
+                //         'messages' => [$ms_array[0]]
+                //         )
+                //         );
+                //     }elseif (count($ms_array) == 2) {
+                //         $client->replyMessage(
+                //         array(
+                //         'replyToken' => $event['replyToken'],
+                //         'messages' => [$ms_array[0],$ms_array[1]]
+                //         )
+                //         );
+                //     }elseif (count($ms_array) == 3) {
+                //         $client->replyMessage(
+                //         array(
+                //         'replyToken' => $event['replyToken'],
+                //         'messages' => [$ms_array[0],$ms_array[1],$ms_array[2]]
+                //         )
+                //         );
+                //     }
                     
-                }
+                // }
                 
                 // search food by calorie ++++++++++++++++++++++++++++++++++
                 else if ($text == "ค้นหาโดยปริมาณพลังงาน") {
