@@ -476,8 +476,8 @@ if (!is_null($events['events']))
                     'type' => 'text',
                     'text' => 'สรุปรายการของ'.$confirm_food[1].'
                     พลังงานรวมที่ได้รับ
-                    เท่ากับ '.$calorie_repast.' กิโลแคลอรี่ '.$calorie_all.'
-                    '.$get_food_dialyId.'
+                    เท่ากับ '.$calorie_repast.' กิโลแคลอรี่ ''
+                    
                     ออกจากเมนูการบันทึกแล้ว'];
                     
                     // $ms = [
