@@ -410,7 +410,7 @@ if (!is_null($events['events']))
                     ,array(
                     'type' => 'postback',
                     'label' => 'พอแล้ว',
-                    'data' => 'enough',
+                    'data' => 'enough '.$repast,
                     'text' => 'พอแล้ว')
                     )
                     )
@@ -465,8 +465,9 @@ if (!is_null($events['events']))
                     // สรุปรายการ
                     // get dialyId
                     $get_food_dialyId = $food_dialy->check_food_dialy($get_userId,date('Y-m-d'));
-
-
+                    
+                    // get repast calorie
+                    $calorie = $food_dialy->get_repast_calorie($get_food_dialyId,$repast);
                     // get summary calorie
                     $calorie = $food_dialy->get_all_calorie($get_food_dialyId);
                     // update summary calorie
@@ -474,8 +475,8 @@ if (!is_null($events['events']))
                     
                     $ms_summary = [
                     'type' => 'text',
-                    'text' => 'สรุป ออกจากเมนูการบันทึกแล้ว'];
-
+                    'text' => 'สรุปรายการ'];
+                    
                     $ms = [
                     'type' => 'text',
                     'text' => 'ออกจากเมนูการบันทึกแล้ว'];

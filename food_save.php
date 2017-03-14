@@ -63,7 +63,33 @@ class Food_save
         
         $db->CloseCon($conn);
     }
-
+    
+    // AND repast =
+    
+    // get all calorie
+    public function get_repast_calorie($food_diary_id,$repast)
+    {
+        $db = new Dbcon;
+        $conn = $db->OpenCon();
+        $sql = "SELECT calorie FROM Food_diary_list WHERE f_diary_id_List = '$food_diary_id' AND repast = '$repast'";
+        $result = $conn->query($sql);
+        
+        $calorie = 0;
+        if ($result->num_rows > 0)
+        {
+            while ($row = $result->fetch_assoc())
+            {
+                $calorie = $calorie + $row["calorie"];
+            }
+            return $calorie;
+        }
+        else
+        {
+            return "null";
+        }
+        $db->CloseCon($conn);
+    }
+    
     // get all calorie
     public function get_all_calorie($food_diary_id)
     {
