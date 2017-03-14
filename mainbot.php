@@ -320,7 +320,7 @@ if (!is_null($events['events']))
                     
                     $messagess = [
                     "type"=> "template",
-                    "altText"=> "",
+                    "altText"=> "ยืนยันรายการ",
                     "template"=> array(
                     "type"=> "confirm",
                     "text"=> "'.$food.' '.$unit.' '.$unittext.' เท่ากับ '.$caloriesum.' กิโลแคลอรี่'
