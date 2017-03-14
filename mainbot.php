@@ -323,8 +323,8 @@ if (!is_null($events['events']))
                     "altText"=> "ยืนยันรายการ",
                     "template"=> array(
                     "type"=> "confirm",
-                    "text"=> "'.$food.' '.$unit.' '.$unittext.' เท่ากับ '.$caloriesum.' กิโลแคลอรี่'
-                    ยืนยันบันทึกรายการนี้",
+                    "text"=> ''.$food.' '.$unit.' '.$unittext.' เท่ากับ '.$caloriesum.' กิโลแคลอรี่
+                    ยืนยันบันทึกรายการนี้',
                     "actions"=> array(
                     array(
                     "type"=> "postback",
