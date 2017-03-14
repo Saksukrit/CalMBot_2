@@ -489,7 +489,7 @@ if (!is_null($events['events']))
                     );
 
                     // set postback
-                    $obdata->setpostback($userId,'menu');
+                    // $obdata->setpostback($userId,'menu');
 
                 }
                 
