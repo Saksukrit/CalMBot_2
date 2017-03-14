@@ -124,7 +124,7 @@ class Food_save
         $db = new Dbcon;
         $conn = $db->OpenCon();
         mysqli_set_charset($conn, "utf8");
-        $sql = "UPDATE Food_diary SET total_calorie = '$total_caloriel' WHERE (food_diary_id = '$food_diary_id')";
+        $sql = "UPDATE Food_diary SET total_calorie = '$total_calorie' WHERE (food_diary_id = '$food_diary_id')";
         $conn->query($sql);
         
         $db->CloseCon($conn);
