@@ -87,7 +87,8 @@ if (!is_null($events['events']))
             else
             {
                 //  select menu    ****************************************
-                if ($text == "เมนู" || $text == "พอแล้ว") {
+                if ($text == "เมนู") {
+                    // || $text == "พอแล้ว"
                     $displayname = $user->get_displayname($userId);
                     
                     $ms1 = [
@@ -428,7 +429,7 @@ if (!is_null($events['events']))
                     // //delete
                     $obdata->deletepostback($userId);
                     // delete req
-                    // $req->delete_req($userId);
+                    $req->delete_req($userId);
                 }
                 
                 // more save
