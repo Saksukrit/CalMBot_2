@@ -91,7 +91,6 @@ class Food_save
     // update summary calorie of day
     public function update_total_calorie($food_diary_id,$total_calorie)
     {
-
         $db = new Dbcon;
         $conn = $db->OpenCon();
         mysqli_set_charset($conn, "utf8");

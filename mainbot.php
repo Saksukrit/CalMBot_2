@@ -262,14 +262,16 @@ if (!is_null($events['events']))
                 else if ($obdata->getpostback($userId) == "food_selected") {
                     //
                     $req->save_food($userId,$text);
+                    // $food = $req->get_food($userId);
+                    $unittext = $searchfood->get_unit($text);
                     
                     $ms_food = [
                     'type' => 'template',
-                    'altText' => 'จำนวนกี่หน่วย',
+                    'altText' => 'จำนวน',
                     'template' => array(
                     'type' => 'buttons',
                     'title' => ' ',
-                    'text' => 'จำนวนเท่าไหร่',
+                    'text' => 'จำนวนกี่'.$unittext,
                     'actions' => array(
                     array(
                     'type' => 'postback',
@@ -286,11 +288,6 @@ if (!is_null($events['events']))
                     'label' => '3',
                     'data' => 'num_food',
                     'text' => '3')
-                    ,array(
-                    'type' => 'postback',
-                    'label' => '4',
-                    'data' => 'num_food',
-                    'text' => '4')
                     )
                     )
                     ];
@@ -468,20 +465,25 @@ if (!is_null($events['events']))
                     // สรุปรายการ
                     // get dialyId
                     $get_food_dialyId = $food_dialy->check_food_dialy($get_userId,date('Y-m-d'));
-                    // get calorie
+
+
+                    // get summary calorie
                     $calorie = $food_dialy->get_all_calorie($get_food_dialyId);
                     // update summary calorie
                     $food_dialy->update_total_calorie($get_food_dialyId,$total_calorie);
-
+                    
+                    $ms_summary = [
+                    'type' => 'text',
+                    'text' => 'สรุป ออกจากเมนูการบันทึกแล้ว'];
 
                     $ms = [
                     'type' => 'text',
-                    'text' => 'ยกเลิก ออกจากเมนูการบันทึกแล้ว'];
+                    'text' => 'ออกจากเมนูการบันทึกแล้ว'];
                     
                     $client->replyMessage(
                     array(
                     'replyToken' => $event['replyToken'],
-                    'messages' => [$ms]
+                    'messages' => [$ms_summary,$ms]
                     )
                     );
                 }
@@ -875,7 +877,7 @@ if (!is_null($events['events']))
                 //     $ms_con = [
                 //     'type' => 'text',
                 //     'text' => 'ยังไม่สามารถ'];
-                    
+                
                 //     $client->replyMessage(
                 //     array(
                 //     'replyToken' => $event['replyToken'],
