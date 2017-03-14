@@ -344,7 +344,7 @@ if (!is_null($events['events']))
                     $client->replyMessage(
                     array(
                     'replyToken' => $event['replyToken'],
-                    'messages' => [$ms_food,$ms_num]
+                    'messages' => [$messagess]
                     )
                     );
                 }
@@ -394,7 +394,7 @@ if (!is_null($events['events']))
                     // ,'text' => 'สรุปรายการ
                     // '.$food.' '.$unit.' '.$unittext.' เท่ากับ '.$caloriesum.' กิโลแคลอรี่'];
                     
-                    $ms_num = [
+                    $ms = [
                     'type' => 'template',
                     'altText' => 'บันทึกรายการอาหารแล้ว',
                     'template' => array(
@@ -419,7 +419,7 @@ if (!is_null($events['events']))
                     $client->replyMessage(
                     array(
                     'replyToken' => $event['replyToken'],
-                    'messages' => [$ms_num]
+                    'messages' => [$ms]
                     )
                     );
                     
