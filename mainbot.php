@@ -476,16 +476,18 @@ if (!is_null($events['events']))
                     $ms_summary = [
                     'type' => 'text',
                     'text' => 'สรุปรายการของ'.$confirm_food[1].'
-                    พลังงานรวมที่ได้รับเท่ากับ'.$calorie_repast];
+                    พลังงานรวมที่ได้รับเท่ากับ'.$calorie_repast].'
                     
-                    $ms = [
-                    'type' => 'text',
-                    'text' => 'ออกจากเมนูการบันทึกแล้ว'];
+                    ออกจากเมนูการบันทึกแล้ว';
+                    
+                    // $ms = [
+                    // 'type' => 'text',
+                    // 'text' => 'ออกจากเมนูการบันทึกแล้ว'];
                     
                     $client->replyMessage(
                     array(
                     'replyToken' => $event['replyToken'],
-                    'messages' => [$ms_summary,$ms]
+                    'messages' => [$ms_summary]
                     )
                     );
                 }
