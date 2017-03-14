@@ -408,7 +408,7 @@ if (!is_null($events['events']))
                     array(
                     'type' => 'postback',
                     'label' => 'เพิ่มอีก',
-                    'data' => 'more',
+                    'data' => 'more '.$repast,
                     'text' => 'เพิ่มอีก')
                     ,array(
                     'type' => 'postback',
@@ -426,13 +426,17 @@ if (!is_null($events['events']))
                     )
                     );
                     
-                    // //delete
+                    // $total_calorie;
+                    // update
+                    // $food_dialy->update_total_calorie($get_food_dialyId,$total_calorie);
+                    //delete
                     $obdata->deletepostback($userId);
                     // delete req
                     $req->delete_req($userId);
                 }
                 
                 // more save
+                explode(" ",);
                 else if ($obdata->getpostback($userId) == "more") {
                     
                     $req->save_repast($userId,$text);
@@ -482,7 +486,7 @@ if (!is_null($events['events']))
                 else if ($text == "ค้นหาข้อมูลอาหาร") {
                     // //delete
                     $obdata->deletepostback($userId);
-
+                    
                     $ms_menu_search = [
                     'type' => 'template',
                     'altText' => 'ค้นหาข้อมูลอาหาร',
@@ -582,6 +586,8 @@ if (!is_null($events['events']))
                 }
                 // show list food by calorie
                 else if ($searchfood->searchfood_bycalorie($text) != "null") {
+                    // //delete
+                    $obdata->deletepostback($userId);
                     
                     $ms_array = array();
                     $ms_array = $searchfood->searchfood_bycalorie($text);
@@ -613,6 +619,9 @@ if (!is_null($events['events']))
                 
                 // search food by type ++++++++++++++++++++++++++++++++++
                 else if ($text == "ค้นหาโดยชนิดอาหาร") {
+                    // //delete
+                    $obdata->deletepostback($userId);
+                    
                     $ms_search_type = [
                     'type' => 'template',
                     'altText' => 'ค้นหาข้อมูลอาหาร',
@@ -648,6 +657,8 @@ if (!is_null($events['events']))
                 }
                 // show list food by type
                 else if ($searchfood->searchfood_bytype($text) != "null") {
+                    // //delete
+                    $obdata->deletepostback($userId);
                     
                     $ms_array = array();
                     $ms_array = $searchfood->searchfood_bytype($text);
@@ -681,6 +692,9 @@ if (!is_null($events['events']))
                 // ค้นหาข้อมูลการออกกำลังกาย
                 // ************  search exercise *****************************************************************************************************
                 else if ($text == "ค้นหาข้อมูลการออกกำลังกาย") {
+                    // //delete
+                    $obdata->deletepostback($userId);
+                    
                     $ms_menu_search = [
                     'type' => 'template',
                     'altText' => 'ค้นหาข้อมูลการออกกำลังกาย',
@@ -713,6 +727,9 @@ if (!is_null($events['events']))
                 
                 // search exercise by calorie ++++++++++++++++++++++++++++++++++
                 else if ($text == "พลังงานที่เผาพลาญ") {
+                    // //delete
+                    $obdata->deletepostback($userId);
+                    
                     $ms_foodcalorie = [
                     'type' => 'text',
                     'text' => 'บอกปริมาณพลังงานสูงสุดที่ต้องการ'];
@@ -758,6 +775,9 @@ if (!is_null($events['events']))
                 //
                 // search exercise by type ++++++++++++++++++++++++++++++++++
                 else if ($text == "ชนิดการออกกำลังกาย") {
+                    // //delete
+                    $obdata->deletepostback($userId);
+                    
                     $ms_menu_search = [
                     'type' => 'template',
                     'altText' => 'เลือกชนิดการออกกำลังกาย',
@@ -794,6 +814,8 @@ if (!is_null($events['events']))
                 }
                 // show list exercise by calorie
                 else if ($searchexercise->searchexercise_bytype($text) != "null") {
+                    // //delete
+                    $obdata->deletepostback($userId);
                     
                     $ms_array = array();
                     $ms_array = $searchexercise->searchexercise_bytype($text);
@@ -826,6 +848,7 @@ if (!is_null($events['events']))
                 // ดูข้อมูลผู้ใช้
                 // get profile
                 else if ($text == "ดูข้อมูลผู้ใช้") {
+                    
                     $ms_profile = $user->get_profile($userId);
                     //delete
                     $obdata->deletepostback($userId);
@@ -838,29 +861,7 @@ if (!is_null($events['events']))
                     );
                 }
                 
-                // $messagess = [
-                // "type"=> "template",
-                // "altText"=> "แคลอรี่ของคุณเกินกำหนดแล้ว
-                // แคลอรี่ที่ได้รับตอนนี้เท่ากับ 2450 กิโลแคลอรี่",
-                // "template"=> array(
-                //   "type"=> "confirm",
-                //   "text"=> "แคลอรี่ของคุณเกินกำหนด(TDEE)แล้ว
-                //   แคลอรี่ที่ได้รับตอนนี้เท่ากับ 2450 กิโลแคลอรี่
-                //   คุณต้องการคำแนะนำเกี่ยวกับอาหารสุขภาพ หรือวิธีการออกกำลังกายมั้ย ?",
-                //   "actions"=> array(
-                //     array(
-                //       "type"=> "message",
-                //       "label"=> "ใช่",
-                //       "text"=> "ใช่"
-                //       ),
-                //     array(
-                //       "type"=> "message",
-                //       "label"=> "ไม่",
-                //       "text"=> "ไม่"
-                //       )
-                //     )
-                //   )
-                // ];
+                
                 // -----------------------------------------------------------------------------------------------------------------------------
                 
                 else if ($text == "เพิ่มอีก") {

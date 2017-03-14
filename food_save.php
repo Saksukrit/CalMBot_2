@@ -32,7 +32,7 @@ class Food_save
         // Create connection
         $db = new Dbcon;
         $conn = $db->OpenCon();
-        $sql = "INSERT INTO Food_diary (userID, food_diary_id, save_date, total_caloriel) VALUES ('$userID', null,'$save_date', 0)";
+        $sql = "INSERT INTO Food_diary (userID, food_diary_id, save_date, total_calorie) VALUES ('$userID', null,'$save_date', 0)";
         
         if ($conn->query($sql) === TRUE)
         {
@@ -63,5 +63,43 @@ class Food_save
         
         $db->CloseCon($conn);
     }
+
+    // get all calorie
+    public function get_all_calorie($userId, $currentdate)
+    {
+        $db = new Dbcon;
+        $conn = $db->OpenCon();
+        $sql = "SELECT food_diary_id FROM Food_diary WHERE userID = '$userId' AND save_date = '$currentdate'";
+        $result = $conn->query($sql);
+        
+        if ($result->num_rows > 0)
+        {
+            while ($row = $result->fetch_assoc())
+            {
+                $food_diary_id = $row["food_diary_id"];
+                return $food_diary_id;
+            }
+        }
+        else
+        {
+            return "null";
+        }
+        $db->CloseCon($conn);
+    }
+    
+    // update summary calorie of day
+    public function update_total_calorie($food_diary_id,$total_calorie)
+    {
+
+
+        $db = new Dbcon;
+        $conn = $db->OpenCon();
+        mysqli_set_charset($conn, "utf8");
+        $sql = "UPDATE Food_diary SET total_calorie = '$total_caloriel' WHERE (food_diary_id = '$food_diary_id')";
+        $conn->query($sql);
+        
+        $db->CloseCon($conn);
+    }
+    
 }
 ?>
