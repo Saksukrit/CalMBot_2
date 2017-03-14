@@ -468,15 +468,15 @@ if (!is_null($events['events']))
                     // get repast calorie
                     $calorie_repast = $food_dialy->get_repast_calorie($get_food_dialyId,$confirm_food[1]);
                     // get summary calorie
-                    $calorie = $food_dialy->get_all_calorie($get_food_dialyId);
+                    $calorie_all = $food_dialy->get_all_calorie($get_food_dialyId);
                     // update summary calorie
-                    $food_dialy->update_total_calorie($get_food_dialyId,$calorie);
+                    $food_dialy->update_total_calorie($get_food_dialyId,$calorie_all);
                     
                     $ms_summary = [
                     'type' => 'text',
                     'text' => 'สรุปรายการของ'.$confirm_food[1].'
                     พลังงานรวมที่ได้รับ
-                    เท่ากับ '.$calorie_repast.' กิโลแคลอรี่
+                    เท่ากับ '.$calorie_repast.' กิโลแคลอรี่ '.$calorie_all.'
                     
                     ออกจากเมนูการบันทึกแล้ว'];
                     

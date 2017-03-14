@@ -119,6 +119,7 @@ class Food_save
     // update summary calorie of day
     public function update_total_calorie($food_diary_id,$total_calorie)
     {
+        $food_diary_id = intval($food_diary_id);
         $total_calorie = intval($total_calorie);
         $db = new Dbcon;
         $conn = $db->OpenCon();
