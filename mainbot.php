@@ -428,7 +428,7 @@ if (!is_null($events['events']))
                     // $food_dialy->update_total_calorie($get_food_dialyId,$total_calorie);
                     //delete
                     $obdata->deletepostback($userId);
-                    // delete req
+                    // delete request
                     $req->delete_req($userId);
                 }
                 
@@ -456,7 +456,7 @@ if (!is_null($events['events']))
                 }
                 
                 // enough save
-                else if ($obdata->getpostback($userId) == "enough") {
+                else if ($confirm_food[0] == "enough") {
                     
                     // delete req
                     $req->delete_req($userId);
@@ -467,7 +467,7 @@ if (!is_null($events['events']))
                     $get_food_dialyId = $food_dialy->check_food_dialy($get_userId,date('Y-m-d'));
                     
                     // get repast calorie
-                    $calorie = $food_dialy->get_repast_calorie($get_food_dialyId,$repast);
+                    $calorie_repast = $food_dialy->get_repast_calorie($get_food_dialyId,$confirm_food[1]);
                     // get summary calorie
                     $calorie = $food_dialy->get_all_calorie($get_food_dialyId);
                     // update summary calorie
@@ -475,7 +475,8 @@ if (!is_null($events['events']))
                     
                     $ms_summary = [
                     'type' => 'text',
-                    'text' => 'สรุปรายการ'];
+                    'text' => 'สรุปรายการของ'.$confirm_food[1].'
+                    พลังงานรวมที่ได้รับเท่ากับ'.$calorie_repast];
                     
                     $ms = [
                     'type' => 'text',
