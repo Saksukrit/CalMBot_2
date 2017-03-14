@@ -462,7 +462,7 @@ if (!is_null($events['events']))
                     $req->delete_req($userId);
                     //delete
                     $obdata->deletepostback($userId);
-                    
+                    // สรุปรายการ
                     $ms = [
                     'type' => 'text',
                     'text' => 'ยกเลิก ออกจากเมนูการบันทึกแล้ว'];
@@ -482,7 +482,7 @@ if (!is_null($events['events']))
                 else if ($text == "ค้นหาข้อมูลอาหาร") {
                     // //delete
                     $obdata->deletepostback($userId);
-                    
+
                     $ms_menu_search = [
                     'type' => 'template',
                     'altText' => 'ค้นหาข้อมูลอาหาร',
