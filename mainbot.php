@@ -406,12 +406,12 @@ if (!is_null($events['events']))
                     array(
                     'type' => 'postback',
                     'label' => 'เพิ่มอีก',
-                    'data' => 'more '.$repast,
+                    'data' => 'more '.$repast.'',
                     'text' => 'เพิ่มอีก')
                     ,array(
                     'type' => 'postback',
                     'label' => 'พอแล้ว',
-                    'data' => 'enough '.$repast,
+                    'data' => 'enough '.$repast.'',
                     'text' => 'พอแล้ว')
                     )
                     )
