@@ -81,7 +81,6 @@ class Food_save
             while ($row = $result->fetch_assoc())
             {
                 $calorie = $calorie + intval($row["calorie"]);
-                // $calorie = $row["calorie"];
             }
             return $calorie;
         }
