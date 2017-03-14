@@ -475,7 +475,8 @@ if (!is_null($events['events']))
                     $ms_summary = [
                     'type' => 'text',
                     'text' => 'สรุปรายการของ'.$confirm_food[1].'
-                    พลังงานรวมที่ได้รับเท่ากับ '.$calorie_repast.' กิโลแคลอรี่
+                    พลังงานรวมที่ได้รับ
+                    เท่ากับ '.$calorie_repast.' กิโลแคลอรี่
                     
                     ออกจากเมนูการบันทึกแล้ว'];
                     
