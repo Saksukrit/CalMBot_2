@@ -91,41 +91,42 @@ if (!is_null($events['events']))
                     // || $text == "พอแล้ว"
                     $displayname = $user->get_displayname($userId);
                     
-                    $ms1 = [
-                    'type' => 'text',
-                    'text' => 'สวัสดี '.$displayname.'
-                    เมนูการใช้งาน
-                    1.บันทึกมื้ออาหาร
-                    2.ค้นหาข้อมูลอาหาร
-                    3.ค้นหาข้อมูลการออกกำลังกาย
-                    4.ดูข้อมูลผู้ใช้'];
+                    // $ms1 = [
+                    // 'type' => 'text',
+                    // 'text' => 'สวัสดี '.$displayname.'
+                    // เมนูการใช้งาน
+                    // 1.บันทึกมื้ออาหาร
+                    // 2.ค้นหาข้อมูลอาหาร
+                    // 3.ค้นหาข้อมูลการออกกำลังกาย
+                    // 4.ดูข้อมูลผู้ใช้'];
                     
                     $ms2 = [
                     'type' => 'template',
-                    'altText' => 'เลือกเมนูการใช้งาน',
+                    'altText' => 'เมนูการใช้งาน',
                     'template' => array(
                     'type' => 'buttons',
                     'title' => 'เมนูการใช้งาน',
-                    'text' => 'เลือกเมนูที่ต้องการ',
+                    'text' => 'สวัสดี '.$displayname.'
+                    เมนูการใช้งาน',
                     'actions' => array(
                     array(
                     'type' => 'postback',
-                    'label' => '1',
+                    'label' => 'บันทึกมื้ออาหาร',
                     'data' => 'save_dialy',
                     'text' => 'บันทึกมื้ออาหาร')
                     ,array(
                     'type' => 'postback',
-                    'label' => '2',
+                    'label' => 'ข้อมูลอาหาร',
                     'data' => 'search_food',
                     'text' => 'ค้นหาข้อมูลอาหาร')
                     ,array(
                     'type' => 'postback',
-                    'label' => '3',
+                    'label' => 'ข้อมูลออกกำลังกาย',
                     'data' => 'search_exercise',
                     'text' => 'ค้นหาข้อมูลการออกกำลังกาย')
                     ,array(
                     'type' => 'postback',
-                    'label' => '4',
+                    'label' => 'ดูข้อมูลผู้ใช้',
                     'data' => 'get_profile',
                     'text' => 'ดูข้อมูลผู้ใช้')
                     )
@@ -136,7 +137,7 @@ if (!is_null($events['events']))
                     $client->replyMessage(
                     array(
                     'replyToken' => $event['replyToken'],
-                    'messages' => [$ms1,$ms2]
+                    'messages' => [$ms2]
                     )
                     );
                 }
