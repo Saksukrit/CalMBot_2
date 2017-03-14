@@ -470,7 +470,7 @@ if (!is_null($events['events']))
                     // get summary calorie
                     $calorie = $food_dialy->get_all_calorie($get_food_dialyId);
                     // update summary calorie
-                    $food_dialy->update_total_calorie($get_food_dialyId,$total_calorie);
+                    $food_dialy->update_total_calorie($get_food_dialyId,$calorie);
                     
                     $ms_summary = [
                     'type' => 'text',
