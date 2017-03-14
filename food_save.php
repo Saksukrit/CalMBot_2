@@ -71,6 +71,7 @@ class Food_save
     {
         $db = new Dbcon;
         $conn = $db->OpenCon();
+        mysqli_set_charset($conn, "utf8");
         $sql = "SELECT calorie FROM Food_diary_list WHERE f_diary_id_List = '$food_diary_id' AND repast = '$repast'";
         $result = $conn->query($sql);
         
@@ -95,6 +96,7 @@ class Food_save
     {
         $db = new Dbcon;
         $conn = $db->OpenCon();
+        mysqli_set_charset($conn, "utf8");
         $sql = "SELECT calorie FROM Food_diary_list WHERE f_diary_id_List = '$food_diary_id'";
         $result = $conn->query($sql);
         
