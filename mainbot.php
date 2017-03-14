@@ -57,7 +57,7 @@ if (!is_null($events['events']))
             
             //
             $text_type = explode(' ', $text);
-            
+            $confirm_food = explode(' ',$obdata->getpostback($userId));
             
             // condition to class food check
             $user = new User;
@@ -436,10 +436,9 @@ if (!is_null($events['events']))
                 }
                 
                 // more save
-                explode(" ",);
-                else if ($obdata->getpostback($userId) == "more") {
+                else if ($confirm_food[0] == "more") {
                     
-                    $req->save_repast($userId,$text);
+                    $req->save_repast($userId,$confirm_food[1]);
                     
                     $ms_repast = [
                     'type' => 'text',
@@ -864,18 +863,18 @@ if (!is_null($events['events']))
                 
                 // -----------------------------------------------------------------------------------------------------------------------------
                 
-                else if ($text == "เพิ่มอีก") {
-                    $ms_con = [
-                    'type' => 'text',
-                    'text' => 'ยังไม่สามารถ'];
+                // else if ($text == "เพิ่มอีก") {
+                //     $ms_con = [
+                //     'type' => 'text',
+                //     'text' => 'ยังไม่สามารถ'];
                     
-                    $client->replyMessage(
-                    array(
-                    'replyToken' => $event['replyToken'],
-                    'messages' => [$ms_con]
-                    )
-                    );
-                }
+                //     $client->replyMessage(
+                //     array(
+                //     'replyToken' => $event['replyToken'],
+                //     'messages' => [$ms_con]
+                //     )
+                //     );
+                // }
                 
                 
                 // ********************************************************************************
