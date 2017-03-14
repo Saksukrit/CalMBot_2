@@ -162,11 +162,11 @@ if (!is_null($events['events']))
                     
                     $save_dialy = [
                     'type' => 'template',
-                    'altText' => 'OK บันทึกมื้ออาหาร',
+                    'altText' => 'บันทึกมื้ออาหาร',
                     'template' => array(
                     
                     'type' => 'buttons',
-                    'title' => 'OK บันทึกมื้ออาหาร',
+                    'title' => 'บันทึกมื้ออาหาร',
                     'text' => 'เลือกมื้ออาหารที่ต้องการ ',
                     'actions' => array(
                     array(
