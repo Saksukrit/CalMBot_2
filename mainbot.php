@@ -400,7 +400,7 @@ if (!is_null($events['events']))
                     'altText' => 'บันทึกรายการอาหารแล้ว',
                     'template' => array(
                     'type' => 'buttons',
-                    'title' => 'บันทึกรายการอาหารแล้ว',
+                    'title' => 'บันทึกรายการอาหารแล้ว'.$repast,
                     'text' => 'ต้องการบันทึกเพิ่มเติมหรือไม่',
                     'actions' => array(
                     array(
@@ -435,6 +435,8 @@ if (!is_null($events['events']))
                 
                 // more save
                 else if ($confirm_food[0] == "more") {
+                    //delete
+                    $obdata->deletepostback($userId);
                     
                     $req->save_repast($userId,$confirm_food[1]);
                     
