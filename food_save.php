@@ -80,7 +80,8 @@ class Food_save
         {
             while ($row = $result->fetch_assoc())
             {
-                $calorie = $calorie + $row["calorie"];
+                // $calorie = $calorie + $row["calorie"];
+                $calorie = $row["calorie"];
             }
             return $calorie;
         }
