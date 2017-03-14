@@ -65,20 +65,21 @@ class Food_save
     }
 
     // get all calorie
-    public function get_all_calorie($userId, $currentdate)
+    public function get_all_calorie($food_diary_id)
     {
         $db = new Dbcon;
         $conn = $db->OpenCon();
-        $sql = "SELECT food_diary_id FROM Food_diary WHERE userID = '$userId' AND save_date = '$currentdate'";
+        $sql = "SELECT calorie FROM Food_diary_list WHERE f_diary_id_List = '$food_diary_id'";
         $result = $conn->query($sql);
         
+        $calorie = 0;
         if ($result->num_rows > 0)
         {
             while ($row = $result->fetch_assoc())
             {
-                $food_diary_id = $row["food_diary_id"];
-                return $food_diary_id;
+                $calorie = $calorie + $row["calorie"];
             }
+            return $calorie;
         }
         else
         {
@@ -90,7 +91,6 @@ class Food_save
     // update summary calorie of day
     public function update_total_calorie($food_diary_id,$total_calorie)
     {
-
 
         $db = new Dbcon;
         $conn = $db->OpenCon();

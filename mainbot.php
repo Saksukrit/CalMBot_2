@@ -466,6 +466,14 @@ if (!is_null($events['events']))
                     //delete
                     $obdata->deletepostback($userId);
                     // สรุปรายการ
+                    // get dialyId
+                    $get_food_dialyId = $food_dialy->check_food_dialy($get_userId,date('Y-m-d'));
+                    // get calorie
+                    $calorie = $food_dialy->get_all_calorie($get_food_dialyId);
+                    // update summary calorie
+                    $food_dialy->update_total_calorie($get_food_dialyId,$total_calorie);
+
+
                     $ms = [
                     'type' => 'text',
                     'text' => 'ยกเลิก ออกจากเมนูการบันทึกแล้ว'];
