@@ -460,6 +460,8 @@ if (!is_null($events['events']))
                     //delete
                     $obdata->deletepostback($userId);
                     // สรุปรายการ
+                    // get userId
+                    $get_userId = $user->get_userId($userId);
                     // get dialyId
                     $get_food_dialyId = $food_dialy->check_food_dialy($get_userId,date('Y-m-d'));
                     
