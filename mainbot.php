@@ -308,8 +308,6 @@ if (!is_null($events['events']))
                 // confirm save
                 else if ($obdata->getpostback($userId) == "num_food") {
                     $req->save_unit($userId,$text);
-                    // change postback
-                    // $obdata->changepostback($userId,'confirm_food');
                     // get data from Req_manage
                     $food = $req->get_food($userId);
                     $unit = intval($text);
@@ -391,16 +389,12 @@ if (!is_null($events['events']))
                     $food_dialy->save_food_dialy_list($get_food_dialyId,$food,$unit,$caloriesum,$repast);
                     
                     
-                    // $ms_food = ['type' => 'text'
-                    // ,'text' => 'สรุปรายการ
-                    // '.$food.' '.$unit.' '.$unittext.' เท่ากับ '.$caloriesum.' กิโลแคลอรี่'];
-                    
                     $ms = [
                     'type' => 'template',
                     'altText' => 'บันทึกรายการอาหารแล้ว',
                     'template' => array(
                     'type' => 'buttons',
-                    'title' => 'บันทึกรายการอาหารแล้ว'.$repast,
+                    'title' => 'บันทึกรายการอาหารแล้ว',
                     'text' => 'ต้องการบันทึกเพิ่มเติมหรือไม่',
                     'actions' => array(
                     array(
@@ -462,7 +456,7 @@ if (!is_null($events['events']))
                 else if ($confirm_food[0] == "enough") {
                     
                     // delete req
-                    $req->delete_req($userId);
+                    // $req->delete_req($userId);
                     //delete
                     $obdata->deletepostback($userId);
                     // สรุปรายการ
