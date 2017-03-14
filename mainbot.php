@@ -87,7 +87,7 @@ if (!is_null($events['events']))
             else
             {
                 //  select menu    ****************************************
-                if ($text == "เมนู") {
+                if ($text == "เมนู" || $obdata->getpostback($userId) == "menu") {
                     // || $text == "พอแล้ว"
                     $displayname = $user->get_displayname($userId);
                     
@@ -480,9 +480,6 @@ if (!is_null($events['events']))
 
                     ออกจากเมนูการบันทึกแล้ว'];
                     
-                    // $ms = [
-                    // 'type' => 'text',
-                    // 'text' => 'ออกจากเมนูการบันทึกแล้ว'];
                     
                     $client->replyMessage(
                     array(
@@ -490,6 +487,10 @@ if (!is_null($events['events']))
                     'messages' => [$ms_summary]
                     )
                     );
+
+                    // set postback
+                    $obdata->setpostback($userId,'menu');
+
                 }
                 
                 // -----------------------------------------------------------------------------------------------------------------------------
