@@ -347,6 +347,8 @@ if (!is_null($events['events']))
                     'messages' => [$messagess]
                     )
                     );
+                    // //delete
+                    $obdata->deletepostback($userId);
                 }
                 
                 // no_confirm_food
