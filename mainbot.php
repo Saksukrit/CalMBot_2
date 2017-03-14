@@ -448,9 +448,10 @@ if (!is_null($events['events']))
                     )
                     );
                     
-                    
+                    // set postback
+                    $obdata->setpostback($userId,'food');
                     // change postback
-                    $obdata->changepostback($userId,'food');
+                    // $obdata->changepostback($userId,'food');
                     
                 }
                 
