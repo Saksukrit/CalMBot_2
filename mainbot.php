@@ -81,6 +81,8 @@ if (!is_null($events['events']))
                 'messages' => [$ms]
                 )
                 );
+
+                $req->save_repast($userId,$text);
             }
             
             // user
