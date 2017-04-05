@@ -35,16 +35,16 @@ $obdata = new Postback;
 //
 if (!is_null($events['events']))
 {
-    
+
     foreach ($events['events'] as $event)
     {
         // get save postback
         if ($event['type'] == 'postback') {
-            
+
             $datapostback = $event['postback']['data'];
             $userIdpostback = $event['source']['userId'];
             $obdata->setpostback($userIdpostback,$datapostback);
-            
+
         }
         if (($event['type'] == 'message')&& $event['message']['type'] == 'text')
         {
@@ -52,13 +52,13 @@ if (!is_null($events['events']))
             $text = $event['message']['text'];
             // Get replyToken
             $replyToken = $event['replyToken'];
-            
+
             $userId = $event['source']['userId'];
-            
+
             //
             $text_type = explode(' ', $text);
             $confirm_food = explode(' ',$obdata->getpostback($userId));
-            
+
             // condition to class food check
             $user = new User;
             // $checkfood = new FoodCheck;
@@ -66,25 +66,46 @@ if (!is_null($events['events']))
             $searchfood = new Searchfood;
             $searchexercise = new Searchexercise;
             $req = new Req_manage;
-            
+
             // check user maping id
             $checkuser = $user->get_userId($userId);
             if ($checkuser == "null") {
-                $ms = [
-                'type' => 'text',
-                'text' => 'สวัสดี คุณคือใคร
-                กรุณายืนยันตัวตนด้วย Username ของคุณ'];
-                
+
+                $ms2 = [
+                'type' => 'template',
+                'altText' => 'เมนูการใช้งาน',
+                'template' => array(
+                'type' => 'buttons',
+                'title' => 'สวัสดี คุณคือใคร',
+                'text' => 'กรุณาเลือกยืนยันตัวตนด้วย Username ของคุณ
+                หรือ เลือกสมัครบัญชีใหม่',
+                'actions' => array(
+                array(
+                'type' => 'postback',
+                'label' => 'ยืนยันตัวตน',
+                'data' => 'user_confirm',
+                'text' => 'ต้องการยืนยันตัวตน')
+                ,array(
+                'type' => 'postback',
+                'label' => 'สมัครบัญชีใหม',
+                'data' => 'register',
+                'text' => 'ต้องการสมัครบัญชีใหม')
+                )
+                )
+                ];
+
+                //register or user_confirm
+
                 $client->replyMessage(
                 array(
                 'replyToken' => $event['replyToken'],
-                'messages' => [$ms]
+                'messages' => [$ms2]
                 )
                 );
 
-                $req->save_repast($userId,$text);
+                // $req->save_repast($userId,$text);
             }
-            
+
             // user
             else
             {
@@ -92,7 +113,7 @@ if (!is_null($events['events']))
                 if ($text == "เมนู" || $obdata->getpostback($userId) == "menu") {
                     // || $text == "พอแล้ว"
                     $displayname = $user->get_displayname($userId);
-                    
+
                     // $ms1 = [
                     // 'type' => 'text',
                     // 'text' => 'สวัสดี '.$displayname.'
@@ -101,7 +122,7 @@ if (!is_null($events['events']))
                     // 2.ค้นหาข้อมูลอาหาร
                     // 3.ค้นหาข้อมูลการออกกำลังกาย
                     // 4.ดูข้อมูลผู้ใช้'];
-                    
+
                     $ms2 = [
                     'type' => 'template',
                     'altText' => 'เมนูการใช้งาน',
@@ -134,7 +155,7 @@ if (!is_null($events['events']))
                     )
                     )
                     ];
-                    
+
                     // send
                     $client->replyMessage(
                     array(
@@ -143,7 +164,7 @@ if (!is_null($events['events']))
                     )
                     );
                 }
-                
+
                 // ***********  Food_save  ************************************************************************************
                 // select repast
                 else if ($obdata->getpostback($userId) == "save_dialy") {
@@ -157,16 +178,16 @@ if (!is_null($events['events']))
                         // if null => create food_dialy
                         $food_dialy->save_food_dialy($get_userId,date('Y-m-d'));
                     }
-                    
-                    
+
+
                     //delete
                     $obdata->deletepostback($userId);
-                    
+
                     $save_dialy = [
                     'type' => 'template',
                     'altText' => 'บันทึกมื้ออาหาร',
                     'template' => array(
-                    
+
                     'type' => 'buttons',
                     'title' => 'บันทึกมื้ออาหาร',
                     'text' => 'เลือกมื้ออาหารที่ต้องการ ',
@@ -201,39 +222,39 @@ if (!is_null($events['events']))
                     )
                     );
                 }
-                
+
                 //มื้อเช้า   ------------------------------------
                 //postback repast
                 else if ($obdata->getpostback($userId) == "repast") {
-                    
+
                     $req->save_repast($userId,$text);
-                    
+
                     $ms_repast = [
                     'type' => 'text',
                     'text' => 'คุณทานอะไรมา'. $text];
-                    
+
                     $client->replyMessage(
                     array(
                     'replyToken' => $event['replyToken'],
                     'messages' => [$ms_repast]
                     )
                     );
-                    
-                    
+
+
                     // change postback
                     $obdata->changepostback($userId,'food');
                     // //delete
                     // $obdata->deletepostback($userId);
-                    
+
                 }
-                
+
                 // search for save
                 // show list food by name
                 else if (($searchfood->searchfood_forsave($text) != "null") && ($obdata->getpostback($userId) == "food")) {
-                    
+
                     $ms_array = array();
                     $ms_array = $searchfood->searchfood_forsave($text);
-                    
+
                     if (count($ms_array) == 1) {
                         $client->replyMessage(
                         array(
@@ -258,16 +279,16 @@ if (!is_null($events['events']))
                     }
                     // //delete
                     $obdata->deletepostback($userId);
-                    
+
                 }
-                
+
                 // number of foods
                 else if ($obdata->getpostback($userId) == "food_selected") {
                     //
                     $req->save_food($userId,$text);
                     // $food = $req->get_food($userId);
                     $unittext = $searchfood->get_unit($text);
-                    
+
                     $ms_food = [
                     'type' => 'template',
                     'altText' => 'จำนวน',
@@ -294,19 +315,19 @@ if (!is_null($events['events']))
                     )
                     )
                     ];
-                    
+
                     $client->replyMessage(
                     array(
                     'replyToken' => $event['replyToken'],
                     'messages' => [$ms_food]
                     )
                     );
-                    
+
                     // //delete
                     $obdata->deletepostback($userId);
-                    
+
                 }
-                
+
                 // confirm save
                 else if ($obdata->getpostback($userId) == "num_food") {
                     $req->save_unit($userId,$text);
@@ -316,7 +337,7 @@ if (!is_null($events['events']))
                     $unittext = $searchfood->get_unit($food);
                     $calorie = $searchfood->get_calorie($food);
                     $caloriesum = $unit * $calorie;
-                    
+
                     $messagess = [
                     "type"=> "template",
                     "altText"=> "ยืนยันรายการ",
@@ -349,18 +370,18 @@ if (!is_null($events['events']))
                     // //delete
                     $obdata->deletepostback($userId);
                 }
-                
+
                 // no_confirm_food
                 else if ($obdata->getpostback($userId) == "no_confirm_food") {
                     // delete req
                     $req->delete_req($userId);
                     //delete
                     $obdata->deletepostback($userId);
-                    
+
                     $ms = [
                     'type' => 'text',
                     'text' => 'ยกเลิก ออกจากเมนูการบันทึกแล้ว'];
-                    
+
                     $client->replyMessage(
                     array(
                     'replyToken' => $event['replyToken'],
@@ -368,29 +389,29 @@ if (!is_null($events['events']))
                     )
                     );
                 }
-                
+
                 // confirm_food
                 else if ($obdata->getpostback($userId) == "confirm_food") {
-                    
+
                     // get data from Req_manage
                     $food = $req->get_food($userId);
                     $unit = intval($req->get_unit($userId));
                     $unittext = $searchfood->get_unit($food);
                     $calorie = $searchfood->get_calorie($food);
                     $caloriesum = $unit * $calorie;
-                    
+
                     $repast = $req->get_repast($userId);
                     // if to eng repast     Breakfast  Lunch  Dinner  Supper
-                    
+
                     // get userId
                     $get_userId = $user->get_userId($userId);
                     // get dialyId
                     $get_food_dialyId = $food_dialy->check_food_dialy($get_userId,date('Y-m-d'));
-                    
+
                     // save food_dialy list
                     $food_dialy->save_food_dialy_list($get_food_dialyId,$food,$unit,$caloriesum,$repast);
-                    
-                    
+
+
                     $ms = [
                     'type' => 'template',
                     'altText' => 'บันทึกรายการอาหารแล้ว',
@@ -412,14 +433,14 @@ if (!is_null($events['events']))
                     )
                     )
                     ];
-                    
+
                     $client->replyMessage(
                     array(
                     'replyToken' => $event['replyToken'],
                     'messages' => [$ms]
                     )
                     );
-                    
+
                     // $total_calorie;
                     // update
                     // $food_dialy->update_total_calorie($get_food_dialyId,$total_calorie);
@@ -428,35 +449,35 @@ if (!is_null($events['events']))
                     // delete request
                     $req->delete_req($userId);
                 }
-                
+
                 // more save
                 else if ($confirm_food[0] == "more") {
                     //delete
                     $obdata->deletepostback($userId);
-                    
+
                     $req->save_repast($userId,$confirm_food[1]);
-                    
+
                     $ms_repast = [
                     'type' => 'text',
                     'text' => 'คุณทานอะไรเพิ่มอีก'. $text];
-                    
+
                     $client->replyMessage(
                     array(
                     'replyToken' => $event['replyToken'],
                     'messages' => [$ms_repast]
                     )
                     );
-                    
+
                     // set postback
                     $obdata->setpostback($userId,'food');
                     // change postback
                     // $obdata->changepostback($userId,'food');
-                    
+
                 }
-                
+
                 // enough save
                 else if ($confirm_food[0] == "enough") {
-                    
+
                     // delete req
                     // $req->delete_req($userId);
                     //delete
@@ -466,14 +487,14 @@ if (!is_null($events['events']))
                     $get_userId = $user->get_userId($userId);
                     // get dialyId
                     $get_food_dialyId = $food_dialy->check_food_dialy($get_userId,date('Y-m-d'));
-                    
+
                     // get repast calorie
                     $calorie_repast = $food_dialy->get_repast_calorie($get_food_dialyId,$confirm_food[1]);
                     // get summary calorie
                     $calorie_all = $food_dialy->get_all_calorie($get_food_dialyId);
                     // update summary calorie
                     $food_dialy->update_total_calorie($get_food_dialyId,$calorie_all);
-                    
+
                     $ms_summary = [
                     'type' => 'text',
                     'text' => 'สรุปรายการของ'.$confirm_food[1].'
@@ -481,8 +502,8 @@ if (!is_null($events['events']))
                     เท่ากับ '.$calorie_repast.' กิโลแคลอรี่
 
                     ออกจากเมนูการบันทึกแล้ว'];
-                    
-                    
+
+
                     $client->replyMessage(
                     array(
                     'replyToken' => $event['replyToken'],
@@ -494,15 +515,15 @@ if (!is_null($events['events']))
                     // $obdata->setpostback($userId,'menu');
 
                 }
-                
+
                 // -----------------------------------------------------------------------------------------------------------------------------
-                
+
                 // ************  search food *****************************************************************************************************
                 // search_food
                 else if ($text == "ค้นหาข้อมูลอาหาร") {
                     // //delete
                     $obdata->deletepostback($userId);
-                    
+
                     $ms_menu_search = [
                     'type' => 'template',
                     'altText' => 'ค้นหาข้อมูลอาหาร',
@@ -529,7 +550,7 @@ if (!is_null($events['events']))
                     )
                     )
                     ];
-                    
+
                     $client->replyMessage(
                     array(
                     'replyToken' => $event['replyToken'],
@@ -537,7 +558,7 @@ if (!is_null($events['events']))
                     )
                     );
                 }
-                
+
                 // search food by name ++++++++++++++++++++++++++++++++++
                 else if ($obdata->getpostback($userId) == "searchfood_byname") {
                     // change postback
@@ -545,7 +566,7 @@ if (!is_null($events['events']))
                     $ms_foodname = [
                     'type' => 'text',
                     'text' => 'บอกชื่ออาหารที่ต้องการ'];
-                    
+
                     $client->replyMessage(
                     array(
                     'replyToken' => $event['replyToken'],
@@ -553,13 +574,13 @@ if (!is_null($events['events']))
                     )
                     );
                 }
-                
+
                 // show list food by name
                 else if (($obdata->getpostback($userId) == "foodname_to_search") && ($searchfood->searchfood_byname($text) != "null")) {
-                    
+
                     $ms_array = array();
                     $ms_array = $searchfood->searchfood_byname($text);
-                    
+
                     if (count($ms_array) == 1) {
                         $client->replyMessage(
                         array(
@@ -584,15 +605,15 @@ if (!is_null($events['events']))
                     }
                     // //delete
                     $obdata->deletepostback($userId);
-                    
+
                 }
-                
+
                 // search food by calorie ++++++++++++++++++++++++++++++++++
                 else if ($text == "ค้นหาโดยปริมาณพลังงาน") {
                     $ms_foodcalorie = [
                     'type' => 'text',
                     'text' => 'บอกปริมาณพลังงานสูงสุดที่ต้องการ'];
-                    
+
                     $client->replyMessage(
                     array(
                     'replyToken' => $event['replyToken'],
@@ -604,10 +625,10 @@ if (!is_null($events['events']))
                 else if ($searchfood->searchfood_bycalorie($text) != "null") {
                     // //delete
                     $obdata->deletepostback($userId);
-                    
+
                     $ms_array = array();
                     $ms_array = $searchfood->searchfood_bycalorie($text);
-                    
+
                     if (count($ms_array) == 1) {
                         $client->replyMessage(
                         array(
@@ -630,14 +651,14 @@ if (!is_null($events['events']))
                         )
                         );
                     }
-                    
+
                 }
-                
+
                 // search food by type ++++++++++++++++++++++++++++++++++
                 else if ($text == "ค้นหาโดยชนิดอาหาร") {
                     // //delete
                     $obdata->deletepostback($userId);
-                    
+
                     $ms_search_type = [
                     'type' => 'template',
                     'altText' => 'ค้นหาข้อมูลอาหาร',
@@ -675,10 +696,10 @@ if (!is_null($events['events']))
                 else if ($searchfood->searchfood_bytype($text) != "null") {
                     // //delete
                     $obdata->deletepostback($userId);
-                    
+
                     $ms_array = array();
                     $ms_array = $searchfood->searchfood_bytype($text);
-                    
+
                     if (count($ms_array) == 1) {
                         $client->replyMessage(
                         array(
@@ -701,16 +722,16 @@ if (!is_null($events['events']))
                         )
                         );
                     }
-                    
+
                 }
-                
+
                 // -------------------------------------------------------------------------
                 // ค้นหาข้อมูลการออกกำลังกาย
                 // ************  search exercise *****************************************************************************************************
                 else if ($text == "ค้นหาข้อมูลการออกกำลังกาย") {
                     // //delete
                     $obdata->deletepostback($userId);
-                    
+
                     $ms_menu_search = [
                     'type' => 'template',
                     'altText' => 'ค้นหาข้อมูลการออกกำลังกาย',
@@ -732,7 +753,7 @@ if (!is_null($events['events']))
                     )
                     )
                     ];
-                    
+
                     $client->replyMessage(
                     array(
                     'replyToken' => $event['replyToken'],
@@ -740,16 +761,16 @@ if (!is_null($events['events']))
                     )
                     );
                 }
-                
+
                 // search exercise by calorie ++++++++++++++++++++++++++++++++++
                 else if ($text == "พลังงานที่เผาพลาญ") {
                     // //delete
                     $obdata->deletepostback($userId);
-                    
+
                     $ms_foodcalorie = [
                     'type' => 'text',
                     'text' => 'บอกปริมาณพลังงานสูงสุดที่ต้องการ'];
-                    
+
                     $client->replyMessage(
                     array(
                     'replyToken' => $event['replyToken'],
@@ -759,10 +780,10 @@ if (!is_null($events['events']))
                 }
                 // show list exercise by calorie
                 else if (($text_type[0] == "สูงสุด") && ($searchexercise->searchexercise_bycalorie($text_type[1]) != "null")) {
-                    
+
                     $ms_array = array();
                     $ms_array = $searchexercise->searchexercise_bycalorie($text_type[1]);
-                    
+
                     if (count($ms_array) == 1) {
                         $client->replyMessage(
                         array(
@@ -785,15 +806,15 @@ if (!is_null($events['events']))
                         )
                         );
                     }
-                    
+
                 }
-                
+
                 //
                 // search exercise by type ++++++++++++++++++++++++++++++++++
                 else if ($text == "ชนิดการออกกำลังกาย") {
                     // //delete
                     $obdata->deletepostback($userId);
-                    
+
                     $ms_menu_search = [
                     'type' => 'template',
                     'altText' => 'เลือกชนิดการออกกำลังกาย',
@@ -820,7 +841,7 @@ if (!is_null($events['events']))
                     )
                     )
                     ];
-                    
+
                     $client->replyMessage(
                     array(
                     'replyToken' => $event['replyToken'],
@@ -832,10 +853,10 @@ if (!is_null($events['events']))
                 else if ($searchexercise->searchexercise_bytype($text) != "null") {
                     // //delete
                     $obdata->deletepostback($userId);
-                    
+
                     $ms_array = array();
                     $ms_array = $searchexercise->searchexercise_bytype($text);
-                    
+
                     if (count($ms_array) == 1) {
                         $client->replyMessage(
                         array(
@@ -858,17 +879,17 @@ if (!is_null($events['events']))
                         )
                         );
                     }
-                    
+
                 }
-                
+
                 // ดูข้อมูลผู้ใช้
                 // get profile
                 else if ($text == "ดูข้อมูลผู้ใช้") {
-                    
+
                     $ms_profile = $user->get_profile($userId);
                     //delete
                     $obdata->deletepostback($userId);
-                    
+
                     $client->replyMessage(
                     array(
                     'replyToken' => $event['replyToken'],
@@ -876,15 +897,15 @@ if (!is_null($events['events']))
                     )
                     );
                 }
-                
-                
+
+
                 // -----------------------------------------------------------------------------------------------------------------------------
-                
+
                 // else if ($text == "เพิ่มอีก") {
                 //     $ms_con = [
                 //     'type' => 'text',
                 //     'text' => 'ยังไม่สามารถ'];
-                
+
                 //     $client->replyMessage(
                 //     array(
                 //     'replyToken' => $event['replyToken'],
@@ -892,11 +913,11 @@ if (!is_null($events['events']))
                 //     )
                 //     );
                 // }
-                
-                
+
+
                 // ********************************************************************************
-                
-                
+
+
                 //
                 //
                 // other
@@ -906,7 +927,7 @@ if (!is_null($events['events']))
                     'text' => 'ขอโทษ ฉันไม่เข้าใจ'];
                 }
                 /*-------------------------------------------  Make a POST  -----------------------------------------*/
-                
+
                 // Make a POST Request to Messaging API to reply to sender
                 $url = 'https://api.line.me/v2/bot/message/reply';
                 $data = [
@@ -915,7 +936,7 @@ if (!is_null($events['events']))
                 ];
                 $post = json_encode($data);
                 $headers = array('Content-Type: application/json', 'Authorization: Bearer ' . $access_token);
-                
+
                 $ch = curl_init($url);
                 curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "POST");
                 curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
@@ -924,7 +945,7 @@ if (!is_null($events['events']))
                 curl_setopt($ch, CURLOPT_FOLLOWLOCATION, 1);
                 $result = curl_exec($ch);
                 curl_close($ch);
-                
+
                 echo $result . "\r\n";
             }
         }
