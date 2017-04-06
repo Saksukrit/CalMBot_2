@@ -13,6 +13,7 @@ include 'search_food.php';
 include 'search_exercise.php';
 include 'postback.php';
 include 'req_manage.php';
+include 'register.php';
 // use LINE\LINEBot\HTTPClient;
 // use LINE\LINEBot\MessageBuilder;
 //
@@ -66,11 +67,13 @@ if (!is_null($events['events']))
             $searchfood = new Searchfood;
             $searchexercise = new Searchexercise;
             $req = new Req_manage;
+            $register = new Register;
 
             // check user maping id
             $checkuser = $user->get_userId($userId);
             if ($checkuser == "null") {
 
+              if ($register->checkmodle($userId) == "null") {
                 $ms2 = [
                 'type' => 'template',
                 'altText' => 'เมนูการใช้งาน',
@@ -80,16 +83,16 @@ if (!is_null($events['events']))
                 'text' => 'กรุณาเลือกยืนยันตัวตนด้วย Username ของคุณ
                 หรือ เลือกสมัครบัญชีใหม่',
                 'actions' => array(
-                array(
+                  array(
+                  'type' => 'postback',
+                  'label' => 'สมัครบัญชีใหม',
+                  'data' => 'register',
+                  'text' => 'ต้องการสมัครบัญชีใหม')
+                ,array(
                 'type' => 'postback',
                 'label' => 'ยืนยันตัวตน',
                 'data' => 'user_confirm',
                 'text' => 'ต้องการยืนยันตัวตน')
-                ,array(
-                'type' => 'postback',
-                'label' => 'สมัครบัญชีใหม',
-                'data' => 'register',
-                'text' => 'ต้องการสมัครบัญชีใหม')
                 )
                 )
                 ];
@@ -102,11 +105,19 @@ if (!is_null($events['events']))
                 'messages' => [$ms2]
                 )
                 );
+              }
+
+              // userid had in database
+              else {
+                # code...
+              }
+
+
 
                 // $req->save_repast($userId,$text);
             }
 
-            // user
+            // pass user maping id  ****************************-*----------------------*******************************************************
             else
             {
                 //  select menu    ****************************************
