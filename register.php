@@ -52,51 +52,10 @@ class Register
   # code...
   }
 
-  public function update_username($username)
-  {
-    # code...
-  }
-
-  public function update_password($password)
-  {
-    # code...
-  }
-
-  public function update_displayname($displayname,$userid_line)
-  {
-    # code...
-  }
-
-  public function update_gender($gender,$userid_line)
-  {
-    # code...
-  }
-
-  public function update_weight($weight,$userid_line)
-  {
-    # code...
-  }
-
-  public function update_height($height,$userid_line)
-  {
-    # code...
-  }
-
-  public function update_age($age,$userid_line)
-  {
-    # code...
-  }
-
-  public function getdata_modle($userid_line)
-  {
-    # code...
-  }
-
   public function get_username_password($userid_line)
   {
     # code...
   }
-
 
   public function new_register($userid_line)
   {

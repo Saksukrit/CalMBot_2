@@ -13,7 +13,7 @@ include 'search_food.php';
 include 'search_exercise.php';
 include 'postback.php';
 include 'req_manage.php';
-include 'register.php';
+// include 'register.php';
 // use LINE\LINEBot\HTTPClient;
 // use LINE\LINEBot\MessageBuilder;
 //
