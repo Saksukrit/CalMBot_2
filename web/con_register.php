@@ -1,5 +1,5 @@
 <?php
-include_once 'dbcon.php';
+include_once '../dbcon.php';
 
 
 class Register
@@ -42,13 +42,16 @@ class Register
     $db->CloseCon($conn);
   }
 
-  public function check_username($username)
+  public function check_username_password($input)
   {
-  # code...
-  }
-
-  public function check_password($password)
-  {
+    if (strlen($input) < 8 || strlen($input) > 16) {
+      return "incorrect";
+    }else if (!preg_match("/^[a-zA-Z0-9 ]+$/",$input)) {
+      return "incorrect";
+    }
+    else {
+      return "correct";
+    }
   # code...
   }
 
@@ -61,6 +64,25 @@ class Register
   {
     // get_username_password($userid_line);
 
+    $db = new Dbcon;
+    $conn = $db->OpenCon();
+    $sql = "INSERT INTO User (username, password, typeUser) VALUES ('$username', '$password', 'U')";
+
+    if ($conn->query($sql) === TRUE)
+    {
+      echo "New create successfully";
+      return "success";
+    }
+    else
+    {
+      echo "Error: " . $sql . "<br>" . $conn->error;
+      return "fail create";
+    }
+    $db->CloseCon($conn);
+  }
+
+  public function create_account($username,$password)
+  {
     $db = new Dbcon;
     $conn = $db->OpenCon();
     $sql = "INSERT INTO User (username, password, typeUser) VALUES ('$username', '$password', 'U')";
