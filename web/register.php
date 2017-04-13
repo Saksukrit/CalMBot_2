@@ -7,7 +7,7 @@ $register = new Register;
  ?>
 
     <head>
-        <title>Ui kits Website Template | Home :: w3layouts</title>
+        <title>Cal.MBot Register</title>
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
         <link href="css/style.css" rel="stylesheet" type="text/css" media="all">
@@ -57,12 +57,19 @@ $register = new Register;
 
           // pass all condition -> add to DB
           else {
-            $register->create_account($_POST["username"],$_POST["password"]);
-            detail_page();
+            if (  $register->create_account($_POST["username"],$_POST["password"]) == "success") {
+              detail_page();
+            }else {
+              register_page(null,null,null);
+            }
           }
         }
+        elseif (isset($_POST["clear"])) {
+          detail_page();
+        }
         else {
-          register_page(null,null,null);
+          // register_page(null,null,null);
+          detail_page();
         }
         ?>
         </div>
@@ -116,13 +123,21 @@ function detail_page()
         <h3>User Detail</h3>
         <form name="detail" method="post" action="register.php">
             <span>
-              <input type="text" name="username" id="txt_username" placeholder="Enter username" >
+              <input type="text" name="displayname" id="displayname" placeholder="displayname" >
             </span>
             <span>
-              <input type="password" placeholder="Enter password">
+              <input type="radio" name="gender" value="male" checked> Male &nbsp&nbsp&nbsp&nbsp&nbsp
+              <input type="radio" name="gender" value="female"> Female
+            </span>
+
+            <span>
+              <input type="text" name="weight" id="weight" placeholder="weight (kg.)" >
             </span>
             <span>
-              <input type="password" placeholder="Enter confirm password">
+              <input type="text" name="height" id="height" placeholder="height (cm.)" >
+            </span>
+            <span>
+              <input type="text" name="age" id="displayname" placeholder="age" >
             </span>
             <button type="submit" class="btn btn-warning btn-lg " name="clear" value="clear">Clear</button>
             <button type="submit" class="btn btn-success btn-lg" name="save" value="save">Save</button>

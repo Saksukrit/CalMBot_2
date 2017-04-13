@@ -60,10 +60,10 @@ class Register
     # code...
   }
 
-  public function new_register($userid_line)
-  {
-    // get_username_password($userid_line);
 
+
+  public function create_account($username,$password)
+  {
     $db = new Dbcon;
     $conn = $db->OpenCon();
     $sql = "INSERT INTO User (username, password, typeUser) VALUES ('$username', '$password', 'U')";
@@ -81,8 +81,9 @@ class Register
     $db->CloseCon($conn);
   }
 
-  public function create_account($username,$password)
+  public function create_userdetail($userid_line)
   {
+
     $db = new Dbcon;
     $conn = $db->OpenCon();
     $sql = "INSERT INTO User (username, password, typeUser) VALUES ('$username', '$password', 'U')";

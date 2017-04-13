@@ -90,6 +90,20 @@ body{
     -webkit-apperance:none;
     font-family: 'ambleregular';
 }
+
+ input[type="radio"]{
+  padding:10px;
+    color:#FFF;
+    font-size:1em;
+    background:none;
+    outline:none;
+    border:none;
+    margin:0px auto;
+    width:75%;
+    -webkit-apperance:none;
+    font-family: 'ambleregular';
+}
+
 .newsletter input[type="submit"],.sign_in input[type="submit"]{
  padding:15px 2.5em;
  color:#FFF;
