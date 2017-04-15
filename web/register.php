@@ -58,18 +58,71 @@ $register = new Register;
           // pass all condition -> add to DB
           else {
             if (  $register->create_account($_POST["username"],$_POST["password"]) == "success") {
-              detail_page();
+              $userid ="null";
+              $userid = $register->get_userID($_POST["username"]);
+              if ($userid != "null") {
+                if ($register->create_userdetail($userid) == "success") {
+                  echo '<script type="text/javascript">alert("Register Success")</script>';
+                  detail_page($userid);
+                }
+              }
             }else {
               register_page(null,null,null);
             }
           }
         }
-        elseif (isset($_POST["clear"])) {
-          detail_page();
+        else if (isset($_POST["clear"])) {
+          echo '<script type="text/javascript">alert("'.$_POST["clear"].'")</script>';
+          detail_page($_POST["clear"]);
+        }else if (isset($_POST["save"])) {
+          // check txt username null
+          if ($_POST["displayname"] == null) {
+            echo '<script type="text/javascript">alert("กรุณาใส่ displayname")</script>';
+            detail_page($_POST["save"]);
+          }
+          // check_displayname
+          else if ($register->check_displayname($_POST["displayname"]) == "incorrect") {
+            echo '<script type="text/javascript">alert("displayname ผิดข้อกำหนด \n *อนุญาตเฉพาะ a-z A-Z \n * ความยาว 8-16 ตัวอักษร")</script>';
+            detail_page($_POST["save"]);
+          }
+          // check txt weight null
+          else if ($_POST["weight"] == null) {
+            echo '<script type="text/javascript">alert("กรุณาใส่น้ำหนัก")</script>';
+            detail_page($_POST["save"]);
+          }
+          // check_num
+          else if ($register->check_num($_POST["weight"]) == "incorrect") {
+            echo '<script type="text/javascript">alert("*อนุญาตเฉพาะตัวเลข*")</script>';
+            detail_page($_POST["save"]);
+          }
+          // check txt height null
+          else if ($_POST["height"] == null) {
+            echo '<script type="text/javascript">alert("กรุณาใส่ส่วนสูง")</script>';
+            detail_page($_POST["save"]);
+          }
+          // check_num
+          else if ($register->check_num($_POST["height"]) == "incorrect") {
+            echo '<script type="text/javascript">alert("*อนุญาตเฉพาะตัวเลข*")</script>';
+            detail_page($_POST["save"]);
+          }
+          // check txt age null
+          else if ($_POST["bday"] == null || $_POST["bday"] == "วว/ดด/ปปปป") {
+            echo '<script type="text/javascript">alert("กรุณาใส่อายุ")</script>';
+            detail_page($_POST["save"]);
+          }else {
+            $age = $register->calculate_age($_POST["bday"]);
+            $bmr = $register->calculate_bmr($_POST["gender"],$_POST["weight"],$_POST["height"],$age);
+            $tdee = $register->calculate_tdee($bmr,$_POST["activity"]);
+            if ($register->update_userdetail($_POST["save"],$_POST["displayname"],$_POST["gender"],$_POST["weight"],$_POST["height"],$age,$bmr,$tdee) == "success") {
+              complete();
+            }else {
+              detail_page($_POST["save"]);
+            }
+          }
         }
         else {
-          // register_page(null,null,null);
-          detail_page();
+          register_page(null,null,null);
+          // detail_page("18");
         }
         ?>
         </div>
@@ -82,7 +135,7 @@ $register = new Register;
 function register_page($username,$password,$confirm_password)
 {
 ?>
-    <h3>Register</h3>
+    <h3><b>Register</b></h3>
     <form name="register" method="post" action="register.php">
         <span>
           <i><img src="images/user.png" alt=""></i>
@@ -117,7 +170,7 @@ function register_page($username,$password,$confirm_password)
     <?php
 }
 
-function detail_page()
+function detail_page($userid)
 {
   ?>
         <h3>User Detail</h3>
@@ -126,8 +179,8 @@ function detail_page()
               <input type="text" name="displayname" id="displayname" placeholder="displayname" >
             </span>
             <span>
-              <input type="radio" name="gender" value="male" checked> Male &nbsp&nbsp&nbsp&nbsp&nbsp
-              <input type="radio" name="gender" value="female"> Female
+              <input type="radio" name="gender" value="Male" checked> Male &nbsp&nbsp&nbsp&nbsp&nbsp
+              <input type="radio" name="gender" value="Female"> Female
             </span>
 
             <span>
@@ -137,10 +190,22 @@ function detail_page()
               <input type="text" name="height" id="height" placeholder="height (cm.)" >
             </span>
             <span>
-              <input type="text" name="age" id="displayname" placeholder="age" >
+              <h5>birthday</h5><input type="date" name="bday" min="1900-01-02">
             </span>
-            <button type="submit" class="btn btn-warning btn-lg " name="clear" value="clear">Clear</button>
-            <button type="submit" class="btn btn-success btn-lg" name="save" value="save">Save</button>
+            <div class="form-group">
+                <label for="inputEmail" class="col-lg-3 control-label">Activity</label>
+                <div class="col-lg-3">
+                    <select id="Activity" class="form-control" name="activity">
+				                  <option selected="selected" value="0">ไม่ออกกำลังกายหรือออกกำลังกายน้อยมาก</option>
+				                  <option value="1">ออกกำลังกายน้อยเล่นกีฬา 1-3 วัน/สัปดาห์</option>
+				                  <option value="2">ออกกำลังกายปานกลางเล่นกีฬา 3-5 วัน/สัปดาห์</option>
+				                  <option value="3">ออกกำลังกายหนักเล่นกีฬา 6-7 วัน/สัปดาห์</option>
+				                  <option value="4">ออกกำลังกายหนักมากเป็นนักกีฬา</option>
+				            </select>
+                </div>
+            </div>
+            <?php  echo '<button type="submit" class="btn btn-warning btn-lg " name="clear" value="'.$userid.'">Clear</button>'; ?>
+            <?php  echo '<button type="submit" class="btn btn-success btn-lg" name="save" value="'.$userid.'">Save</button>'; ?>
         </form>
         <h4><a href="" onclick="self.close()">Back to LINE</a></h4>
         <?php

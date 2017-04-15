@@ -91,7 +91,7 @@ body{
     font-family: 'ambleregular';
 }
 
- input[type="radio"]{
+ .column_right_grid input[type="radio"],.column_right_grid input[type="date"]{
   padding:10px;
     color:#FFF;
     font-size:1em;
@@ -161,6 +161,6 @@ body{
  -o-border-radius: 5px 5px 0 0;
 }
 
-.sign_in h4{
+.sign_in h3{
  margin-top:20px;
 }
