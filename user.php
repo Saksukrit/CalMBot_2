@@ -23,11 +23,11 @@ class User
         $db->CloseCon($conn);
     }
 
-    public function get_userId($userId)
+    public function get_userId($userid_line)
     {
         $db = new Dbcon;
         $conn = $db->OpenCon();
-        $sql = "SELECT userID FROM Udetail WHERE userid_line = '$userId'";
+        $sql = "SELECT userID FROM Udetail WHERE userid_line = '$userid_line'";
         $result = $conn->query($sql);
 
         if ($result->num_rows > 0) {

@@ -40,13 +40,13 @@ if (!is_null($events['events']))
     foreach ($events['events'] as $event)
     {
         // get save postback
-        if ($event['type'] == 'postback') {
-
-            $datapostback = $event['postback']['data'];
-            $userIdpostback = $event['source']['userId'];
-            $obdata->setpostback($userIdpostback,$datapostback);
-
-        }
+        // if ($event['type'] == 'postback') {
+        //
+        //     $datapostback = $event['postback']['data'];
+        //     $userIdpostback = $event['source']['userId'];
+        //     $obdata->setpostback($userIdpostback,$datapostback);
+        //
+        // }
         if (($event['type'] == 'message')&& $event['message']['type'] == 'text')
         {
             // Get text sent
@@ -90,7 +90,7 @@ if (!is_null($events['events']))
               else {
                 $ms2 = [
                 'type' => 'template',
-                'altText' => 'เมนูการใช้งาน',
+                'altText' => 'สวัสดี คุณคือใคร',
                 'template' => array(
                 'type' => 'buttons',
                 'title' => 'สวัสดี คุณคือใคร',
