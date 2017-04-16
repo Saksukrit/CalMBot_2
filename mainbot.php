@@ -57,7 +57,7 @@ if (!is_null($events['events']))
 
             //
             $text_type = explode(' ', $text);
-            $confirm_food = explode(' ',$obdata->getpostback($userId));
+            // $confirm_food = explode(' ',$obdata->getpostback($userId));
 
             // condition to class food check
             $user = new User;

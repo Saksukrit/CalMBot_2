@@ -44,7 +44,7 @@ if (!is_null($arrJson['events'])) {
       $text = $event['message']['text'];
 
       $text_type = explode(' ', $text);
-      $confirm_food = explode(' ',$obdata->getpostback($userId));
+      // $confirm_food = explode(' ',$obdata->getpostback($userId));
 
       $user = new User;
       $food_dialy = new Food_save;
