@@ -19,6 +19,9 @@ $strUrl = "https://api.line.me/v2/bot/message/reply";
 // datapostback
 $data = array();
 
+//Postback
+$obdata = new Postback;
+
 if (!is_null($arrJson['events'])) {
   foreach ($arrJson['events'] as $event) {
 
@@ -44,7 +47,7 @@ if (!is_null($arrJson['events'])) {
       $text = $event['message']['text'];
 
       $text_type = explode(' ', $text);
-      // $confirm_food = explode(' ',$obdata->getpostback($userId));
+      $confirm_food = explode(' ',$obdata->getpostback($userId));
 
       $user = new User;
       $food_dialy = new Food_save;
