@@ -32,7 +32,7 @@ if($arrJson['events'][0]['message']['text'] == "สวัสดี"){
   'text' => "ขอโทษ ฉันไม่เข้าใจ"];
   $arrPostData = array();
   $arrPostData['replyToken'] = $arrJson['events'][0]['replyToken'];
-  $arrPostData['messages'] = $messages;
+  $arrPostData['messages'][0] = $messages;
   // $arrPostData['messages'][0]['type'] = "text";
   // $arrPostData['messages'][0]['text'] = "ฉันไม่เข้าใจคำสั่ง";
 }
@@ -48,5 +48,7 @@ curl_setopt($ch, CURLOPT_RETURNTRANSFER,true);
 curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
 $result = curl_exec($ch);
 curl_close ($ch);
+
+echo "OK";
 
 ?>
