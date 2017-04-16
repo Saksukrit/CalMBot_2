@@ -108,11 +108,12 @@ if (!is_null($arrJson['events'])) {
               'text' => 'กรุณาเลือกยืนยันตัวตนด้วย Username ของคุณ
               หรือ เลือกสมัครบัญชีใหม่',
               'actions' => array(
+                // array(
+                //   'type' => 'uri',
+                //   'label' => 'สมัครบัญชีใหม',
+                //   'uri' => 'https://arcane-sands-19975.herokuapp.com/web/register.php')
+                // ,
                 array(
-                  'type' => 'uri',
-                  'label' => 'สมัครบัญชีใหม',
-                  'uri' => 'https://arcane-sands-19975.herokuapp.com/web/register.php')
-                ,array(
                   'type' => 'postback',
                   'label' => 'ยืนยันตัวตน',
                   'data' => 'user_confirm:ต้องการยืนยันตัวตน')
@@ -123,7 +124,8 @@ if (!is_null($arrJson['events'])) {
 
           $data['replyToken'] = $replyToken;
           $data['messages'][0] = $ms;
-        }else {
+        }
+        else {
 
 
           if($text == "สวัสดี"){
