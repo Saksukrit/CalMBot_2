@@ -92,8 +92,7 @@ if (!is_null($arrJson['events'])) {
             array(
               'type' => 'postback',
               'label' => 'บันทึกมื้ออาหาร',
-              'data' => 'save_dialy',
-              'text' => 'บันทึกมื้ออาหาร')
+              'data' => 'save_dialy')
             ,array(
               'type' => 'postback',
               'label' => 'ข้อมูลอาหาร',
