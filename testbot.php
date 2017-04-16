@@ -62,7 +62,7 @@ $result = curl_exec($ch);
 curl_close ($ch);
 
 // test push by date
-if (date('Y-m-d H:i') == "2017-04-16 19:50") {
+if (date('Y-m-d') == "2017-04-16") {
   $strUrl = "https://api.line.me/v2/bot/message/push";
   $arrPostData = array();
   $arrPostData['to'] = "U223a593a6474192e91019c67a657ab7f";
