@@ -169,6 +169,8 @@ class Register
 
   }
 
+
+
    public function calculate_age($bday)
   { $bday = date("m/d/Y",strtotime($bday));
     // mm/dd/yyyy

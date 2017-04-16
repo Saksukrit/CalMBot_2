@@ -31,13 +31,19 @@ if (!is_null($arrJson['events'])) {
 
       // get replyToken
       $replyToken = $event['replyToken'];
-
       $datapostback = $event['postback']['data'];
       $userIdpostback = $event['source']['userId'];
-      // $obdata->setpostback($userIdpostback,$datapostback);
+
       $text_type = explode(':', $datapostback);
       $key = $text_type[0];
       $value = $text_type[1];
+      if ($key == "user_confirm") {
+        $obdata->setpostback($userIdpostback,$key);
+        $data['replyToken'] = $replyToken;
+        $data['messages'][0]['type'] = "text";
+        $data['messages'][0]['text'] = $value;
+      }
+
 
 
       $data['replyToken'] = $replyToken;
@@ -79,6 +85,19 @@ if (!is_null($arrJson['events'])) {
             'type' => 'text',
             'text' => 'กรุณากรอก Username ของคุณ'. $text];
           }
+          else if ($obdata->getpostback($userId) == "user_confirm") {
+            if ($user->update_userid_line($text,$userid_line) == "success") {
+              $displayname = $user->get_displayname($userId);
+              $ms = [
+              'type' => 'text',
+              'text' => 'ยืนยันตัวตนสำเร็จ คุณ'.$displayname];
+              $obdata->deletepostback($userId);
+            }else {
+              $ms = [
+              'type' => 'text',
+              'text' => 'ยืนยันตัวตนไม่สำเร็จ กรุณาลองอีกครั้ง'];
+            }
+          }
           else {
             $ms = [
             'type' => 'template',
@@ -94,10 +113,9 @@ if (!is_null($arrJson['events'])) {
                   'label' => 'สมัครบัญชีใหม',
                   'uri' => 'https://arcane-sands-19975.herokuapp.com/web/register.php')
                 ,array(
-                  'type' => 'text',
+                  'type' => 'postback',
                   'label' => 'ยืนยันตัวตน',
-            // 'data' => 'user_confirm',
-                  'text' => 'ต้องการยืนยันตัวตน')
+                  'data' => 'user_confirm:ต้องการยืนยันตัวตน')
                 )
               )
             ];
@@ -105,46 +123,45 @@ if (!is_null($arrJson['events'])) {
 
           $data['replyToken'] = $replyToken;
           $data['messages'][0] = $ms;
-        }
+        }else {
 
 
-        if($text == "สวัสดี"){
-          $data['replyToken'] = $replyToken;
-          $data['messages'][0]['type'] = "text";
-          $data['messages'][0]['text'] = "สวัสดี ID คุณคือ ".$arrJson['events'][0]['source']['userId'];
-        }else if($text == "ชื่ออะไร"){
-          $data['replyToken'] = $replyToken;
-          $data['messages'][0]['type'] = "text";
-          $data['messages'][0]['text'] = "ฉันยังไม่มีชื่อนะ";
-        }else if($text == "หลายอัน"){
-          $data['replyToken'] = $replyToken;
-          $data['messages'][0]['type'] = "text";
-          $data['messages'][0]['text'] = "ฉันทำอะไรไม่ได้เลย คุณต้องสอนฉันอีกเยอะ";
-        }else{
-          $ms = [
-          'type' => 'template',
-          'altText' => 'เมนูการใช้งาน',
-          'template' => array(
-            'type' => 'buttons',
-            'title' => 'เมนูการใช้งาน',
-            'text' => 'สวัสดี
-            เมนูการใช้งาน',
-            'actions' => array(
-              array(
-                'type' => 'postback',
-                'label' => 'บันทึกมื้ออาหาร',
-                'data' => 'save_dialy:บันทึกมื้ออาหาร')
+          if($text == "สวัสดี"){
+            $data['replyToken'] = $replyToken;
+            $data['messages'][0]['type'] = "text";
+            $data['messages'][0]['text'] = "สวัสดี ID คุณคือ ".$arrJson['events'][0]['source']['userId'];
+          }else if($text == "ชื่ออะไร"){
+            $data['replyToken'] = $replyToken;
+            $data['messages'][0]['type'] = "text";
+            $data['messages'][0]['text'] = "ฉันยังไม่มีชื่อนะ";
+          }else if($text == "หลายอัน"){
+            $data['replyToken'] = $replyToken;
+            $data['messages'][0]['type'] = "text";
+            $data['messages'][0]['text'] = "ฉันทำอะไรไม่ได้เลย คุณต้องสอนฉันอีกเยอะ";
+          }else{
+            $ms = [
+            'type' => 'template',
+            'altText' => 'เมนูการใช้งาน',
+            'template' => array(
+              'type' => 'buttons',
+              'title' => 'เมนูการใช้งาน',
+              'text' => 'สวัสดี
+              เมนูการใช้งาน',
+              'actions' => array(
+                array(
+                  'type' => 'postback',
+                  'label' => 'บันทึกมื้ออาหาร',
+                  'data' => 'save_dialy:บันทึกมื้ออาหาร')
+                )
               )
-            )
-          ];
-          $messages = [
-          'type' => "text",
-          'text' => "ขอโทษ ฉันไม่เข้าใจ"];
+            ];
+            $messages = [
+            'type' => "text",
+            'text' => "ขอโทษ ฉันไม่เข้าใจ"];
 
-          $data['replyToken'] = $replyToken;
-          $data['messages'][0] = $ms;
-  // $arrPostData['messages'][0]['type'] = "text";
-  // $arrPostData['messages'][0]['text'] = "ฉันไม่เข้าใจคำสั่ง";
+            $data['replyToken'] = $replyToken;
+            $data['messages'][0] = $ms;
+          }
         }
 
       }
