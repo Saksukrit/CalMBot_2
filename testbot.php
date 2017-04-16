@@ -120,6 +120,9 @@ if (!is_null($arrJson['events'])) {
                 )
               )
             ];
+            $ms = [
+            'type' => 'text',
+            'text' => 'ลอง กรุณากรอก Username ของคุณ'. $text];
           }
 
           $data['replyToken'] = $replyToken;
