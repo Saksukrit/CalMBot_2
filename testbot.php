@@ -75,7 +75,7 @@ if (!is_null($arrJson['events'])) {
         'template' => array(
         'type' => 'buttons',
         'title' => 'เมนูการใช้งาน',
-        'text' => 'สวัสดี '.$displayname.'
+        'text' => 'สวัสดี
         เมนูการใช้งาน',
         'actions' => array(
         array(
