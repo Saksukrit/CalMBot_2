@@ -26,17 +26,22 @@ if (!is_null($arrJson['events'])) {
   foreach ($arrJson['events'] as $event) {
 
     // get save postback
-    // if ($event['type'] == 'postback') {
-    //
-    //     $datapostback = $event['postback']['data'];
-    //     $userIdpostback = $event['source']['userId'];
-    //     $obdata->setpostback($userIdpostback,$datapostback);
-    //
-    // }
+    if ($event['type'] == 'postback') {
+
+      $datapostback = $event['postback']['data'];
+      $userIdpostback = $event['source']['userId'];
+        // $obdata->setpostback($userIdpostback,$datapostback);
+
+        $data['replyToken'] = $replyToken;
+        $data['messages'][0]['type'] = "text";
+        $data['messages'][0]['text'] = $datapostback." : ".$userIdpostback;
+
+
+    }
 
 
     // messages_back
-    if ($event['type'] == 'message' && $event['message']['type'] == 'text') {
+    else if ($event['type'] == 'message' && $event['message']['type'] == 'text') {
 
 
     // get replyToken
@@ -47,7 +52,7 @@ if (!is_null($arrJson['events'])) {
       $text = $event['message']['text'];
 
       $text_type = explode(' ', $text);
-      $confirm_food = explode(' ',$obdata->getpostback($userId));
+      // $confirm_food = explode(' ',$obdata->getpostback($userId));
 
       $user = new User;
       $food_dialy = new Food_save;
@@ -76,33 +81,33 @@ if (!is_null($arrJson['events'])) {
         'type' => 'template',
         'altText' => 'เมนูการใช้งาน',
         'template' => array(
-        'type' => 'buttons',
-        'title' => 'เมนูการใช้งาน',
-        'text' => 'สวัสดี
-        เมนูการใช้งาน',
-        'actions' => array(
-        array(
-        'type' => 'postback',
-        'label' => 'บันทึกมื้ออาหาร',
-        'data' => 'save_dialy',
-        'text' => 'บันทึกมื้ออาหาร')
-        ,array(
-        'type' => 'postback',
-        'label' => 'ข้อมูลอาหาร',
-        'data' => 'search_food',
-        'text' => 'ค้นหาข้อมูลอาหาร')
-        ,array(
-        'type' => 'postback',
-        'label' => 'ข้อมูลออกกำลังกาย',
-        'data' => 'search_exercise',
-        'text' => 'ค้นหาข้อมูลการออกกำลังกาย')
-        ,array(
-        'type' => 'postback',
-        'label' => 'ดูข้อมูลผู้ใช้',
-        'data' => 'get_profile',
-        'text' => 'ดูข้อมูลผู้ใช้')
-        )
-        )
+          'type' => 'buttons',
+          'title' => 'เมนูการใช้งาน',
+          'text' => 'สวัสดี
+          เมนูการใช้งาน',
+          'actions' => array(
+            array(
+              'type' => 'postback',
+              'label' => 'บันทึกมื้ออาหาร',
+              'data' => 'save_dialy',
+              'text' => 'บันทึกมื้ออาหาร')
+            ,array(
+              'type' => 'postback',
+              'label' => 'ข้อมูลอาหาร',
+              'data' => 'search_food',
+              'text' => 'ค้นหาข้อมูลอาหาร')
+            ,array(
+              'type' => 'postback',
+              'label' => 'ข้อมูลออกกำลังกาย',
+              'data' => 'search_exercise',
+              'text' => 'ค้นหาข้อมูลการออกกำลังกาย')
+            ,array(
+              'type' => 'postback',
+              'label' => 'ดูข้อมูลผู้ใช้',
+              'data' => 'get_profile',
+              'text' => 'ดูข้อมูลผู้ใช้')
+            )
+          )
         ];
         $messages = [
         'type' => "text",
@@ -115,27 +120,27 @@ if (!is_null($arrJson['events'])) {
       }
 
 
-
+    }
 // Header
-      $arrHeader = array();
-      $arrHeader[] = "Content-Type: application/json";
-      $arrHeader[] = "Authorization: Bearer {$strAccessToken}";
+    $arrHeader = array();
+    $arrHeader[] = "Content-Type: application/json";
+    $arrHeader[] = "Authorization: Bearer {$strAccessToken}";
 
 // json_encode
-      $post = json_encode($data);
+    $post = json_encode($data);
 
-      $ch = curl_init();
-      curl_setopt($ch, CURLOPT_URL,$strUrl);
-      curl_setopt($ch, CURLOPT_HEADER, false);
-      curl_setopt($ch, CURLOPT_POST, true);
-      curl_setopt($ch, CURLOPT_HTTPHEADER, $arrHeader);
-      curl_setopt($ch, CURLOPT_POSTFIELDS, $post);
-      curl_setopt($ch, CURLOPT_RETURNTRANSFER,true);
-      curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
-      $result = curl_exec($ch);
-      curl_close ($ch);
+    $ch = curl_init();
+    curl_setopt($ch, CURLOPT_URL,$strUrl);
+    curl_setopt($ch, CURLOPT_HEADER, false);
+    curl_setopt($ch, CURLOPT_POST, true);
+    curl_setopt($ch, CURLOPT_HTTPHEADER, $arrHeader);
+    curl_setopt($ch, CURLOPT_POSTFIELDS, $post);
+    curl_setopt($ch, CURLOPT_RETURNTRANSFER,true);
+    curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
+    $result = curl_exec($ch);
+    curl_close ($ch);
 
-    }
+    // }
   }
 
 }
