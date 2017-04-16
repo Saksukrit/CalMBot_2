@@ -43,6 +43,17 @@ if (!is_null($arrJson['events'])) {
     // Get text sent
       $text = $event['message']['text'];
 
+      $text_type = explode(' ', $text);
+      $confirm_food = explode(' ',$obdata->getpostback($userId));
+
+      $user = new User;
+      $food_dialy = new Food_save;
+      $searchfood = new Searchfood;
+      $searchexercise = new Searchexercise;
+      $req = new Req_manage;
+
+
+
 
 
       if($text == "สวัสดี"){
@@ -58,13 +69,44 @@ if (!is_null($arrJson['events'])) {
         $data['messages'][0]['type'] = "text";
         $data['messages'][0]['text'] = "ฉันทำอะไรไม่ได้เลย คุณต้องสอนฉันอีกเยอะ";
       }else{
-
+        $ms2 = [
+        'type' => 'template',
+        'altText' => 'เมนูการใช้งาน',
+        'template' => array(
+        'type' => 'buttons',
+        'title' => 'เมนูการใช้งาน',
+        'text' => 'สวัสดี '.$displayname.'
+        เมนูการใช้งาน',
+        'actions' => array(
+        array(
+        'type' => 'postback',
+        'label' => 'บันทึกมื้ออาหาร',
+        'data' => 'save_dialy',
+        'text' => 'บันทึกมื้ออาหาร')
+        ,array(
+        'type' => 'postback',
+        'label' => 'ข้อมูลอาหาร',
+        'data' => 'search_food',
+        'text' => 'ค้นหาข้อมูลอาหาร')
+        ,array(
+        'type' => 'postback',
+        'label' => 'ข้อมูลออกกำลังกาย',
+        'data' => 'search_exercise',
+        'text' => 'ค้นหาข้อมูลการออกกำลังกาย')
+        ,array(
+        'type' => 'postback',
+        'label' => 'ดูข้อมูลผู้ใช้',
+        'data' => 'get_profile',
+        'text' => 'ดูข้อมูลผู้ใช้')
+        )
+        )
+        ];
         $messages = [
         'type' => "text",
         'text' => "ขอโทษ ฉันไม่เข้าใจ"];
 
         $data['replyToken'] = $replyToken;
-        $data['messages'][0] = $messages;
+        $data['messages'][0] = $ms2;
   // $arrPostData['messages'][0]['type'] = "text";
   // $arrPostData['messages'][0]['text'] = "ฉันไม่เข้าใจคำสั่ง";
       }
