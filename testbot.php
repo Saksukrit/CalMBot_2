@@ -8,6 +8,7 @@ include 'search_food.php';
 include 'search_exercise.php';
 include 'postback.php';
 include 'req_manage.php';
+include 'mg_push.php';
 
 $strAccessToken = "8RNNBRGbDOu0y/MAr0BnuajV46/YU3MVzA0rA4m4t6F1orO6PHx6b913ABPg3bR7TEvQO99XihXnZaPKVO/4VsQXLqs8LQZdmskXuwncFHyyQ824y7XOt9GLFJOgodw9zUS5/9qgrff265ZoTF3e9QdB04t89/1O/w1cDnyilFU=";
 
@@ -35,26 +36,17 @@ if (!is_null($arrJson['events'])) {
       $userIdpostback = $event['source']['userId'];
         // $obdata->setpostback($userIdpostback,$datapostback);
 
-        $strUrlpush = "https://api.line.me/v2/bot/message/push";
-          $arrPostData = array();
-          $arrPostData['to'] = $userIdpostback;
-          $arrPostData['messages'][0]['type'] = "text";
-          $arrPostData['messages'][0]['text'] = "นี้คือการทดสอบ Push Message";
+        // push_message
+        $push = new Push;
 
-          // Header
-              $arrHeader2 = array();
-              $arrHeader2[] = "Content-Type: application/json";
-              $arrHeader2[] = "Authorization: Bearer {$strAccessToken}";
-          $ch = curl_init();
-          curl_setopt($ch, CURLOPT_URL,$strUrlpush);
-          curl_setopt($ch, CURLOPT_HEADER, false);
-          curl_setopt($ch, CURLOPT_POST, true);
-          curl_setopt($ch, CURLOPT_HTTPHEADER, $arrHeader2);
-          curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($arrPostData));
-          curl_setopt($ch, CURLOPT_RETURNTRANSFER,true);
-          curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
-          $result = curl_exec($ch);
-          curl_close ($ch);
+        $strUrlpush = "https://api.line.me/v2/bot/message/push";
+          $pushdata = array();
+          $pushdata['to'] = $userIdpostback;
+          $pushdata['messages'][0]['type'] = "text";
+          $pushdata['messages'][0]['text'] = " Push Message : ".$datapostback;
+
+          $push->push_message($pushdata,$strAccessToken);
+
 
       $data['replyToken'] = $replyToken;
       $data['messages'][0]['type'] = "text";
