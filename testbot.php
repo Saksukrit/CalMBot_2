@@ -85,19 +85,19 @@ if (!is_null($arrJson['events'])) {
             'type' => 'text',
             'text' => 'กรุณากรอก Username ของคุณ'. $text];
           }
-          // else if ($obdata->getpostback($userId) == "user_confirm") {
-          //   if ($user->update_userid_line($text,$userId) == "success") {
-          //     $displayname = $user->get_displayname($userId);
-          //     $ms = [
-          //     'type' => 'text',
-          //     'text' => 'ยืนยันตัวตนสำเร็จ คุณ'.$displayname];
-          //     $obdata->deletepostback($userId);
-          //   }else {
-          //     $ms = [
-          //     'type' => 'text',
-          //     'text' => 'ยืนยันตัวตนไม่สำเร็จ กรุณาลองอีกครั้ง'];
-          //   }
-          // }
+          else if ($obdata->getpostback($userId) == "user_confirm") {
+            if ($user->update_userid_line($text,$userId) == "success") {
+              $displayname = $user->get_displayname($userId);
+              $ms = [
+              'type' => 'text',
+              'text' => 'ยืนยันตัวตนสำเร็จ คุณ'.$displayname];
+              $obdata->deletepostback($userId);
+            }else {
+              $ms = [
+              'type' => 'text',
+              'text' => 'ยืนยันตัวตนไม่สำเร็จ กรุณาลองอีกครั้ง'];
+            }
+          }
           else {
             $ms = [
             'type' => 'template',
@@ -105,14 +105,13 @@ if (!is_null($arrJson['events'])) {
             'template' => array(
               'type' => 'buttons',
               'title' => 'สวัสดี คุณคือใคร',
-              'text' => 'กรุณาเลือกยืนยันตัวตนด้วย Username ของคุณ
-              หรือ เลือกสมัครบัญชีใหม่',
+              'text' => 'กรุณาเลือก',
               'actions' => array(
-                // array(
-                //   'type' => 'uri',
-                //   'label' => 'สมัครบัญชีใหม',
-                //   'uri' => 'https://arcane-sands-19975.herokuapp.com/web/register.php')
-                // ,
+                array(
+                  'type' => 'uri',
+                  'label' => 'สมัครบัญชีใหม',
+                  'uri' => 'https://arcane-sands-19975.herokuapp.com/web/register.php')
+                ,
                 array(
                   'type' => 'postback',
                   'label' => 'ยืนยันตัวตน',
@@ -120,9 +119,7 @@ if (!is_null($arrJson['events'])) {
                 )
               )
             ];
-            $ms = [
-            'type' => 'text',
-            'text' => 'ลอง กรุณากรอก Username ของคุณ'. $text];
+
           }
 
           $data['replyToken'] = $replyToken;
