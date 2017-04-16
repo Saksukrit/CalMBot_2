@@ -73,7 +73,21 @@ if (!is_null($events['events']))
             $checkuser = $user->get_userId($userId);
             if ($checkuser == "null") {
 
-              if ($register->checkmodle($userId) == "null") {
+              if ($text == "ต้องการยืนยันตัวตน") {
+
+                $ms = [
+                'type' => 'text',
+                'text' => 'กรุณากรอก Username ของคุณ'. $text];
+
+                $client->replyMessage(
+                array(
+                'replyToken' => $event['replyToken'],
+                'messages' => [$ms]
+                )
+                );
+              }
+
+              else {
                 $ms2 = [
                 'type' => 'template',
                 'altText' => 'เมนูการใช้งาน',
@@ -84,21 +98,19 @@ if (!is_null($events['events']))
                 หรือ เลือกสมัครบัญชีใหม่',
                 'actions' => array(
                   array(
-                  'type' => 'postback',
+                  'type' => 'uri',
                   'label' => 'สมัครบัญชีใหม',
-                  'data' => 'register',
-                  'text' => 'ต้องการสมัครบัญชีใหม')
-                ,array(
-                'type' => 'postback',
-                'label' => 'ยืนยันตัวตน',
-                'data' => 'user_confirm',
-                'text' => 'ต้องการยืนยันตัวตน')
+                  'uri' => 'https://arcane-sands-19975.herokuapp.com/web/register.php')
+                  ,array(
+                  'type' => 'text',
+                  'label' => 'ยืนยันตัวตน',
+                  // 'data' => 'user_confirm',
+                  'text' => 'ต้องการยืนยันตัวตน')
                 )
                 )
                 ];
 
                 //register or user_confirm
-
                 $client->replyMessage(
                 array(
                 'replyToken' => $event['replyToken'],
@@ -108,15 +120,14 @@ if (!is_null($events['events']))
               }
 
               // userid had in database
-              else {
-                # code...
-              }
-
-
+              // else {
+              //   # code...
+              // }
 
                 // $req->save_repast($userId,$text);
             }
 
+            // =================================================================================================================================
             // pass user maping id  ****************************-*----------------------*******************************************************
             else
             {
