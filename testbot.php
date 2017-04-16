@@ -41,14 +41,9 @@ if (!is_null($arrJson['events'])) {
         $obdata->setpostback($userIdpostback,$key);
         $data['replyToken'] = $replyToken;
         $data['messages'][0]['type'] = "text";
-        $data['messages'][0]['text'] = $value;
+        $data['messages'][0]['text'] = "กรุณากรอก Username ของคุณ";
       }
 
-
-      //
-      // $data['replyToken'] = $replyToken;
-      // $data['messages'][0]['type'] = "text";
-      // $data['messages'][0]['text'] = $key." ".$value;
 
 
     }
@@ -80,12 +75,7 @@ if (!is_null($arrJson['events'])) {
         $checkuser = $user->get_userId($userId);
         if ($checkuser == "null") {
 
-          if ($text == "ต้องการยืนยันตัวตน") {
-            $ms = [
-            'type' => 'text',
-            'text' => 'กรุณากรอก Username ของคุณ'. $text];
-          }
-          else if ($obdata->getpostback($userId) == "user_confirm") {
+          if ($obdata->getpostback($userId) == "user_confirm") {
             if ($user->update_userid_line($text,$userId) == "success") {
               $displayname = $user->get_displayname($userId);
               $ms = [
