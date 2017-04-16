@@ -85,19 +85,19 @@ if (!is_null($arrJson['events'])) {
             'type' => 'text',
             'text' => 'กรุณากรอก Username ของคุณ'. $text];
           }
-          else if ($obdata->getpostback($userId) == "user_confirm") {
-            if ($user->update_userid_line($text,$userId) == "success") {
-              $displayname = $user->get_displayname($userId);
-              $ms = [
-              'type' => 'text',
-              'text' => 'ยืนยันตัวตนสำเร็จ คุณ'.$displayname];
-              $obdata->deletepostback($userId);
-            }else {
-              $ms = [
-              'type' => 'text',
-              'text' => 'ยืนยันตัวตนไม่สำเร็จ กรุณาลองอีกครั้ง'];
-            }
-          }
+          // else if ($obdata->getpostback($userId) == "user_confirm") {
+          //   if ($user->update_userid_line($text,$userId) == "success") {
+          //     $displayname = $user->get_displayname($userId);
+          //     $ms = [
+          //     'type' => 'text',
+          //     'text' => 'ยืนยันตัวตนสำเร็จ คุณ'.$displayname];
+          //     $obdata->deletepostback($userId);
+          //   }else {
+          //     $ms = [
+          //     'type' => 'text',
+          //     'text' => 'ยืนยันตัวตนไม่สำเร็จ กรุณาลองอีกครั้ง'];
+          //   }
+          // }
           else {
             $ms = [
             'type' => 'template',
