@@ -26,41 +26,21 @@ if($arrJson['events'][0]['message']['text'] == "สวัสดี"){
   $arrPostData['replyToken'] = $arrJson['events'][0]['replyToken'];
   $arrPostData['messages'][0]['type'] = "text";
   $arrPostData['messages'][0]['text'] = "ฉันทำอะไรไม่ได้เลย คุณต้องสอนฉันอีกเยอะ";
+}else if($arrJson['events'][0]['message']['text'] == "ลองสิ"){
+  $strUrl = "https://api.line.me/v2/bot/message/push";
+  $arrPostData = array();
+  $arrPostData['to'] = "U223a593a6474192e91019c67a657ab7f";
+  $arrPostData['messages'][0]['type'] = "text";
+  $arrPostData['messages'][0]['text'] = "นี้คือการทดสอบ Push Message";
 }else{
+
   $messages = [
   'type' => "text",
   'text' => "ขอโทษ ฉันไม่เข้าใจ"];
 
-  $ms_menu_search = [
-  'type' => 'template',
-  'altText' => 'เลือกชนิดการออกกำลังกาย',
-  'template' => array(
-  'type' => 'buttons',
-  'title' => 'เลือกชนิดการออกกำลังกาย',
-  'text' => 'กรุณาเลือก',
-  'actions' => array(
-  array(
-  'type' => 'postback',
-  'label' => 'Low',
-  'data' => 'Low',
-  'text' => 'Low')
-  ,array(
-  'type' => 'postback',
-  'label' => 'Moderate',
-  'data' => 'Moderate',
-  'text' => 'Moderate')
-  ,array(
-  'type' => 'postback',
-  'label' => 'High',
-  'data' => 'High',
-  'text' => 'High')
-  )
-  )
-  ];
-
   $arrPostData = array();
   $arrPostData['replyToken'] = $arrJson['events'][0]['replyToken'];
-  $arrPostData['messages'][0] = $ms_menu_search;
+  $arrPostData['messages'][0] = $messages;
   // $arrPostData['messages'][0]['type'] = "text";
   // $arrPostData['messages'][0]['text'] = "ฉันไม่เข้าใจคำสั่ง";
 }
