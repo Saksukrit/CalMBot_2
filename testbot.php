@@ -48,6 +48,18 @@ if($arrJson['events'][0]['message']['text'] == "สวัสดี"){
   // $arrPostData['messages'][0]['text'] = "ฉันไม่เข้าใจคำสั่ง";
 }
 
+// test push by date
+if (date('Y-m-d') == "2017-04-16") {
+  $strUrl = "https://api.line.me/v2/bot/message/push";
+  $arrPostData = array();
+  $arrPostData['to'] = "U223a593a6474192e91019c67a657ab7f";
+  $arrPostData['messages'][0]['type'] = "text";
+  $arrPostData['messages'][0]['text'] = "นี้คือการทดสอบ Push Message";
+}
+// if (date('Y-m-d H:i') == "2017-04-16 19:50") {
+//   # code...
+// }
+
 
 $ch = curl_init();
 curl_setopt($ch, CURLOPT_URL,$strUrl);
