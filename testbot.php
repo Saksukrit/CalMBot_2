@@ -6,8 +6,6 @@ $strAccessToken = "8RNNBRGbDOu0y/MAr0BnuajV46/YU3MVzA0rA4m4t6F1orO6PHx6b913ABPg3
 $content = file_get_contents('php://input');
 $arrJson = json_decode($content, true);
 
-// get replyToken
-// $replyToken = $arrJson['events'][0]['replyToken'];
 // url reply
 $strUrl = "https://api.line.me/v2/bot/message/reply";
 // datapostback
@@ -17,19 +15,20 @@ if (!is_null($arrJson['events'])) {
   foreach ($arrJson['events'] as $event) {
 
     // get replyToken
+    // $replyToken = $arrJson['events'][0]['replyToken'];
     $replyToken = $event['replyToken'];
 //   }
 //
 // }
-    if($arrJson['events'][0]['message']['text'] == "สวัสดี"){
+    if($event['message']['text'] == "สวัสดี"){
       $data['replyToken'] = $replyToken;
       $data['messages'][0]['type'] = "text";
       $data['messages'][0]['text'] = "สวัสดี ID คุณคือ ".$arrJson['events'][0]['source']['userId'];
-    }else if($arrJson['events'][0]['message']['text'] == "ชื่ออะไร"){
+    }else if($event['message']['text'] == "ชื่ออะไร"){
       $data['replyToken'] = $replyToken;
       $data['messages'][0]['type'] = "text";
       $data['messages'][0]['text'] = "ฉันยังไม่มีชื่อนะ";
-    }else if($arrJson['events'][0]['message']['text'] == "หลายอัน"){
+    }else if($event['message']['text'] == "หลายอัน"){
       $data['replyToken'] = $replyToken;
       $data['messages'][0]['type'] = "text";
       $data['messages'][0]['text'] = "ฉันทำอะไรไม่ได้เลย คุณต้องสอนฉันอีกเยอะ";
