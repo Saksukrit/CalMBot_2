@@ -34,23 +34,15 @@ if (!is_null($arrJson['events'])) {
 
       $datapostback = $event['postback']['data'];
       $userIdpostback = $event['source']['userId'];
-        // $obdata->setpostback($userIdpostback,$datapostback);
-
-        // push_message
-        $push = new Push;
-
-        $strUrlpush = "https://api.line.me/v2/bot/message/push";
-          $pushdata = array();
-          $pushdata['to'] = $userIdpostback;
-          $pushdata['messages'][0]['type'] = "text";
-          $pushdata['messages'][0]['text'] = " Push Message : ".$datapostback;
-
-          $push->push_message($pushdata,$strAccessToken);
+      // $obdata->setpostback($userIdpostback,$datapostback);
+      $text_type = explode(':', $datapostback);
+      $key = $text_type[0];
+      $value = $text_type[1];
 
 
       $data['replyToken'] = $replyToken;
       $data['messages'][0]['type'] = "text";
-      $data['messages'][0]['text'] = $datapostback;
+      $data['messages'][0]['text'] = $key." ".$value;
 
 
     }
@@ -107,7 +99,7 @@ if (!is_null($arrJson['events'])) {
               array(
                 'type' => 'postback',
                 'label' => 'บันทึกมื้ออาหาร',
-                'data' => 'save_dialy')
+                'data' => 'save_dialy:บันทึกมื้ออาหาร')
               ,array(
                 'type' => 'postback',
                 'label' => 'ข้อมูลอาหาร',
@@ -163,22 +155,15 @@ if (!is_null($arrJson['events'])) {
 }
 // test push by date
 // if (date('Y-m-d') == "2017-04-16") {
-//   $strUrl = "https://api.line.me/v2/bot/message/push";
-//   $arrPostData = array();
-//   $arrPostData['to'] = "U223a593a6474192e91019c67a657ab7f";
-//   $arrPostData['messages'][0]['type'] = "text";
-//   $arrPostData['messages'][0]['text'] = "นี้คือการทดสอบ Push Message";
+// // push_message
+// $push = new Push;
 //
-//   $ch = curl_init();
-//   curl_setopt($ch, CURLOPT_URL,$strUrl);
-//   curl_setopt($ch, CURLOPT_HEADER, false);
-//   curl_setopt($ch, CURLOPT_POST, true);
-//   curl_setopt($ch, CURLOPT_HTTPHEADER, $arrHeader);
-//   curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($arrPostData));
-//   curl_setopt($ch, CURLOPT_RETURNTRANSFER,true);
-//   curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
-//   $result = curl_exec($ch);
-//   curl_close ($ch);
+// $pushdata = array();
+// $pushdata['to'] = $userIdpostback;
+// $pushdata['messages'][0]['type'] = "text";
+// $pushdata['messages'][0]['text'] = " Push Message : ".$datapostback;
+//
+// $push->push_message($pushdata,$strAccessToken);
 // }
 
 echo "OK";
