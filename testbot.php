@@ -28,6 +28,9 @@ if (!is_null($arrJson['events'])) {
     // get save postback
     if ($event['type'] == 'postback') {
 
+      // get replyToken
+        $replyToken = $event['replyToken'];
+
       $datapostback = $event['postback']['data'];
       $userIdpostback = $event['source']['userId'];
         // $obdata->setpostback($userIdpostback,$datapostback);
