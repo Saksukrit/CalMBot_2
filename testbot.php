@@ -70,8 +70,42 @@ if (!is_null($arrJson['events'])) {
         $searchexercise = new Searchexercise;
         $req = new Req_manage;
 
+        // check user maping id
+        $checkuser = $user->get_userId($userId);
+        if ($checkuser == "null") {
 
+          if ($text == "ต้องการยืนยันตัวตน") {
+            $ms = [
+            'type' => 'text',
+            'text' => 'กรุณากรอก Username ของคุณ'. $text];
+          }
+          else {
+            $ms = [
+            'type' => 'template',
+            'altText' => 'สวัสดี คุณคือใคร',
+            'template' => array(
+              'type' => 'buttons',
+              'title' => 'สวัสดี คุณคือใคร',
+              'text' => 'กรุณาเลือกยืนยันตัวตนด้วย Username ของคุณ
+              หรือ เลือกสมัครบัญชีใหม่',
+              'actions' => array(
+                array(
+                  'type' => 'uri',
+                  'label' => 'สมัครบัญชีใหม',
+                  'uri' => 'https://arcane-sands-19975.herokuapp.com/web/register.php')
+                ,array(
+                  'type' => 'text',
+                  'label' => 'ยืนยันตัวตน',
+            // 'data' => 'user_confirm',
+                  'text' => 'ต้องการยืนยันตัวตน')
+                )
+              )
+            ];
+          }
 
+          $data['replyToken'] = $replyToken;
+          $data['messages'][0] = $ms;
+        }
 
 
         if($text == "สวัสดี"){
@@ -87,7 +121,7 @@ if (!is_null($arrJson['events'])) {
           $data['messages'][0]['type'] = "text";
           $data['messages'][0]['text'] = "ฉันทำอะไรไม่ได้เลย คุณต้องสอนฉันอีกเยอะ";
         }else{
-          $ms2 = [
+          $ms = [
           'type' => 'template',
           'altText' => 'เมนูการใช้งาน',
           'template' => array(
@@ -100,21 +134,6 @@ if (!is_null($arrJson['events'])) {
                 'type' => 'postback',
                 'label' => 'บันทึกมื้ออาหาร',
                 'data' => 'save_dialy:บันทึกมื้ออาหาร')
-              ,array(
-                'type' => 'postback',
-                'label' => 'ข้อมูลอาหาร',
-                'data' => 'search_food',
-                'text' => 'ค้นหาข้อมูลอาหาร')
-              ,array(
-                'type' => 'postback',
-                'label' => 'ข้อมูลออกกำลังกาย',
-                'data' => 'search_exercise',
-                'text' => 'ค้นหาข้อมูลการออกกำลังกาย')
-              ,array(
-                'type' => 'postback',
-                'label' => 'ดูข้อมูลผู้ใช้',
-                'data' => 'get_profile',
-                'text' => 'ดูข้อมูลผู้ใช้')
               )
             )
           ];
@@ -123,7 +142,7 @@ if (!is_null($arrJson['events'])) {
           'text' => "ขอโทษ ฉันไม่เข้าใจ"];
 
           $data['replyToken'] = $replyToken;
-          $data['messages'][0] = $ms2;
+          $data['messages'][0] = $ms;
   // $arrPostData['messages'][0]['type'] = "text";
   // $arrPostData['messages'][0]['text'] = "ฉันไม่เข้าใจคำสั่ง";
         }
