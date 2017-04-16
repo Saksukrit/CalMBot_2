@@ -30,9 +30,37 @@ if($arrJson['events'][0]['message']['text'] == "สวัสดี"){
   $messages = [
   'type' => "text",
   'text' => "ขอโทษ ฉันไม่เข้าใจ"];
+
+  $ms_menu_search = [
+  'type' => 'template',
+  'altText' => 'เลือกชนิดการออกกำลังกาย',
+  'template' => array(
+  'type' => 'buttons',
+  'title' => 'เลือกชนิดการออกกำลังกาย',
+  'text' => 'กรุณาเลือก',
+  'actions' => array(
+  array(
+  'type' => 'postback',
+  'label' => 'Low',
+  'data' => 'Low',
+  'text' => 'Low')
+  ,array(
+  'type' => 'postback',
+  'label' => 'Moderate',
+  'data' => 'Moderate',
+  'text' => 'Moderate')
+  ,array(
+  'type' => 'postback',
+  'label' => 'High',
+  'data' => 'High',
+  'text' => 'High')
+  )
+  )
+  ];
+
   $arrPostData = array();
   $arrPostData['replyToken'] = $arrJson['events'][0]['replyToken'];
-  $arrPostData['messages'][0] = $messages;
+  $arrPostData['messages'][0] = $ms_menu_search;
   // $arrPostData['messages'][0]['type'] = "text";
   // $arrPostData['messages'][0]['text'] = "ฉันไม่เข้าใจคำสั่ง";
 }
