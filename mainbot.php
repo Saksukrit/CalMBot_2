@@ -13,7 +13,6 @@ include 'search_food.php';
 include 'search_exercise.php';
 include 'postback.php';
 include 'req_manage.php';
-// include 'register.php';
 // use LINE\LINEBot\HTTPClient;
 // use LINE\LINEBot\MessageBuilder;
 //
@@ -67,7 +66,7 @@ if (!is_null($events['events']))
             $searchfood = new Searchfood;
             $searchexercise = new Searchexercise;
             $req = new Req_manage;
-            $register = new Register;
+            // $register = new Register;
 
             // check user maping id
             $checkuser = $user->get_userId($userId);

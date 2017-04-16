@@ -1,6 +1,14 @@
 <?php
 date_default_timezone_set('Asia/Bangkok');
 
+include 'food_check.php';
+include 'food_save.php';
+include 'user.php';
+include 'search_food.php';
+include 'search_exercise.php';
+include 'postback.php';
+include 'req_manage.php';
+
 $strAccessToken = "8RNNBRGbDOu0y/MAr0BnuajV46/YU3MVzA0rA4m4t6F1orO6PHx6b913ABPg3bR7TEvQO99XihXnZaPKVO/4VsQXLqs8LQZdmskXuwncFHyyQ824y7XOt9GLFJOgodw9zUS5/9qgrff265ZoTF3e9QdB04t89/1O/w1cDnyilFU=";
 
 $content = file_get_contents('php://input');
@@ -14,57 +22,75 @@ $data = array();
 if (!is_null($arrJson['events'])) {
   foreach ($arrJson['events'] as $event) {
 
+    // get save postback
+    // if ($event['type'] == 'postback') {
+    //
+    //     $datapostback = $event['postback']['data'];
+    //     $userIdpostback = $event['source']['userId'];
+    //     $obdata->setpostback($userIdpostback,$datapostback);
+    //
+    // }
+
+
+    // messages_back
+    if ($event['type'] == 'message' && $event['message']['type'] == 'text') {
+
+
     // get replyToken
-    // $replyToken = $arrJson['events'][0]['replyToken'];
-    $replyToken = $event['replyToken'];
-//   }
-//
-// }
-    if($event['message']['text'] == "สวัสดี"){
-      $data['replyToken'] = $replyToken;
-      $data['messages'][0]['type'] = "text";
-      $data['messages'][0]['text'] = "สวัสดี ID คุณคือ ".$arrJson['events'][0]['source']['userId'];
-    }else if($event['message']['text'] == "ชื่ออะไร"){
-      $data['replyToken'] = $replyToken;
-      $data['messages'][0]['type'] = "text";
-      $data['messages'][0]['text'] = "ฉันยังไม่มีชื่อนะ";
-    }else if($event['message']['text'] == "หลายอัน"){
-      $data['replyToken'] = $replyToken;
-      $data['messages'][0]['type'] = "text";
-      $data['messages'][0]['text'] = "ฉันทำอะไรไม่ได้เลย คุณต้องสอนฉันอีกเยอะ";
-    }else{
+      $replyToken = $event['replyToken'];
+    // get_userId
+      $userId = $event['source']['userId'];
+    // Get text sent
+      $text = $event['message']['text'];
 
-      $messages = [
-      'type' => "text",
-      'text' => "ขอโทษ ฉันไม่เข้าใจ"];
 
-      $data['replyToken'] = $replyToken;
-      $data['messages'][0] = $messages;
+
+      if($text == "สวัสดี"){
+        $data['replyToken'] = $replyToken;
+        $data['messages'][0]['type'] = "text";
+        $data['messages'][0]['text'] = "สวัสดี ID คุณคือ ".$arrJson['events'][0]['source']['userId'];
+      }else if($text == "ชื่ออะไร"){
+        $data['replyToken'] = $replyToken;
+        $data['messages'][0]['type'] = "text";
+        $data['messages'][0]['text'] = "ฉันยังไม่มีชื่อนะ";
+      }else if($text == "หลายอัน"){
+        $data['replyToken'] = $replyToken;
+        $data['messages'][0]['type'] = "text";
+        $data['messages'][0]['text'] = "ฉันทำอะไรไม่ได้เลย คุณต้องสอนฉันอีกเยอะ";
+      }else{
+
+        $messages = [
+        'type' => "text",
+        'text' => "ขอโทษ ฉันไม่เข้าใจ"];
+
+        $data['replyToken'] = $replyToken;
+        $data['messages'][0] = $messages;
   // $arrPostData['messages'][0]['type'] = "text";
   // $arrPostData['messages'][0]['text'] = "ฉันไม่เข้าใจคำสั่ง";
-    }
+      }
 
 
 
 // Header
-    $arrHeader = array();
-    $arrHeader[] = "Content-Type: application/json";
-    $arrHeader[] = "Authorization: Bearer {$strAccessToken}";
+      $arrHeader = array();
+      $arrHeader[] = "Content-Type: application/json";
+      $arrHeader[] = "Authorization: Bearer {$strAccessToken}";
 
 // json_encode
-    $post = json_encode($data);
+      $post = json_encode($data);
 
-    $ch = curl_init();
-    curl_setopt($ch, CURLOPT_URL,$strUrl);
-    curl_setopt($ch, CURLOPT_HEADER, false);
-    curl_setopt($ch, CURLOPT_POST, true);
-    curl_setopt($ch, CURLOPT_HTTPHEADER, $arrHeader);
-    curl_setopt($ch, CURLOPT_POSTFIELDS, $post);
-    curl_setopt($ch, CURLOPT_RETURNTRANSFER,true);
-    curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
-    $result = curl_exec($ch);
-    curl_close ($ch);
+      $ch = curl_init();
+      curl_setopt($ch, CURLOPT_URL,$strUrl);
+      curl_setopt($ch, CURLOPT_HEADER, false);
+      curl_setopt($ch, CURLOPT_POST, true);
+      curl_setopt($ch, CURLOPT_HTTPHEADER, $arrHeader);
+      curl_setopt($ch, CURLOPT_POSTFIELDS, $post);
+      curl_setopt($ch, CURLOPT_RETURNTRANSFER,true);
+      curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
+      $result = curl_exec($ch);
+      curl_close ($ch);
 
+    }
   }
 
 }
