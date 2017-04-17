@@ -300,65 +300,38 @@ if (!is_null($arrJson['events'])) {
           // if ($check == "true") {
           if ($text == "เมนู") {
             $displayname = $user->get_displayname($userId);
-// '.$displayname.'
-            $ms_menu = [
-            'type' => 'template',
-            'altText' => 'เมนูการใช้งาน',
-            'template' => array(
-              'type' => 'buttons',
-              'title' => 'เมนูการใช้งาน',
-              'text' => 'สวัสดี
-              เลือกเมนูที่ต้องการ',
-              'actions' => array(
-                array(
-                  'type' => 'messages',
-                  'label' => 'บันทึกมื้ออาหาร',
-                  'text' => 'บันทึกมื้ออาหาร')
-                ,array(
-                  'type' => 'postback',
-                  'label' => 'ข้อมูลอาหาร',
-                  'data' => 'search_food',
-                  'text' => 'ค้นหาข้อมูลอาหาร')
-                ,array(
-                  'type' => 'postback',
-                  'label' => 'ข้อมูลออกกำลังกาย',
-                  'data' => 'search_exercise',
-                  'text' => 'ค้นหาข้อมูลการออกกำลังกาย')
-                ,array(
-                  'type' => 'postback',
-                  'label' => 'ดูข้อมูลผู้ใช้',
-                  'data' => 'get_profile',
-                  'text' => 'ดูข้อมูลผู้ใช้')
-                )
-              )
-            ];
+
             // $messages = [
             // 'type' => "text",
             // 'text' => "ใช่ เมนู"];
             $messages = [
             'type' => 'template',
-            'altText' => 'บันทึกมื้ออาหาร',
+            'altText' => 'เมนูการใช้งาน',
             'template' => array(
               'type' => 'buttons',
-              'title' => 'บันทึกมื้ออาหาร',
-              'text' => 'เลือกมื้ออาหารที่ต้องการ ',
+              'title' => 'เมนูการใช้งาน',
+              'text' => 'สวัสดี'.$displayname.'
+              เลือกเมนูที่ต้องการ ',
               'actions' => array(
                 array(
-                  'type' => 'postback',
-                  'label' => 'มื้อเช้า',
-                  'data' => 'repast:มื้อเช้า')
-                ,array(
-                  'type' => 'postback',
-                  'label' => 'มื้อเที่ยง',
-                  'data' => 'repast:มื้อเที่ยง')
-                ,array(
-                  'type' => 'postback',
-                  'label' => 'มื้อเย็น',
-                  'data' => 'repast:มื้อเย็น')
-                ,array(
-                  'type' => 'postback',
-                  'label' => 'ระหว่างมื้อ',
-                  'data' => 'repast:ระหว่างมื้อ')
+                  'type' => 'messages',
+                  'label' => 'บันทึกมื้ออาหาร',
+                  'text' => 'บันทึกมื้ออาหาร')
+                  ,array(
+                    'type' => 'postback',
+                    'label' => 'ข้อมูลอาหาร',
+                    'data' => 'search_food',
+                    'text' => 'ค้นหาข้อมูลอาหาร')
+                  ,array(
+                    'type' => 'postback',
+                    'label' => 'ข้อมูลออกกำลังกาย',
+                    'data' => 'search_exercise',
+                    'text' => 'ค้นหาข้อมูลการออกกำลังกาย')
+                  ,array(
+                    'type' => 'postback',
+                    'label' => 'ดูข้อมูลผู้ใช้',
+                    'data' => 'get_profile',
+                    'text' => 'ดูข้อมูลผู้ใช้')
                 )
               )
             ];
