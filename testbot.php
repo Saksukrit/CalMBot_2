@@ -314,24 +314,20 @@ if (!is_null($arrJson['events'])) {
               เมนูการใช้งาน',
               'actions' => array(
                 array(
-                  'type' => 'postback',
+                  'type' => 'message',
                   'label' => 'บันทึกมื้ออาหาร',
-                  'data' => 'save_dialy',
                   'text' => 'บันทึกมื้ออาหาร')
                 ,array(
-                  'type' => 'postback',
+                  'type' => 'message',
                   'label' => 'ข้อมูลอาหาร',
-                  'data' => 'search_food',
                   'text' => 'ค้นหาข้อมูลอาหาร')
                 ,array(
-                  'type' => 'postback',
+                  'type' => 'message',
                   'label' => 'ข้อมูลออกกำลังกาย',
-                  'data' => 'search_exercise',
                   'text' => 'ค้นหาข้อมูลการออกกำลังกาย')
                 ,array(
-                  'type' => 'postback',
+                  'type' => 'message',
                   'label' => 'ดูข้อมูลผู้ใช้',
-                  'data' => 'get_profile',
                   'text' => 'ดูข้อมูลผู้ใช้')
                 )
               )
