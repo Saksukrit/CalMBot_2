@@ -335,9 +335,36 @@ if (!is_null($arrJson['events'])) {
             // $messages = [
             // 'type' => "text",
             // 'text' => "ใช่ เมนู"];
+            $messages = [
+            'type' => 'template',
+            'altText' => 'บันทึกมื้ออาหาร',
+            'template' => array(
+              'type' => 'buttons',
+              'title' => 'บันทึกมื้ออาหาร',
+              'text' => 'เลือกมื้ออาหารที่ต้องการ ',
+              'actions' => array(
+                array(
+                  'type' => 'postback',
+                  'label' => 'มื้อเช้า',
+                  'data' => 'repast:มื้อเช้า')
+                ,array(
+                  'type' => 'postback',
+                  'label' => 'มื้อเที่ยง',
+                  'data' => 'repast:มื้อเที่ยง')
+                ,array(
+                  'type' => 'postback',
+                  'label' => 'มื้อเย็น',
+                  'data' => 'repast:มื้อเย็น')
+                ,array(
+                  'type' => 'postback',
+                  'label' => 'ระหว่างมื้อ',
+                  'data' => 'repast:ระหว่างมื้อ')
+                )
+              )
+            ];
 
             $data['replyToken'] = $replyToken;
-            $data['messages'][0] = $ms_menu;
+            $data['messages'][0] = $messages;
 
           }
 
