@@ -25,6 +25,11 @@ $data = array();
 
 //Postback
 $obdata = new Postback;
+$user = new User;
+$food_dialy = new Food_save;
+$searchfood = new Searchfood;
+$searchexercise = new Searchexercise;
+$req = new Req_manage;
 
 if (!is_null($arrJson['events'])) {
   foreach ($arrJson['events'] as $event) {
@@ -84,11 +89,11 @@ if (!is_null($arrJson['events'])) {
         $text_type = explode(' ', $text);
       // $confirm_food = explode(' ',$obdata->getpostback($userId));
 
-        $user = new User;
-        $food_dialy = new Food_save;
-        $searchfood = new Searchfood;
-        $searchexercise = new Searchexercise;
-        $req = new Req_manage;
+        // $user = new User;
+        // $food_dialy = new Food_save;
+        // $searchfood = new Searchfood;
+        // $searchexercise = new Searchexercise;
+        // $req = new Req_manage;
 
         // =============================================================================
         // check user maping id
