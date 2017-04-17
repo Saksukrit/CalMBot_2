@@ -129,27 +129,27 @@ if (!is_null($arrJson['events'])) {
         else {
 
           // key_word cutting to action *****************************
-          function check_keyword($keyword,$word)
-          {
-            $segment = new Segment();
-            $result = $segment->get_segment_array($word);
-
-            $mapper = 0;
-            // loop mapping algorithm
-            for ($i=0; $i < count($result); $i++) {
-              if ($mapper < count($keyword)) {
-                if ($result[$i] == $keyword[$mapper]) {
-                  $mapper++;
-                }
-              }
-            }
-            // check mapper
-            if ($mapper == count($keyword)) {
-              return "true";
-            }else {
-              return "false";
-            }
-          }
+          // function check_keyword($keyword,$word)
+          // {
+          //   $segment = new Segment();
+          //   $result = $segment->get_segment_array($word);
+          //
+          //   $mapper = 0;
+          //   // loop mapping algorithm
+          //   for ($i=0; $i < count($result); $i++) {
+          //     if ($mapper < count($keyword)) {
+          //       if ($result[$i] == $keyword[$mapper]) {
+          //         $mapper++;
+          //       }
+          //     }
+          //   }
+          //   // check mapper
+          //   if ($mapper == count($keyword)) {
+          //     return "true";
+          //   }else {
+          //     return "false";
+          //   }
+          // }
 
           //  select menu    ****************************************
           // if ($text == "เมนู") {
