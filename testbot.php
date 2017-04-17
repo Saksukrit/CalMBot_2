@@ -10,6 +10,7 @@ include 'postback.php';
 include 'req_manage.php';
 include 'mg_push.php';
 include 'wordcut.php';
+include('THSplitLib/segment.php');
 
 
 $strAccessToken = "8RNNBRGbDOu0y/MAr0BnuajV46/YU3MVzA0rA4m4t6F1orO6PHx6b913ABPg3bR7TEvQO99XihXnZaPKVO/4VsQXLqs8LQZdmskXuwncFHyyQ824y7XOt9GLFJOgodw9zUS5/9qgrff265ZoTF3e9QdB04t89/1O/w1cDnyilFU=";
@@ -128,7 +129,7 @@ if (!is_null($arrJson['events'])) {
         else {
 
           // key_word cutting to action *****************************
-          $wordcut = new Wordcut;
+          // $wordcut = new Wordcut;
           // $keyword = explode(" ", "บันทึก มื้อ อาหาร");
           // if ($wordcut->check($keyword,$text) == "true") {
           //   # code...
@@ -137,7 +138,7 @@ if (!is_null($arrJson['events'])) {
           //  select menu    ****************************************
           // if ($text == "เมนู") {
           $keyword = explode(" ", "เมนู");
-          if ($wordcut->check($keyword,$text) == "true") {
+          if (check($keyword,$text) == "true") {
             // if ($text == "เมนู") {
             $displayname = $user->get_displayname($userId);
 
@@ -260,5 +261,30 @@ if (!is_null($arrJson['events'])) {
 // }
 
 echo "OK";
+
+function check($keyword,$word)
+{
+  $segment = new Segment();
+  $result = $segment->get_segment_array($word);
+
+
+  $mapper = 0;
+  // loop mapping algorithm
+    for ($i=0; $i < count($result); $i++) {
+      if ($mapper < count($keyword)) {
+        if ($result[$i] == $keyword[$mapper]) {
+          $mapper++;
+        }
+      }
+    }
+  // check mapper
+  if ($mapper == count($keyword)) {
+    return "true";
+  }else {
+    return "false";
+  }
+
+
+}
 
 ?>
