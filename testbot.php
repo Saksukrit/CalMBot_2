@@ -261,7 +261,8 @@ if (!is_null($arrJson['events'])) {
 
 
       // show list food by type
-      else if (($search = $searchfood->searchfood_bytype($key)) != "null") {
+      elseif ($key == "foodtype") {
+        $search = $searchfood->searchfood_bytype($value);
         $ms_array = array();
         $ms_array = $search;
         if (count($ms_array) == 1) {
@@ -577,15 +578,15 @@ if (!is_null($arrJson['events'])) {
                 array(
                   'type' => 'postback',
                   'label' => 'food',
-                  'data' => 'food:0')
+                  'data' => 'foodtype:food')
                 ,array(
                   'type' => 'postback',
                   'label' => 'dessert',
-                  'data' => 'dessert:0')
+                  'data' => 'foodtype:dessert')
                 ,array(
                   'type' => 'postback',
                   'label' => 'beverage',
-                  'data' => 'beverage:0')
+                  'data' => 'foodtype:beverage')
                 )
               )
             ];
