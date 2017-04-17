@@ -300,14 +300,14 @@ if (!is_null($arrJson['events'])) {
           // if ($check == "true") {
           if ($text == "เมนู") {
             $displayname = $user->get_displayname($userId);
-
+// '.$displayname.'
             $ms_menu = [
             'type' => 'template',
             'altText' => 'เมนูการใช้งาน',
             'template' => array(
               'type' => 'buttons',
               'title' => 'เมนูการใช้งาน',
-              'text' => 'สวัสดี '.$displayname.'
+              'text' => 'สวัสดี
               เลือกเมนูที่ต้องการ',
               'actions' => array(
                 array(
