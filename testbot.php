@@ -220,6 +220,26 @@ if (!is_null($arrJson['events'])) {
 
 
 
+
+      // show list exercise by calorie
+      else if ($key = "ecalorie") {
+        $ms_array = array();
+        $ms_array = $searchexercise->searchexercise_bytype($value);
+        if (count($ms_array) == 1) {
+          $data['replyToken'] = $replyToken;
+          $data['messages'][0] = $ms_array[0];
+        }elseif (count($ms_array) == 2) {
+          $data['replyToken'] = $replyToken;
+          $data['messages'][0] = $ms_array[0];
+          $data['messages'][1] = $ms_array[1];
+        }elseif (count($ms_array) == 3) {
+          $data['replyToken'] = $replyToken;
+          $data['messages'][0] = $ms_array[0];
+          $data['messages'][1] = $ms_array[1];
+          $data['messages'][2] = $ms_array[2];
+        }
+      }
+
     }
     // =============================================================================
 
@@ -301,9 +321,6 @@ if (!is_null($arrJson['events'])) {
           if ($text == "เมนู") {
             $displayname = $user->get_displayname($userId);
 
-            // $messages = [
-            // 'type' => "text",
-            // 'text' => "ใช่ เมนู"];
             $messages = [
             'type' => 'template',
             'altText' => 'เมนูการใช้งาน',
@@ -405,27 +422,117 @@ if (!is_null($arrJson['events'])) {
             }
 
           }
+          // -------------------------------------------------------------------------
+
+
+          // ค้นหาข้อมูลการออกกำลังกาย
+          // ************  search exercise *****************************************************************************************************
+          else if ($text == "ค้นหาข้อมูลการออกกำลังกาย") {
+            $ms_menu_search = [
+            'type' => 'template',
+            'altText' => 'ค้นหาข้อมูลการออกกำลังกาย',
+            'template' => array(
+              'type' => 'buttons',
+              'title' => 'ค้นหาข้อมูลการออกกำลังกาย',
+              'text' => 'ต้องการค้นหาแบบใด',
+              'actions' => array(
+                array(
+                  'type' => 'message',
+                  'label' => 'พลังงานที่เผาพลาญ',
+                  'text' => 'พลังงานที่เผาพลาญ')
+                ,array(
+                  'type' => 'message',
+                  'label' => 'ชนิดการออกกำลังกาย',
+                  'text' => 'ชนิดการออกกำลังกาย')
+                )
+              )
+            ];
+
+            $data['replyToken'] = $replyToken;
+            $data['messages'][0] = $ms_menu_search;
+          }
+          // search exercise by calorie ++++++++++++++++++++++++++++++++++
+          else if ($text == "พลังงานที่เผาพลาญ") {
+            $ms_foodcalorie = [
+            'type' => 'text',
+            'text' => 'บอกปริมาณพลังงานสูงสุดที่ต้องการ'];
+
+            $data['replyToken'] = $replyToken;
+            $data['messages'][0] = $ms_foodcalorie;
+          }
+          // show list exercise by calorie
+          else if (($text_type[0] == "สูงสุด") && ($searchexercise->searchexercise_bycalorie($text_type[1]) != "null")) {
+
+            $ms_array = array();
+            $ms_array = $searchexercise->searchexercise_bycalorie($text_type[1]);
+
+            if (count($ms_array) == 1) {
+              $data['replyToken'] = $replyToken;
+              $data['messages'][0] = $ms_array[0];
+            }elseif (count($ms_array) == 2) {
+              $data['replyToken'] = $replyToken;
+              $data['messages'][0] = $ms_array[0];
+              $data['messages'][1] = $ms_array[1];
+            }elseif (count($ms_array) == 3) {
+              $data['replyToken'] = $replyToken;
+              $data['messages'][0] = $ms_array[0];
+              $data['messages'][1] = $ms_array[1];
+              $data['messages'][3] = $ms_array[3];
+            }
+
+          }
+
+          //
+          // search exercise by type ++++++++++++++++++++++++++++++++++
+          else if ($text == "ชนิดการออกกำลังกาย") {
+
+            $ms_menu_search = [
+            'type' => 'template',
+            'altText' => 'เลือกชนิดการออกกำลังกาย',
+            'template' => array(
+              'type' => 'buttons',
+              'title' => 'เลือกชนิดการออกกำลังกาย',
+              'text' => 'กรุณาเลือก',
+              'actions' => array(
+                array(
+                  'type' => 'postback',
+                  'label' => 'Low',
+                  'data' => 'ecalorie:Low')
+                ,array(
+                  'type' => 'postback',
+                  'label' => 'Moderate',
+                  'data' => 'ecalorie:Moderate')
+                ,array(
+                  'type' => 'postback',
+                  'label' => 'High',
+                  'data' => 'ecalorie:High')
+                )
+              )
+            ];
+
+            $data['replyToken'] = $replyToken;
+            $data['messages'][0] = $ms_menu_search;
+          }
+          // ---------------------------------------------------------------
 
 
 
           else if($text == "สวัสดี"){
+            $messages = [
+            'type' => "text",
+            'text' => "สวัสดี ฉันคือ Cal.MBot ผู้ช่วยให้ข้อมูลและบันทึกข้อมูลเกี่ยวกับอาหารและการออกกำลังกาย"];
             $data['replyToken'] = $replyToken;
-            $data['messages'][0] = $ms;
+            $data['messages'][0] = $messages;
 
-          }else if($text == "ชื่ออะไร"){
+          }else if($text == "ดูข้อมูลผู้ใช้"){
+            $ms_profile = $user->get_profile($userId);
             $data['replyToken'] = $replyToken;
-            $data['messages'][0] = $ms;
+            $data['messages'][0] = $ms_profile;
 
-          }else if($text == "หลายอัน"){
-            $data['replyToken'] = $replyToken;
-            $data['messages'][0]['type'] = "text";
-            $data['messages'][0]['text'] = "ฉันทำอะไรไม่ได้เลย คุณต้องสอนฉันอีกเยอะ";
           }else{
-
             $messages = [
             'type' => "text",
             'text' => "ขอโทษ ฉันไม่เข้าใจ"];
-
             $data['replyToken'] = $replyToken;
             $data['messages'][0] = $messages;
           }
