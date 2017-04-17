@@ -10,7 +10,7 @@ include 'postback.php';
 include 'req_manage.php';
 include 'mg_push.php';
 include 'wordcut.php';
-include('THSplitLib/segment.php');
+include_once 'THSplitLib/segment.php';
 
 
 $strAccessToken = "8RNNBRGbDOu0y/MAr0BnuajV46/YU3MVzA0rA4m4t6F1orO6PHx6b913ABPg3bR7TEvQO99XihXnZaPKVO/4VsQXLqs8LQZdmskXuwncFHyyQ824y7XOt9GLFJOgodw9zUS5/9qgrff265ZoTF3e9QdB04t89/1O/w1cDnyilFU=";
@@ -270,13 +270,13 @@ function check($keyword,$word)
 
   $mapper = 0;
   // loop mapping algorithm
-    for ($i=0; $i < count($result); $i++) {
-      if ($mapper < count($keyword)) {
-        if ($result[$i] == $keyword[$mapper]) {
-          $mapper++;
-        }
+  for ($i=0; $i < count($result); $i++) {
+    if ($mapper < count($keyword)) {
+      if ($result[$i] == $keyword[$mapper]) {
+        $mapper++;
       }
     }
+  }
   // check mapper
   if ($mapper == count($keyword)) {
     return "true";
