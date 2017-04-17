@@ -261,24 +261,24 @@ if (!is_null($arrJson['events'])) {
 
 
       // show list food by type
-      elseif ($key == "foodtype") {
-        $search = $searchfood->searchfood_bytype($value);
-        $ms_array = array();
-        $ms_array = $search;
-        if (count($ms_array) == 1) {
-          $data['replyToken'] = $replyToken;
-          $data['messages'][0] = $ms_array[0];
-        }elseif (count($ms_array) == 2) {
-          $data['replyToken'] = $replyToken;
-          $data['messages'][0] = $ms_array[0];
-          $data['messages'][1] = $ms_array[1];
-        }elseif (count($ms_array) == 3) {
-          $data['replyToken'] = $replyToken;
-          $data['messages'][0] = $ms_array[0];
-          $data['messages'][1] = $ms_array[1];
-          $data['messages'][2] = $ms_array[2];
-        }
-      }
+      // else if ($key == "foodtype") {
+      //   $search = $searchfood->searchfood_bytype($value);
+      //   $ms_array = array();
+      //   $ms_array = $search;
+      //   if (count($ms_array) == 1) {
+      //     $data['replyToken'] = $replyToken;
+      //     $data['messages'][0] = $ms_array[0];
+      //   }elseif (count($ms_array) == 2) {
+      //     $data['replyToken'] = $replyToken;
+      //     $data['messages'][0] = $ms_array[0];
+      //     $data['messages'][1] = $ms_array[1];
+      //   }elseif (count($ms_array) == 3) {
+      //     $data['replyToken'] = $replyToken;
+      //     $data['messages'][0] = $ms_array[0];
+      //     $data['messages'][1] = $ms_array[1];
+      //     $data['messages'][2] = $ms_array[2];
+      //   }
+      // }
 
 
     }
@@ -566,7 +566,7 @@ if (!is_null($arrJson['events'])) {
 
           // search food by type ++++++++++++++++++++++++++++++++++
           else if ($text == "ค้นหาโดยชนิดอาหาร") {
-            // $obdata->setpostback($userId,"searchfood_bycalorie");
+            $obdata->setpostback($userId,"searchfood_bytype");
             $ms_search_type = [
             'type' => 'template',
             'altText' => 'ค้นหาข้อมูลอาหาร',
@@ -592,6 +592,26 @@ if (!is_null($arrJson['events'])) {
             ];
             $data['replyToken'] = $replyToken;
             $data['messages'][0] = $ms_search_type;
+          }
+          // show list food by type
+          else if (($obdata->getpostback($userId) == "searchfood_bytype") && (($search = $searchfood->searchfood_bytype($text)) != "null")) {
+            $ms_array = array();
+            $ms_array = $search;
+            if (count($ms_array) == 1) {
+              $data['replyToken'] = $replyToken;
+              $data['messages'][0] = $ms_array[0];
+            }elseif (count($ms_array) == 2) {
+              $data['replyToken'] = $replyToken;
+              $data['messages'][0] = $ms_array[0];
+              $data['messages'][1] = $ms_array[1];
+            }elseif (count($ms_array) == 3) {
+              $data['replyToken'] = $replyToken;
+              $data['messages'][0] = $ms_array[0];
+              $data['messages'][1] = $ms_array[1];
+              $data['messages'][2] = $ms_array[2];
+            }
+            //delete
+            $obdata->deletepostback($userId);
           }
 
 
