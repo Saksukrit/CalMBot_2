@@ -244,7 +244,7 @@ if (!is_null($events['events']))
 
                     $ms_repast = [
                     'type' => 'text',
-                    'text' => 'คุณทานอะไรมา'. $text];
+                    'text' => 'คุณทานอะไรใน'. $text];
 
                     $client->replyMessage(
                     array(

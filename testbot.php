@@ -36,7 +36,7 @@ if (!is_null($arrJson['events'])) {
       // get replyToken
       $replyToken = $event['replyToken'];
       $datapostback = $event['postback']['data'];
-      $userIdpostback = $event['source']['userId'];
+      $userId = $event['source']['userId'];
 
       $text_type = explode(':', $datapostback);
       $key = $text_type[0];
@@ -44,10 +44,22 @@ if (!is_null($arrJson['events'])) {
 
       // user_confirm *********
       if ($key == "user_confirm") {
-        $obdata->setpostback($userIdpostback,$key);
+        $obdata->setpostback($userId,$key);
         $data['replyToken'] = $replyToken;
         $data['messages'][0]['type'] = "text";
         $data['messages'][0]['text'] = "กรุณากรอก Username ของคุณ";
+      }
+      //มื้ออาหาร  ------------------------------------
+      //postback repast
+      else if ($key == "repast") {
+        $req->save_repast($userId,$value);
+
+        $ms_repast = [
+        'type' => 'text',
+        'text' => 'คุณทานอะไรใน'. $value];
+        $data['replyToken'] = $replyToken;
+        $data['messages'][0] = $ms_repast;
+
       }
 
 
@@ -148,9 +160,8 @@ if (!is_null($arrJson['events'])) {
               เลือกเมนูที่ต้องการ',
               'actions' => array(
                 array(
-                  'type' => 'postback',
+                  'type' => 'messages',
                   'label' => 'บันทึกมื้ออาหาร',
-                  'data' => 'save_dialy',
                   'text' => 'บันทึกมื้ออาหาร')
                 ,array(
                   'type' => 'postback',
@@ -174,47 +185,98 @@ if (!is_null($arrJson['events'])) {
             $data['replyToken'] = $replyToken;
             $data['messages'][0] = $ms;
 
+          }
+
+          // ***********  Food_save  ************************************************************************************
+          // select repast
+          else if ($text == "บันทึกมื้ออาหาร") {
+            // check userId
+            $get_userId = $user->get_userId($userId);
+            // check date
+            $check_food_dialy = $food_dialy->check_food_dialy($get_userId,date('Y-m-d'));
+            //
+            if ($check_food_dialy == "null") {
+                // if null => create food_dialy
+              $food_dialy->save_food_dialy($get_userId,date('Y-m-d'));
+            }
+
+            $save_dialy = [
+            'type' => 'template',
+            'altText' => 'บันทึกมื้ออาหาร',
+            'template' => array(
+              'type' => 'buttons',
+              'title' => 'บันทึกมื้ออาหาร',
+              'text' => 'เลือกมื้ออาหารที่ต้องการ ',
+              'actions' => array(
+                array(
+                  'type' => 'postback',
+                  'label' => 'มื้อเช้า',
+                  'data' => 'repast:มื้อเช้า')
+                ,array(
+                  'type' => 'postback',
+                  'label' => 'มื้อเที่ยง',
+                  'data' => 'repast:มื้อเที่ยง')
+                ,array(
+                  'type' => 'postback',
+                  'label' => 'มื้อเย็น',
+                  'data' => 'repast:มื้อเย็น')
+                ,array(
+                  'type' => 'postback',
+                  'label' => 'ระหว่างมื้อ',
+                  'data' => 'repast:ระหว่างมื้อ')
+                )
+              )
+            ];
+
+            $data['replyToken'] = $replyToken;
+            $data['messages'][0] = $save_dialy;
+          }
+
+          // search for save
+          // show list food by name
+          else if ((($search = $searchfood->searchfood_forsave($text)) != "null") && ($req->get_repast($userId) != "null--")) {
+
+            $ms_array = array();
+            $ms_array = $search;
+
+            if (count($ms_array) == 1) {
+              $data['replyToken'] = $replyToken;
+              $data['messages'][0] = $ms_array[0];
+            }elseif (count($ms_array) == 2) {
+              $data['replyToken'] = $replyToken;
+              $data['messages'][0] = $ms_array[0];
+              $data['messages'][1] = $ms_array[1];
+            }elseif (count($ms_array) == 3) {
+              $data['replyToken'] = $replyToken;
+              $data['messages'][0] = $ms_array[0];
+              $data['messages'][1] = $ms_array[1];
+              $data['messages'][2] = $ms_array[2];
+            }
 
           }
 
 
 
-
           else if($text == "สวัสดี"){
             $data['replyToken'] = $replyToken;
-            $data['messages'][0]['type'] = "text";
-            $data['messages'][0]['text'] = "สวัสดี ID คุณคือ ".$arrJson['events'][0]['source']['userId'];
+            $data['messages'][0] = $ms;
+
           }else if($text == "ชื่ออะไร"){
             $data['replyToken'] = $replyToken;
-            $data['messages'][0]['type'] = "text";
-            $data['messages'][0]['text'] = "ฉันยังไม่มีชื่อนะ";
+            $data['messages'][0] = $ms;
+
           }else if($text == "หลายอัน"){
             $data['replyToken'] = $replyToken;
             $data['messages'][0]['type'] = "text";
             $data['messages'][0]['text'] = "ฉันทำอะไรไม่ได้เลย คุณต้องสอนฉันอีกเยอะ";
           }else{
-            $ms = [
-            'type' => 'template',
-            'altText' => 'เมนูการใช้งาน',
-            'template' => array(
-              'type' => 'buttons',
-              'title' => 'เมนูการใช้งาน',
-              'text' => 'สวัสดี
-              เมนูการใช้งาน',
-              'actions' => array(
-                array(
-                  'type' => 'postback',
-                  'label' => 'บันทึกมื้ออาหาร',
-                  'data' => 'save_dialy:บันทึกมื้ออาหาร')
-                )
-              )
-            ];
+
             $messages = [
             'type' => "text",
             'text' => "ขอโทษ ฉันไม่เข้าใจ"];
 
             $data['replyToken'] = $replyToken;
-            $data['messages'][0] = $ms;
+            $data['messages'][0] = $messages;
           }
         }
 
