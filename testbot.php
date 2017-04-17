@@ -299,7 +299,7 @@ if (!is_null($arrJson['events'])) {
           // $check = check($keyword,$text);
           // if ($check == "true") {
           if ($text == "เมนู") {
-            // $displayname = $user->get_displayname($userId);
+            $displayname = $user->get_displayname($userId);
 
             $ms = [
             'type' => 'template',
@@ -315,21 +315,21 @@ if (!is_null($arrJson['events'])) {
                   'type' => 'messages',
                   'label' => 'บันทึกมื้ออาหาร',
                   'text' => 'บันทึกมื้ออาหาร')
-                ,array(
-                  'type' => 'postback',
-                  'label' => 'ข้อมูลอาหาร',
-                  'data' => 'search_food',
-                  'text' => 'ค้นหาข้อมูลอาหาร')
-                ,array(
-                  'type' => 'postback',
-                  'label' => 'ข้อมูลออกกำลังกาย',
-                  'data' => 'search_exercise',
-                  'text' => 'ค้นหาข้อมูลการออกกำลังกาย')
-                ,array(
-                  'type' => 'postback',
-                  'label' => 'ดูข้อมูลผู้ใช้',
-                  'data' => 'get_profile',
-                  'text' => 'ดูข้อมูลผู้ใช้')
+                // ,array(
+                //   'type' => 'postback',
+                //   'label' => 'ข้อมูลอาหาร',
+                //   'data' => 'search_food',
+                //   'text' => 'ค้นหาข้อมูลอาหาร')
+                // ,array(
+                //   'type' => 'postback',
+                //   'label' => 'ข้อมูลออกกำลังกาย',
+                //   'data' => 'search_exercise',
+                //   'text' => 'ค้นหาข้อมูลการออกกำลังกาย')
+                // ,array(
+                //   'type' => 'postback',
+                //   'label' => 'ดูข้อมูลผู้ใช้',
+                //   'data' => 'get_profile',
+                //   'text' => 'ดูข้อมูลผู้ใช้')
                 )
               )
             ];
