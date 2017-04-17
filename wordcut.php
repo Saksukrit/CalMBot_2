@@ -1,5 +1,5 @@
 <?php
-include('THSplitLib/segment.php');
+include 'THSplitLib/segment.php';
 
 class Wordcut
 {
