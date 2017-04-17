@@ -154,7 +154,7 @@ if (!is_null($arrJson['events'])) {
           //  select menu    ****************************************
           // if ($text == "เมนู") {
           $keyword = explode(" ", "เมนู");
-          $check = check_keyword($keyword,$text);
+          $check = check($keyword,$text);
           // if ($check == "true") {
             if ($text == "เมนู") {
             $displayname = $user->get_displayname($userId);
@@ -279,10 +279,11 @@ if (!is_null($arrJson['events'])) {
 
 echo "OK";
 
-// function check($keyword,$word)
-// {
 $word = "เมนูใช้งาน";
 $keyword = explode(" ", "เมนู");
+check($keyword,$word);
+function check($keyword,$word)
+{
 
   $segment = new Segment();
   $result = $segment->get_segment_array($word);
@@ -303,7 +304,6 @@ $keyword = explode(" ", "เมนู");
     echo '<br> false';
     return "false";
   }
-
-// }
+}
 
 ?>
