@@ -137,8 +137,8 @@ if (!is_null($arrJson['events'])) {
           //  select menu    ****************************************
           // if ($text == "เมนู") {
           $keyword = explode(" ", "เมนู");
-          // if ($wordcut->check($keyword,$text) == "true") {
-            if ($text == "เมนู") {
+          if ($wordcut->check($keyword,$text) == "true") {
+            // if ($text == "เมนู") {
             $displayname = $user->get_displayname($userId);
 
             $ms = [
@@ -148,7 +148,7 @@ if (!is_null($arrJson['events'])) {
               'type' => 'buttons',
               'title' => 'เมนูการใช้งาน',
               'text' => 'สวัสดี '.$displayname.'
-              เมนูการใช้งาน',
+              เลือกเมนูที่ต้องการ',
               'actions' => array(
                 array(
                   'type' => 'postback',
