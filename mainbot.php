@@ -135,14 +135,6 @@ if (!is_null($events['events']))
                     // || $text == "พอแล้ว"
                     $displayname = $user->get_displayname($userId);
 
-                    // $ms1 = [
-                    // 'type' => 'text',
-                    // 'text' => 'สวัสดี '.$displayname.'
-                    // เมนูการใช้งาน
-                    // 1.บันทึกมื้ออาหาร
-                    // 2.ค้นหาข้อมูลอาหาร
-                    // 3.ค้นหาข้อมูลการออกกำลังกาย
-                    // 4.ดูข้อมูลผู้ใช้'];
 
                     $ms2 = [
                     'type' => 'template',

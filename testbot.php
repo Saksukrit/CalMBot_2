@@ -9,6 +9,8 @@ include 'search_exercise.php';
 include 'postback.php';
 include 'req_manage.php';
 include 'mg_push.php';
+include 'wordcut.php';
+
 
 $strAccessToken = "8RNNBRGbDOu0y/MAr0BnuajV46/YU3MVzA0rA4m4t6F1orO6PHx6b913ABPg3bR7TEvQO99XihXnZaPKVO/4VsQXLqs8LQZdmskXuwncFHyyQ824y7XOt9GLFJOgodw9zUS5/9qgrff265ZoTF3e9QdB04t89/1O/w1cDnyilFU=";
 
@@ -26,7 +28,8 @@ $obdata = new Postback;
 if (!is_null($arrJson['events'])) {
   foreach ($arrJson['events'] as $event) {
 
-    // get save postback
+    // =============================================================================
+    // start action by postback
     if ($event['type'] == 'postback') {
 
       // get replyToken
@@ -37,6 +40,8 @@ if (!is_null($arrJson['events'])) {
       $text_type = explode(':', $datapostback);
       $key = $text_type[0];
       $value = $text_type[1];
+
+      // user_confirm *********
       if ($key == "user_confirm") {
         $obdata->setpostback($userIdpostback,$key);
         $data['replyToken'] = $replyToken;
@@ -47,9 +52,10 @@ if (!is_null($arrJson['events'])) {
 
 
     }
+    // =============================================================================
 
 
-    // messages_back
+    // start action by postback messages ===========================================
     else if ($event['type'] == 'message' ) {
       if ($event['message']['type'] == 'text') {
         # code...
@@ -71,6 +77,7 @@ if (!is_null($arrJson['events'])) {
         $searchexercise = new Searchexercise;
         $req = new Req_manage;
 
+        // =============================================================================
         // check user maping id
         $checkuser = $user->get_userId($userId);
         if ($checkuser == "null") {
@@ -115,10 +122,67 @@ if (!is_null($arrJson['events'])) {
           $data['replyToken'] = $replyToken;
           $data['messages'][0] = $ms;
         }
+        // =============================================================================
+
+        // start system for user in sytem
         else {
 
+          // key_word cutting to action *****************************
+          $wordcut = new Wordcut;
+          // $keyword = explode(" ", "บันทึก มื้อ อาหาร");
+          // if ($wordcut->check($keyword,$text) == "true") {
+          //   # code...
+          // }
 
-          if($text == "สวัสดี"){
+          //  select menu    ****************************************
+          // if ($text == "เมนู") {
+          $keyword = explode(" ", "เมนู");
+          if ($wordcut->check($keyword,$text) == "true") {
+            $displayname = $user->get_displayname($userId);
+
+            $ms = [
+            'type' => 'template',
+            'altText' => 'เมนูการใช้งาน',
+            'template' => array(
+              'type' => 'buttons',
+              'title' => 'เมนูการใช้งาน',
+              'text' => 'สวัสดี '.$displayname.'
+              เมนูการใช้งาน',
+              'actions' => array(
+                array(
+                  'type' => 'postback',
+                  'label' => 'บันทึกมื้ออาหาร',
+                  'data' => 'save_dialy',
+                  'text' => 'บันทึกมื้ออาหาร')
+                ,array(
+                  'type' => 'postback',
+                  'label' => 'ข้อมูลอาหาร',
+                  'data' => 'search_food',
+                  'text' => 'ค้นหาข้อมูลอาหาร')
+                ,array(
+                  'type' => 'postback',
+                  'label' => 'ข้อมูลออกกำลังกาย',
+                  'data' => 'search_exercise',
+                  'text' => 'ค้นหาข้อมูลการออกกำลังกาย')
+                ,array(
+                  'type' => 'postback',
+                  'label' => 'ดูข้อมูลผู้ใช้',
+                  'data' => 'get_profile',
+                  'text' => 'ดูข้อมูลผู้ใช้')
+                )
+              )
+            ];
+
+            $data['replyToken'] = $replyToken;
+            $data['messages'][0] = $ms;
+
+
+          }
+
+
+
+
+          else if($text == "สวัสดี"){
             $data['replyToken'] = $replyToken;
             $data['messages'][0]['type'] = "text";
             $data['messages'][0]['text'] = "สวัสดี ID คุณคือ ".$arrJson['events'][0]['source']['userId'];
