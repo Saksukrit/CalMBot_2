@@ -54,18 +54,169 @@ if (!is_null($arrJson['events'])) {
         $data['messages'][0]['type'] = "text";
         $data['messages'][0]['text'] = "กรุณากรอก Username ของคุณ";
       }
-      //มื้ออาหาร  ------------------------------------
       //postback repast
       else if ($key == "repast") {
         $req->save_repast($userId,$value);
-
         $ms_repast = [
         'type' => 'text',
         'text' => 'คุณทานอะไรใน'. $value];
         $data['replyToken'] = $replyToken;
         $data['messages'][0] = $ms_repast;
-
       }
+      // postback food_selected
+      else if ($key == "food_selected") {
+        $req->save_food($userId,$value);
+        // get_unit
+        $unittext = $searchfood->get_unit($value);
+        $ms_food = [
+        'type' => 'template',
+        'altText' => 'จำนวน',
+        'template' => array(
+          'type' => 'buttons',
+          'title' => ' ',
+          'text' => 'จำนวนกี่'.$unittext,
+          'actions' => array(
+            array(
+              'type' => 'postback',
+              'label' => '1',
+              'data' => 'num_food:1')
+            ,array(
+              'type' => 'postback',
+              'label' => '2',
+              'data' => 'num_food:2')
+            ,array(
+              'type' => 'postback',
+              'label' => '3',
+              'data' => 'num_food:3')
+            )
+          )
+        ];
+        $data['replyToken'] = $replyToken;
+        $data['messages'][0] = $ms_food;
+      }
+      //postback num_food
+      else if ($key == "num_food") {
+        $req->save_unit($userId,$text);
+        // get data from Req_manage
+        $food = $req->get_food($userId);
+        $unit = $value;
+        $unittext = $searchfood->get_unit($food);
+        $calorie = $searchfood->get_calorie($food);
+        $caloriesum = $unit * $calorie;
+
+        $messagess = [
+        "type"=> "template",
+        "altText"=> "ยืนยันรายการ",
+        "template"=> array(
+          "type"=> "confirm",
+          "text"=> ''.$food.' '.$unit.' '.$unittext.' เท่ากับ '.$caloriesum.' กิโลแคลอรี่
+          ยืนยันบันทึกรายการนี้',
+          "actions"=> array(
+            array(
+              "type"=> "postback",
+              "label"=> "ยืนยัน",
+              'data' => 'confirm_food:ยืนยัน'),
+            array(
+              "type"=> "postback",
+              "label"=> "ยกเลิก",
+              'data' => 'no_confirm_food:ยกเลิก')
+            )
+          )
+        ];
+        $data['replyToken'] = $replyToken;
+        $data['messages'][0] = $messagess;
+      }
+      // no_confirm_food
+      else if ($key == "no_confirm_food") {
+        $req->delete_req($userId);
+
+        $ms = [
+        'type' => 'text',
+        'text' => 'ยกเลิก และออกจากเมนูการบันทึกแล้ว'];
+        $data['replyToken'] = $replyToken;
+        $data['messages'][0] = $ms;
+      }
+      // confirm_food
+      else if ($key == "confirm_food") {
+        // get data from Req_manage
+        $repast = $req->get_repast($userId);
+        $food = $req->get_food($userId);
+        $unit = intval($req->get_unit($userId));
+        $unittext = $searchfood->get_unit($food);
+        $calorie = $searchfood->get_calorie($food);
+        $caloriesum = $unit * $calorie;
+
+        // if to eng repast     Breakfast  Lunch  Dinner  Supper
+
+        // get userId
+        $get_userId = $user->get_userId($userId);
+        // get dialyId
+        $get_food_dialyId = $food_dialy->check_food_dialy($get_userId,date('Y-m-d'));
+        // save food_dialy list
+        $food_dialy->save_food_dialy_list($get_food_dialyId,$food,$unit,$caloriesum,$repast);
+
+        $ms = [
+        'type' => 'template',
+        'altText' => 'บันทึกรายการอาหารแล้ว',
+        'template' => array(
+          'type' => 'buttons',
+          'title' => 'บันทึกรายการอาหารแล้ว',
+          'text' => 'ต้องการบันทึกเพิ่มเติมหรือไม่',
+          'actions' => array(
+            array(
+              'type' => 'postback',
+              'label' => 'เพิ่มอีก',
+              'data' => 'more:'.$repast.'')
+            ,array(
+              'type' => 'postback',
+              'label' => 'พอแล้ว',
+              'data' => 'enough:'.$repast.'')
+            )
+          )
+        ];
+        $data['replyToken'] = $replyToken;
+        $data['messages'][0] = $ms;
+
+        // delete request
+        $req->delete_req($userId);
+      }
+
+      // more save
+      else if ($key == "more") {
+        $req->save_repast($userId,$value);
+
+        $ms_repast = [
+        'type' => 'text',
+        'text' => 'คุณทานอะไรเพิ่มอีกใน'. $value];
+        $data['replyToken'] = $replyToken;
+        $data['messages'][0] = $ms_repast;
+      }
+      // enough save
+      else if ($key == "enough") {
+        // summary
+        // get userId
+        $get_userId = $user->get_userId($userId);
+        // get dialyId
+        $get_food_dialyId = $food_dialy->check_food_dialy($get_userId,date('Y-m-d'));
+
+        // get repast calorie
+        $calorie_repast = $food_dialy->get_repast_calorie($get_food_dialyId,$value);
+        // get summary calorie
+        $calorie_all = $food_dialy->get_all_calorie($get_food_dialyId);
+        // update summary calorie
+        $food_dialy->update_total_calorie($get_food_dialyId,$calorie_all);
+
+        $ms_summary = [
+        'type' => 'text',
+        'text' => 'สรุปรายการของ'.$value.'
+        พลังงานรวมที่ได้รับ
+        เท่ากับ '.$calorie_repast.' กิโลแคลอรี่
+
+        ออกจากเมนูการบันทึกแล้ว'];
+        $data['replyToken'] = $replyToken;
+        $data['messages'][0] = $ms_summary;
+      }
+      // -----------------------------------------------------------------------
 
 
 
@@ -89,11 +240,6 @@ if (!is_null($arrJson['events'])) {
         $text_type = explode(' ', $text);
       // $confirm_food = explode(' ',$obdata->getpostback($userId));
 
-        // $user = new User;
-        // $food_dialy = new Food_save;
-        // $searchfood = new Searchfood;
-        // $searchexercise = new Searchexercise;
-        // $req = new Req_manage;
 
         // =============================================================================
         // check user maping id

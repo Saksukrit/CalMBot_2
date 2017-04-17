@@ -678,7 +678,7 @@ if (!is_null($events['events']))
                     'template' => array(
                     'type' => 'buttons',
                     'title' => 'ค้นหาข้อมูลอาหาร',
-                    'text' => 'ต้องการค้นหาปรพเภทใด',
+                    'text' => 'ต้องการค้นหาประเภทใด',
                     'actions' => array(
                     array(
                     'type' => 'postback',
