@@ -318,19 +318,16 @@ if (!is_null($arrJson['events'])) {
                   'label' => 'บันทึกมื้ออาหาร',
                   'text' => 'บันทึกมื้ออาหาร')
                   ,array(
-                    'type' => 'postback',
+                    'type' => 'messages',
                     'label' => 'ข้อมูลอาหาร',
-                    'data' => 'search_food',
                     'text' => 'ค้นหาข้อมูลอาหาร')
                   ,array(
-                    'type' => 'postback',
+                    'type' => 'messages',
                     'label' => 'ข้อมูลออกกำลังกาย',
-                    'data' => 'search_exercise',
                     'text' => 'ค้นหาข้อมูลการออกกำลังกาย')
                   ,array(
-                    'type' => 'postback',
+                    'type' => 'messages',
                     'label' => 'ดูข้อมูลผู้ใช้',
-                    'data' => 'get_profile',
                     'text' => 'ดูข้อมูลผู้ใช้')
                 )
               )
