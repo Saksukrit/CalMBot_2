@@ -1,6 +1,6 @@
 <?php
-// include_once 'THSplitLib/segment.php';
-require_once ('./THSplitLib/segment.php');
+include_once 'THSplitLib/segment.php';
+// require_once ('./THSplitLib/segment.php');
 
 class Wordcut
 {
