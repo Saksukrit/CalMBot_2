@@ -508,7 +508,8 @@ if (!is_null($arrJson['events'])) {
                 array(
                   'type' => 'postback',
                   'label' => 'ค้นหาโดยชื่ออาหาร',
-                  'data' => 'searchfood_byname:1')
+                  'data' => 'searchfood_byname:1',
+                  'text' => 'ค้นหาโดยชื่ออาหาร')
                 ,array(
                   'type' => 'postback',
                   'label' => 'ค้นหาโดยปริมาณพลังงาน',
@@ -523,6 +524,20 @@ if (!is_null($arrJson['events'])) {
 
             $data['replyToken'] = $replyToken;
             $data['messages'][0] = $ms_menu_search;
+          }
+          // search food by name ++++++++++++++++++++++++++++++++++
+          else if ($text == "ค้นหาโดยชื่ออาหาร") {
+            $obdata->setpostback($userId,"searchfood_byname");
+              $ms_foodname = [
+              'type' => 'text',
+              'text' => 'บอกชื่ออาหารที่ต้องการ'];
+
+              $client->replyMessage(
+              array(
+              'replyToken' => $event['replyToken'],
+              'messages' => [$ms_foodname]
+              )
+              );
           }
           // show list food by name
           else if (($obdata->getpostback($userId) == "searchfood_byname") && (($search = $searchfood->searchfood_byname($text)) != "null")) {
