@@ -597,7 +597,8 @@ if (!is_null($arrJson['events'])) {
             $data['messages'][0] = $ms_search_type;
           }
           // show list food by type
-          else if (($obdata->getpostback($userId) == "searchfood_bytype") && (($search = $searchfood->searchfood_bytype($text)) != "null")) {
+          // else if (($obdata->getpostback($userId) == "searchfood_bytype") && (($search = $searchfood->searchfood_bytype($text)) != "null")) {
+          else if (($search = $searchfood->searchfood_bytype($text)) != "null") {
             $ms_array = array();
             $ms_array = $search;
             if (count($ms_array) == 1) {
