@@ -6,7 +6,7 @@ class Wordcut
 
   public function check($keyword,$word)
   {
-    $segment = new Segment();
+    $segment = new Segment;
     $result = $segment->get_segment_array($word);
     // $count = count($result);
     //js_thai_encode($result);
