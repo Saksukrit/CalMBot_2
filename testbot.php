@@ -299,7 +299,7 @@ if (!is_null($arrJson['events'])) {
           // $check = check($keyword,$text);
           // if ($check == "true") {
           if ($text == "เมนู") {
-            $displayname = $user->get_displayname($userId);
+            // $displayname = $user->get_displayname($userId);
 
             $ms = [
             'type' => 'template',
@@ -307,7 +307,8 @@ if (!is_null($arrJson['events'])) {
             'template' => array(
               'type' => 'buttons',
               'title' => 'เมนูการใช้งาน',
-              'text' => 'สวัสดี '.$displayname.'
+              // 'text' => 'สวัสดี '.$displayname.'
+              'text' => 'สวัสดี
               เลือกเมนูที่ต้องการ',
               'actions' => array(
                 array(
