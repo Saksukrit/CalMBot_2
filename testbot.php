@@ -240,7 +240,7 @@ if (!is_null($arrJson['events'])) {
 
       // search food by name ++++++++++++++++++++++++++++++++++
       else if ($key == "searchfood_byname") {
-        $obdata->setpostback($userId,$key);
+        // $obdata->setpostback($userId,$key);
         $ms_foodname = [
         'type' => 'text',
         'text' => 'บอกชื่ออาหารที่ต้องการ'];
@@ -251,7 +251,7 @@ if (!is_null($arrJson['events'])) {
 
       // search food by calorie ++++++++++++++++++++++++++++++++++
       else if ($key == "searchfood_bycalorie") {
-        $obdata->setpostback($userId,$key);
+        // $obdata->setpostback($userId,$key);
         $ms_foodcalorie = [
         'type' => 'text',
         'text' => 'บอกปริมาณพลังงานสูงสุดที่ต้องการ'];
