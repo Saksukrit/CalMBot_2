@@ -96,7 +96,7 @@ if (!is_null($arrJson['events'])) {
       }
       //postback num_food
       else if ($key == "num_food") {
-        $req->save_unit($userId,$text);
+        $req->save_unit($userId,$value);
         // get data from Req_manage
         $food = $req->get_food($userId);
         $unit = $value;

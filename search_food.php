@@ -140,9 +140,7 @@ class Searchfood
                     array(
                     'type' => 'postback',
                     'label' => 'เลือก',
-                    'data' => 'food_selected:'.$row["food_name"],
-                    'text' => $row["food_name"]
-                    )
+                    'data' => 'food_selected:'.$row["food_name"])
                     ) ,
                     );
                     ++$num;
