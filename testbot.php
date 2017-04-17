@@ -154,7 +154,8 @@ if (!is_null($arrJson['events'])) {
           //  select menu    ****************************************
           // if ($text == "เมนู") {
           $keyword = explode(" ", "เมนู");
-          if (check($keyword,$text) == "true") {
+          $check = check($keyword,$text);
+          if ($check == "true") {
             // if ($text == "เมนู") {
             $displayname = $user->get_displayname($userId);
 
