@@ -301,44 +301,43 @@ if (!is_null($arrJson['events'])) {
           if ($text == "เมนู") {
             $displayname = $user->get_displayname($userId);
 
-            $ms = [
+            $ms_menu = [
             'type' => 'template',
             'altText' => 'เมนูการใช้งาน',
             'template' => array(
               'type' => 'buttons',
               'title' => 'เมนูการใช้งาน',
-              // 'text' => 'สวัสดี '.$displayname.'
-              'text' => 'สวัสดี
+              'text' => 'สวัสดี '.$displayname.'
               เลือกเมนูที่ต้องการ',
               'actions' => array(
                 array(
                   'type' => 'messages',
                   'label' => 'บันทึกมื้ออาหาร',
                   'text' => 'บันทึกมื้ออาหาร')
-                // ,array(
-                //   'type' => 'postback',
-                //   'label' => 'ข้อมูลอาหาร',
-                //   'data' => 'search_food',
-                //   'text' => 'ค้นหาข้อมูลอาหาร')
-                // ,array(
-                //   'type' => 'postback',
-                //   'label' => 'ข้อมูลออกกำลังกาย',
-                //   'data' => 'search_exercise',
-                //   'text' => 'ค้นหาข้อมูลการออกกำลังกาย')
-                // ,array(
-                //   'type' => 'postback',
-                //   'label' => 'ดูข้อมูลผู้ใช้',
-                //   'data' => 'get_profile',
-                //   'text' => 'ดูข้อมูลผู้ใช้')
+                ,array(
+                  'type' => 'postback',
+                  'label' => 'ข้อมูลอาหาร',
+                  'data' => 'search_food',
+                  'text' => 'ค้นหาข้อมูลอาหาร')
+                ,array(
+                  'type' => 'postback',
+                  'label' => 'ข้อมูลออกกำลังกาย',
+                  'data' => 'search_exercise',
+                  'text' => 'ค้นหาข้อมูลการออกกำลังกาย')
+                ,array(
+                  'type' => 'postback',
+                  'label' => 'ดูข้อมูลผู้ใช้',
+                  'data' => 'get_profile',
+                  'text' => 'ดูข้อมูลผู้ใช้')
                 )
               )
             ];
-            $messages = [
-            'type' => "text",
-            'text' => "ใช่ เมนู"];
+            // $messages = [
+            // 'type' => "text",
+            // 'text' => "ใช่ เมนู"];
 
             $data['replyToken'] = $replyToken;
-            $data['messages'][0] = $messages;
+            $data['messages'][0] = $ms_menu;
 
           }
 
