@@ -129,7 +129,7 @@ if (!is_null($arrJson['events'])) {
         else {
 
           // key_word cutting to action *****************************
-          function check($keyword,$word)
+          function check_keyword($keyword,$word)
           {
             $segment = new Segment();
             $result = $segment->get_segment_array($word);
@@ -154,7 +154,7 @@ if (!is_null($arrJson['events'])) {
           //  select menu    ****************************************
           // if ($text == "เมนู") {
           $keyword = explode(" ", "เมนู");
-          // $check = check($keyword,$text);
+          $check = check_keyword($keyword,$text);
           // if ($check == "true") {
             if ($text == "เมนู") {
             $displayname = $user->get_displayname($userId);
@@ -281,24 +281,28 @@ echo "OK";
 
 // function check($keyword,$word)
 // {
-//   $segment = new Segment();
-//   $result = $segment->get_segment_array($word);
-//
-//   $mapper = 0;
-//   // loop mapping algorithm
-//   for ($i=0; $i < count($result); $i++) {
-//     if ($mapper < count($keyword)) {
-//       if ($result[$i] == $keyword[$mapper]) {
-//         $mapper++;
-//       }
-//     }
-//   }
-//   // check mapper
-//   if ($mapper == count($keyword)) {
-//     return "true";
-//   }else {
-//     return "false";
-//   }
+$word = "เมนูใช้งาน";
+$keyword = explode(" ", "เมนู");
+
+  $segment = new Segment();
+  $result = $segment->get_segment_array($word);
+  $mapper = 0;
+  // loop mapping algorithm
+  for ($i=0; $i < count($result); $i++) {
+    if ($mapper < count($keyword)) {
+      if ($result[$i] == $keyword[$mapper]) {
+        $mapper++;
+      }
+    }
+  }
+  // check mapper
+  if ($mapper == count($keyword)) {
+    echo '<br>'.$word;
+    return "true";
+  }else {
+    echo '<br> false';
+    return "false";
+  }
 
 // }
 
