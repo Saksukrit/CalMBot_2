@@ -310,25 +310,29 @@ if (!is_null($arrJson['events'])) {
             'template' => array(
               'type' => 'buttons',
               'title' => 'เมนูการใช้งาน',
-              'text' => 'สวัสดี'.$displayname.'
-              เลือกเมนูที่ต้องการ ',
+              'text' => 'สวัสดี '.$displayname.'
+              เมนูการใช้งาน',
               'actions' => array(
                 array(
-                  'type' => 'messages',
+                  'type' => 'postback',
                   'label' => 'บันทึกมื้ออาหาร',
+                  'data' => 'save_dialy',
                   'text' => 'บันทึกมื้ออาหาร')
-                  ,array(
-                    'type' => 'messages',
-                    'label' => 'ข้อมูลอาหาร',
-                    'text' => 'ค้นหาข้อมูลอาหาร')
-                  ,array(
-                    'type' => 'messages',
-                    'label' => 'ข้อมูลออกกำลังกาย',
-                    'text' => 'ค้นหาข้อมูลการออกกำลังกาย')
-                  ,array(
-                    'type' => 'messages',
-                    'label' => 'ดูข้อมูลผู้ใช้',
-                    'text' => 'ดูข้อมูลผู้ใช้')
+                ,array(
+                  'type' => 'postback',
+                  'label' => 'ข้อมูลอาหาร',
+                  'data' => 'search_food',
+                  'text' => 'ค้นหาข้อมูลอาหาร')
+                ,array(
+                  'type' => 'postback',
+                  'label' => 'ข้อมูลออกกำลังกาย',
+                  'data' => 'search_exercise',
+                  'text' => 'ค้นหาข้อมูลการออกกำลังกาย')
+                ,array(
+                  'type' => 'postback',
+                  'label' => 'ดูข้อมูลผู้ใช้',
+                  'data' => 'get_profile',
+                  'text' => 'ดูข้อมูลผู้ใช้')
                 )
               )
             ];
