@@ -129,11 +129,27 @@ if (!is_null($arrJson['events'])) {
         else {
 
           // key_word cutting to action *****************************
-          // $wordcut = new Wordcut;
-          // $keyword = explode(" ", "บันทึก มื้อ อาหาร");
-          // if ($wordcut->check($keyword,$text) == "true") {
-          //   # code...
-          // }
+          function check($keyword,$word)
+          {
+            $segment = new Segment();
+            $result = $segment->get_segment_array($word);
+
+            $mapper = 0;
+            // loop mapping algorithm
+            for ($i=0; $i < count($result); $i++) {
+              if ($mapper < count($keyword)) {
+                if ($result[$i] == $keyword[$mapper]) {
+                  $mapper++;
+                }
+              }
+            }
+            // check mapper
+            if ($mapper == count($keyword)) {
+              return "true";
+            }else {
+              return "false";
+            }
+          }
 
           //  select menu    ****************************************
           // if ($text == "เมนู") {
@@ -262,29 +278,27 @@ if (!is_null($arrJson['events'])) {
 
 echo "OK";
 
-function check($keyword,$word)
-{
-  $segment = new Segment();
-  $result = $segment->get_segment_array($word);
+// function check($keyword,$word)
+// {
+//   $segment = new Segment();
+//   $result = $segment->get_segment_array($word);
+//
+//   $mapper = 0;
+//   // loop mapping algorithm
+//   for ($i=0; $i < count($result); $i++) {
+//     if ($mapper < count($keyword)) {
+//       if ($result[$i] == $keyword[$mapper]) {
+//         $mapper++;
+//       }
+//     }
+//   }
+//   // check mapper
+//   if ($mapper == count($keyword)) {
+//     return "true";
+//   }else {
+//     return "false";
+//   }
 
-
-  $mapper = 0;
-  // loop mapping algorithm
-  for ($i=0; $i < count($result); $i++) {
-    if ($mapper < count($keyword)) {
-      if ($result[$i] == $keyword[$mapper]) {
-        $mapper++;
-      }
-    }
-  }
-  // check mapper
-  if ($mapper == count($keyword)) {
-    return "true";
-  }else {
-    return "false";
-  }
-
-
-}
+// }
 
 ?>
