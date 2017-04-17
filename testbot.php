@@ -333,9 +333,12 @@ if (!is_null($arrJson['events'])) {
                 )
               )
             ];
+            $messages = [
+            'type' => "text",
+            'text' => "ใช่ เมนู"];
 
             $data['replyToken'] = $replyToken;
-            $data['messages'][0] = $ms;
+            $data['messages'][0] = $messages;
 
           }
 
