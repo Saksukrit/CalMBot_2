@@ -239,54 +239,27 @@ if (!is_null($arrJson['events'])) {
       }
 
       // search food by name ++++++++++++++++++++++++++++++++++
-      else if ($key == "searchfood_byname") {
-        // $obdata->setpostback($userId,$key);
-        $ms_foodname = [
-        'type' => 'text',
-        'text' => 'บอกชื่ออาหารที่ต้องการ'];
-
-        $data['replyToken'] = $replyToken;
-        $data['messages'][0] = $ms_foodname;
-      }
+      // else if ($key == "searchfood_byname") {
+      //   // $obdata->setpostback($userId,$key);
+      //   $ms_foodname = [
+      //   'type' => 'text',
+      //   'text' => 'บอกชื่ออาหารที่ต้องการ'];
+      //
+      //   $data['replyToken'] = $replyToken;
+      //   $data['messages'][0] = $ms_foodname;
+      // }
 
       // search food by calorie ++++++++++++++++++++++++++++++++++
-      else if ($key == "searchfood_bycalorie") {
-        // $obdata->setpostback($userId,$key);
-        $ms_foodcalorie = [
-        'type' => 'text',
-        'text' => 'บอกปริมาณพลังงานสูงสุดที่ต้องการ'];
-        $data['replyToken'] = $replyToken;
-        $data['messages'][0] = $ms_foodcalorie;
-      }
+      // else if ($key == "searchfood_bycalorie") {
+      //   // $obdata->setpostback($userId,$key);
+      //   $ms_foodcalorie = [
+      //   'type' => 'text',
+      //   'text' => 'บอกปริมาณพลังงานสูงสุดที่ต้องการ'];
+      //   $data['replyToken'] = $replyToken;
+      //   $data['messages'][0] = $ms_foodcalorie;
+      // }
 
-      // search food by type ++++++++++++++++++++++++++++++++++
-      else if ($key == "searchfood_bytype") {
-        $ms_search_type = [
-        'type' => 'template',
-        'altText' => 'ค้นหาข้อมูลอาหาร',
-        'template' => array(
-          'type' => 'buttons',
-          'title' => 'ค้นหาข้อมูลอาหาร',
-          'text' => 'ต้องการค้นหาประเภทใด',
-          'actions' => array(
-            array(
-              'type' => 'postback',
-              'label' => 'food',
-              'data' => 'food:0')
-            ,array(
-              'type' => 'postback',
-              'label' => 'dessert',
-              'data' => 'dessert:0')
-            ,array(
-              'type' => 'postback',
-              'label' => 'beverage',
-              'data' => 'beverage:0')
-            )
-          )
-        ];
-        $data['replyToken'] = $replyToken;
-        $data['messages'][0] = $ms_search_type;
-      }
+
       // show list food by type
       else if (($search = $searchfood->searchfood_bytype($key)) != "null") {
         $ms_array = array();
@@ -513,11 +486,13 @@ if (!is_null($arrJson['events'])) {
                 ,array(
                   'type' => 'postback',
                   'label' => 'ค้นหาโดยปริมาณพลังงาน',
-                  'data' => 'searchfood_bycalorie:1')
+                  'data' => 'searchfood_bycalorie:1',
+                  'text' => 'ค้นหาโดยปริมาณพลังงาน')
                 ,array(
                   'type' => 'postback',
                   'label' => 'ค้นหาโดยชนิดอาหาร',
-                  'data' => 'searchfood_bytype:1')
+                  'data' => 'searchfood_bytype:1',
+                  'text' => 'ค้นหาโดยชนิดอาหาร')
                 )
               )
             ];
@@ -532,12 +507,8 @@ if (!is_null($arrJson['events'])) {
               'type' => 'text',
               'text' => 'บอกชื่ออาหารที่ต้องการ'];
 
-              $client->replyMessage(
-              array(
-              'replyToken' => $event['replyToken'],
-              'messages' => [$ms_foodname]
-              )
-              );
+              $data['replyToken'] = $replyToken;
+              $data['messages'][0] = $ms_foodname;
           }
           // show list food by name
           else if (($obdata->getpostback($userId) == "searchfood_byname") && (($search = $searchfood->searchfood_byname($text)) != "null")) {
@@ -561,7 +532,16 @@ if (!is_null($arrJson['events'])) {
 
           }
 
+          // search food by calorie ++++++++++++++++++++++++++++++++++
+          else if ($text == "ค้นหาโดยปริมาณพลังงาน") {
+            $obdata->setpostback($userId,"searchfood_bycalorie");
+              $ms_foodcalorie = [
+              'type' => 'text',
+              'text' => 'บอกปริมาณพลังงานสูงสุดที่ต้องการ'];
 
+              $data['replyToken'] = $replyToken;
+              $data['messages'][0] = $ms_foodcalorie;
+          }
           // show list food by calorie
           else if (($obdata->getpostback($userId) == "searchfood_bycalorie") && (($search = $searchfood->searchfood_bycalorie($text)) != "null")) {
             $ms_array = array();
@@ -581,6 +561,36 @@ if (!is_null($arrJson['events'])) {
             }
             // //delete
             $obdata->deletepostback($userId);
+          }
+
+          // search food by type ++++++++++++++++++++++++++++++++++
+          else if ($text == "ค้นหาโดยชนิดอาหาร") {
+            // $obdata->setpostback($userId,"searchfood_bycalorie");
+            $ms_search_type = [
+            'type' => 'template',
+            'altText' => 'ค้นหาข้อมูลอาหาร',
+            'template' => array(
+              'type' => 'buttons',
+              'title' => 'ค้นหาข้อมูลอาหาร',
+              'text' => 'ต้องการค้นหาประเภทใด',
+              'actions' => array(
+                array(
+                  'type' => 'postback',
+                  'label' => 'food',
+                  'data' => 'food:0')
+                ,array(
+                  'type' => 'postback',
+                  'label' => 'dessert',
+                  'data' => 'dessert:0')
+                ,array(
+                  'type' => 'postback',
+                  'label' => 'beverage',
+                  'data' => 'beverage:0')
+                )
+              )
+            ];
+            $data['replyToken'] = $replyToken;
+            $data['messages'][0] = $ms_search_type;
           }
 
 
