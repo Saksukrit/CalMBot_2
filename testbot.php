@@ -578,15 +578,18 @@ if (!is_null($arrJson['events'])) {
                 array(
                   'type' => 'postback',
                   'label' => 'food',
-                  'data' => 'foodtype:food')
+                  'data' => 'foodtype:food',
+                  'text' => 'food')
                 ,array(
                   'type' => 'postback',
                   'label' => 'dessert',
-                  'data' => 'foodtype:dessert')
+                  'data' => 'foodtype:dessert',
+                  'text' => 'dessert')
                 ,array(
                   'type' => 'postback',
                   'label' => 'beverage',
-                  'data' => 'foodtype:beverage')
+                  'data' => 'foodtype:beverage',
+                  'text' => 'beverage')
                 )
               )
             ];
