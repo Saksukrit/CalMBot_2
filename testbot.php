@@ -566,7 +566,6 @@ if (!is_null($arrJson['events'])) {
 
           // search food by type ++++++++++++++++++++++++++++++++++
           else if ($text == "ค้นหาโดยชนิดอาหาร") {
-            $obdata->setpostback($userId,"searchfood_bytype");
             $ms_search_type = [
             'type' => 'template',
             'altText' => 'ค้นหาข้อมูลอาหาร',
@@ -614,8 +613,6 @@ if (!is_null($arrJson['events'])) {
               $data['messages'][1] = $ms_array[1];
               $data['messages'][2] = $ms_array[2];
             }
-            //delete
-            $obdata->deletepostback($userId);
           }
 
 
