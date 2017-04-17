@@ -508,15 +508,15 @@ if (!is_null($arrJson['events'])) {
                 array(
                   'type' => 'postback',
                   'label' => 'ค้นหาโดยชื่ออาหาร',
-                  'data' => 'searchfood_byname:0')
+                  'data' => 'searchfood_byname:1')
                 ,array(
                   'type' => 'postback',
                   'label' => 'ค้นหาโดยปริมาณพลังงาน',
-                  'data' => 'searchfood_bycalorie:0')
+                  'data' => 'searchfood_bycalorie:1')
                 ,array(
                   'type' => 'postback',
                   'label' => 'ค้นหาโดยชนิดอาหาร',
-                  'data' => 'searchfood_bytype:0')
+                  'data' => 'searchfood_bytype:1')
                 )
               )
             ];
