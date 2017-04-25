@@ -1,35 +1,38 @@
-<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
-<div id="chart_div" style="width: 150%; height: 700px;"></div>
+<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js">
+</script>
+<div id="chart_div" style="width: 110%; height: 700px;"></div>
 <script>
- google.charts.load('current', {
+    google.charts.load('current', {
         'packages': ['corechart']
-      });
-      google.charts.setOnLoadCallback(drawChart);
+    });
+    google.charts.setOnLoadCallback(drawChart);
 
-      function drawChart() {
+    function drawChart() {
         var data = google.visualization.arrayToDataTable([
-          ['Day', 'Calorie'],
-          ['13', 2000],
-          ['14', 2170],
-          ['15', 1660],
-          ['16', 1930]
+            ['Day', 'Calorie'],
+            ['13', 2000],
+            ['14', 2170],
+            ['15', 1660],
+            ['15', 1660],
+            ['15', 1660],
+            ['15', 1660],
+            ['16', 1930]
         ]);
 
         var options = {
-          title: 'Calorie ',
-          hAxis: {
-            title: 'Day',
-            titleTextStyle: {
-              color: '#333'
+            title: 'Calorie ',
+            hAxis: {
+                title: 'Day',
+                titleTextStyle: {
+                    color: '#333'
+                }
+            },
+            vAxis: {
+                minValue: 0
             }
-          },
-          vAxis: {
-            minValue: 0
-          }
         };
 
         var chart = new google.visualization.AreaChart(document.getElementById('chart_div'));
         chart.draw(data, options);
-      }
-
+    }
 </script>

@@ -135,9 +135,11 @@ $register = new Register;
 function register_page($username,$password,$confirm_password)
 {
 ?>
-    <h3><b>Register</b></h3>
-    <form name="register" method="post" action="register.php">
-        <span>
+    <div align="center">
+        <h3><b>Register</b></h3>
+
+        <form name="register" method="post" action="register.php">
+            <span>
           <i><img src="images/user.png" alt=""></i>
           <?php if ($username != null) {
             echo '<input type="text" name="username" id="txt_username" placeholder="Enter username" value="'.$username.'">';
@@ -146,7 +148,7 @@ function register_page($username,$password,$confirm_password)
           }
            ?>
         </span>
-        <span>
+            <span>
           <i><img src="images/lock.png" alt=""></i>
           <?php if ($password != null) {
             echo '<input type="password" name="password" id="confirm_password" placeholder="Enter password" value="'.$password.'">';
@@ -155,7 +157,7 @@ function register_page($username,$password,$confirm_password)
           }
            ?>
         </span>
-        <span>
+            <span>
           <i><img src="images/lock.png" alt=""></i>
           <?php if ($confirm_password != null) {
             echo '<input type="password" name="confirm_password" id="confirm_password" placeholder="Enter confirm password" value="'.$confirm_password.'">';
@@ -164,50 +166,53 @@ function register_page($username,$password,$confirm_password)
           }
            ?>
         </span>
-        <button type="submit" class="btn btn-success btn-lg" name="signup" value="signup">Sign Up</button>
-    </form>
-    <h4><a href="" onclick="self.close()">Back to LINE</a></h4>
+            <button type="submit" class="btn btn-success btn-lg" name="signup" value="signup">Sign Up</button>
+        </form>
+        <h4><a href="" onclick="self.close()">Back to LINE</a></h4>
+    </div>
     <?php
 }
 
 function detail_page($userid)
 {
   ?>
-        <h3>User Detail</h3>
-        <form name="detail" method="post" action="register.php">
-            <span>
+        <div align="center">
+            <h3>User Detail</h3>
+            <form name="detail" method="post" action="register.php">
+                <span>
               <input type="text" name="displayname" id="displayname" placeholder="displayname" >
             </span>
-            <span>
+                <span>
               <input type="radio" name="gender" value="Male" checked> Male &nbsp&nbsp&nbsp&nbsp&nbsp
               <input type="radio" name="gender" value="Female"> Female
             </span>
 
-            <span>
+                <span>
               <input type="text" name="weight" id="weight" placeholder="weight (kg.)" >
             </span>
-            <span>
+                <span>
               <input type="text" name="height" id="height" placeholder="height (cm.)" >
             </span>
-            <span>
+                <span>
               <h5>birthday</h5><input type="date" name="bday" min="1900-01-02">
             </span>
-            <div class="form-group">
-                <label for="inputEmail" class="col-lg-3 control-label">Activity</label>
-                <div class="col-lg-3">
-                    <select id="Activity" class="form-control" name="activity">
+                <div class="form-group">
+                    <label for="inputEmail" class="col-lg-3 control-label">Activity</label>
+                    <div class="col-lg-3">
+                        <select id="Activity" class="form-control" name="activity">
 				                  <option selected="selected" value="0">ไม่ออกกำลังกายหรือออกกำลังกายน้อยมาก</option>
 				                  <option value="1">ออกกำลังกายน้อยเล่นกีฬา 1-3 วัน/สัปดาห์</option>
 				                  <option value="2">ออกกำลังกายปานกลางเล่นกีฬา 3-5 วัน/สัปดาห์</option>
 				                  <option value="3">ออกกำลังกายหนักเล่นกีฬา 6-7 วัน/สัปดาห์</option>
 				                  <option value="4">ออกกำลังกายหนักมากเป็นนักกีฬา</option>
 				            </select>
+                    </div>
                 </div>
-            </div>
-            <?php  echo '<button type="submit" class="btn btn-warning btn-lg " name="clear" value="'.$userid.'">Clear</button>'; ?>
-            <?php  echo '<button type="submit" class="btn btn-success btn-lg" name="save" value="'.$userid.'">Save</button>'; ?>
-        </form>
-        <h4><a href="" onclick="self.close()">Back to LINE</a></h4>
+                <?php  echo '<button type="submit" class="btn btn-warning btn-lg " name="clear" value="'.$userid.'">Clear</button>'; ?>
+                <?php  echo '<button type="submit" class="btn btn-success btn-lg" name="save" value="'.$userid.'">Save</button>'; ?>
+            </form>
+            <h4><a href="" onclick="self.close()">Back to LINE</a></h4>
+        </div>
         <?php
 }
 
