@@ -2,7 +2,7 @@
 
 include('THSplitLib/segment.php');
 
-try {
+// try {
 $segment = new Segment();
 $string = "ต้องการบันทึกมื้อมื้ออาหารมื้อ";
 $result = $segment->get_segment_array($string);
@@ -21,10 +21,10 @@ $key = explode(" ", "บันทึก");
     echo "ไม่ตรงคีย์";
   }
 
-
-} catch (Exception $e) {
-  $e->getMessage();
-}
+// 
+// } catch (Exception $e) {
+//   $e->getMessage();
+// }
 
 // if (check_keyword($key,$string) == "true") {
 //   echo "บันทึกมื้ออาหาร";
