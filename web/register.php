@@ -142,27 +142,27 @@ function register_page($username,$password,$confirm_password)
             <span>
           <i><img src="images/user.png" alt=""></i>
           <?php if ($username != null) {
-            echo '<input type="text" name="username" id="txt_username" placeholder="Enter username" value="'.$username.'">';
+            echo '<input type="text" name="username" id="txt_username" placeholder="Username" value="'.$username.'">';
           }else {
-            echo '<input type="text" name="username" id="txt_username" placeholder="Enter username (a-z A-Z 0-9  ความยาว 8-16 ตัวอักษร)" >';
+            echo '<input type="text" name="username" id="txt_username" placeholder="Username (A-z 0-9  ความยาว 8-16 ตัวอักษร)" >';
           }
            ?>
         </span>
             <span>
           <i><img src="images/lock.png" alt=""></i>
           <?php if ($password != null) {
-            echo '<input type="password" name="password" id="confirm_password" placeholder="Enter password" value="'.$password.'">';
+            echo '<input type="password" name="password" id="confirm_password" placeholder="Password" value="'.$password.'">';
           }else {
-            echo '<input type="password" name="password" id="confirm_password" placeholder="Enter password (a-z A-Z 0-9  ความยาว 8-16 ตัวอักษร)">';
+            echo '<input type="password" name="password" id="confirm_password" placeholder="Password (A-z 0-9  ความยาว 8-16 ตัวอักษร)">';
           }
            ?>
         </span>
             <span>
           <i><img src="images/lock.png" alt=""></i>
           <?php if ($confirm_password != null) {
-            echo '<input type="password" name="confirm_password" id="confirm_password" placeholder="Enter confirm password" value="'.$confirm_password.'">';
+            echo '<input type="password" name="confirm_password" id="confirm_password" placeholder="Confirm password" value="'.$confirm_password.'">';
           }else {
-            echo '<input type="password" name="confirm_password" id="confirm_password" placeholder="Enter confirm password">';
+            echo '<input type="password" name="confirm_password" id="confirm_password" placeholder="Confirm password">';
           }
            ?>
         </span>
