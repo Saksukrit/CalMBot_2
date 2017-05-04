@@ -1,4 +1,6 @@
 <?php
+error_reporting(E_ALL);
+ini_set('display_errors', '1');
 
 include_once 'THSplitLib/segment.php';
 
@@ -27,8 +29,7 @@ $key = explode(" ", "Hi");
   $e->getMessage();
 }
 
-error_reporting(E_ALL);
-ini_set('display_errors', '1');
+
 
 // if (check_keyword($key,$string) == "true") {
 //   echo "บันทึกมื้ออาหาร";
