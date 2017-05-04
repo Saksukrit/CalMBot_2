@@ -6,8 +6,7 @@ include_once 'THSplitLib/segment.php';
 
 try {
 $segment = new Segment();
-// $string = "ต้องการบันทึกมื้อมื้ออาหารมื้อ";
-$string = "Hi dada";
+$string = "ต้องการบันทึกมื้อมื้ออาหารมื้อ";
 $result = $segment->get_segment_array($string);
 $count = count($result);
 //js_thai_encode($result);
@@ -15,7 +14,7 @@ echo implode(' | ', $result);
 echo '<br>'.$count.'<br><br>';
 
 // $req = explode(" ", "บันทึก มื้อ อาหาร");
-$key = explode(" ", "Hi");
+$key = explode(" ", "บันทึก มื้อ อาหาร");
 
 
   if (check_keyword($key,$string) == "true") {
