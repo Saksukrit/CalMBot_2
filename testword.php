@@ -1,6 +1,6 @@
 <?php
 
-include('THSplitLib/segment.php');
+include_once 'THSplitLib/segment.php';
 
 // try {
 $segment = new Segment();
@@ -21,7 +21,7 @@ $key = explode(" ", "บันทึก");
     echo "ไม่ตรงคีย์";
   }
 
-// 
+//
 // } catch (Exception $e) {
 //   $e->getMessage();
 // }
