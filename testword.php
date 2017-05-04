@@ -13,11 +13,21 @@ echo '<br>'.$count.'<br><br>';
 // $req = explode(" ", "บันทึก มื้อ อาหาร");
 $key = explode(" ", "บันทึก");
 
-if (check_keyword($key,$string) == "true") {
-  echo "บันทึกมื้ออาหาร";
-}else {
-  echo "ไม่ตรงคีย์";
+try {
+  if (check_keyword($key,$string) == "true") {
+    echo "บันทึกมื้ออาหาร";
+  }else {
+    echo "ไม่ตรงคีย์";
+  }
+} catch (Exception $e) {
+  $e->getMessage();
 }
+
+// if (check_keyword($key,$string) == "true") {
+//   echo "บันทึกมื้ออาหาร";
+// }else {
+//   echo "ไม่ตรงคีย์";
+// }
 
 
 
