@@ -10,7 +10,7 @@ include 'postback.php';
 include 'req_manage.php';
 include 'mg_push.php';
 include 'wordcut.php';
-include_once 'THSplitLib/segment.php';
+// include_once 'THSplitLib/segment.php';
 
 
 $strAccessToken = "8RNNBRGbDOu0y/MAr0BnuajV46/YU3MVzA0rA4m4t6F1orO6PHx6b913ABPg3bR7TEvQO99XihXnZaPKVO/4VsQXLqs8LQZdmskXuwncFHyyQ824y7XOt9GLFJOgodw9zUS5/9qgrff265ZoTF3e9QdB04t89/1O/w1cDnyilFU=";
@@ -30,6 +30,7 @@ $food_dialy = new Food_save;
 $searchfood = new Searchfood;
 $searchexercise = new Searchexercise;
 $req = new Req_manage;
+$wordcut = new Wordcut;
 
 if (!is_null($arrJson['events'])) {
   foreach ($arrJson['events'] as $event) {
@@ -771,31 +772,15 @@ if (!is_null($arrJson['events'])) {
 
 echo "OK";
 
-$word = "เมนูใช้งาน";
-$keyword = explode(" ", "เมนู");
-check($keyword,$word);
-function check($keyword,$word)
-{
-
-  $segment = new Segment();
-  $result = $segment->get_segment_array($word);
-  $mapper = 0;
-  // loop mapping algorithm
-  for ($i=0; $i < count($result); $i++) {
-    if ($mapper < count($keyword)) {
-      if ($result[$i] == $keyword[$mapper]) {
-        $mapper++;
-      }
-    }
-  }
-  // check mapper
-  if ($mapper == count($keyword)) {
-    echo '<br>'.$word;
-    return "true";
-  }else {
-    echo '<br> false';
-    return "false";
-  }
+$word = "มันใช่หรอ เมนูใช้งาน";
+$keyword = explode(" ", "เมนู อาหาร");
+$wc = new Wordcut;
+if ($wc->check($keyword,$word) == "true") {
+  echo "เข้าเมนู";
+}else {
+  $a = array("ไม่เข้าใจ","อะไรหรอ","ว่าไงนะ");
+  echo "<br><br>".$a[array_rand($a,1)];
 }
+
 
 ?>

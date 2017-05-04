@@ -7,27 +7,26 @@ class Wordcut
 
   public function check($keyword,$word)
   {
-    $segment = new Segment;
+
+    $segment = new Segment();
     $result = $segment->get_segment_array($word);
-
-
     $mapper = 0;
     // loop mapping algorithm
-      for ($i=0; $i < count($result); $i++) {
-        if ($mapper < count($keyword)) {
-          if ($result[$i] == $keyword[$mapper]) {
-            $mapper++;
-          }
+    for ($i=0; $i < count($result); $i++) {
+      if ($mapper < count($keyword)) {
+        if ($result[$i] == $keyword[$mapper]) {
+          $mapper++;
         }
       }
+    }
     // check mapper
     if ($mapper == count($keyword)) {
+      // echo '<br>'.$word;
       return "true";
     }else {
+      // echo '<br> false';
       return "false";
     }
-
-
   }
 
 
