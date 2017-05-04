@@ -130,7 +130,7 @@ $register = new Register;
 
 </html>
 
-<!-- fun php -->
+<!-- php page-->
 <?php
 function register_page($username,$password,$confirm_password)
 {
@@ -144,7 +144,7 @@ function register_page($username,$password,$confirm_password)
           <?php if ($username != null) {
             echo '<input type="text" name="username" id="txt_username" placeholder="Enter username" value="'.$username.'">';
           }else {
-            echo '<input type="text" name="username" id="txt_username" placeholder="Enter username" >';
+            echo '<input type="text" name="username" id="txt_username" placeholder="Enter username (a-z A-Z 0-9  ความยาว 8-16 ตัวอักษร)" >';
           }
            ?>
         </span>
@@ -153,7 +153,7 @@ function register_page($username,$password,$confirm_password)
           <?php if ($password != null) {
             echo '<input type="password" name="password" id="confirm_password" placeholder="Enter password" value="'.$password.'">';
           }else {
-            echo '<input type="password" name="password" id="confirm_password" placeholder="Enter password">';
+            echo '<input type="password" name="password" id="confirm_password" placeholder="Enter password (a-z A-Z 0-9  ความยาว 8-16 ตัวอักษร)">';
           }
            ?>
         </span>
@@ -214,8 +214,10 @@ function detail_page($userid)
             <h4><a href="" onclick="self.close()">Back to LINE</a></h4>
         </div>
         <?php
-}
+}?>
 
+<!-- php page -->
+<?php
 function complete()
 {
   ?>
