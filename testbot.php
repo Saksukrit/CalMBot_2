@@ -434,11 +434,11 @@ if (!is_null($arrJson['events'])) {
 
             $messages2 = [
             'type' => 'template',
-            'altText' => ' ',
+            'altText' => 'เมนูเพิ่มเติม',
             'template' => array(
               'type' => 'buttons',
-              'title' => ' ',
-              'text' => ' ',
+              'title' => 'เมนูเพิ่มเติม',
+              // 'text' => ' ',
               'actions' => array(
                 array(
                   'type' => 'message',
