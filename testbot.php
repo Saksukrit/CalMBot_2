@@ -394,7 +394,7 @@ if (!is_null($arrJson['events'])) {
             'template' => array(
               'type' => 'buttons',
               'title' => 'เมนูเพิ่มเติม',
-              // 'text' => ' ',
+              'text' => ' ',
               'actions' => array(
                 array(
                   'type' => 'message',
