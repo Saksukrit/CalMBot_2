@@ -220,8 +220,8 @@ if (!is_null($arrJson['events'])) {
       // -----------------------------------------------------------------------
 
 
-      // show list exercise by calorie ++++++++++++++++++++++++
-      else if ($key = "ecalorie") {
+      // show list exercise by type ++++++++++++++++++++++++
+      else if ($key = "ecallvl") {
         $ms_array = array();
         $ms_array = $searchexercise->searchexercise_bytype($value);
         if (count($ms_array) == 1) {
@@ -691,16 +691,16 @@ if (!is_null($arrJson['events'])) {
               'actions' => array(
                 array(
                   'type' => 'postback',
-                  'label' => 'Low',
-                  'data' => 'ecalorie:Low')
+                  'label' => 'ระดับเบาๆ',
+                  'data' => 'ecallvl:Low')
                 ,array(
                   'type' => 'postback',
-                  'label' => 'Moderate',
-                  'data' => 'ecalorie:Moderate')
+                  'label' => 'ระดับปานกลาง',
+                  'data' => 'ecallvl:Moderate')
                 ,array(
                   'type' => 'postback',
-                  'label' => 'High',
-                  'data' => 'ecalorie:High')
+                  'label' => 'ระดับหนักหน่วง',
+                  'data' => 'ecallvl:High')
                 )
               )
             ];
@@ -715,7 +715,8 @@ if (!is_null($arrJson['events'])) {
           else if($text == "สวัสดี"){
             $messages = [
             'type' => "text",
-            'text' => "สวัสดี ฉันคือ Cal.MBot ผู้ช่วยให้ข้อมูลและบันทึกข้อมูลเกี่ยวกับอาหารและการออกกำลังกาย"];
+            'text' => "สวัสดี ฉันคือ Cal.MBot ผู้ช่วยให้ข้อมูลและบันทึกข้อมูลเกี่ยวกับอาหารและการออกกำลังกาย
+            คุณสามารถเรียนเมนูการใช้งานได้โดยพิมพ์คำว่า 'เมนู' "];
             $data['replyToken'] = $replyToken;
             $data['messages'][0] = $messages;
 
