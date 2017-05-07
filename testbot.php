@@ -189,35 +189,35 @@ if (!is_null($arrJson['events'])) {
         $total_calorie = $check_Cal[1];
         $tdee = $check_Cal[2];
 
-        if ($result == "over") {
-          $neg_cal = $total_calorie - $tdee;
-          $notify = [
-          'type' => 'template',
-          'altText' => 'แคลอรี่เกินกำหนดแล้ว',
-          'template' => array(
-            'type' => 'buttons',
-            'title' => 'แคลอรี่เกินกำหนดแล้วนะ',
-            'text' => 'วันนี้ คุณได้รับแคลอรี่รวมเกินกำหนดที่ '.$tdee.' แคลอรี่
-            เราขอเสนอสิ่งที่ช่วยให้ดีขึ้นได้',
-            'actions' => array(
-              array(
-                'type' => 'postback',
-                'label' => 'อาหารสุขภาพที่ใช่',
-                'data' => 'healthyfood:'.$neg_cal)
-              ,array(
-                'type' => 'postback',
-                'label' => 'การออกกำลังกายที่เหมาะ',
-                'data' => 'healthyex:'.$neg_cal)
-              )
-            )
-          ];
-          $push = new Push;
-          $pushdata = array();
-          $pushdata['to'] = $userId;
-          $pushdata['messages'][0] = $notify;
-
-          $push->push_message($pushdata,$strAccessToken);
-        }
+        // if ($result == "over") {
+        //   $neg_cal = $total_calorie - $tdee;
+        //   $notify = [
+        //   'type' => 'template',
+        //   'altText' => 'แคลอรี่เกินกำหนดแล้ว',
+        //   'template' => array(
+        //     'type' => 'buttons',
+        //     'title' => 'แคลอรี่เกินกำหนดแล้วนะ',
+        //     'text' => 'วันนี้ คุณได้รับแคลอรี่รวมเกินกำหนดแล้ว
+        //     เราขอเสนอสิ่งที่ช่วยให้ดีขึ้นได้',
+        //     'actions' => array(
+        //       array(
+        //         'type' => 'postback',
+        //         'label' => 'อาหารสุขภาพที่ใช่',
+        //         'data' => 'healthyfood:'.$neg_cal)
+        //       ,array(
+        //         'type' => 'postback',
+        //         'label' => 'การออกกำลังกายที่เหมาะ',
+        //         'data' => 'healthyex:'.$neg_cal)
+        //       )
+        //     )
+        //   ];
+        //   $push = new Push;
+        //   $pushdata = array();
+        //   $pushdata['to'] = $userId;
+        //   $pushdata['messages'][0] = $notify;
+        //
+        //   $push->push_message($pushdata,$strAccessToken);
+        // }
 
         // ***************************************************************************************************************************************************
 
@@ -784,6 +784,36 @@ if (!is_null($arrJson['events'])) {
             $ms_profile = $user->get_profile($userId);
             $data['replyToken'] = $replyToken;
             $data['messages'][0] = $ms_profile;
+
+          }else  if ($text == "over") {
+              $neg_cal = 1 - 0;
+              $notify = [
+              'type' => 'template',
+              'altText' => 'แคลอรี่เกินกำหนดแล้ว',
+              'template' => array(
+                'type' => 'buttons',
+                'title' => 'แคลอรี่เกินกำหนดแล้วนะ',
+                'text' => 'วันนี้ คุณได้รับแคลอรี่รวมเกินกำหนดแล้ว
+                เราขอเสนอสิ่งที่ช่วยให้ดีขึ้นได้',
+                'actions' => array(
+                  array(
+                    'type' => 'postback',
+                    'label' => 'อาหารสุขภาพที่ใช่',
+                    'data' => 'healthyfood:'.$neg_cal)
+                  ,array(
+                    'type' => 'postback',
+                    'label' => 'การออกกำลังกายที่เหมาะ',
+                    'data' => 'healthyex:'.$neg_cal)
+                  )
+                )
+              ];
+              $push = new Push;
+              $pushdata = array();
+              $pushdata['to'] = $userId;
+              $pushdata['messages'][0] = $notify;
+
+              $push->push_message($pushdata,$strAccessToken);
+
 
           }else{
             $messages = [
