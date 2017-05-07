@@ -10,6 +10,7 @@ include 'postback.php';
 include 'req_manage.php';
 include 'mg_push.php';
 include 'wordcut.php';
+include 'cal_notifications.php';
 // include_once 'THSplitLib/segment.php';
 
 
