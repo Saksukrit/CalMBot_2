@@ -363,7 +363,7 @@ if (!is_null($arrJson['events'])) {
           if ($text == "เมนู") {
             $displayname = $user->get_displayname($userId);
 
-            $messages = [
+            $messages1 = [
             'type' => 'template',
             'altText' => 'เมนูการใช้งาน',
             'template' => array(
@@ -384,16 +384,33 @@ if (!is_null($arrJson['events'])) {
                   'type' => 'message',
                   'label' => 'ข้อมูลออกกำลังกาย',
                   'text' => 'ค้นหาข้อมูลการออกกำลังกาย')
-                ,array(
+                )
+              )
+            ];
+
+            $messages2 = [
+            'type' => 'template',
+            'altText' => ' ',
+            'template' => array(
+              'type' => 'buttons',
+              'title' => ' ',
+              'text' => ' ',
+              'actions' => array(
+                array(
                   'type' => 'message',
                   'label' => 'ดูข้อมูลผู้ใช้',
                   'text' => 'ดูข้อมูลผู้ใช้')
+                ,array(
+                  'type' => 'uri',
+                  'label' => 'เข้าเว็บไซต์',
+                  'uri' => 'http://example.com/page/123')
                 )
               )
             ];
 
             $data['replyToken'] = $replyToken;
-            $data['messages'][0] = $messages;
+            $data['messages'][0] = $messages1;
+            $data['messages'][1] = $messages2;
 
           }
 
@@ -728,7 +745,8 @@ if (!is_null($arrJson['events'])) {
           }else{
             $messages = [
             'type' => "text",
-            'text' => "ขอโทษ ฉันไม่เข้าใจ"];
+            'text' => "ขอโทษ ฉันไม่เข้าใจ
+            คุณสามารถเรียนเมนูการใช้งานได้โดยพิมพ์คำว่า 'เมนู'"];
             $data['replyToken'] = $replyToken;
             $data['messages'][0] = $messages;
           }
