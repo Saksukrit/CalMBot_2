@@ -217,6 +217,49 @@ if (!is_null($arrJson['events'])) {
         ออกจากเมนูการบันทึกแล้ว'];
         $data['replyToken'] = $replyToken;
         $data['messages'][0] = $ms_summary;
+
+
+        // *********   check over caloriesum to notifications ************************************************************************************************
+        //check caloriesum
+        $checkCal = new CalNotif;
+        // $checkCal->checkOverCal($get_userId);
+        $check_Cal = explode(':',$checkCal->checkOverCal($get_userId));
+        $result = $check_Cal[0];
+        $total_calorie = $check_Cal[1];
+        $tdee = $check_Cal[2];
+
+        if ($result == "over") {
+          $neg_cal = $total_calorie - $tdee;
+          $notify = [
+          'type' => 'template',
+          'altText' => 'แคลอรี่เกินกำหนดแล้ว',
+          'template' => array(
+            'type' => 'buttons',
+            'title' => 'แคลอรี่เกินกำหนดแล้วนะ',
+            'text' => '
+            เราขอเสนอสิ่งที่ช่วยให้ดีขึ้นได้',
+            'actions' => array(
+              array(
+                'type' => 'postback',
+                'label' => 'อาหารสุขภาพที่ใช่',
+                'data' => 'healthyfood:'.$neg_cal)
+              ,array(
+                'type' => 'postback',
+                'label' => 'การออกกำลังกายที่เหมาะ',
+                'data' => 'healthyex:'.$neg_cal)
+              )
+            )
+          ];
+          $push = new Push;
+          $pushdata = array();
+          $pushdata['to'] = $userId;
+          $pushdata['messages'][0] = $notify;
+
+          $push->push_message($pushdata,$strAccessToken);
+        }
+
+        // ***************************************************************************************************************************************************
+
       }
       // -----------------------------------------------------------------------
 
@@ -430,48 +473,6 @@ if (!is_null($arrJson['events'])) {
               $food_dialy->save_food_dialy($get_userId,date('Y-m-d'));
             }
 
-            // *********   check over caloriesum to notifications ************************************************************************************************
-            //check caloriesum
-            $checkCal = new CalNotif;
-            // $checkCal->checkOverCal($get_userId);
-            $check_Cal = explode(':',$checkCal->checkOverCal($get_userId));
-            $result = $check_Cal[0];
-            $total_calorie = $check_Cal[1];
-            $tdee = $check_Cal[2];
-
-            if ($result == "over") {
-              $neg_cal = $total_calorie - $tdee;
-              $notify = [
-              'type' => 'template',
-              'altText' => 'แคลอรี่เกินกำหนดแล้ว',
-              'template' => array(
-                'type' => 'buttons',
-                'title' => 'แคลอรี่เกินกำหนดแล้วนะ',
-                'text' => '
-                เราขอเสนอสิ่งที่ช่วยให้ดีขึ้นได้',
-                'actions' => array(
-                  array(
-                    'type' => 'postback',
-                    'label' => 'อาหารสุขภาพที่ใช่',
-                    'data' => 'healthyfood:'.$neg_cal)
-                  ,array(
-                    'type' => 'postback',
-                    'label' => 'การออกกำลังกายที่เหมาะ',
-                    'data' => 'healthyex:'.$neg_cal)
-                  )
-                )
-              ];
-              $push = new Push;
-              $pushdata = array();
-              $pushdata['to'] = $userId;
-              $pushdata['messages'][0] = $notify;
-
-              $push->push_message($pushdata,$strAccessToken);
-            }
-
-            // ***************************************************************************************************************************************************
-
-            else {
 
 
             $save_dialy = [
@@ -504,7 +505,7 @@ if (!is_null($arrJson['events'])) {
 
             $data['replyToken'] = $replyToken;
             $data['messages'][0] = $save_dialy;
-          }
+
           }
 
           // search for save
