@@ -82,6 +82,15 @@ class Searchfood
 
     public function searchfood_bytype($foodtype)
     {
+      if ($foodtype == "อาหารคาว") {
+        $foodtype = "food";
+      }else if ($foodtype == "อาหารหวาน") {
+        $foodtype = "dessert";
+      }else if ($foodtype == "ผลไม้") {
+        $foodtype = "fruit";
+      }else if ($foodtype == "เครื่องดื่ม") {
+        $foodtype = "drink";
+      }
         $db = new Dbcon;
         $conn = $db->OpenCon();
         mysqli_set_charset($conn, "utf8");

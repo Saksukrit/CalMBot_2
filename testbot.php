@@ -576,20 +576,21 @@ if (!is_null($arrJson['events'])) {
               'text' => 'ต้องการค้นหาประเภทใด',
               'actions' => array(
                 array(
-                  'type' => 'postback',
-                  'label' => 'food',
-                  'data' => 'foodtype:food',
-                  'text' => 'food')
+                  'type' => 'message',
+                  'label' => 'อาหารคาว',
+                  'text' => 'อาหารคาว')
                 ,array(
-                  'type' => 'postback',
-                  'label' => 'dessert',
-                  'data' => 'foodtype:dessert',
-                  'text' => 'dessert')
+                  'type' => 'message',
+                  'label' => 'อาหารหวาน',
+                  'text' => 'อาหารหวาน')
+                  ,array(
+                    'type' => 'message',
+                    'label' => 'ผลไม้',
+                    'text' => 'ผลไม้')
                 ,array(
-                  'type' => 'postback',
-                  'label' => 'beverage',
-                  'data' => 'foodtype:beverage',
-                  'text' => 'beverage')
+                  'type' => 'message',
+                  'label' => 'เครื่องดื่ม',
+                  'text' => 'เครื่องดื่ม')
                 )
               )
             ];
