@@ -256,7 +256,7 @@ if (!is_null($arrJson['events'])) {
           'template' => array(
             'type' => 'buttons',
             'title' => 'แคลอรี่เกินกำหนดแล้วนะ',
-            'text' => $neg_cal.'
+            'text' => '
             เราขอเสนอสิ่งที่ช่วยให้ดีขึ้นได้',
             'actions' => array(
               array(
