@@ -184,11 +184,11 @@ if (!is_null($arrJson['events'])) {
             array(
               'type' => 'postback',
               'label' => 'เพิ่มอีก',
-              'data' => 'more:'.$repast.'')
+              'data' => 'more:'.$reqrepast.'')
             ,array(
               'type' => 'postback',
               'label' => 'พอแล้ว',
-              'data' => 'enough:'.$repast.'')
+              'data' => 'enough:'.$reqrepast.'')
             )
           )
         ];
