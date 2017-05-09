@@ -11,6 +11,7 @@ include 'req_manage.php';
 include 'mg_push.php';
 include 'wordcut.php';
 include 'cal_notifications.php';
+include 'show_healthyfood.php';
 // include_once 'THSplitLib/segment.php';
 
 
@@ -46,30 +47,40 @@ if (!is_null($arrJson['events'])) {
       $userId = $event['source']['userId'];
 
       $text_type = explode(':', $datapostback);
+      if ($text_type[0] == "savefood") {
+        // savefood:repast:food_selected:num_food:confirm_food
+        $key = $text_type[0];
+        $repast = $text_type[1];
+        $food_selected = $text_type[2];
+        $num_food = $text_type[3];
+        $confirm_food = $text_type[4];
+      }
       $key = $text_type[0];
       $value = $text_type[1];
 
-      // user_confirm *********
+      // user_confirm **************************************
       if ($key == "user_confirm") {
         $obdata->setpostback($userId,$key);
         $data['replyToken'] = $replyToken;
         $data['messages'][0]['type'] = "text";
         $data['messages'][0]['text'] = "กรุณากรอก Username ของคุณ";
       }
+
+      // ---------------------------------------------------
       //postback repast
-      else if ($key == "repast") {
-        $req->save_repast($userId,$value);
+      else if (($key == "savefood") && ($repast != "null")) {
+        $req->save_repast($userId,$repast);
         $ms_repast = [
         'type' => 'text',
-        'text' => 'คุณทานอะไรใน'. $value];
+        'text' => 'คุณทานอะไรใน'. $repast];
         $data['replyToken'] = $replyToken;
         $data['messages'][0] = $ms_repast;
       }
       // postback food_selected
-      else if ($key == "food_selected") {
-        $req->save_food($userId,$value);
+      else if (($key == "savefood") && ($food_selected != "null")) {
+        $req->save_food($userId,$food_selected);
         // get_unit
-        $unittext = $searchfood->get_unit($value);
+        $unittext = $searchfood->get_unit($food_selected);
         $ms_food = [
         'type' => 'template',
         'altText' => 'จำนวน',
@@ -81,15 +92,15 @@ if (!is_null($arrJson['events'])) {
             array(
               'type' => 'postback',
               'label' => '1',
-              'data' => 'num_food:1')
+              'data' => 'savefood:'.$repast.':'.$food_selected.':1:null')
             ,array(
               'type' => 'postback',
               'label' => '2',
-              'data' => 'num_food:2')
+              'data' => 'savefood:'.$repast.':'.$food_selected.':2:null')
             ,array(
               'type' => 'postback',
               'label' => '3',
-              'data' => 'num_food:3')
+              'data' => 'savefood:'.$repast.':'.$food_selected.':3:null')
             )
           )
         ];
@@ -97,13 +108,13 @@ if (!is_null($arrJson['events'])) {
         $data['messages'][0] = $ms_food;
       }
       //postback num_food
-      else if ($key == "num_food") {
-        $req->save_unit($userId,$value);
+      else if (($key == "savefood") && ($num_food != "null")) {
+        $req->save_unit($userId,$num_food);
         // get data from Req_manage
-        $food = $req->get_food($userId);
-        $unit = $value;
-        $unittext = $searchfood->get_unit($food);
-        $calorie = $searchfood->get_calorie($food);
+        // $food = $req->get_food($userId);
+        $unit = intval($num_food);
+        $unittext = $searchfood->get_unit($food_selected);
+        $calorie = $searchfood->get_calorie($food_selected);
         $caloriesum = $unit * $calorie;
 
         $messagess = [
@@ -111,13 +122,13 @@ if (!is_null($arrJson['events'])) {
         "altText"=> "ยืนยันรายการ",
         "template"=> array(
           "type"=> "confirm",
-          "text"=> ''.$food.' '.$unit.' '.$unittext.' เท่ากับ '.$caloriesum.' กิโลแคลอรี่
+          "text"=> ''.$food_selected.' '.$unit.' '.$unittext.' เท่ากับ '.$caloriesum.' กิโลแคลอรี่
           ยืนยันบันทึกรายการนี้',
           "actions"=> array(
             array(
               "type"=> "postback",
               "label"=> "ยืนยัน",
-              'data' => 'confirm_food:ยืนยัน'),
+              'data' => 'savefood:'.$repast.':'.$food_selected.':'.$num_food.':confirm_food'),
             array(
               "type"=> "postback",
               "label"=> "ยกเลิก",
@@ -139,13 +150,14 @@ if (!is_null($arrJson['events'])) {
         $data['messages'][0] = $ms;
       }
       // confirm_food
-      else if ($key == "confirm_food") {
+      else if ($confirm_food == "confirm_food") {
         // get data from Req_manage
-        $repast = $req->get_repast($userId);
-        $food = $req->get_food($userId);
-        $unit = intval($req->get_unit($userId));
-        $unittext = $searchfood->get_unit($food);
-        $calorie = $searchfood->get_calorie($food);
+        // $repast = $req->get_repast($userId);
+        // $food = $req->get_food($userId);
+        // $unit = intval($req->get_unit($userId));
+        $unit = intval($num_food);
+        $unittext = $searchfood->get_unit($food_selected);
+        $calorie = $searchfood->get_calorie($food_selected);
         $caloriesum = $unit * $calorie;
 
         // if to eng repast     Breakfast  Lunch  Dinner  Supper
@@ -156,6 +168,10 @@ if (!is_null($arrJson['events'])) {
         $get_food_dialyId = $food_dialy->check_food_dialy($get_userId,date('Y-m-d'));
         // save food_dialy list
         $food_dialy->save_food_dialy_list($get_food_dialyId,$food,$unit,$caloriesum,$repast);
+        // get summary calorie
+        $calorie_all = $food_dialy->get_all_calorie($get_food_dialyId);
+        // update summary calorie
+        $food_dialy->update_total_calorie($get_food_dialyId,$calorie_all);
 
         $ms = [
         'type' => 'template',
@@ -203,10 +219,10 @@ if (!is_null($arrJson['events'])) {
 
         // get repast calorie
         $calorie_repast = $food_dialy->get_repast_calorie($get_food_dialyId,$value);
-        // get summary calorie
-        $calorie_all = $food_dialy->get_all_calorie($get_food_dialyId);
-        // update summary calorie
-        $food_dialy->update_total_calorie($get_food_dialyId,$calorie_all);
+        // // get summary calorie
+        // $calorie_all = $food_dialy->get_all_calorie($get_food_dialyId);
+        // // update summary calorie
+        // $food_dialy->update_total_calorie($get_food_dialyId,$calorie_all);
 
         $ms_summary = [
         'type' => 'text',
@@ -261,6 +277,32 @@ if (!is_null($arrJson['events'])) {
         // ***************************************************************************************************************************************************
 
       }
+
+
+      // show healthyfood
+      else if ($key = "healthyfood" && ($healthy = $healthyfood->get_healthyfood_by_cal($value) != "null")) {
+        $healthyfood = new HealthyFood;
+        $ms_array = array();
+        $ms_array = $healthy;
+        if (count($ms_array) == 1) {
+          $data['replyToken'] = $replyToken;
+          $data['messages'][0] = $ms_array[0];
+        }
+
+      }
+
+      // show exercise
+      else if ($key = "healthyex" && ($exercise = $searchexercise->searchexercise_bycalorie($value) != "null")) {
+          $ms_array = array();
+          $ms_array = $exercise;
+          if (count($ms_array) == 1) {
+            $data['replyToken'] = $replyToken;
+            $data['messages'][0] = $ms_array[0];
+          }
+
+      }
+
+
       // -----------------------------------------------------------------------
 
 
@@ -486,19 +528,19 @@ if (!is_null($arrJson['events'])) {
                 array(
                   'type' => 'postback',
                   'label' => 'มื้อเช้า',
-                  'data' => 'repast:มื้อเช้า')
+                  'data' => 'savefood:มื้อเช้า:null:null:null')
                 ,array(
                   'type' => 'postback',
                   'label' => 'มื้อเที่ยง',
-                  'data' => 'repast:มื้อเที่ยง')
+                  'data' => 'savefood:มื้อเที่ยง:null:null:null')
                 ,array(
                   'type' => 'postback',
                   'label' => 'มื้อเย็น',
-                  'data' => 'repast:มื้อเย็น')
+                  'data' => 'savefood:มื้อเย็น:null:null:null')
                 ,array(
                   'type' => 'postback',
                   'label' => 'ระหว่างมื้อ',
-                  'data' => 'repast:ระหว่างมื้อ')
+                  'data' => 'savefood:ระหว่างมื้อ:null:null:null')
                 )
               )
             ];
@@ -510,7 +552,8 @@ if (!is_null($arrJson['events'])) {
 
           // search for save
           // show list food by name
-          else if ((($search = $searchfood->searchfood_forsave($text)) != "null") && ($req->get_repast($userId) != "null--")) {
+          // else if ((($search = $searchfood->searchfood_forsave($text)) != "null") && ($req->get_repast($userId) != "null--")) {
+          else if (($getrepast = $req->get_repast($userId) != "null--") && (($search = $searchfood->searchfood_forsave($text,$getrepast)) != "null")) {
 
             $ms_array = array();
             $ms_array = $search;

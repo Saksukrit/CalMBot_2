@@ -127,7 +127,7 @@ class Searchfood
     }
     //------------------------------------------------------------
     // for save
-    public function searchfood_forsave($foodname)
+    public function searchfood_forsave($foodname,$repast)
     {
         $db = new Dbcon;
         $conn = $db->OpenCon();
@@ -149,7 +149,7 @@ class Searchfood
                     array(
                     'type' => 'postback',
                     'label' => 'เลือก',
-                    'data' => 'food_selected:'.$row["food_name"])
+                    'data' => 'savefood:'.$repast.':'.$row["food_name"].':null:null')
                     ) ,
                     );
                     ++$num;
