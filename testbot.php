@@ -68,7 +68,7 @@ if (!is_null($arrJson['events'])) {
 
       // ---------------------------------------------------
       //postback repast
-      else if (($key == "savefood") && ($repast != "null")) {
+      else if (($key == "savefood") && ($repast != "null") && ($food_selected == "null")) {
         $req->save_repast($userId,$repast);
         $ms_repast = [
         'type' => 'text',
@@ -77,7 +77,7 @@ if (!is_null($arrJson['events'])) {
         $data['messages'][0] = $ms_repast;
       }
       // postback food_selected
-      else if (($key == "savefood") && ($food_selected != "null")) {
+      else if (($key == "savefood") && ($food_selected != "null") && ($num_food == "null")) {
         $req->save_food($userId,$food_selected);
         // get_unit
         $unittext = $searchfood->get_unit($food_selected);
@@ -108,7 +108,7 @@ if (!is_null($arrJson['events'])) {
         $data['messages'][0] = $ms_food;
       }
       //postback num_food
-      else if (($key == "savefood") && ($num_food != "null")) {
+      else if (($key == "savefood") && ($num_food != "null") && ($confirm_food == "null")) {
         $req->save_unit($userId,$num_food);
         // get data from Req_manage
         // $food = $req->get_food($userId);
