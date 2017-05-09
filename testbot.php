@@ -78,7 +78,7 @@ if (!is_null($arrJson['events'])) {
       }
       // postback food_selected
       else if (($key == "savefood") && ($food_selected != "null") && ($num_food == "null")) {
-        $req->save_food($userId,$food_selected);
+        // $req->save_food($userId,$food_selected);//--
         // get_unit
         $unittext = $searchfood->get_unit($food_selected);
         $ms_food = [
@@ -109,7 +109,7 @@ if (!is_null($arrJson['events'])) {
       }
       //postback num_food
       else if (($key == "savefood") && ($num_food != "null") && ($confirm_food == "null")) {
-        $req->save_unit($userId,$num_food);
+        // $req->save_unit($userId,$num_food); //--
         // get data from Req_manage
         // $food = $req->get_food($userId);
         $unit = intval($num_food);
@@ -201,7 +201,7 @@ if (!is_null($arrJson['events'])) {
 
       // more save
       else if ($key == "more") {
-        $req->save_repast($userId,$value);
+        $req->save_repast($userId,$value);//--
 
         $ms_repast = [
         'type' => 'text',
@@ -280,7 +280,7 @@ if (!is_null($arrJson['events'])) {
 
 
       // show healthyfood
-      else if ($key = "healthyfood" && ($healthy = $healthyfood->get_healthyfood_by_cal($value) != "null")) {
+      else if (($key = "healthyfood") && ($healthy = $healthyfood->get_healthyfood_by_cal($value) != "null")) {
         $healthyfood = new HealthyFood;
         $ms_array = array();
         $ms_array = $healthy;
@@ -292,7 +292,7 @@ if (!is_null($arrJson['events'])) {
       }
 
       // show exercise
-      else if ($key = "healthyex" && ($exercise = $searchexercise->searchexercise_bycalorie($value) != "null")) {
+      else if (($key = "healthyex") && ($exercise = $searchexercise->searchexercise_bycalorie($value) != "null")) {
           $ms_array = array();
           $ms_array = $exercise;
           if (count($ms_array) == 1) {
