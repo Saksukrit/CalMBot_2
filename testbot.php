@@ -54,9 +54,11 @@ if (!is_null($arrJson['events'])) {
         $food_selected = $text_type[2];
         $num_food = $text_type[3];
         $confirm_food = $text_type[4];
+      }else {
+        $key = $text_type[0];
+        $value = $text_type[1];
       }
-      $key = $text_type[0];
-      $value = $text_type[1];
+
 
       // user_confirm **************************************
       if ($key == "user_confirm") {
