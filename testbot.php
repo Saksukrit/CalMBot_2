@@ -282,10 +282,10 @@ if (!is_null($arrJson['events'])) {
 
 
       // show healthyfood
-      else if (($key = "healthyfood") && ($healthy = $healthyfood->get_healthyfood_by_cal($value) != "null")) {
+      else if (($key = "healthyfood") && ($healthyfood->get_healthyfood_by_cal($value) != "null")) {
         $healthyfood = new HealthyFood;
         $ms_array = array();
-        $ms_array = $healthy;
+        $ms_array = $healthyfood->get_healthyfood_by_cal($value);
         if (count($ms_array) == 1) {
           $data['replyToken'] = $replyToken;
           $data['messages'][0] = $ms_array[0];
@@ -294,9 +294,9 @@ if (!is_null($arrJson['events'])) {
       }
 
       // show exercise
-      else if (($key = "healthyex") && ($exercise = $searchexercise->searchexercise_bycalorie($value) != "null")) {
+      else if (($key = "healthyex") && ($searchexercise->searchexercise_bycalorie($value) != "null")) {
           $ms_array = array();
-          $ms_array = $exercise;
+          $ms_array = $searchexercise->searchexercise_bycalorie($value);
           if (count($ms_array) == 1) {
             $data['replyToken'] = $replyToken;
             $data['messages'][0] = $ms_array[0];
