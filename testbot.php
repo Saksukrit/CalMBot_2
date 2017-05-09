@@ -553,7 +553,7 @@ if (!is_null($arrJson['events'])) {
           // search for save
           // show list food by name
           // else if ((($search = $searchfood->searchfood_forsave($text)) != "null") && ($req->get_repast($userId) != "null--")) {
-          else if (($getrepast = $req->get_repast($userId) != "null--") && (($search = $searchfood->searchfood_forsave($text,$getrepast)) != "null")) {
+          else if (($getrepast = $req->get_repast($userId) != "null") && (($search = $searchfood->searchfood_forsave($text,$getrepast)) != "null")) {
 
             $ms_array = array();
             $ms_array = $search;
