@@ -152,7 +152,7 @@ if (!is_null($arrJson['events'])) {
       // confirm_food
       else if ($confirm_food == "confirm_food") {
         // get data from Req_manage
-        // $repast = $req->get_repast($userId);
+        $reqrepast = $req->get_repast($userId);
         // $food = $req->get_food($userId);
         // $unit = intval($req->get_unit($userId));
         $unit = intval($num_food);
@@ -167,7 +167,7 @@ if (!is_null($arrJson['events'])) {
         // get dialyId
         $get_food_dialyId = $food_dialy->check_food_dialy($get_userId,date('Y-m-d'));
         // save food_dialy list
-        $food_dialy->save_food_dialy_list($get_food_dialyId,$food,$unit,$caloriesum,$repast);
+        $food_dialy->save_food_dialy_list($get_food_dialyId,$food,$unit,$caloriesum,$reqrepast);
         // get summary calorie
         $calorie_all = $food_dialy->get_all_calorie($get_food_dialyId);
         // update summary calorie
@@ -196,12 +196,12 @@ if (!is_null($arrJson['events'])) {
         $data['messages'][0] = $ms;
 
         // delete request
-        $req->delete_req($userId);
+        // $req->delete_req($userId);
       }
 
       // more save
       else if ($key == "more") {
-        $req->save_repast($userId,$value);//--
+        // $req->save_repast($userId,$value);//--
 
         $ms_repast = [
         'type' => 'text',
@@ -211,6 +211,8 @@ if (!is_null($arrJson['events'])) {
       }
       // enough save
       else if ($key == "enough") {
+        // delete request
+        $req->delete_req($userId);
         // summary
         // get userId
         $get_userId = $user->get_userId($userId);
