@@ -935,24 +935,30 @@ if (!is_null($arrJson['events'])) {
               }
 
               // show exercise
-              else if (($text_type[0] == "การออกกำลังกายที่เหมาะ") && ($searchexercise->searchexercise_bycalorie($text_type[1]) != "null")) {
+              else if (($text_type[0] == "การออกกำลังกายที่เหมาะ")) {
 
-                $ms_array = array();
-                $ms_array = $searchexercise->searchexercise_bycalorie($text_type[1]);
+                // $ms_array = array();
+                // $ms_array = $searchexercise->searchexercise_bycalorie($text_type[1]);
+                //
+                // if (count($ms_array) == 1) {
+                //   $data['replyToken'] = $replyToken;
+                //   $data['messages'][0] = $ms_array[0];
+                // }elseif (count($ms_array) == 2) {
+                //   $data['replyToken'] = $replyToken;
+                //   $data['messages'][0] = $ms_array[0];
+                //   $data['messages'][1] = $ms_array[1];
+                // }elseif (count($ms_array) == 3) {
+                //   $data['replyToken'] = $replyToken;
+                //   $data['messages'][0] = $ms_array[0];
+                //   $data['messages'][1] = $ms_array[1];
+                //   $data['messages'][3] = $ms_array[3];
+                // }
 
-                if (count($ms_array) == 1) {
-                  $data['replyToken'] = $replyToken;
-                  $data['messages'][0] = $ms_array[0];
-                }elseif (count($ms_array) == 2) {
-                  $data['replyToken'] = $replyToken;
-                  $data['messages'][0] = $ms_array[0];
-                  $data['messages'][1] = $ms_array[1];
-                }elseif (count($ms_array) == 3) {
-                  $data['replyToken'] = $replyToken;
-                  $data['messages'][0] = $ms_array[0];
-                  $data['messages'][1] = $ms_array[1];
-                  $data['messages'][3] = $ms_array[3];
-                }
+                $ms_test = [
+                'type' => 'text',
+                'text' => 'exercise -- '. $text_type[1]];
+                $data['replyToken'] = $replyToken;
+                $data['messages'][0] = $ms_test;
 
               }
           //     else if (($text = "การออกกำลังกายที่เหมาะ")) {
