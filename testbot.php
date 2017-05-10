@@ -910,29 +910,29 @@ if (!is_null($arrJson['events'])) {
               }  else if ($text = "อาหารสุขภาพที่ใช่"){
                 // $datapostback = $obdata->getpostback($userId);
                 // $value = explode(':', $datapostback);
-                $healthyfood = new HealthyFood;
-                $ms_array = array();
-                  // $ms_array = $healthyfood->get_healthyfood_by_cal($value[1]);
-                  $ms_array = $healthyfood->getall_healthyfood_by_cal();
-                  if (count($ms_array) == 1) {
-                    $data['replyToken'] = $replyToken;
-                    $data['messages'][0] = $ms_array[0];
-                  }elseif (count($ms_array) == 2) {
-                    $data['replyToken'] = $replyToken;
-                    $data['messages'][0] = $ms_array[0];
-                    $data['messages'][1] = $ms_array[1];
-                  }elseif (count($ms_array) == 3) {
-                    $data['replyToken'] = $replyToken;
-                    $data['messages'][0] = $ms_array[0];
-                    $data['messages'][1] = $ms_array[1];
-                    $data['messages'][3] = $ms_array[3];
-                  }
+                // $healthyfood = new HealthyFood;
+                // $ms_array = array();
+                //   // $ms_array = $healthyfood->get_healthyfood_by_cal($value[1]);
+                //   $ms_array = $healthyfood->getall_healthyfood_by_cal();
+                //   if (count($ms_array) == 1) {
+                //     $data['replyToken'] = $replyToken;
+                //     $data['messages'][0] = $ms_array[0];
+                //   }elseif (count($ms_array) == 2) {
+                //     $data['replyToken'] = $replyToken;
+                //     $data['messages'][0] = $ms_array[0];
+                //     $data['messages'][1] = $ms_array[1];
+                //   }elseif (count($ms_array) == 3) {
+                //     $data['replyToken'] = $replyToken;
+                //     $data['messages'][0] = $ms_array[0];
+                //     $data['messages'][1] = $ms_array[1];
+                //     $data['messages'][3] = $ms_array[3];
+                //   }
 
-                // $ms_test = [
-                // 'type' => 'text',
-                // 'text' => 'healthyfood -- '. $value[1]];
-                // $data['replyToken'] = $replyToken;
-                // $data['messages'][0] = $ms_test;
+                $ms_test = [
+                'type' => 'text',
+                'text' => 'healthyfood -- '];
+                $data['replyToken'] = $replyToken;
+                $data['messages'][0] = $ms_test;
 
                 // $obdata->deletepostback($userId);
 

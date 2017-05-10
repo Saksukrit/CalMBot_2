@@ -47,7 +47,7 @@ class HealthyFood
     $db = new Dbcon;
     $conn = $db->OpenCon();
     mysqli_set_charset($conn, "utf8");
-    $sql = "SELECT * FROM HealthyFood LIMIT 5";
+    $sql = "SELECT * FROM HealthyFood LIMIT 15";
     $result = $conn->query($sql);
 
     if ($result->num_rows > 0) {
