@@ -810,46 +810,53 @@ if (!is_null($arrJson['events'])) {
             $data['replyToken'] = $replyToken;
             $data['messages'][0] = $messages;
 
-          }else if($text == "ดูข้อมูลผู้ใช้"){
+          }
+
+          else if($text == "ดูข้อมูลผู้ใช้"){
             $ms_profile = $user->get_profile($userId);
             $data['replyToken'] = $replyToken;
             $data['messages'][0] = $ms_profile;
 
-          }else  if ($text == "over") {
-              $neg_cal = '300';
-              $notify = [
-              'type' => 'template',
-              'altText' => 'แคลอรี่เกินกำหนดแล้ว',
-              'template' => array(
-                'type' => 'buttons',
-                'title' => 'แคลอรี่เกินกำหนดแล้วนะ',
-                'text' => '
-                เราขอเสนอสิ่งที่ช่วยให้ดีขึ้นได้',
-                'actions' => array(
-                  array(
-                    'type' => 'postback',
-                    'label' => 'อาหารสุขภาพที่ใช่',
-                    'text' => 'อาหารสุขภาพที่ใช่',
-                    'data' => 'healthyfood:'.$neg_cal
-                  )
-                  // ,array(
-                  //   'type' => 'postback',
-                  //   'label' => 'การออกกำลังกายที่เหมาะ',
-                  //   'text' => 'การออกกำลังกายที่เหมาะ',
-                  //   'data' => 'healthyex:'.$neg_cal
-                  // )
-                  )
-                )
-              ];
-              $push = new Push;
-              $pushdata = array();
-              $pushdata['to'] = $userId;
-              $pushdata['messages'][0] = $notify;
+          }
 
-              $push->push_message($pushdata,$strAccessToken);
+          // // test over
+          // else  if ($text == "over") {
+          //     $neg_cal = '300';
+          //     $notify = [
+          //     'type' => 'template',
+          //     'altText' => 'แคลอรี่เกินกำหนดแล้ว',
+          //     'template' => array(
+          //       'type' => 'buttons',
+          //       'title' => 'แคลอรี่เกินกำหนดแล้วนะ',
+          //       'text' => '
+          //       เราขอเสนอสิ่งที่ช่วยให้ดีขึ้นได้',
+          //       'actions' => array(
+          //         array(
+          //           'type' => 'postback',
+          //           'label' => 'อาหารสุขภาพที่ใช่',
+          //           'text' => 'อาหารสุขภาพที่ใช่',
+          //           'data' => 'healthyfood:'.$neg_cal
+          //         )
+          //         // ,array(
+          //         //   'type' => 'postback',
+          //         //   'label' => 'การออกกำลังกายที่เหมาะ',
+          //         //   'text' => 'การออกกำลังกายที่เหมาะ',
+          //         //   'data' => 'healthyex:'.$neg_cal
+          //         // )
+          //         )
+          //       )
+          //     ];
+          //     $push = new Push;
+          //     $pushdata = array();
+          //     $pushdata['to'] = $userId;
+          //     $pushdata['messages'][0] = $notify;
+          //
+          //     $push->push_message($pushdata,$strAccessToken);
+          //
+          //     }
 
               // show healthyfood
-              }  else if ($text = "อาหารสุขภาพที่ใช่"){
+                else if ($text = "อาหารสุขภาพที่ใช่"){
                 $datapostback = $obdata->getpostback($userId);
                 $value = explode(':', $datapostback);
                 $healthyfood = new HealthyFood;
@@ -960,7 +967,7 @@ $word = "มันใช่หรอ เมนูใช้งาน";
 $keyword = explode(" ", "เมนู อาหาร");
 $wc = new Wordcut;
 if ($wc->check($keyword,$word) == "true") {
-  echo "เข้าเมนู";
+  echo "<br>เข้าเมนู";
 }else {
   $a = array("ไม่เข้าใจ","อะไรหรอ","ว่าไงนะ");
   echo "<br><br>".$a[array_rand($a,1)];
