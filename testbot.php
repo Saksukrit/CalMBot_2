@@ -890,10 +890,10 @@ if (!is_null($arrJson['events'])) {
                     'data' => 'healthyfood:'.$neg_cal
                   )
                   ,array(
-                    'type' => 'message',
+                    'type' => 'postback',
                     'label' => 'การออกกำลังกายที่เหมาะ',
-                    'text' => 'การออกกำลังกายที่เหมาะ '.$neg_cal
-                    // 'data' => 'healthyex:'.$neg_cal
+                    'text' => 'การออกกำลังกายที่เหมาะ',
+                    'data' => 'healthyex:'.$neg_cal
                   )
                   )
                 )
@@ -906,13 +906,12 @@ if (!is_null($arrJson['events'])) {
               $push->push_message($pushdata,$strAccessToken);
 
               // show healthyfood
-              // else if (($key = "healthyfood") && ($healthyfood->get_healthyfood_by_cal($value) != "null")) {
               }  else if ($text = "อาหารสุขภาพที่ใช่"){
                 $datapostback = $obdata->getpostback($userId);
                 $value = explode(':', $datapostback);
                 $healthyfood = new HealthyFood;
                 $ms_array = array();
-                  $ms_array = $healthyfood->get_healthyfood_by_cal($value[1]);
+                $ms_array = $healthyfood->get_healthyfood_by_cal($value[1]);
                   // $ms_array = $healthyfood->getall_healthyfood_by_cal();
                   if (count($ms_array) == 1) {
                     $data['replyToken'] = $replyToken;
@@ -926,66 +925,44 @@ if (!is_null($arrJson['events'])) {
                     $data['messages'][0] = $ms_array[0];
                     $data['messages'][1] = $ms_array[1];
                     $data['messages'][3] = $ms_array[3];
+                  }else {
+                    $ms = [
+                    'type' => "text",
+                    'text' => "ขอโทษด้วย ไม่มีอาหารแคลอรี่ต่ำกว่านี้"];
+                    $data['replyToken'] = $replyToken;
+                    $data['messages'][0] = $ms;
                   }
 
-                // $ms_test = [
-                // 'type' => 'text',
-                // 'text' => 'healthyfood -- '];
-                // $data['replyToken'] = $replyToken;
-                // $data['messages'][0] = $ms_test;
-
-                // $obdata->deletepostback($userId);
-
+                $obdata->deletepostback($userId);
               }
 
-              // show exercise
-              else if (($text_type[0] == "การออกกำลังกายที่เหมาะ")) {
+              else if ($text = "การออกกำลังกายที่เหมาะ") {
+                $datapostback = $obdata->getpostback($userId);
+                $value = explode(':', $datapostback);
+                  $ms_array = array();
+                  $ms_array = $searchexercise->searchexercise_bycalorie($value[1]);
+                  if (count($ms_array) == 1) {
+                    $data['replyToken'] = $replyToken;
+                    $data['messages'][0] = $ms_array[0];
+                  }elseif (count($ms_array) == 2) {
+                    $data['replyToken'] = $replyToken;
+                    $data['messages'][0] = $ms_array[0];
+                    $data['messages'][1] = $ms_array[1];
+                  }elseif (count($ms_array) == 3) {
+                    $data['replyToken'] = $replyToken;
+                    $data['messages'][0] = $ms_array[0];
+                    $data['messages'][1] = $ms_array[1];
+                    $data['messages'][3] = $ms_array[3];
+                  }else {
+                    $ms_test = [
+                      'type' => 'text',
+                      'text' => 'ขอโทษด้วย ไม่มีการออกกำลังกายที่เผาพลาญแคลอรี่ต่ำกว่านี้'];
+                      $data['replyToken'] = $replyToken;
+                      $data['messages'][0] = $ms_test;
+                    }
+                $obdata->deletepostback($userId);
 
-                // $ms_array = array();
-                // $ms_array = $searchexercise->searchexercise_bycalorie($text_type[1]);
-                //
-                // if (count($ms_array) == 1) {
-                //   $data['replyToken'] = $replyToken;
-                //   $data['messages'][0] = $ms_array[0];
-                // }elseif (count($ms_array) == 2) {
-                //   $data['replyToken'] = $replyToken;
-                //   $data['messages'][0] = $ms_array[0];
-                //   $data['messages'][1] = $ms_array[1];
-                // }elseif (count($ms_array) == 3) {
-                //   $data['replyToken'] = $replyToken;
-                //   $data['messages'][0] = $ms_array[0];
-                //   $data['messages'][1] = $ms_array[1];
-                //   $data['messages'][3] = $ms_array[3];
-                // }
-
-                $ms_test = [
-                'type' => 'text',
-                'text' => 'exercise -- '. $text_type[1]];
-                $data['replyToken'] = $replyToken;
-                $data['messages'][0] = $ms_test;
-
-              }
-          //     else if (($text = "การออกกำลังกายที่เหมาะ")) {
-          //       $datapostback = $obdata->getpostback($userId);
-          //       $value = explode(':', $datapostback);
-          //         $ms_array = array();
-          //         $ms_array = $searchexercise->searchexercise_bycalorie(300);
-          //         if (count($ms_array) == 1) {
-          //           $data['replyToken'] = $replyToken;
-          //           $data['messages'][0] = $ms_array[0];
-          //         }elseif (count($ms_array) == 2) {
-          //           $data['replyToken'] = $replyToken;
-          //           $data['messages'][0] = $ms_array[0];
-          //           $data['messages'][1] = $ms_array[1];
-          //         }elseif (count($ms_array) == 3) {
-          //           $data['replyToken'] = $replyToken;
-          //           $data['messages'][0] = $ms_array[0];
-          //           $data['messages'][1] = $ms_array[1];
-          //           $data['messages'][3] = $ms_array[3];
-          //         }
-          //
-          //
-          // }
+          }
           else{
             $messages = [
             'type' => "text",
