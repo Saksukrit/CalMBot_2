@@ -835,7 +835,7 @@ if (!is_null($arrJson['events'])) {
             $messages = [
             'type' => "text",
             'text' => "สวัสดี ฉันคือ Cal.MBot ผู้ช่วยให้ข้อมูลและบันทึกข้อมูลเกี่ยวกับอาหารและการออกกำลังกาย
-            คุณสามารถเรียนเมนูการใช้งานได้โดยพิมพ์คำว่า 'เมนู' "];
+            คุณสามารถเรียกเมนูการใช้งานได้โดยพิมพ์คำว่า 'เมนู' "];
             $data['replyToken'] = $replyToken;
             $data['messages'][0] = $messages;
 
@@ -845,7 +845,7 @@ if (!is_null($arrJson['events'])) {
             $data['messages'][0] = $ms_profile;
 
           }else  if ($text == "over") {
-              $neg_cal = 1 - 0;
+              $neg_cal = '300';
               $notify = [
               'type' => 'template',
               'altText' => 'แคลอรี่เกินกำหนดแล้ว',
@@ -878,7 +878,7 @@ if (!is_null($arrJson['events'])) {
             $messages = [
             'type' => "text",
             'text' => "ขอโทษ ฉันไม่เข้าใจ
-            คุณสามารถเรียนเมนูการใช้งานได้โดยพิมพ์คำว่า 'เมนู'"];
+            คุณสามารถเรียกเมนูการใช้งานได้โดยพิมพ์คำว่า 'เมนู'"];
             $data['replyToken'] = $replyToken;
             $data['messages'][0] = $messages;
           }
