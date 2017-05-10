@@ -238,20 +238,27 @@ if (!is_null($arrJson['events'])) {
         เท่ากับ '.$calorie_repast.' กิโลแคลอรี่
 
         ออกจากเมนูการบันทึกแล้ว'];
-        $data['replyToken'] = $replyToken;
-        $data['messages'][0] = $ms_summary;
+        // $data['replyToken'] = $replyToken;
+        // $data['messages'][0] = $ms_summary;
+
+        $push = new Push;
+        $pushdata = array();
+        $pushdata['to'] = $userId;
+        $pushdata['messages'][0] = $ms_summary;
+        $push->push_message($pushdata,$strAccessToken);
+
 
 
         // *********   check over caloriesum to notifications ************************************************************************************************
         //check caloriesum
         $checkCal = new CalNotif;
-        // $checkCal->checkOverCal($get_userId);
         $check_Cal = explode(':',$checkCal->checkOverCal($get_userId));
         $result = $check_Cal[0];
         $total_calorie = $check_Cal[1];
         $tdee = $check_Cal[2];
 
         if ($result == "over") {
+          sleep(10);
           $neg_cal = $total_calorie - $tdee;
           $notify = [
           'type' => 'template',
@@ -278,10 +285,10 @@ if (!is_null($arrJson['events'])) {
           $pushdata = array();
           $pushdata['to'] = $userId;
           $pushdata['messages'][0] = $notify;
-          if (date("m/d/Y h:i:s a", time() + 30)) {
-            $push->push_message($pushdata,$strAccessToken);
-          }
-          // $push->push_message($pushdata,$strAccessToken);
+          // if (date("m/d/Y h:i:s a", time() + 30)) {
+          //   $push->push_message($pushdata,$strAccessToken);
+          // }
+          $push->push_message($pushdata,$strAccessToken);
         }
 
         // ***************************************************************************************************************************************************
@@ -950,6 +957,9 @@ if (!is_null($arrJson['events'])) {
   }
 
 }
+
+
+
 // test push by date
 // if (date('Y-m-d') == "2017-04-16") {
 // // push_message
