@@ -891,7 +891,7 @@ if (!is_null($arrJson['events'])) {
                   ,array(
                     'type' => 'postback',
                     'label' => 'การออกกำลังกายที่เหมาะ',
-                    'text' => 'การออกกำลังกายที่เหมาะ',
+                    'text' => 'การออกกำลังกายที่เหมาะ '.$neg_cal,
                     'data' => 'healthyex:'.$neg_cal)
                   )
                 )
@@ -934,27 +934,48 @@ if (!is_null($arrJson['events'])) {
               }
 
               // show exercise
-              else if (($text = "การออกกำลังกายที่เหมาะ")) {
-                $datapostback = $obdata->getpostback($userId);
-                $value = explode(':', $datapostback);
-                  $ms_array = array();
-                  $ms_array = $searchexercise->searchexercise_bycalorie(300);
-                  if (count($ms_array) == 1) {
-                    $data['replyToken'] = $replyToken;
-                    $data['messages'][0] = $ms_array[0];
-                  }elseif (count($ms_array) == 2) {
-                    $data['replyToken'] = $replyToken;
-                    $data['messages'][0] = $ms_array[0];
-                    $data['messages'][1] = $ms_array[1];
-                  }elseif (count($ms_array) == 3) {
-                    $data['replyToken'] = $replyToken;
-                    $data['messages'][0] = $ms_array[0];
-                    $data['messages'][1] = $ms_array[1];
-                    $data['messages'][3] = $ms_array[3];
-                  }
+              else if (($text_type[0] == "การออกกำลังกายที่เหมาะ") && ($searchexercise->searchexercise_bycalorie($text_type[1]) != "null")) {
 
+                $ms_array = array();
+                $ms_array = $searchexercise->searchexercise_bycalorie($text_type[1]);
 
-          }else{
+                if (count($ms_array) == 1) {
+                  $data['replyToken'] = $replyToken;
+                  $data['messages'][0] = $ms_array[0];
+                }elseif (count($ms_array) == 2) {
+                  $data['replyToken'] = $replyToken;
+                  $data['messages'][0] = $ms_array[0];
+                  $data['messages'][1] = $ms_array[1];
+                }elseif (count($ms_array) == 3) {
+                  $data['replyToken'] = $replyToken;
+                  $data['messages'][0] = $ms_array[0];
+                  $data['messages'][1] = $ms_array[1];
+                  $data['messages'][3] = $ms_array[3];
+                }
+
+              }
+          //     else if (($text = "การออกกำลังกายที่เหมาะ")) {
+          //       $datapostback = $obdata->getpostback($userId);
+          //       $value = explode(':', $datapostback);
+          //         $ms_array = array();
+          //         $ms_array = $searchexercise->searchexercise_bycalorie(300);
+          //         if (count($ms_array) == 1) {
+          //           $data['replyToken'] = $replyToken;
+          //           $data['messages'][0] = $ms_array[0];
+          //         }elseif (count($ms_array) == 2) {
+          //           $data['replyToken'] = $replyToken;
+          //           $data['messages'][0] = $ms_array[0];
+          //           $data['messages'][1] = $ms_array[1];
+          //         }elseif (count($ms_array) == 3) {
+          //           $data['replyToken'] = $replyToken;
+          //           $data['messages'][0] = $ms_array[0];
+          //           $data['messages'][1] = $ms_array[1];
+          //           $data['messages'][3] = $ms_array[3];
+          //         }
+          //
+          //
+          // }
+          else{
             $messages = [
             'type' => "text",
             'text' => "ขอโทษ ฉันไม่เข้าใจ
