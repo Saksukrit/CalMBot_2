@@ -80,6 +80,76 @@ class HealthyFood
 
   }
 
+  //------------------------------------------------------------
+  //
+  function getcolums($colum)
+  {
+      // number of $colum
+
+      if (count($colum) <= 5) { /*-------------- 5---------------- */
+
+          $ms_foodlist = array();
+          $ms_foodlist[0] = ['type' => 'template', 'altText' => 'รายการออกกำลังกาย', 'template' => array(
+          'type' => 'carousel',
+          'columns' => $colum
+          ) ];
+          return $ms_foodlist;
+      } elseif (count($colum) <= 10) { /*-------------- 10---------------- */
+
+          $ms_foodlist = array();
+          $colums = array();
+          for ($i=0; $i < 5; $i++) {
+              $colums[$i] = $colum[$i];
+          }
+
+          $ms_foodlist[0] = ['type' => 'template', 'altText' => 'รายการออกกำลังกาย', 'template' => array(
+          'type' => 'carousel',
+          'columns' => $colums
+          ) ];
+          $colums = array();
+          for ($i=5; $i < count($colum); $i++) {
+              $colums[$i-5] = $colum[$i];
+          }
+
+          $ms_foodlist[1] = ['type' => 'template', 'altText' => 'รายการออกกำลังกาย', 'template' => array(
+          'type' => 'carousel',
+          'columns' => $colums
+          ) ];
+          return $ms_foodlist;
+      } elseif (count($colum) <= 15) { /*-------------- 15---------------- */
+
+          $ms_foodlist = array();
+          $colums = array();
+
+          for ($i=0; $i < 5; $i++) {
+              $colums[$i] = $colum[$i];
+          }
+          $ms_foodlist[0] = ['type' => 'template', 'altText' => 'รายการออกกำลังกาย', 'template' => array(
+          'type' => 'carousel',
+          'columns' => $colums
+          ) ];
+
+          $colums = array();
+          for ($i=5; $i < 10; $i++) {
+              $colums[$i-5] = $colum[$i];
+          }
+          $ms_foodlist[1] = ['type' => 'template', 'altText' => 'รายการออกกำลังกาย', 'template' => array(
+          'type' => 'carousel',
+          'columns' => $colums
+          ) ];
+
+          $colums = array();
+          for ($i = 10; $i < count($colum); $i++) {
+              $colums[$i - 10] = $colum[$i];
+          }
+          $ms_foodlist[2] = ['type' => 'template', 'altText' => 'รายการออกกำลังกาย', 'template' => array(
+          'type' => 'carousel',
+          'columns' => $colums
+          ) ];
+          return $ms_foodlist;
+      }
+  }
+
 
 
 }
