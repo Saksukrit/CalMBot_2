@@ -55,7 +55,7 @@ if (!is_null($arrJson['events'])) {
         $num_food = $text_type[3];
         $confirm_food = $text_type[4];
       }else if ($text_type[0] == "healthyfood" || $text_type[0] == "healthyex") {
-        $obdata->setpostback($userId,$text_type[0].':'.$text_type[1]);
+        // $obdata->setpostback($userId,$text_type[0].':'.$text_type[1]);
       }
       else {
         $key = $text_type[0];
