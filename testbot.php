@@ -925,7 +925,7 @@ if (!is_null($arrJson['events'])) {
 
                 $ms_test = [
                 'type' => 'text',
-                'text' => 'healthyfood -- '. $er];
+                'text' => 'healthyfood -- '. $value[1]];
                 $data['replyToken'] = $replyToken;
                 $data['messages'][0] = $ms_test;
 
@@ -938,7 +938,7 @@ if (!is_null($arrJson['events'])) {
                 $datapostback = $obdata->getpostback($userId);
                 $value = explode(':', $datapostback);
                   $ms_array = array();
-                  $ms_array = $searchexercise->searchexercise_bycalorie(300);
+                  $ms_array = $searchexercise->searchexercise_bycalorie("300");
                   if (count($ms_array) == 1) {
                     $data['replyToken'] = $replyToken;
                     $data['messages'][0] = $ms_array[0];
