@@ -284,14 +284,20 @@ if (!is_null($arrJson['events'])) {
 
 
       // show healthyfood
-      else if (($key = "healthyfood") && ($healthyfood->get_healthyfood_by_cal($value) != "null")) {
+      // else if (($key = "healthyfood") && ($healthyfood->get_healthyfood_by_cal($value) != "null")) {
+        else if ($key = "healthyfood"){
         $healthyfood = new HealthyFood;
-        $ms_array = array();
-        $ms_array = $healthyfood->get_healthyfood_by_cal($value);
-        if (count($ms_array) == 1) {
-          $data['replyToken'] = $replyToken;
-          $data['messages'][0] = $ms_array[0];
-        }
+        // $ms_array = array();
+        // $ms_array = $healthyfood->get_healthyfood_by_cal($value);
+        // if (count($ms_array) == 1) {
+        //   $data['replyToken'] = $replyToken;
+        //   $data['messages'][0] = $ms_array[0];
+        // }
+        $ms_test = [
+        'type' => 'text',
+        'text' => 'healthyfood -- '. $value];
+        $data['replyToken'] = $replyToken;
+        $data['messages'][0] = $ms_test;
 
       }
 
