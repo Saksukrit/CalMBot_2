@@ -909,16 +909,16 @@ if (!is_null($arrJson['events'])) {
                 $datapostback = $obdata->getpostback($userId);
                 $value = explode(':', $datapostback);
                 $healthyfood = new HealthyFood;
-                $ms_array = array();
-                $ms_array = $healthyfood->get_healthyfood_by_cal($value[1]);
-                if (count($ms_array) == 1) {
-                  $data['replyToken'] = $replyToken;
-                  $data['messages'][0] = $ms_array[0];
-                }
-                // $ms_test = [
-                // 'type' => 'text',
-                // 'text' => 'healthyfood -- '. count($ms_array)];
-                // $data['replyToken'] = $replyToken;
+                // $ms_array = array();
+                // $ms_array = $healthyfood->get_healthyfood_by_cal($value[1]);
+                // if (count($ms_array) == 1) {
+                //   $data['replyToken'] = $replyToken;
+                //   $data['messages'][0] = $ms_array[0];
+                // }
+                $ms_test = [
+                'type' => 'text',
+                'text' => 'healthyfood -- '. $value[1]];
+                $data['replyToken'] = $replyToken;
                 $data['messages'][0] = $ms_test;
 
                 $obdata->deletepostback($userId);
@@ -944,21 +944,7 @@ if (!is_null($arrJson['events'])) {
                     $data['messages'][1] = $ms_array[1];
                     $data['messages'][3] = $ms_array[3];
                   }
-                  // $push = new Push;
-                  // $pushdata = array();
-                  // $pushdata['to'] = $userId;
-                  // if (count($ms_array) == 1) {
-                  //   $pushdata['messages'][0] = $ms_array[0];
-                  // }elseif (count($ms_array) == 2) {
-                  //   $pushdata['messages'][0] = $ms_array[0];
-                  //   $pushdata['messages'][1] = $ms_array[1];
-                  // }elseif (count($ms_array) == 3) {
-                  //   $pushdata['messages'][0] = $ms_array[0];
-                  //   $pushdata['messages'][1] = $ms_array[1];
-                  //   $pushdata['messages'][3] = $ms_array[3];
-                  // }
-                  //
-                  // $push->push_message($pushdata,$strAccessToken);
+
 
           }else{
             $messages = [
