@@ -9,7 +9,7 @@ class HealthyFood
     $db = new Dbcon;
     $conn = $db->OpenCon();
     mysqli_set_charset($conn, "utf8");
-    $sql = "SELECT * FROM HealthyFood WHERE hf_calorie <= '$calorie' LIMIT 5";
+    $sql = "SELECT * FROM HealthyFood WHERE hf_calorie <= '$calorie' LIMIT 10";
     $result = $conn->query($sql);
 
     if ($result->num_rows > 0) {
