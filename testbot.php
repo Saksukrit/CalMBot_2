@@ -77,7 +77,8 @@ if (!is_null($arrJson['events'])) {
         $req->save_repast($userId,$repast);
         $ms_repast = [
         'type' => 'text',
-        'text' => 'คุณทานอะไรใน'. $repast];
+        'text' => 'คุณทานอะไรใน'. $repast.'
+        กรุณาระบุชื่ออาหาร'];
         $data['replyToken'] = $replyToken;
         $data['messages'][0] = $ms_repast;
       }
