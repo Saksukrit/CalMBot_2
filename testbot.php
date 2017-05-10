@@ -54,7 +54,10 @@ if (!is_null($arrJson['events'])) {
         $food_selected = $text_type[2];
         $num_food = $text_type[3];
         $confirm_food = $text_type[4];
-      }else {
+      }else if ($text_type[0] == "healthyfood" || $text_type[0] == "healthyex") {
+        $obdata->setpostback($userId,$text_type[0]);
+      }
+      else {
         $key = $text_type[0];
         $value = $text_type[1];
       }
@@ -283,59 +286,59 @@ if (!is_null($arrJson['events'])) {
       }
 
 
-      // show healthyfood
-      // else if (($key = "healthyfood") && ($healthyfood->get_healthyfood_by_cal($value) != "null")) {
-        else if ($key = "healthyfood"){
-        $healthyfood = new HealthyFood;
-        $ms_array = array();
-        $ms_array = $healthyfood->get_healthyfood_by_cal($value);
-        // if (count($ms_array) == 1) {
-        //   $data['replyToken'] = $replyToken;
-        //   $data['messages'][0] = $ms_array[0];
-        // }
-        $ms_test = [
-        'type' => 'text',
-        'text' => 'healthyfood -- '. count($ms_array)];
-        $data['replyToken'] = $replyToken;
-        $data['messages'][0] = $ms_test;
-
-      }
-
-      // show exercise
-      else if (($key = "healthyex") && ($searchexercise->searchexercise_bycalorie($value) != "null")) {
-          $ms_array = array();
-          $ms_array = $searchexercise->searchexercise_bycalorie($value);
-
-          // if (count($ms_array) == 1) {
-          //   $data['replyToken'] = $replyToken;
-          //   $data['messages'][0] = $ms_array[0];
-          // }elseif (count($ms_array) == 2) {
-          //   $data['replyToken'] = $replyToken;
-          //   $data['messages'][0] = $ms_array[0];
-          //   $data['messages'][1] = $ms_array[1];
-          // }elseif (count($ms_array) == 3) {
-          //   $data['replyToken'] = $replyToken;
-          //   $data['messages'][0] = $ms_array[0];
-          //   $data['messages'][1] = $ms_array[1];
-          //   $data['messages'][3] = $ms_array[3];
-          // }
-          $push = new Push;
-          $pushdata = array();
-          $pushdata['to'] = $userId;
-          if (count($ms_array) == 1) {
-            $pushdata['messages'][0] = $ms_array[0];
-          }elseif (count($ms_array) == 2) {
-            $pushdata['messages'][0] = $ms_array[0];
-            $pushdata['messages'][1] = $ms_array[1];
-          }elseif (count($ms_array) == 3) {
-            $pushdata['messages'][0] = $ms_array[0];
-            $pushdata['messages'][1] = $ms_array[1];
-            $pushdata['messages'][3] = $ms_array[3];
-          }
-
-          $push->push_message($pushdata,$strAccessToken);
-
-      }
+      // // show healthyfood
+      // // else if (($key = "healthyfood") && ($healthyfood->get_healthyfood_by_cal($value) != "null")) {
+      //   else if ($key = "healthyfood"){
+      //   $healthyfood = new HealthyFood;
+      //   $ms_array = array();
+      //   $ms_array = $healthyfood->get_healthyfood_by_cal($value);
+      //   // if (count($ms_array) == 1) {
+      //   //   $data['replyToken'] = $replyToken;
+      //   //   $data['messages'][0] = $ms_array[0];
+      //   // }
+      //   $ms_test = [
+      //   'type' => 'text',
+      //   'text' => 'healthyfood -- '. count($ms_array)];
+      //   $data['replyToken'] = $replyToken;
+      //   $data['messages'][0] = $ms_test;
+      //
+      // }
+      //
+      // // show exercise
+      // else if (($key = "healthyex") && ($searchexercise->searchexercise_bycalorie($value) != "null")) {
+      //     $ms_array = array();
+      //     $ms_array = $searchexercise->searchexercise_bycalorie($value);
+      //
+      //     // if (count($ms_array) == 1) {
+      //     //   $data['replyToken'] = $replyToken;
+      //     //   $data['messages'][0] = $ms_array[0];
+      //     // }elseif (count($ms_array) == 2) {
+      //     //   $data['replyToken'] = $replyToken;
+      //     //   $data['messages'][0] = $ms_array[0];
+      //     //   $data['messages'][1] = $ms_array[1];
+      //     // }elseif (count($ms_array) == 3) {
+      //     //   $data['replyToken'] = $replyToken;
+      //     //   $data['messages'][0] = $ms_array[0];
+      //     //   $data['messages'][1] = $ms_array[1];
+      //     //   $data['messages'][3] = $ms_array[3];
+      //     // }
+      //     $push = new Push;
+      //     $pushdata = array();
+      //     $pushdata['to'] = $userId;
+      //     if (count($ms_array) == 1) {
+      //       $pushdata['messages'][0] = $ms_array[0];
+      //     }elseif (count($ms_array) == 2) {
+      //       $pushdata['messages'][0] = $ms_array[0];
+      //       $pushdata['messages'][1] = $ms_array[1];
+      //     }elseif (count($ms_array) == 3) {
+      //       $pushdata['messages'][0] = $ms_array[0];
+      //       $pushdata['messages'][1] = $ms_array[1];
+      //       $pushdata['messages'][3] = $ms_array[3];
+      //     }
+      //
+      //     $push->push_message($pushdata,$strAccessToken);
+      //
+      // }
 
 
       // -----------------------------------------------------------------------
@@ -883,10 +886,12 @@ if (!is_null($arrJson['events'])) {
                   array(
                     'type' => 'postback',
                     'label' => 'อาหารสุขภาพที่ใช่',
+                    'text' => 'อาหารสุขภาพที่ใช่',
                     'data' => 'healthyfood:'.$neg_cal)
                   ,array(
                     'type' => 'postback',
                     'label' => 'การออกกำลังกายที่เหมาะ',
+                    'text' => 'การออกกำลังกายที่เหมาะ',
                     'data' => 'healthyex:'.$neg_cal)
                   )
                 )
@@ -898,6 +903,62 @@ if (!is_null($arrJson['events'])) {
 
               $push->push_message($pushdata,$strAccessToken);
 
+              // show healthyfood
+              // else if (($key = "healthyfood") && ($healthyfood->get_healthyfood_by_cal($value) != "null")) {
+              }  else if ($text = "อาหารสุขภาพที่ใช่"){
+                $datapostback = $obdata->getpostback($userId);
+                $value = explode(':', $datapostback);
+                $healthyfood = new HealthyFood;
+                $ms_array = array();
+                $ms_array = $healthyfood->get_healthyfood_by_cal($value[1]);
+                // if (count($ms_array) == 1) {
+                //   $data['replyToken'] = $replyToken;
+                //   $data['messages'][0] = $ms_array[0];
+                // }
+                $ms_test = [
+                'type' => 'text',
+                'text' => 'healthyfood -- '. count($ms_array)];
+                $data['replyToken'] = $replyToken;
+                $data['messages'][0] = $ms_test;
+
+                $obdata->deletepostback($userId);
+
+              }
+
+              // show exercise
+              else if (($text = "การออกกำลังกายที่เหมาะ")) {
+                $datapostback = $obdata->getpostback($userId);
+                $value = explode(':', $datapostback);
+                  $ms_array = array();
+                  $ms_array = $searchexercise->searchexercise_bycalorie($value[1]);
+                  if (count($ms_array) == 1) {
+                    $data['replyToken'] = $replyToken;
+                    $data['messages'][0] = $ms_array[0];
+                  }elseif (count($ms_array) == 2) {
+                    $data['replyToken'] = $replyToken;
+                    $data['messages'][0] = $ms_array[0];
+                    $data['messages'][1] = $ms_array[1];
+                  }elseif (count($ms_array) == 3) {
+                    $data['replyToken'] = $replyToken;
+                    $data['messages'][0] = $ms_array[0];
+                    $data['messages'][1] = $ms_array[1];
+                    $data['messages'][3] = $ms_array[3];
+                  }
+                  // $push = new Push;
+                  // $pushdata = array();
+                  // $pushdata['to'] = $userId;
+                  // if (count($ms_array) == 1) {
+                  //   $pushdata['messages'][0] = $ms_array[0];
+                  // }elseif (count($ms_array) == 2) {
+                  //   $pushdata['messages'][0] = $ms_array[0];
+                  //   $pushdata['messages'][1] = $ms_array[1];
+                  // }elseif (count($ms_array) == 3) {
+                  //   $pushdata['messages'][0] = $ms_array[0];
+                  //   $pushdata['messages'][1] = $ms_array[1];
+                  //   $pushdata['messages'][3] = $ms_array[3];
+                  // }
+                  //
+                  // $push->push_message($pushdata,$strAccessToken);
 
           }else{
             $messages = [
