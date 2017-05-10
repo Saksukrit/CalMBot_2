@@ -305,19 +305,35 @@ if (!is_null($arrJson['events'])) {
       else if (($key = "healthyex") && ($searchexercise->searchexercise_bycalorie($value) != "null")) {
           $ms_array = array();
           $ms_array = $searchexercise->searchexercise_bycalorie($value);
+
+          // if (count($ms_array) == 1) {
+          //   $data['replyToken'] = $replyToken;
+          //   $data['messages'][0] = $ms_array[0];
+          // }elseif (count($ms_array) == 2) {
+          //   $data['replyToken'] = $replyToken;
+          //   $data['messages'][0] = $ms_array[0];
+          //   $data['messages'][1] = $ms_array[1];
+          // }elseif (count($ms_array) == 3) {
+          //   $data['replyToken'] = $replyToken;
+          //   $data['messages'][0] = $ms_array[0];
+          //   $data['messages'][1] = $ms_array[1];
+          //   $data['messages'][3] = $ms_array[3];
+          // }
+          $push = new Push;
+          $pushdata = array();
+          $pushdata['to'] = $userId;
           if (count($ms_array) == 1) {
-            $data['replyToken'] = $replyToken;
-            $data['messages'][0] = $ms_array[0];
+            $pushdata['messages'][0] = $ms_array[0];
           }elseif (count($ms_array) == 2) {
-            $data['replyToken'] = $replyToken;
-            $data['messages'][0] = $ms_array[0];
-            $data['messages'][1] = $ms_array[1];
+            $pushdata['messages'][0] = $ms_array[0];
+            $pushdata['messages'][1] = $ms_array[1];
           }elseif (count($ms_array) == 3) {
-            $data['replyToken'] = $replyToken;
-            $data['messages'][0] = $ms_array[0];
-            $data['messages'][1] = $ms_array[1];
-            $data['messages'][3] = $ms_array[3];
+            $pushdata['messages'][0] = $ms_array[0];
+            $pushdata['messages'][1] = $ms_array[1];
+            $pushdata['messages'][3] = $ms_array[3];
           }
+
+          $push->push_message($pushdata,$strAccessToken);
 
       }
 
