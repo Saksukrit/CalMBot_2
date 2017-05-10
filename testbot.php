@@ -886,12 +886,12 @@ if (!is_null($arrJson['events'])) {
                   array(
                     'type' => 'postback',
                     'label' => 'อาหารสุขภาพที่ใช่',
-                    'text' => 'อาหารสุขภาพที่ใช่',
+                    'text' => 'อาหารสุขภาพที่ใช่ '.$neg_cal,
                     'data' => 'healthyfood:'.$neg_cal)
                   ,array(
                     'type' => 'postback',
                     'label' => 'การออกกำลังกายที่เหมาะ',
-                    'text' => 'การออกกำลังกายที่เหมาะ',
+                    'text' => 'การออกกำลังกายที่เหมาะ'.$neg_cal,
                     'data' => 'healthyex:'.$neg_cal)
                   )
                 )
@@ -905,13 +905,15 @@ if (!is_null($arrJson['events'])) {
 
               // show healthyfood
               // else if (($key = "healthyfood") && ($healthyfood->get_healthyfood_by_cal($value) != "null")) {
-              }  else if ($text = "อาหารสุขภาพที่ใช่"){
+              // }  else if ($text = "อาหารสุขภาพที่ใช่"){$text_type[0]
+                }  else if ($text_type[0] = "อาหารสุขภาพที่ใช่"){
                 $datapostback = $obdata->getpostback($userId);
                 $value = explode(':', $datapostback);
                 $healthyfood = new HealthyFood;
                 $ms_array = array();
                 try {
-                  $ms_array = $healthyfood->get_healthyfood_by_cal($value[1]);
+                  // $ms_array = $healthyfood->get_healthyfood_by_cal($value[1]);
+                  $ms_array = $healthyfood->get_healthyfood_by_cal('300');
                 } catch (Exception $e) {
                   $er = $e->getMessage();
                 }
