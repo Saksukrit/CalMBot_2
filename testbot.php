@@ -889,10 +889,11 @@ if (!is_null($arrJson['events'])) {
                     'text' => 'อาหารสุขภาพที่ใช่',
                     'data' => 'healthyfood:'.$neg_cal)
                   ,array(
-                    'type' => 'postback',
+                    'type' => 'message',
                     'label' => 'การออกกำลังกายที่เหมาะ',
-                    'text' => 'การออกกำลังกายที่เหมาะ '.$neg_cal,
-                    'data' => 'healthyex:'.$neg_cal)
+                    'text' => 'การออกกำลังกายที่เหมาะ '.$neg_cal
+                    // 'data' => 'healthyex:'.$neg_cal
+                  )
                   )
                 )
               ];
