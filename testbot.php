@@ -884,10 +884,11 @@ if (!is_null($arrJson['events'])) {
                 เราขอเสนอสิ่งที่ช่วยให้ดีขึ้นได้',
                 'actions' => array(
                   array(
-                    'type' => 'postback',
+                    'type' => 'message',
                     'label' => 'อาหารสุขภาพที่ใช่',
-                    'text' => 'อาหารสุขภาพที่ใช่',
-                    'data' => 'healthyfood:'.$neg_cal)
+                    'text' => 'อาหารสุขภาพที่ใช่'
+                    // 'data' => 'healthyfood:'.$neg_cal
+                  )
                   ,array(
                     'type' => 'message',
                     'label' => 'การออกกำลังกายที่เหมาะ',
@@ -907,30 +908,33 @@ if (!is_null($arrJson['events'])) {
               // show healthyfood
               // else if (($key = "healthyfood") && ($healthyfood->get_healthyfood_by_cal($value) != "null")) {
               }  else if ($text = "อาหารสุขภาพที่ใช่"){
-                $datapostback = $obdata->getpostback($userId);
-                $value = explode(':', $datapostback);
+                // $datapostback = $obdata->getpostback($userId);
+                // $value = explode(':', $datapostback);
                 $healthyfood = new HealthyFood;
                 $ms_array = array();
-                try {
                   // $ms_array = $healthyfood->get_healthyfood_by_cal($value[1]);
-                  $ms_array = $healthyfood->get_healthyfood_by_cal('300');
-                } catch (Exception $e) {
-                  $er = $e->getMessage();
-                }
+                  $ms_array = $healthyfood->getall_healthyfood_by_cal();
+                  if (count($ms_array) == 1) {
+                    $data['replyToken'] = $replyToken;
+                    $data['messages'][0] = $ms_array[0];
+                  }elseif (count($ms_array) == 2) {
+                    $data['replyToken'] = $replyToken;
+                    $data['messages'][0] = $ms_array[0];
+                    $data['messages'][1] = $ms_array[1];
+                  }elseif (count($ms_array) == 3) {
+                    $data['replyToken'] = $replyToken;
+                    $data['messages'][0] = $ms_array[0];
+                    $data['messages'][1] = $ms_array[1];
+                    $data['messages'][3] = $ms_array[3];
+                  }
 
-                // $ms_array = $healthyfood->get_healthyfood_by_cal($value[1]);
-                // if (count($ms_array) == 1) {
-                //   $data['replyToken'] = $replyToken;
-                //   $data['messages'][0] = $ms_array[0];
-                // }
+                // $ms_test = [
+                // 'type' => 'text',
+                // 'text' => 'healthyfood -- '. $value[1]];
+                // $data['replyToken'] = $replyToken;
+                // $data['messages'][0] = $ms_test;
 
-                $ms_test = [
-                'type' => 'text',
-                'text' => 'healthyfood -- '. $value[1]];
-                $data['replyToken'] = $replyToken;
-                $data['messages'][0] = $ms_test;
-
-                $obdata->deletepostback($userId);
+                // $obdata->deletepostback($userId);
 
               }
 
