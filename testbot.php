@@ -55,7 +55,7 @@ if (!is_null($arrJson['events'])) {
         $num_food = $text_type[3];
         $confirm_food = $text_type[4];
       }else if ($text_type[0] == "healthyfood" || $text_type[0] == "healthyex") {
-        $obdata->setpostback($userId,$text_type[0]);
+        $obdata->setpostback($userId,$text_type);
       }
       else {
         $key = $text_type[0];
@@ -911,14 +911,14 @@ if (!is_null($arrJson['events'])) {
                 $healthyfood = new HealthyFood;
                 $ms_array = array();
                 $ms_array = $healthyfood->get_healthyfood_by_cal($value[1]);
-                // if (count($ms_array) == 1) {
-                //   $data['replyToken'] = $replyToken;
-                //   $data['messages'][0] = $ms_array[0];
-                // }
-                $ms_test = [
-                'type' => 'text',
-                'text' => 'healthyfood -- '. count($ms_array)];
-                $data['replyToken'] = $replyToken;
+                if (count($ms_array) == 1) {
+                  $data['replyToken'] = $replyToken;
+                  $data['messages'][0] = $ms_array[0];
+                }
+                // $ms_test = [
+                // 'type' => 'text',
+                // 'text' => 'healthyfood -- '. count($ms_array)];
+                // $data['replyToken'] = $replyToken;
                 $data['messages'][0] = $ms_test;
 
                 $obdata->deletepostback($userId);
