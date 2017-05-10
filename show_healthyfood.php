@@ -1,9 +1,6 @@
 <?php
 include_once 'dbcon.php';
 
-/**
- *
- */
 class HealthyFood
 {
   public function get_healthyfood_by_cal($calorie)
@@ -42,8 +39,6 @@ class HealthyFood
         return "null";
     }
     $db->CloseCon($conn);
-
-
 
   }
 
