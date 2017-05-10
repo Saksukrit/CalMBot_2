@@ -886,12 +886,12 @@ if (!is_null($arrJson['events'])) {
                   array(
                     'type' => 'postback',
                     'label' => 'อาหารสุขภาพที่ใช่',
-                    'text' => 'อาหารสุขภาพที่ใช่ '.$neg_cal,
+                    'text' => 'อาหารสุขภาพที่ใช่',
                     'data' => 'healthyfood:'.$neg_cal)
                   ,array(
                     'type' => 'postback',
                     'label' => 'การออกกำลังกายที่เหมาะ',
-                    'text' => 'การออกกำลังกายที่เหมาะ'.$neg_cal,
+                    'text' => 'การออกกำลังกายที่เหมาะ',
                     'data' => 'healthyex:'.$neg_cal)
                   )
                 )
@@ -905,8 +905,7 @@ if (!is_null($arrJson['events'])) {
 
               // show healthyfood
               // else if (($key = "healthyfood") && ($healthyfood->get_healthyfood_by_cal($value) != "null")) {
-              // }  else if ($text = "อาหารสุขภาพที่ใช่"){$text_type[0]
-                }  else if ($text_type[0] = "อาหารสุขภาพที่ใช่"){
+              }  else if ($text = "อาหารสุขภาพที่ใช่"){
                 $datapostback = $obdata->getpostback($userId);
                 $value = explode(':', $datapostback);
                 $healthyfood = new HealthyFood;
@@ -939,7 +938,7 @@ if (!is_null($arrJson['events'])) {
                 $datapostback = $obdata->getpostback($userId);
                 $value = explode(':', $datapostback);
                   $ms_array = array();
-                  $ms_array = $searchexercise->searchexercise_bycalorie($value[1]);
+                  $ms_array = $searchexercise->searchexercise_bycalorie(300);
                   if (count($ms_array) == 1) {
                     $data['replyToken'] = $replyToken;
                     $data['messages'][0] = $ms_array[0];
