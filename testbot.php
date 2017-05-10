@@ -278,8 +278,10 @@ if (!is_null($arrJson['events'])) {
           $pushdata = array();
           $pushdata['to'] = $userId;
           $pushdata['messages'][0] = $notify;
-
-          $push->push_message($pushdata,$strAccessToken);
+          if (date("m/d/Y h:i:s a", time() + 30)) {
+            $push->push_message($pushdata,$strAccessToken);
+          }
+          // $push->push_message($pushdata,$strAccessToken);
         }
 
         // ***************************************************************************************************************************************************
