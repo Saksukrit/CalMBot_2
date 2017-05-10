@@ -55,7 +55,7 @@ if (!is_null($arrJson['events'])) {
         $num_food = $text_type[3];
         $confirm_food = $text_type[4];
       }else if ($text_type[0] == "healthyfood" || $text_type[0] == "healthyex") {
-        // $obdata->setpostback($userId,$text_type[0].':'.$text_type[1]);
+        $obdata->setpostback($userId,$text_type[0].':'.$text_type[1]);
       }
       else {
         $key = $text_type[0];
@@ -884,10 +884,10 @@ if (!is_null($arrJson['events'])) {
                 เราขอเสนอสิ่งที่ช่วยให้ดีขึ้นได้',
                 'actions' => array(
                   array(
-                    'type' => 'message',
+                    'type' => 'postback',
                     'label' => 'อาหารสุขภาพที่ใช่',
-                    'text' => 'อาหารสุขภาพที่ใช่'
-                    // 'data' => 'healthyfood:'.$neg_cal
+                    'text' => 'อาหารสุขภาพที่ใช่',
+                    'data' => 'healthyfood:'.$neg_cal
                   )
                   ,array(
                     'type' => 'message',
@@ -908,12 +908,12 @@ if (!is_null($arrJson['events'])) {
               // show healthyfood
               // else if (($key = "healthyfood") && ($healthyfood->get_healthyfood_by_cal($value) != "null")) {
               }  else if ($text = "อาหารสุขภาพที่ใช่"){
-                // $datapostback = $obdata->getpostback($userId);
-                // $value = explode(':', $datapostback);
+                $datapostback = $obdata->getpostback($userId);
+                $value = explode(':', $datapostback);
                 $healthyfood = new HealthyFood;
                 $ms_array = array();
-                  // $ms_array = $healthyfood->get_healthyfood_by_cal($value[1]);
-                  $ms_array = $healthyfood->getall_healthyfood_by_cal();
+                  $ms_array = $healthyfood->get_healthyfood_by_cal($value[1]);
+                  // $ms_array = $healthyfood->getall_healthyfood_by_cal();
                   if (count($ms_array) == 1) {
                     $data['replyToken'] = $replyToken;
                     $data['messages'][0] = $ms_array[0];
