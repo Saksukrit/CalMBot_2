@@ -909,15 +909,22 @@ if (!is_null($arrJson['events'])) {
                 $datapostback = $obdata->getpostback($userId);
                 $value = explode(':', $datapostback);
                 $healthyfood = new HealthyFood;
-                // $ms_array = array();
+                $ms_array = array();
+                try {
+                  $ms_array = $healthyfood->get_healthyfood_by_cal($value[1]);
+                } catch (Exception $e) {
+                  $er = $e->getMessage();
+                }
+
                 // $ms_array = $healthyfood->get_healthyfood_by_cal($value[1]);
                 // if (count($ms_array) == 1) {
                 //   $data['replyToken'] = $replyToken;
                 //   $data['messages'][0] = $ms_array[0];
                 // }
+
                 $ms_test = [
                 'type' => 'text',
-                'text' => 'healthyfood -- '. $value[1]];
+                'text' => 'healthyfood -- '. $er];
                 $data['replyToken'] = $replyToken;
                 $data['messages'][0] = $ms_test;
 
