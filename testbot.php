@@ -986,9 +986,8 @@ if (!is_null($arrJson['events'])) {
 echo "OK";
 
 $word = "มันใช่หรอ เมนูใช้งาน";
-$keyword = explode(" ", "เมนู อาหาร");
 $wc = new Wordcut;
-if ($wc->check($keyword,$word) == "true") {
+if ($wc->check("เมนู",$word) == "true") {
   echo "<br>เข้าเมนู";
 }else {
   $a = array("ไม่เข้าใจ","อะไรหรอ","ว่าไงนะ");

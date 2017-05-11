@@ -13,7 +13,7 @@ echo $wc->implode_word($word);
 
 
 
-if ($wc->check($keyword,$word) == "true") {
+if ($wc->check("เมนู",$word) == "true") {
   echo "<br>เข้าเมนู";
 }else if ($wc->swear($word) == "true") {
   $re = array("นี่คำหยาบ ไม่ใช้ๆ","หยาบหรอ ไม่เอาน่า","โอ้ ฉันไม่ชอบคำหยาบ");
