@@ -933,9 +933,10 @@ if (!is_null($arrJson['events'])) {
           // }
 
           else{
+            $re = array("ขอโทษ ฉันไม่เข้าใจ","ขอโทษนะ ลองใหมสิ่","โอ้ ฉันไม่เข้าใจที่คุณบอก");
             $messages = [
             'type' => "text",
-            'text' => "ขอโทษ ฉันไม่เข้าใจ
+            'text' => $re[array_rand($re,1)]."
             คุณสามารถเรียกเมนูการใช้งานได้โดยพิมพ์คำว่า 'เมนู'"];
             $data['replyToken'] = $replyToken;
             $data['messages'][0] = $messages;
