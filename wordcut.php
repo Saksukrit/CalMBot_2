@@ -36,29 +36,6 @@ class Wordcut
     return implode(' | ', $result);
   }
 
-  function run_swear($keyword,$word)
-  {
-    $keyword = explode(" ", $keyword);
-    $segment = new Segment();
-    $result = $segment->get_segment_array($word);
-    $mapper = 0;
-    // loop mapping algorithm
-    for ($i=0; $i < count($result); $i++) {
-      if ($mapper < count($keyword)) {
-        if ($result[$i] == $keyword[$mapper]) {
-          $mapper++;
-        }
-      }
-    }
-    // check mapper
-    if ($mapper == count($keyword)) {
-      // echo '<br>'.$word;
-      return "true";
-    }else {
-      return  "false";
-    }
-
-  }
 
   public function swear($word)
   {
@@ -80,7 +57,21 @@ class Wordcut
     }else {
       return "false";
     }
-    explode(" ", "เมนู อาหาร");
+  }
+
+  public function greeting($word)
+  {
+    if (($this->check("หวัดดี",$word) == "true")
+    || ($this->check("hi",$word) == "true")
+    || ($this->check("Hi",$word) == "true")
+    || ($this->check("ดีดี",$word) == "true")
+    || ($this->check("ดีๆ",$word) == "true")
+    || ($this->check("ไง",$word) == "true")) {
+      return "true";
+
+    }else {
+      return "false";
+    }
   }
 
 
