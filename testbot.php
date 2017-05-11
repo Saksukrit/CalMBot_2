@@ -932,7 +932,7 @@ if (!is_null($arrJson['events'])) {
           //       $obdata->deletepostback($userId);
           // }
 
-          else{
+          else if (($wordcut->check("เมนู",$text) == "false")) {
             $re = array("ขอโทษ ฉันไม่เข้าใจ","ขอโทษนะ ลองใหมสิ่","โอ้ ฉันไม่เข้าใจที่คุณบอก");
             $messages = [
             'type' => "text",
