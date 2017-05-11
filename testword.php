@@ -6,7 +6,7 @@ include_once 'THSplitLib/segment.php';
 
 try {
 $segment = new Segment();
-$string = "ต้องการบันทึกมื้อมื้ออาหารมื้อ";
+$string = "ต้องการบันทึกมื้อมื้ออาหารมื้อเมนู";
 $result = $segment->get_segment_array($string);
 $count = count($result);
 //js_thai_encode($result);
