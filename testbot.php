@@ -259,7 +259,7 @@ if (!is_null($arrJson['events'])) {
         $tdee = $check_Cal[2];
 
         if ($result == "over") {
-          sleep(10);
+          sleep(10);  // add delay distance time for notify
           $neg_cal = $total_calorie - $tdee;
           $notify = [
           'type' => 'template',
