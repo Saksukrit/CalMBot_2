@@ -65,16 +65,16 @@ class Wordcut
     // if ($this->check(explode(" ", "สัส"),$allword) == "true") {
     //   return "true";
     // }
-    if (($this->run_swear("กู",$word) == "true")
-    || ($this->run_swear("ไอ",$word) == "true")
-    || ($this->run_swear("มึง",$word) == "true")
-    || ($this->run_swear("เหี้ย",$word) == "true")
-    || ($this->run_swear("ควาย",$word) == "true")
-    || ($this->run_swear("สัด",$word) == "true")
-    || ($this->run_swear("สัส",$word) == "true")
-    || ($this->run_swear("ห่า",$word) == "true")
-    || ($this->run_swear("เสือก",$word) == "true")
-    || ($this->run_swear("ชิบ",$word) == "true")) {
+    if (($this->check("กู",$word) == "true")
+    || ($this->check("ไอ",$word) == "true")
+    || ($this->check("มึง",$word) == "true")
+    || ($this->check("เหี้ย",$word) == "true")
+    || ($this->check("ควาย",$word) == "true")
+    || ($this->check("สัด",$word) == "true")
+    || ($this->check("สัส",$word) == "true")
+    || ($this->check("ห่า",$word) == "true")
+    || ($this->check("เสือก",$word) == "true")
+    || ($this->check("ชิบ",$word) == "true")) {
       return "true";
 
     }else {

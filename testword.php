@@ -5,7 +5,7 @@ ini_set('display_errors', '1');
 include_once 'THSplitLib/segment.php';
 include 'wordcut.php';
 
-$word = "เรามันใช่หรอเมนูอาหารใช้งาน";
+$word = "ค้นหาข้อมูลออกกำลังกาย";
 $keyword = explode(" ", "เมนู อาหาร");
 $wc = new Wordcut;
 
@@ -13,7 +13,7 @@ echo $wc->implode_word($word);
 
 
 
-if ($wc->check("เมนูอาหาร ",$word) == "true") {
+if ($wc->check("ข้อมูล อาหาร",$word) == "true") {
   echo "<br>เข้าเมนู";
 }else if ($wc->swear($word) == "true") {
   $re = array("นี่คำหยาบ ไม่ใช้ๆ","หยาบหรอ ไม่เอาน่า","โอ้ ฉันไม่ชอบคำหยาบ");

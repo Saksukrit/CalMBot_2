@@ -502,7 +502,7 @@ if (!is_null($arrJson['events'])) {
 
           // ***********  Food_save  ************************************************************************************
           // select repast
-          else if ($text == "บันทึกมื้ออาหาร") {
+          else if (($text == "บันทึกมื้ออาหาร") || ($wordcut->check("บันทึก",$text) == "true")) {
 
 
             // check userId
@@ -577,7 +577,7 @@ if (!is_null($arrJson['events'])) {
 
           // ************  search food *****************************************************************************************************
           // search_food
-          else if ($text == "ค้นหาข้อมูลอาหาร") {
+          else if (($text == "ค้นหาข้อมูลอาหาร") || ($wordcut->check("ข้อมูล อาหาร",$text) == "true")) {
               // //delete
             $obdata->deletepostback($userId);
 
@@ -648,7 +648,8 @@ if (!is_null($arrJson['events'])) {
             $obdata->setpostback($userId,"searchfood_bycalorie");
               $ms_foodcalorie = [
               'type' => 'text',
-              'text' => 'บอกปริมาณพลังงานสูงสุดที่ต้องการ'];
+              'text' => 'บอกปริมาณพลังงานสูงสุดที่ต้องการ
+              (เฉพาะตัวเลข)'];
 
               $data['replyToken'] = $replyToken;
               $data['messages'][0] = $ms_foodcalorie;
@@ -731,7 +732,7 @@ if (!is_null($arrJson['events'])) {
 
           // ค้นหาข้อมูลการออกกำลังกาย
           // ************  search exercise *****************************************************************************************************
-          else if ($text == "ค้นหาข้อมูลการออกกำลังกาย") {
+          else if (($text == "ค้นหาข้อมูลการออกกำลังกาย") || ($wordcut->check("ข้อมูล ออกกำลังกาย",$text) == "true")) {
             $ms_menu_search = [
             'type' => 'template',
             'altText' => 'ค้นหาข้อมูลการออกกำลังกาย',
@@ -759,7 +760,8 @@ if (!is_null($arrJson['events'])) {
           else if ($text == "พลังงานที่เผาพลาญ") {
             $ms_foodcalorie = [
             'type' => 'text',
-            'text' => 'บอกปริมาณพลังงานสูงสุดที่ต้องการ'];
+            'text' => 'บอกปริมาณพลังงานสูงสุดที่ต้องการ
+            (เช่น สูงสุด 350)'];
 
             $data['replyToken'] = $replyToken;
             $data['messages'][0] = $ms_foodcalorie;
@@ -821,7 +823,7 @@ if (!is_null($arrJson['events'])) {
 
 
 
-          else if($text == "สวัสดี"){
+          else if(($text == "สวัสดี") || ($wordcut->check("ข้อมูล ออกกำลังกาย",$text) == "true")){
             $messages = [
             'type' => "text",
             'text' => "สวัสดี ฉันคือ Cal.MBot ผู้ช่วยให้ข้อมูลและบันทึกข้อมูลเกี่ยวกับอาหารและการออกกำลังกาย
