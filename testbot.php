@@ -173,7 +173,7 @@ if (!is_null($arrJson['events'])) {
         // get dialyId
         $get_food_dialyId = $food_dialy->check_food_dialy($get_userId,date('Y-m-d'));
         // save food_dialy list
-        $food_dialy->save_food_dialy_list($get_food_dialyId,$food,$unit,$caloriesum,$reqrepast);
+        $food_dialy->save_food_dialy_list($get_food_dialyId,$food_selected,$unit,$caloriesum,$reqrepast);
         // get summary calorie
         $calorie_all = $food_dialy->get_all_calorie($get_food_dialyId);
         // update summary calorie
