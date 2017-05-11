@@ -823,7 +823,7 @@ if (!is_null($arrJson['events'])) {
 
 
 
-          else if(($text == "สวัสดี") || ($wordcut->check("ข้อมูล ออกกำลังกาย",$text) == "true")){
+          else if(($text == "สวัสดี") || ($wordcut->greeting($text) == "true")){
             $messages = [
             'type' => "text",
             'text' => "สวัสดี ฉันคือ Cal.MBot ผู้ช่วยให้ข้อมูลและบันทึกข้อมูลเกี่ยวกับอาหารและการออกกำลังกาย
