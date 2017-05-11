@@ -446,7 +446,7 @@ if (!is_null($arrJson['events'])) {
           // $keyword = explode(" ", "เมนู");
           // $check = check($keyword,$text);
           // if ($check == "true") {
-          else if ($text == "เมนู") {
+          else if (($text == "เมนู") || ($wordcut->check("เมนู",$text) == "true")) {
             $displayname = $user->get_displayname($userId);
 
             $messages1 = [
