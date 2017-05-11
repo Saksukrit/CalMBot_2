@@ -431,13 +431,22 @@ if (!is_null($arrJson['events'])) {
         else {
 
           // key_word cutting to action *****************************
+          // check swear words
+          if ($wordcut->swear($text) == "true") {
+            $re = array("นี่คำหยาบ ไม่ใช้ๆ","หยาบหรอ ไม่เอาน่า","โอ้ ฉันไม่ชอบคำหยาบ");
+            $swear = [
+            'type' => 'text',
+            'text' => ''.$re[array_rand($re,1)]];
+            $data['replyToken'] = $replyToken;
+            $data['messages'][0] = $swear;
+          }
 
 
           //  select menu    ****************************************
           // $keyword = explode(" ", "เมนู");
           // $check = check($keyword,$text);
           // if ($check == "true") {
-          if ($text == "เมนู") {
+          else if ($text == "เมนู") {
             $displayname = $user->get_displayname($userId);
 
             $messages1 = [
