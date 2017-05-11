@@ -933,21 +933,17 @@ if (!is_null($arrJson['events'])) {
           // }
 
           // else if (($wordcut->check("เมนู",$text) == "false")) {
-          else{
+
+          else {
             $re = array("ขอโทษ ฉันไม่เข้าใจ","ขอโทษนะ ลองใหมสิ่","โอ้ ฉันไม่เข้าใจที่คุณบอก");
             // $re[array_rand($re,1)].
             $messages = [
             'type' => "text",
             'text' => '
             คุณสามารถเรียกเมนูการใช้งานได้โดยพิมพ์คำว่า "เมนู"'];
-            // $data['replyToken'] = $replyToken;
-            // $data['messages'][0] = $messages;
-            $push = new Push;
-            $pushdata = array();
-            $pushdata['to'] = $userId;
-            $pushdata['messages'][0] = $messages;
+            $data['replyToken'] = $replyToken;
+            $data['messages'][0] = $messages;
 
-            $push->push_message($pushdata,$strAccessToken);
           }
         }
 
